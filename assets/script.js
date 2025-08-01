@@ -42,23 +42,31 @@ matrixEffect();
 
 
 
+// Configuration : durée d'affichage du badge en jours
+const NEW_REPO_DAYS = 30;
+
 // Charger les dépôts GitHub
 fetch("https://api.github.com/users/0xCyberLiTech/repos?sort=updated")
   .then(res => res.json())
   .then(data => {
     const container = document.getElementById("projects-list");
+    const now = new Date();
+
     data.forEach(repo => {
+      const createdDate = new Date(repo.created_at);
+      const daysSinceCreation = (now - createdDate) / (1000 * 60 * 60 * 24);
+      const isNew = daysSinceCreation <= NEW_REPO_DAYS;
+
       const card = document.createElement("div");
       card.className = "project-card";
-      
 
-card.innerHTML = `
-  <h3>${repo.name}</h3>
-  <p>${repo.description || "Aucune description."}</p>
-  <div class="repo-stats">⭐ ${repo.stargazers_count} | 🍴 ${repo.forks_count} | 🕒 ${new Date(repo.updated_at).toLocaleDateString()}</div>
-  <a class="repo-btn" href="${repo.html_url}" target="_blank">🚀 Ouvrir sur GitHub</a>
-`;
-
+      card.innerHTML = `
+        <h3>${repo.name}</h3>
+        <p>${repo.description || "Aucune description."}</p>
+        ${isNew ? `<div class="new-badge">🆕 Nouveau</div>` : ""}
+        <div class="repo-stats">⭐ ${repo.stargazers_count} | 🍴 ${repo.forks_count} | 🕒 ${new Date(repo.updated_at).toLocaleDateString()}</div>
+        <a class="repo-btn" href="${repo.html_url}" target="_blank">🚀 Ouvrir sur GitHub</a>
+      `;
 
       container.appendChild(card);
     });
