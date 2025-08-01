@@ -1,7 +1,6 @@
 const themeToggle = document.getElementById("theme-toggle");
 const body = document.body;
 
-// Forcer le mode sombre par défaut si aucune préférence n'est enregistrée
 if (!localStorage.getItem("theme")) {
   localStorage.setItem("theme", "dark");
 }
@@ -20,7 +19,6 @@ if (localStorage.getItem("theme") === "light") {
   body.classList.remove("light-mode");
 }
 
-// Charger les dépôts GitHub
 fetch("https://api.github.com/users/0xCyberLiTech/repos?sort=updated")
   .then(res => res.json())
   .then(data => {
@@ -29,9 +27,15 @@ fetch("https://api.github.com/users/0xCyberLiTech/repos?sort=updated")
       const card = document.createElement("div");
       card.className = "project-card";
       card.innerHTML = `
-        <h3>${repo.name}</h3>
-        <p>${repo.description || "Aucune description."}</p>
-        <a href="${repo.html_url}" target="_blank">Voir sur GitHub</a>
+        <div class="project-header">${repo.name}</div>
+        <div class="project-description">${repo.description || "Aucune description."}</div>
+        <div class="project-stats">
+          <span>⭐ ${repo.stargazers_count}</span>
+          <span>🍴 ${repo.forks_count}</span>
+          <span>🐞 ${repo.open_issues_count}</span>
+          <span>📅 ${new Date(repo.updated_at).toLocaleDateString()}</span>
+        </div>
+        <a class="project-link" href="${repo.html_url}" target="_blank">Voir sur GitHub</a>
       `;
       container.appendChild(card);
     });

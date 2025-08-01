@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Arial, sans-serif;
   background: #0d1117;
   color: white;
 }
@@ -11,10 +11,6 @@ header {
   align-items: center;
   background: #161b22;
   padding: 1rem;
-}
-
-.logo-container {
-  text-align: center;
 }
 
 .logo {
@@ -49,24 +45,75 @@ nav a {
   text-decoration: none;
 }
 
-#projects-list {
+.projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1rem;
   padding: 1rem;
 }
 
 .project-card {
-  background: #161b22;
+  background: rgba(22, 27, 34, 0.8);
+  backdrop-filter: blur(10px);
   padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 0 10px #00f0ff;
+  border-radius: 12px;
+  box-shadow: 0 0 10px #00f0ff33;
   transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .project-card:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 15px #ff0048;
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px #ff0048;
+}
+
+.project-header {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #00f0ff;
+  margin-bottom: 0.5rem;
+}
+
+.project-description {
+  flex-grow: 1;
+  color: #ccc;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.project-stats {
+  display: flex;
+  justify-content: space-around;
+  font-size: 0.85rem;
+  background: rgba(0, 240, 255, 0.1);
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+
+.project-stats span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.project-link {
+  margin-top: 0.8rem;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: #00f0ff;
+  color: black;
+  border-radius: 8px;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.project-link:hover {
+  background: #ff0048;
+  color: white;
 }
 
 .light-mode {
@@ -83,6 +130,6 @@ nav a {
 }
 
 .light-mode .project-card {
-  background: #f5f5f5;
+  background: rgba(255, 255, 255, 0.8);
   box-shadow: 0 0 10px #ccc;
 }
