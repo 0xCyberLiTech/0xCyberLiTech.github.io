@@ -1,7 +1,8 @@
+
 body {
   margin: 0;
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background: #0d1117;
+  font-family: Arial, sans-serif;
+  background: #0d1117 url('matrix-bg.gif') repeat; /* Matrix background */
   color: white;
 }
 
@@ -9,8 +10,17 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #161b22;
+  justify-content: center;
+  background: #0d1117;
   padding: 1rem;
+  text-align: center;
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .logo {
@@ -19,10 +29,55 @@ header {
   box-shadow: 0 0 15px #00f0ff;
 }
 
+
+/* Style du titre principal */
+
+/* Style du titre principal - version douce */
 h1 {
-  font-family: monospace;
-  color: #00f0ff;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.2rem;
+  background: linear-gradient(90deg, #66ff66, #99ffcc, #66ff66);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: sweep 6s linear infinite; /* plus lent */
+  text-shadow: 0 0 3px rgba(102, 255, 102, 0.4), 0 0 6px rgba(153, 255, 204, 0.3);
 }
+
+/* Curseur clignotant */
+.cursor {
+  animation: blink 1s infinite;
+  color: #66ff66;
+}
+
+/* Effet de balayage lumineux */
+@keyframes sweep {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+
+/* Curseur clignotant */
+.cursor {
+  animation: blink 1s infinite;
+  color: #00ff00;
+}
+
+/* Effet de balayage lumineux */
+@keyframes sweep {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
 
 .cursor {
   animation: blink 1s infinite;
@@ -41,79 +96,35 @@ nav ul {
 }
 
 nav a {
-  color: white;
+  color: #00ff00;
   text-decoration: none;
 }
 
-.projects-grid {
+#accueil h2,
+#accueil p,
+#projets h2 {
+  text-align: center;
+}
+
+#projects-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1rem;
-  padding: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 1.5rem;
+  align-items: start; /* prevent stretching */
 }
 
 .project-card {
-  background: rgba(22, 27, 34, 0.8);
-  backdrop-filter: blur(10px);
+  background: rgba(13, 17, 23, 0.9);
   padding: 1rem;
-  border-radius: 12px;
-  box-shadow: 0 0 10px #00f0ff33;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #00f0ff;
   transition: transform 0.3s, box-shadow 0.3s;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 .project-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 20px #ff0048;
-}
-
-.project-header {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #00f0ff;
-  margin-bottom: 0.5rem;
-}
-
-.project-description {
-  flex-grow: 1;
-  color: #ccc;
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
-}
-
-.project-stats {
-  display: flex;
-  justify-content: space-around;
-  font-size: 0.85rem;
-  background: rgba(0, 240, 255, 0.1);
-  border-radius: 8px;
-  padding: 0.5rem;
-}
-
-.project-stats span {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.project-link {
-  margin-top: 0.8rem;
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  background: #00f0ff;
-  color: black;
-  border-radius: 8px;
-  text-align: center;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background 0.3s;
-}
-
-.project-link:hover {
-  background: #ff0048;
-  color: white;
+  box-shadow: 0 0 15px #00ff00;
+  border: 1px solid #00ff00;
 }
 
 .light-mode {
@@ -126,10 +137,217 @@ nav a {
 }
 
 .light-mode nav a {
-  color: black;
+  color: #00ff00;
+  text-decoration: none;
 }
 
 .light-mode .project-card {
-  background: rgba(255, 255, 255, 0.8);
+  background: #f5f5f5;
   box-shadow: 0 0 10px #ccc;
+}
+
+
+/* Matrix background canvas */
+#matrix {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: black;
+}
+
+
+/* Hyperlink styles harmonized with Matrix green */
+a, a:visited {
+  color: #00ff00;
+  text-decoration: none;
+}
+a:hover {
+  color: #00cc00;
+  text-shadow: 0 0 5px #00ff00;
+}
+
+
+/* Stylish GitHub button */
+.repo-btn {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  color: #00ff00;
+  border: 2px solid #00ff00;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+
+.repo-btn:hover {
+  background: #00ff00;
+  color: black;
+  box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+  transform: scale(1.05);
+}
+
+
+/* equal-height-cards */
+#projects-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 1.5rem;
+  align-items: start; /* prevent stretching */
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  min-height: 250px;
+}
+
+.project-card h3 {
+  margin-top: 0;
+}
+
+.project-card p {
+  flex-grow: 1;
+}
+
+
+/* equal-height-fix */
+#projects-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 1.5rem;
+  align-items: start; /* prevent stretching */
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 260px; /* fixed uniform height */
+  height: 100%;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.project-card h3 {
+  margin-top: 0;
+}
+
+.project-card p {
+  flex-grow: 1;
+}
+
+
+/* uniform-card-fix */
+.project-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 280px; /* same height for all */
+  height: 100%;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+
+/* fixed-card-height */
+.project-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 280px; /* fixed same height for all */
+  overflow: hidden;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.project-card p {
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* Import de la police Orbitron */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
+
+/* Effet néon vert Matrix sur les titres */
+#accueil h2, #projets h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  color: #00ff00;
+  text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 20px #00ff00;
+  animation: glitch 2.5s infinite;
+}
+
+#accueil p {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1rem;
+  color: #aaffaa;
+  text-align: center;
+  text-shadow: 0 0 5px #00ff00;
+}
+
+/* Effet glitch léger */
+@keyframes glitch {
+  0% { text-shadow: 0 0 5px #00ff00; }
+  20% { text-shadow: -2px 0 #00ff00, 2px 0 #00cc00; }
+  40% { text-shadow: 2px 0 #00ff00, -2px 0 #00cc00; }
+  60% { text-shadow: 0 0 5px #00ff00; }
+  100% { text-shadow: 0 0 5px #00ff00; }
+}
+
+/* Bandeau du logo avec dégradé animé */
+header {
+  background: linear-gradient(270deg, #003300, #00ff00, #003300);
+  background-size: 600% 600%;
+  animation: aurora 10s ease infinite;
+}
+
+@keyframes aurora {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+footer {
+  text-align: center;
+}
+
+
+/* Titre Matrix futuriste */
+.matrix-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  color: #00ff00;
+  text-shadow: 0 0 5px #00ff00,
+               0 0 10px #00ff00,
+               0 0 20px #00ff00;
+  animation: glitch 2.5s infinite;
+  text-align: center;
+}
+
+/* Sous-titre stylisé */
+.matrix-subtitle {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.2rem;
+  color: #aaffaa;
+  text-shadow: 0 0 5px #00ff00;
+  text-align: center;
+  margin-top: -0.5rem;
+}
+
+/* Animation glitch douce */
+@keyframes glitch {
+  0% { text-shadow: 0 0 5px #00ff00; }
+  20% { text-shadow: -2px 0 #00ff00, 2px 0 #00cc00; }
+  40% { text-shadow: 2px 0 #00ff00, -2px 0 #00cc00; }
+  60% { text-shadow: 0 0 5px #00ff00; }
+  100% { text-shadow: 0 0 5px #00ff00; }
 }
