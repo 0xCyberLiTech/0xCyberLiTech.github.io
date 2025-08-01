@@ -314,3 +314,40 @@ header {
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
+
+
+footer {
+  text-align: center;
+}
+
+
+/* Titre Matrix futuriste */
+.matrix-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  color: #00ff00;
+  text-shadow: 0 0 5px #00ff00,
+               0 0 10px #00ff00,
+               0 0 20px #00ff00;
+  animation: glitch 2.5s infinite;
+  text-align: center;
+}
+
+/* Sous-titre stylisé */
+.matrix-subtitle {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.2rem;
+  color: #aaffaa;
+  text-shadow: 0 0 5px #00ff00;
+  text-align: center;
+  margin-top: -0.5rem;
+}
+
+/* Animation glitch douce */
+@keyframes glitch {
+  0% { text-shadow: 0 0 5px #00ff00; }
+  20% { text-shadow: -2px 0 #00ff00, 2px 0 #00cc00; }
+  40% { text-shadow: 2px 0 #00ff00, -2px 0 #00cc00; }
+  60% { text-shadow: 0 0 5px #00ff00; }
+  100% { text-shadow: 0 0 5px #00ff00; }
+}

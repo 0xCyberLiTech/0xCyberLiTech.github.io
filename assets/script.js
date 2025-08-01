@@ -1,10 +1,8 @@
-
-// Matrix effect
+// Effet Matrix
 function matrixEffect() {
   const canvas = document.getElementById("matrix");
   const ctx = canvas.getContext("2d");
 
-  // Set canvas size
   canvas.height = window.innerHeight;
   canvas.width = window.innerWidth;
 
@@ -37,28 +35,6 @@ function matrixEffect() {
 
 matrixEffect();
 
-const themeToggle = document.getElementById("theme-toggle");
-const body = document.body;
-
-// Forcer le mode sombre par défaut si aucune préférence n'est enregistrée
-if (!localStorage.getItem("theme")) {
-  localStorage.setItem("theme", "dark");
-}
-
-themeToggle.addEventListener("click", () => {
-  body.classList.toggle("light-mode");
-  localStorage.setItem(
-    "theme",
-    body.classList.contains("light-mode") ? "light" : "dark"
-  );
-});
-
-if (localStorage.getItem("theme") === "light") {
-  body.classList.add("light-mode");
-} else {
-  body.classList.remove("light-mode");
-}
-
 // Charger les dépôts GitHub
 fetch("https://api.github.com/users/0xCyberLiTech/repos?sort=updated")
   .then(res => res.json())
@@ -67,15 +43,13 @@ fetch("https://api.github.com/users/0xCyberLiTech/repos?sort=updated")
     data.forEach(repo => {
       const card = document.createElement("div");
       card.className = "project-card";
-      
 
-card.innerHTML = `
-  <h3>${repo.name}</h3>
-  <p>${repo.description || "Aucune description."}</p>
-  <p>⭐ ${repo.stargazers_count} | 🍴 ${repo.forks_count} | 🕒 ${new Date(repo.updated_at).toLocaleDateString()}</p>
-  <a class="repo-btn" href="${repo.html_url}" target="_blank">🚀 Ouvrir sur GitHub</a>
-`;
-
+      card.innerHTML = `
+        <h3>${repo.name}</h3>
+        <p>${repo.description || "Aucune description."}</p>
+        <p>⭐ ${repo.stargazers_count} | 🍴 ${repo.forks_count} | 🕒 ${new Date(repo.updated_at).toLocaleDateString()}</p>
+        <a class="repo-btn" href="${repo.html_url}" target="_blank">🚀 Ouvrir sur GitHub</a>
+      `;
 
       container.appendChild(card);
     });
