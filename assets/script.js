@@ -6,7 +6,6 @@ if (!localStorage.getItem("theme")) {
   localStorage.setItem("theme", "dark");
 }
 
-// Événement du bouton de changement de thème
 themeToggle.addEventListener("click", () => {
   body.classList.toggle("light-mode");
   localStorage.setItem(
@@ -15,7 +14,6 @@ themeToggle.addEventListener("click", () => {
   );
 });
 
-// Appliquer le thème enregistré
 if (localStorage.getItem("theme") === "light") {
   body.classList.add("light-mode");
 } else {
