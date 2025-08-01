@@ -1,15 +1,28 @@
 const themeToggle = document.getElementById("theme-toggle");
 const body = document.body;
 
-themeToggle.addEventListener("click", () => {
-  body.classList.toggle("light-mode");
-  localStorage.setItem("theme", body.classList.contains("light-mode") ? "light" : "dark");
-});
-
-if (localStorage.getItem("theme") === "light") {
-  body.classList.add("light-mode");
+// Forcer le mode sombre par défaut si aucune préférence n'est enregistrée
+if (!localStorage.getItem("theme")) {
+  localStorage.setItem("theme", "dark");
 }
 
+// Événement du bouton de changement de thème
+themeToggle.addEventListener("click", () => {
+  body.classList.toggle("light-mode");
+  localStorage.setItem(
+    "theme",
+    body.classList.contains("light-mode") ? "light" : "dark"
+  );
+});
+
+// Appliquer le thème enregistré
+if (localStorage.getItem("theme") === "light") {
+  body.classList.add("light-mode");
+} else {
+  body.classList.remove("light-mode");
+}
+
+// Charger les dépôts GitHub
 fetch("https://api.github.com/users/0xCyberLiTech/repos?sort=updated")
   .then(res => res.json())
   .then(data => {
@@ -24,5 +37,7 @@ fetch("https://api.github.com/users/0xCyberLiTech/repos?sort=updated")
       `;
       container.appendChild(card);
     });
+  })
+  .catch(error => {
+    console.error("Erreur lors du chargement des dépôts :", error);
   });
-
