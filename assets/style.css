@@ -187,8 +187,8 @@ a:hover {
 .repo-btn:hover {
   background: #00ff00;
   color: black;
-  box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
-  transform: scale(1.05);
+  box-shadow: 0 0 5px #00ff00;
+  transform: scale(1.02);
 }
 
 
@@ -281,8 +281,8 @@ a:hover {
   font-family: 'Orbitron', sans-serif;
   font-size: 2rem;
   color: #00ff00;
-  text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 20px #00ff00;
-  animation: glitch 2.5s infinite;
+  text-shadow: none;
+  animation: none;
 }
 
 #accueil p {
@@ -290,7 +290,7 @@ a:hover {
   font-size: 1.1rem;
   color: #aaffaa;
   text-align: center;
-  text-shadow: 0 0 5px #00ff00;
+  text-shadow: none;
 }
 
 /* Effet glitch léger */
@@ -316,38 +316,38 @@ header {
 }
 
 
+/* Stats section above button */
+.repo-stats {
+  margin-top: auto;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: #aaffaa;
+}
+
+
+/* Effet au survol des tuiles */
+.project-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #00ff00;
+  border: 1px solid #00ff00;
+}
+
+/* Titre en vert au survol */
+.project-card h3 {
+  transition: color 0.3s ease;
+}
+
+.project-card:hover h3 {
+  color: #00ff00;
+}
+
+
 footer {
   text-align: center;
-}
-
-
-/* Titre Matrix futuriste */
-.matrix-title {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 2rem;
-  color: #00ff00;
-  text-shadow: 0 0 5px #00ff00,
-               0 0 10px #00ff00,
-               0 0 20px #00ff00;
-  animation: glitch 2.5s infinite;
-  text-align: center;
-}
-
-/* Sous-titre stylisé */
-.matrix-subtitle {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 1.2rem;
+  padding: 1rem 0;
   color: #aaffaa;
-  text-shadow: 0 0 5px #00ff00;
-  text-align: center;
-  margin-top: -0.5rem;
-}
-
-/* Animation glitch douce */
-@keyframes glitch {
-  0% { text-shadow: 0 0 5px #00ff00; }
-  20% { text-shadow: -2px 0 #00ff00, 2px 0 #00cc00; }
-  40% { text-shadow: 2px 0 #00ff00, -2px 0 #00cc00; }
-  60% { text-shadow: 0 0 5px #00ff00; }
-  100% { text-shadow: 0 0 5px #00ff00; }
 }
