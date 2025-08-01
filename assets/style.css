@@ -7,13 +7,13 @@ body {
 }
 
 header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: #0d1117;
+  background: linear-gradient(270deg, rgba(0, 51, 0, 0.4), rgba(0, 255, 0, 0.4), rgba(0, 51, 0, 0.4));
+  background-size: 600% 600%;
+  animation: aurora 10s ease infinite;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(0, 255, 0, 0.2);
   padding: 1rem;
-  text-align: center;
 }
 
 .logo-container {
@@ -133,7 +133,13 @@ nav a {
 }
 
 .light-mode header {
-  background: #f5f5f5;
+  background: linear-gradient(270deg, rgba(0, 51, 0, 0.4), rgba(0, 255, 0, 0.4), rgba(0, 51, 0, 0.4));
+  background-size: 600% 600%;
+  animation: aurora 10s ease infinite;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(0, 255, 0, 0.2);
+  padding: 1rem;
 }
 
 .light-mode nav a {
@@ -304,9 +310,13 @@ a:hover {
 
 /* Bandeau du logo avec dégradé animé */
 header {
-  background: linear-gradient(270deg, #003300, #00ff00, #003300);
+  background: linear-gradient(270deg, rgba(0, 51, 0, 0.4), rgba(0, 255, 0, 0.4), rgba(0, 51, 0, 0.4));
   background-size: 600% 600%;
   animation: aurora 10s ease infinite;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(0, 255, 0, 0.2);
+  padding: 1rem;
 }
 
 @keyframes aurora {
