@@ -11,6 +11,8 @@ function matrixEffect() {
   const fontSize = 14;
   let columns;
   let drops;
+  let matrixSpeed = 0.8; // vitesse normale
+
   let lastWidth = window.innerWidth;
   let lastHeight = Math.max(window.innerHeight, document.body.scrollHeight);
 
@@ -34,7 +36,7 @@ function matrixEffect() {
   }
 
   function draw() {
-    checkResize(); // Vérifie si la taille réelle a changé (scroll ou zoom)
+    checkResize();
     ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#0F0";
@@ -46,7 +48,7 @@ function matrixEffect() {
       if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
         drops[i] = 0;
       }
-      drops[i]++;
+      drops[i] += matrixSpeed; // vitesse dynamique du matrix
     }
 
     requestAnimationFrame(draw);
@@ -56,6 +58,35 @@ function matrixEffect() {
 }
 
 matrixEffect();
+
+// Fonction effet machine à écrire au survol
+function applyHoverTypingEffect(card, description) {
+  const descElement = card.querySelector("p");
+  let interval;
+  
+  card.addEventListener("mouseenter", () => {
+    let index = 0;
+    descElement.textContent = "";
+    clearInterval(interval);
+    
+    interval = setInterval(() => {
+      if (index < description.length) {
+        const before = description.substring(0, index);
+        const current = `<span class="typing-highlight">${description.charAt(index)}</span>`;
+        const after = description.substring(index + 1);
+        descElement.innerHTML = before + current + after;
+        index++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 50);
+  });
+
+  card.addEventListener("mouseleave", () => {
+    clearInterval(interval);
+    descElement.textContent = description;
+  });
+}
 
 // Charger les dépôts GitHub
 fetch("https://api.github.com/users/0xCyberLiTech/repos?sort=updated")
@@ -79,14 +110,26 @@ fetch("https://api.github.com/users/0xCyberLiTech/repos?sort=updated")
 
       const card = document.createElement("div");
       card.className = "project-card";
+      const description = repo.description || "Aucune description.";
+      
       card.innerHTML = `
         <h3>${repo.name}</h3>
-        <p>${repo.description || "Aucune description."}</p>
+        <p>${description}</p>
         ${isNew ? `<div class="new-badge">🆕 Nouveau</div>` : ""}
         <div class="repo-stats">⭐ ${repo.stargazers_count} | 🍴 ${repo.forks_count} | 🕒 ${new Date(repo.updated_at).toLocaleDateString()}</div>
         <a class="repo-btn" href="${repo.html_url}/blob/${repo.default_branch || "main"}/README.md" target="_blank">📄 Lire le README</a>
       `;
+      
       container.appendChild(card);
+      applyHoverTypingEffect(card, description);
+      // Accélère le Matrix lors du survol
+      card.addEventListener("mouseenter", () => {
+        matrixSpeed = 1.2; // accélère légèrement
+      });
+      card.addEventListener("mouseleave", () => {
+        matrixSpeed = 0.8; // revient à la normale
+      });
+
     });
   })
   .catch(() => {

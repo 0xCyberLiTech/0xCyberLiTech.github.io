@@ -408,3 +408,13 @@ header {
   max-height: 100px; /* Empêche le logo d'être tronqué */
   height: auto;
 }
+
+
+.typing-highlight {
+  color: #66ff66;
+  font-weight: bold;
+  display: inline-block;
+  transform: scale(1.5); /* plus gros qu'avant */
+  transition: transform 0.15s ease-in-out;
+  text-shadow: 0 0 8px #00ff00;
+}
