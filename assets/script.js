@@ -1,4 +1,3 @@
-
 // Force dark mode
 document.body.classList.remove('light-mode');
 
@@ -40,8 +39,6 @@ function matrixEffect() {
 
 matrixEffect();
 
-
-
 // Configuration : durée d'affichage du badge en jours
 const NEW_REPO_DAYS = 30;
 
@@ -52,7 +49,18 @@ fetch("https://api.github.com/users/0xCyberLiTech/repos?sort=updated")
     const container = document.getElementById("projects-list");
     const now = new Date();
 
-    data.forEach(repo => {
+    // Exclure le dépôt 0xCyberLiTech.github.io
+    let repos = data.filter(repo => repo.name.toLowerCase() !== "0xcyberlitech.github.io");
+
+    // Mettre le dépôt 0xCyberLiTech en premier
+    const mainRepoIndex = repos.findIndex(repo => repo.name.toLowerCase() === "0xcyberlitech");
+    if (mainRepoIndex > -1) {
+      const mainRepo = repos.splice(mainRepoIndex, 1)[0];
+      repos.unshift(mainRepo);
+    }
+
+    // Afficher les dépôts
+    repos.forEach(repo => {
       const createdDate = new Date(repo.created_at);
       const daysSinceCreation = (now - createdDate) / (1000 * 60 * 60 * 24);
       const isNew = daysSinceCreation <= NEW_REPO_DAYS;
@@ -65,7 +73,7 @@ fetch("https://api.github.com/users/0xCyberLiTech/repos?sort=updated")
         <p>${repo.description || "Aucune description."}</p>
         ${isNew ? `<div class="new-badge">🆕 Nouveau</div>` : ""}
         <div class="repo-stats">⭐ ${repo.stargazers_count} | 🍴 ${repo.forks_count} | 🕒 ${new Date(repo.updated_at).toLocaleDateString()}</div>
-        <a class="repo-btn" href="${repo.html_url}" target="_blank">🚀 Ouvrir sur GitHub</a>
+        <a class="repo-btn" href="${repo.html_url}/blob/main/README.md" target="_blank">📄 Lire le README</a>
       `;
 
       container.appendChild(card);
