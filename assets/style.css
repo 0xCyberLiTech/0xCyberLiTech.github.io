@@ -1,32 +1,28 @@
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #0d1117;
+  background: #0d1117 url('matrix-bg.gif') repeat; /* Matrix background */
   color: white;
 }
 
-/* Header */
 header {
   background: linear-gradient(270deg, rgba(0, 51, 0, 0.4), rgba(0, 255, 0, 0.4), rgba(0, 51, 0, 0.4));
   background-size: 600% 600%;
   animation: aurora 10s ease infinite;
   backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border-bottom: 1px solid rgba(0, 255, 0, 0.2);
   padding: 1rem;
 }
 
+
 .logo-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.logo-title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
+  flex-direction: row; /* Logo à gauche, titre à droite */
+  align-items: center; /* Alignement vertical parfait */
+  justify-content: center; /* Centre horizontalement */
+  gap: 1rem; /* Espace entre logo et titre */
 }
 
 .logo {
@@ -35,7 +31,10 @@ header {
   box-shadow: 0 0 15px #00f0ff;
 }
 
-/* Titre principal */
+
+/* Style du titre principal */
+
+/* Style du titre principal - version douce */
 h1 {
   font-family: 'Orbitron', sans-serif;
   font-size: 2.2rem;
@@ -43,14 +42,18 @@ h1 {
   background-size: 200% auto;
   color: transparent;
   -webkit-background-clip: text;
-  animation: sweep 6s linear infinite;
+  background-clip: text;
+  animation: sweep 6s linear infinite; /* plus lent */
+  text-shadow: 0 0 3px rgba(102, 255, 102, 0.4), 0 0 6px rgba(153, 255, 204, 0.3);
 }
 
+/* Curseur clignotant */
 .cursor {
   animation: blink 1s infinite;
-  color: #00ff00;
+  color: #66ff66;
 }
 
+/* Effet de balayage lumineux */
 @keyframes sweep {
   0% { background-position: 0% 50%; }
   100% { background-position: 200% 50%; }
@@ -60,7 +63,33 @@ h1 {
   50% { opacity: 0; }
 }
 
-/* Navigation */
+
+/* Curseur clignotant */
+.cursor {
+  animation: blink 1s infinite;
+  color: #00ff00;
+}
+
+/* Effet de balayage lumineux */
+@keyframes sweep {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+
+.cursor {
+  animation: blink 1s infinite;
+  color: #ff0048;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
 nav ul {
   list-style: none;
   display: flex;
@@ -79,69 +108,54 @@ nav a {
   text-align: center;
 }
 
-/* Grille projets sans chevauchement */
 #projects-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem; /* espace entre les tuiles */
+  gap: 1.5rem;
   padding: 1.5rem;
-  align-items: start;
+  align-items: start; /* prevent stretching */
 }
 
 .project-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 350px; /* hauteur minimale */
   background: rgba(13, 17, 23, 0.9);
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 0 10px #00f0ff;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  overflow: hidden; /* empêche le contenu de dépasser */
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .project-card:hover {
-  transform: scale(1.05);
   box-shadow: 0 0 15px #00ff00;
   border: 1px solid #00ff00;
 }
 
-.project-card h3 {
-  margin-top: 0;
-  transition: color 0.3s ease;
-}
-
-.project-card:hover h3 {
-  color: #00ff00;
-}
-
-.project-card p {
-  flex-grow: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* Bouton */
-.repo-btn {
-  display: inline-block;
-  margin-top: 0.5rem;
-  padding: 0.5rem 1rem;
-  background: transparent;
-  color: #00ff00;
-  border: 2px solid #00ff00;
-  border-radius: 5px;
-  font-weight: bold;
-  text-decoration: none;
-  transition: all 0.3s ease-in-out;
-}
-
-.repo-btn:hover {
-  background: #00ff00;
+.light-mode {
+  background: white;
   color: black;
 }
 
-/* Canvas Matrix */
+.light-mode header {
+  background: linear-gradient(270deg, rgba(0, 51, 0, 0.4), rgba(0, 255, 0, 0.4), rgba(0, 51, 0, 0.4));
+  background-size: 600% 600%;
+  animation: aurora 10s ease infinite;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(0, 255, 0, 0.2);
+  padding: 1rem;
+}
+
+.light-mode nav a {
+  color: #00ff00;
+  text-decoration: none;
+}
+
+.light-mode .project-card {
+  background: #f5f5f5;
+  box-shadow: 0 0 10px #ccc;
+}
+
+
+/* Matrix background canvas */
 #matrix {
   position: fixed;
   top: 0;
@@ -152,19 +166,202 @@ nav a {
   background: black;
 }
 
-footer {
+
+/* Hyperlink styles harmonized with Matrix green */
+a, a:visited {
+  color: #00ff00;
+  text-decoration: none;
+}
+a:hover {
+  color: #00cc00;
+  text-shadow: 0 0 5px #00ff00;
+}
+
+
+/* Stylish GitHub button */
+.repo-btn {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  color: #00ff00;
+  border: 2px solid #00ff00;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+
+.repo-btn:hover {
+  background: #00ff00;
+  color: black;
+  box-shadow: 0 0 5px #00ff00;
+  transform: scale(1.02);
+}
+
+
+/* equal-height-cards */
+#projects-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 1.5rem;
+  align-items: start; /* prevent stretching */
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  min-height: 250px;
+}
+
+.project-card h3 {
+  margin-top: 0;
+}
+
+.project-card p {
+  flex-grow: 1;
+}
+
+
+/* equal-height-fix */
+#projects-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 1.5rem;
+  align-items: start; /* prevent stretching */
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 260px; /* fixed uniform height */
+  height: 100%;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.project-card h3 {
+  margin-top: 0;
+}
+
+.project-card p {
+  flex-grow: 1;
+}
+
+
+/* uniform-card-fix */
+.project-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 280px; /* same height for all */
+  height: 100%;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+
+/* fixed-card-height */
+.project-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 280px; /* fixed same height for all */
+  overflow: hidden;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.project-card p {
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* Import de la police Orbitron */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
+
+/* Effet néon vert Matrix sur les titres */
+#accueil h2, #projets h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  color: #00ff00;
+  text-shadow: none;
+  animation: none;
+}
+
+#accueil p {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1rem;
+  color: #aaffaa;
   text-align: center;
-  padding: 1rem 0;
+  text-shadow: none;
+}
+
+/* Effet glitch léger */
+@keyframes glitch {
+  0% { text-shadow: 0 0 5px #00ff00; }
+  20% { text-shadow: -2px 0 #00ff00, 2px 0 #00cc00; }
+  40% { text-shadow: 2px 0 #00ff00, -2px 0 #00cc00; }
+  60% { text-shadow: 0 0 5px #00ff00; }
+  100% { text-shadow: 0 0 5px #00ff00; }
+}
+
+/* Bandeau du logo avec dégradé animé */
+header {
+  background: linear-gradient(270deg, rgba(0, 51, 0, 0.4), rgba(0, 255, 0, 0.4), rgba(0, 51, 0, 0.4));
+  background-size: 600% 600%;
+  animation: aurora 10s ease infinite;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(0, 255, 0, 0.2);
+  padding: 1rem;
+}
+
+@keyframes aurora {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+/* Stats section above button */
+.repo-stats {
+  margin-top: auto;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
   color: #aaffaa;
 }
 
 
-.typing-highlight {
-  color: #66ff66;
-  font-weight: bold;
-  display: inline-block;
-  transform: scale(1.2);
-  transition: transform 0.15s ease-in-out;
+/* Effet au survol des tuiles */
+.project-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #00ff00;
+  border: 1px solid #00ff00;
+}
+
+/* Titre en vert au survol */
+.project-card h3 {
+  transition: color 0.3s ease;
+}
+
+.project-card:hover h3 {
+  color: #00ff00;
+}
+
+
+footer {
+  text-align: center;
+  padding: 1rem 0;
+  color: #aaffaa;
 }
 
 
@@ -193,4 +390,21 @@ footer {
   50% {
     box-shadow: 0 0 12px rgba(0, 255, 0, 0.6);
   }
+}
+
+
+header {
+  padding: 1.5rem 1rem !important; /* Augmente la hauteur */
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.logo {
+  max-height: 100px; /* Empêche le logo d'être tronqué */
+  height: auto;
 }
