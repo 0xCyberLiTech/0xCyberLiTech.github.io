@@ -11,8 +11,6 @@ function matrixEffect() {
   const fontSize = 14;
   let columns;
   let drops;
-  let matrixSpeed = 0.8; // vitesse normale
-
   let lastWidth = window.innerWidth;
   let lastHeight = Math.max(window.innerHeight, document.body.scrollHeight);
 
@@ -48,7 +46,7 @@ function matrixEffect() {
       if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
         drops[i] = 0;
       }
-      drops[i] += matrixSpeed; // vitesse dynamique du matrix
+      drops[i]++;
     }
 
     requestAnimationFrame(draw);
@@ -122,14 +120,6 @@ fetch("https://api.github.com/users/0xCyberLiTech/repos?sort=updated")
       
       container.appendChild(card);
       applyHoverTypingEffect(card, description);
-      // Accélère le Matrix lors du survol
-      card.addEventListener("mouseenter", () => {
-        matrixSpeed = 1.2; // accélère légèrement
-      });
-      card.addEventListener("mouseleave", () => {
-        matrixSpeed = 0.8; // revient à la normale
-      });
-
     });
   })
   .catch(() => {

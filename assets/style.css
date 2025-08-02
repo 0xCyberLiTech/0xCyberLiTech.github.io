@@ -414,7 +414,6 @@ header {
   color: #66ff66;
   font-weight: bold;
   display: inline-block;
-  transform: scale(1.5); /* plus gros qu'avant */
+  transform: scale(1.2);
   transition: transform 0.15s ease-in-out;
-  text-shadow: 0 0 8px #00ff00;
 }
