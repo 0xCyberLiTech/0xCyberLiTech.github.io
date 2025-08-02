@@ -1,0 +1,235 @@
+
+
+/* ==========================
+   1. Import Fonts
+========================== */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
+
+/* ==========================
+   2. Global Styles
+========================== */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0d1117 url('matrix-bg.gif') repeat;
+  color: white;
+}
+
+/* Links */
+a, a:visited {
+  color: #00ff00;
+  text-decoration: none;
+}
+a:hover {
+  color: #00cc00;
+  text-shadow: 0 0 5px #00ff00;
+}
+
+/* ==========================
+   3. Header & Logo
+========================== */
+header {
+  background: linear-gradient(270deg, rgba(0, 51, 0, 0.4), rgba(0, 255, 0, 0.4), rgba(0, 51, 0, 0.4));
+  background-size: 600% 600%;
+  animation: aurora 10s ease infinite;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(0, 255, 0, 0.2);
+  padding: 1.5rem 1rem;
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.logo {
+  width: 120px;
+  max-height: 100px;
+  height: auto;
+  border-radius: 50%;
+  box-shadow: 0 0 15px #00f0ff;
+}
+
+/* ==========================
+   4. Main Titles
+========================== */
+h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.2rem;
+  background: linear-gradient(90deg, #66ff66, #99ffcc, #66ff66);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: sweep 6s linear infinite;
+  text-shadow: 0 0 3px rgba(102, 255, 102, 0.4), 0 0 6px rgba(153, 255, 204, 0.3);
+}
+
+.cursor {
+  animation: blink 1s infinite;
+  color: #66ff66;
+}
+
+#accueil h2, #projets h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  color: #00ff00;
+  text-align: center;
+}
+
+#accueil p {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1rem;
+  color: #aaffaa;
+  text-align: center;
+}
+
+/* ==========================
+   5. Matrix Background
+========================== */
+#matrix {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: black;
+}
+
+/* ==========================
+   6. Project Cards
+========================== */
+#projects-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 1.5rem;
+  align-items: start;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 280px;
+  overflow: hidden;
+  background: rgba(13, 17, 23, 0.9);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #00f0ff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.project-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #00ff00;
+  border: 1px solid #00ff00;
+}
+
+.project-card h3 {
+  margin-top: 0;
+  transition: color 0.3s ease;
+}
+.project-card:hover h3 {
+  color: #00ff00;
+}
+
+.project-card p {
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Repo Stats */
+.repo-stats {
+  margin-top: auto;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: #aaffaa;
+}
+
+/* GitHub Button */
+.repo-btn {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  color: #00ff00;
+  border: 2px solid #00ff00;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+.repo-btn:hover {
+  background: #00ff00;
+  color: black;
+  box-shadow: 0 0 5px #00ff00;
+  transform: scale(1.02);
+}
+
+/* Badge New */
+.new-badge {
+  display: inline-block;
+  background: rgba(0, 255, 0, 0.2);
+  color: #00ff00;
+  font-size: 0.75rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: 5px;
+  font-weight: bold;
+  border: 1px solid rgba(0, 255, 0, 0.4);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 0 5px rgba(0, 255, 0, 0.4);
+  margin-bottom: 0.3rem;
+  animation: badgePulse 3s ease-in-out infinite;
+}
+
+/* ==========================
+   7. Footer
+========================== */
+footer {
+  text-align: center;
+  padding: 1rem 0;
+  color: #aaffaa;
+}
+
+/* ==========================
+   8. Animations
+========================== */
+@keyframes sweep {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+@keyframes aurora {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes badgePulse {
+  0%, 100% { box-shadow: 0 0 5px rgba(0, 255, 0, 0.4); }
+  50% { box-shadow: 0 0 12px rgba(0, 255, 0, 0.6); }
+}
+
+/* ==========================
+   9. Typing Highlight
+========================== */
+.typing-highlight {
+  color: #66ff66;
+  font-weight: bold;
+  display: inline-block;
+  transform: scale(1.5);
+  transition: transform 0.15s ease-in-out;
+  text-shadow: 0 0 8px #00ff00;
+}
+
