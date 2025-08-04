@@ -1,5 +1,7 @@
 # 0xCyberLiTech - Portfolio GitHub
 
+![Aperçu du site](assets/screenshot.png)
+
 Bienvenue sur mon **portfolio GitHub**.  
 Ce site présente mes projets, scripts et tutoriels en cybersécurité, avec un style inspiré de l'univers **Matrix**.
 
@@ -23,7 +25,8 @@ Ce portfolio est hébergé via **GitHub Pages** :
 ├── assets/            # Styles, scripts et images
 │   ├── style.css
 │   ├── script.js
-│   └── logo.png
+│   ├── logo.png
+│   └── screenshot.png # Capture d'écran du site (à ajouter)
 ```
 
 ## 📦 Technologies utilisées
