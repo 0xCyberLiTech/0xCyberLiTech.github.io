@@ -115,10 +115,38 @@ fetch("https://api.github.com/users/0xCyberLiTech/repos?sort=updated")
       card.innerHTML = `
         <h3>${repo.name}</h3>
         <p>${description}</p>
-        ${isNew ? `<div class="new-badge">🆕 Nouveau</div>` : ""}
         <div class="repo-stats">⭐ ${repo.stargazers_count} | 🍴 ${repo.forks_count} | 🕒 ${new Date(repo.updated_at).toLocaleDateString()}</div>
         <a class="repo-btn" href="${repo.html_url}/blob/${repo.default_branch || "main"}/README.md" target="_blank">📄 Lire le README</a>
       `;
+    // === Ajout badge/LED ===
+    const updatedDate = new Date(repo.updated_at);
+    const daysSinceUpdate = Math.floor((Date.now() - updatedDate) / 86400000);
+    const pct = daysSinceUpdate >= 30 ? 0 : Math.round((daysSinceUpdate / 30) * 100);
+
+    // Création de la barre LED et du compteur
+    const ledBar = document.createElement('div');
+    ledBar.className = 'update-bar';
+    ledBar.innerHTML = `<div class="update-bar__fill" style="width: ${pct}%;"></div>`;
+
+    
+const badgeNew = document.createElement('span');
+badgeNew.className = 'update-badge';
+badgeNew.textContent = 'Nouveau';
+if (daysSinceUpdate < 30) {
+  badgeNew.style.display = 'inline-block';
+} else {
+  badgeNew.style.display = 'none';
+}
+
+const counter = document.createElement('div');
+    counter.className = 'update-counter';
+    counter.textContent = `${daysSinceUpdate} j`;
+
+    // Insert au bas de la carte
+    card.appendChild(ledBar);
+    card.appendChild(badgeNew);
+    card.appendChild(counter);
+
       
       container.appendChild(card);
       applyHoverTypingEffect(card, description);
@@ -137,3 +165,109 @@ fetch("https://api.github.com/users/0xCyberLiTech/repos?sort=updated")
     errorMessage.textContent = "Erreur de connexion à l'API GitHub.";
     errorMessage.style.display = "block";
   });
+
+
+// ==== Binary Effect in Each Tile ====
+document.querySelectorAll('.binary-tile').forEach(canvas => {
+    const ctx = canvas.getContext('2d');
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+
+    const fontSize = 12;
+    const columns = Math.floor(canvas.width / fontSize);
+    const drops = Array(columns).fill(1);
+
+    function draw() {
+        ctx.fillStyle = 'rgba(0,0,0,0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = 'rgba(0,255,0,0.25)';
+        ctx.font = fontSize + 'px monospace';
+
+        for (let i = 0; i < drops.length; i++) {
+            const text = Math.random() > 0.5 ? '0' : '1';
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+            drops[i]++;
+        }
+    }
+
+    setInterval(draw, 100);
+});
+
+
+
+
+// ==== Global Binary Effect Settings ====
+let binaryOpacity = 0.20; // Adjust intensity here
+let binaryFontSize = 12;
+let binaryInterval = 100;
+
+// ==== Binary Effect Function ====
+function initBinaryEffect(selector) {
+    document.querySelectorAll(selector).forEach(canvas => {
+        const ctx = canvas.getContext('2d');
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+
+        const columns = Math.floor(canvas.width / binaryFontSize);
+        const drops = Array(columns).fill(1);
+
+        function draw() {
+            ctx.fillStyle = 'rgba(0,0,0,0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = `rgba(0,255,0,${binaryOpacity})`;
+            ctx.font = binaryFontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = Math.random() > 0.5 ? '0' : '1';
+                ctx.fillText(text, i * binaryFontSize, drops[i] * binaryFontSize);
+                if (drops[i] * binaryFontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        }
+
+        setInterval(draw, binaryInterval);
+    });
+}
+
+// ==== Inject Binary Canvas After Loading Projects ====
+function injectBinaryIntoProjects() {
+    document.querySelectorAll('.project-card').forEach(card => {
+        if (!card.querySelector('.binary-tile')) {
+            const canvas = document.createElement('canvas');
+            canvas.classList.add('binary-tile');
+            card.prepend(canvas);
+        }
+    });
+    initBinaryEffect('.project-card .binary-tile');
+}
+
+// ==== Run binary effect for profile card immediately ====
+if (document.querySelector('.profil-card .binary-tile')) {
+    initBinaryEffect('.profil-card .binary-tile');
+}
+
+// ==== Hook into GitHub repos loading ====
+const originalDisplayReposList = typeof displayReposList === 'function' ? displayReposList : null;
+if (originalDisplayReposList) {
+    displayReposList = function(repos) {
+        originalDisplayReposList(repos);
+        injectBinaryIntoProjects();
+    };
+} else {
+    // Fallback: try injecting after DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(injectBinaryIntoProjects, 2000);
+    });
+}
+
+
+// ==== Adjust binary intensity on hover ====
+document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+        binaryOpacity = 0.20; // lower intensity during zoom
+    });
+    card.addEventListener('mouseleave', () => {
+        binaryOpacity = 0.20; // restore intensity
+    });
+});
