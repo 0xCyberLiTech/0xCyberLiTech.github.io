@@ -602,3 +602,9 @@ animation:pulse 3s ease-in-out infinite;
 @media (prefers-reduced-motion: reduce){
   .update-bar__fill{animation:none;}
 }
+
+
+
+
+
+

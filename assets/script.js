@@ -192,3 +192,4 @@ document.querySelectorAll('.project-card').forEach(card => {
         binaryOpacity = 0.20; // restore intensity
     });
 });
+
