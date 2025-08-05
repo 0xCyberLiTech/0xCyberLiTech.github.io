@@ -167,93 +167,14 @@ const counter = document.createElement('div');
   });
 
 
-// ==== Binary Effect in Each Tile ====
-document.querySelectorAll('.binary-tile').forEach(canvas => {
-    const ctx = canvas.getContext('2d');
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
+ // Suppression de l\'effet binaire sur la tuile profil
 
-    const fontSize = 12;
-    const columns = Math.floor(canvas.width / fontSize);
-    const drops = Array(columns).fill(1);
-
-    function draw() {
-        ctx.fillStyle = 'rgba(0,0,0,0.05)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = 'rgba(0,255,0,0.25)';
-        ctx.font = fontSize + 'px monospace';
-
-        for (let i = 0; i < drops.length; i++) {
-            const text = Math.random() > 0.5 ? '0' : '1';
-            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-            drops[i]++;
-        }
-    }
-
-    setInterval(draw, 100);
-});
-
-
-
-
-// ==== Global Binary Effect Settings ====
-let binaryOpacity = 0.20; // Adjust intensity here
-let binaryFontSize = 12;
-let binaryInterval = 100;
-
-// ==== Binary Effect Function ====
-function initBinaryEffect(selector) {
-    document.querySelectorAll(selector).forEach(canvas => {
-        const ctx = canvas.getContext('2d');
-        canvas.width = canvas.offsetWidth;
-        canvas.height = canvas.offsetHeight;
-
-        const columns = Math.floor(canvas.width / binaryFontSize);
-        const drops = Array(columns).fill(1);
-
-        function draw() {
-            ctx.fillStyle = 'rgba(0,0,0,0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = `rgba(0,255,0,${binaryOpacity})`;
-            ctx.font = binaryFontSize + 'px monospace';
-
-            for (let i = 0; i < drops.length; i++) {
-                const text = Math.random() > 0.5 ? '0' : '1';
-                ctx.fillText(text, i * binaryFontSize, drops[i] * binaryFontSize);
-                if (drops[i] * binaryFontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
-            }
-        }
-
-        setInterval(draw, binaryInterval);
-    });
-}
-
-// ==== Inject Binary Canvas After Loading Projects ====
-function injectBinaryIntoProjects() {
-    document.querySelectorAll('.project-card').forEach(card => {
-        if (!card.querySelector('.binary-tile')) {
-            const canvas = document.createElement('canvas');
-            canvas.classList.add('binary-tile');
-            card.prepend(canvas);
-        }
-    });
-    initBinaryEffect('.project-card .binary-tile');
-}
-
-// ==== Run binary effect for profile card immediately ====
-if (document.querySelector('.profil-card .binary-tile')) {
-    initBinaryEffect('.profil-card .binary-tile');
-}
 
 // ==== Hook into GitHub repos loading ====
 const originalDisplayReposList = typeof displayReposList === 'function' ? displayReposList : null;
 if (originalDisplayReposList) {
     displayReposList = function(repos) {
-        originalDisplayReposList(repos);
-        injectBinaryIntoProjects();
-    };
+        originalDisplayReposList(repos);};
 } else {
     // Fallback: try injecting after DOMContentLoaded
     document.addEventListener('DOMContentLoaded', () => {
