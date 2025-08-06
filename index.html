@@ -1,78 +1,58 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-
-    <!-- Open Graph Metadata -->
-    <meta property="og:title" content="0xCyberLiTech - Portail GitHub" />
-    <meta property="og:description" content="Scripts, tutoriels et projets en cybersécurité. Découvrez mes dépôts GitHub !" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://0xcyberlitech.github.io/" />
-    <meta property="og:image" content="https://0xcyberlitech.github.io/assets/logo.png" />
-    <meta property="og:locale" content="fr_FR" />
-
-    <!-- Twitter Card Metadata -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="0xCyberLiTech - Portail GitHub" />
-    <meta name="twitter:description" content="Scripts, tutoriels et projets en cybersécurité. Découvrez mes dépôts GitHub !" />
-    <meta name="twitter:image" content="https://0xcyberlitech.github.io/assets/logo.png" />
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>0xCyberLiTech - Portail GitHub</title>
+    <meta charset="UTF-8">
+    <title>0xCyberLiTech - Portfolio GitHub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="assets/style.css">
     <script defer src="assets/script.js"></script>
 </head>
 <body>
-    <canvas id="matrix"></canvas>
-
-    <header>
-        <div class="logo-container">
-            
-            <h1>&gt; 0xCyberLiTech <span class="cursor">_</span></h1>
+    <!-- Bandeau en haut de la page -->
+    <header class="top-banner">
+        <div class="top-banner__content">
+            <span class="top-banner__title">Portfolio 0xCyberLiTech</span>
         </div>
     </header>
 
+    <!-- Effet Matrix -->
+    <canvas id="matrix"></canvas>
 
-<section id="profil" class="profil-section">
-    <div class="profil-card enhanced-profil">
-<div class="profil-logo-container">
-            <div class="logo-wrapper">
-                <img src="assets/logo.png" alt="Logo 0xCyberLiTech" class="profil-logo">
-                <div class="scanlines"></div>
+    <!-- Section profil -->
+    <section class="profil-section">
+        <div class="profil-card">
+            <div class="profil-logo-container">
+                <div class="logo-wrapper">
+                    <img src="assets/logo.png" alt="Logo 0xCyberLiTech" class="profil-logo">
+                    <div class="scanlines"></div>
+                </div>
+            </div>
+            <h2>0xCyberLiTech</h2>
+            <p class="profil-description">
+                Passionné par la cybersécurité, Linux, l'intelligence artificielle, les nouvelles technologies et la musique assistée par ordinateur.
+            </p>
+            <div class="profil-buttons">
+                <a href="https://github.com/0xCyberLiTech" target="_blank" class="profil-btn">💻 GitHub</a>
             </div>
         </div>
-        <h2>0xCyberLiTech</h2>
-        <p class="profil-slogan">Cybersécurité • Linux • IA • MAO</p>
-        <p class="profil-description">
-            Passionné par la cybersécurité, Linux, l'intelligence artificielle, les nouvelles technologies et la musique assistée par ordinateur.
-        </p>
-        <div class="profil-buttons">
-            <a href="https://github.com/0xCyberLiTech" target="_blank" class="profil-btn">💻 GitHub</a>
-                    </div>
-    </div>
-</section>
-
-
-
-
-
-
+    </section>
 
     <main>
         <section id="accueil">
             <h2>Bienvenue sur mon portail GitHub</h2>
             <p>Scripts, tutoriels et projets en cybersécurité.</p>
         </section>
-
         <section id="projets">
-            <h2>📂 Mes Dépôts GitHub</h2>
-            <div id="projects-list"></div>
+            <h2>Mes dépôts publics</h2>
+            <div id="error-message" style="display:none;color:red;"></div>
+            <div id="projects-list">
+                <!-- Les tuiles projets seront générées ici par script.js -->
+            </div>
         </section>
-        <div id="error-message" style="display:none;color:red;text-align:center;margin-top:1rem;"></div>
     </main>
 
     <footer>
-        <p>© 2025 - 0xCyberLiTech</p>
+        &copy; 2025 0xCyberLiTech. Tous droits réservés.
     </footer>
 </body>
 </html>
