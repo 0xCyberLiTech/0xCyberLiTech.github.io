@@ -92,7 +92,11 @@ async function loadRepos() {
     try {
         const response = await fetch('https://api.github.com/users/0xCyberLiTech/repos');
         const repos = await response.json();
-        repos.forEach(repo => {
+        
+        // Filtrer pour exclure le dépôt GitHub Pages
+        const filteredRepos = repos.filter(repo => repo.name !== '0xCyberLiTech.github.io');
+        
+        filteredRepos.forEach(repo => {
             const lastUpdate = new Date(repo.updated_at);
             const now = new Date();
             const daysElapsed = Math.floor((now - lastUpdate) / (1000 * 60 * 60 * 24));
