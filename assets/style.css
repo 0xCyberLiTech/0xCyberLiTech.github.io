@@ -1,610 +1,690 @@
-
-
-/* ==========================
-   1. Import Fonts
-========================== */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
-
-/* ==========================
-   2. Global Styles
-========================== */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #0d1117 url('matrix-bg.gif') repeat;
-  color: white;
+/* Effet Matrix Digital Rain 2.0 en arrière-plan */
+#matrix {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    display: block;
+    background: #000;
 }
 
-/* Links */
-a, a:visited {
-  color: #00ff00;
-  text-decoration: none;
-}
-a:hover {
-  color: #00cc00;
-  text-shadow: 0 0 5px #00ff00;
+/* Structure générale */
+body, html {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background: #101010;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', 'Consolas', monospace, Arial, sans-serif;
 }
 
-/* ==========================
-   3. Header & Logo
-========================== */
+main, header, section, footer {
+    position: relative;
+    z-index: 1;
+}
+
 header {
-  background: linear-gradient(270deg, rgba(0, 51, 0, 0.4), rgba(0, 255, 0, 0.4), rgba(0, 51, 0, 0.4));
-  background-size: 600% 600%;
-  animation: aurora 10s ease infinite;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-bottom: 1px solid rgba(0, 255, 0, 0.2);
-  padding: 1.5rem 1rem;
+    padding: 24px 0 8px 0;
+    text-align: center;
 }
 
-.logo-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
+/* Bandeau fixe en haut : style Terminal/Console modernisé */
+.top-banner {
+    width: 100vw;
+    background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 50%, #0c0c0c 100%);
+    color: #e0e0e0;
+    padding: 0;
+    text-align: center;
+    box-shadow: 
+        0 0 20px rgba(0, 255, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 4px 15px rgba(0, 0, 0, 0.9);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    border-bottom: 2px solid #333;
+    border-image: linear-gradient(90deg, #00ff00, #00aaff, #00ff00) 1;
+    overflow: hidden;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
 }
 
-.logo {
-  width: 120px;
-  max-height: 100px;
-  height: auto;
-  border-radius: 50%;
-  box-shadow: 0 0 15px #00f0ff;
+/* Header terminal pour le bandeau */
+.top-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 18px;
+    background: linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 100%);
+    border-bottom: 1px solid #555;
+    background-image: 
+        radial-gradient(circle at 10px 9px, #ff5555 3px, transparent 4px),
+        radial-gradient(circle at 25px 9px, #ffaa00 3px, transparent 4px),
+        radial-gradient(circle at 40px 9px, #00ff00 3px, transparent 4px);
+    z-index: 1;
 }
 
-/* ==========================
-   4. Main Titles
-========================== */
-h1 {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 2.2rem;
-  background: linear-gradient(90deg, #66ff66, #99ffcc, #66ff66);
-  background-size: 200% auto;
-  color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  animation: sweep 6s linear infinite;
-  text-shadow: 0 0 3px rgba(102, 255, 102, 0.4), 0 0 6px rgba(153, 255, 204, 0.3);
+/* Effet de scan animé */
+.top-banner::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(0, 255, 0, 0.1) 50%,
+        transparent 100%
+    );
+    animation: bannerScan 3s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 2;
+}
+
+@keyframes bannerScan {
+    0% { left: -100%; }
+    50% { left: 100%; }
+    100% { left: -100%; }
+}
+
+.top-banner__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 22px 0 8px 0;
+    position: relative;
+    z-index: 3;
+}
+
+.top-banner__title {
+    font-size: 1.4em;
+    font-weight: bold;
+    letter-spacing: 3px;
+    font-family: 'Consolas', monospace;
+    color: #00ff00;
+    text-shadow: 
+        0 0 5px rgba(0, 255, 0, 0.8),
+        0 0 10px rgba(0, 255, 0, 0.4);
+    position: relative;
+    animation: terminalGlow 2s ease-in-out infinite alternate;
+}
+
+.top-banner__title::before {
+    content: '┌──(Portfolio㉿0xCyberLiTech)-[~/]';
+    display: block;
+    font-size: 0.6em;
+    color: #00aaff;
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+    text-shadow: none;
+    animation: none;
+}
+
+.top-banner__title::after {
+    content: '└─$ echo "Welcome to my cybersecurity portfolio"';
+    display: block;
+    font-size: 0.5em;
+    color: #888;
+    letter-spacing: 1px;
+    margin-top: 2px;
+    text-shadow: none;
+    animation: typewriter 4s steps(40) infinite;
+}
+
+@keyframes terminalGlow {
+    0% { 
+        text-shadow: 
+            0 0 5px rgba(0, 255, 0, 0.8),
+            0 0 10px rgba(0, 255, 0, 0.4);
+    }
+    100% { 
+        text-shadow: 
+            0 0 8px rgba(0, 255, 0, 1),
+            0 0 15px rgba(0, 255, 0, 0.6),
+            0 0 20px rgba(0, 255, 0, 0.3);
+    }
+}
+
+@keyframes typewriter {
+    0%, 50% { opacity: 1; }
+    51%, 60% { opacity: 0.3; }
+    61%, 100% { opacity: 1; }
+}
+
+/* Décale le contenu pour ne pas passer sous le bandeau modernisé */
+body {
+    padding-top: 85px;
+}
+
+.logo-container h1 {
+    font-size: 2.2em;
+    color: #00ff00;
+    font-family: 'Consolas', monospace;
+    letter-spacing: 2px;
+    margin: 0;
 }
 
 .cursor {
-  animation: blink 1s infinite;
-  color: #66ff66;
-}
-
-#accueil h2, #projets h2 {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 2rem;
-  color: #00ff00;
-  text-align: center;
-}
-
-#accueil p {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 1.1rem;
-  color: #aaffaa;
-  text-align: center;
-}
-
-/* ==========================
-   5. Matrix Background
-========================== */
-#matrix {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  background: black;
-}
-
-/* ==========================
-   6. Project Cards
-========================== */
-#projects-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
-  padding: 1.5rem;
-  align-items: start;
-}
-
-.project-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 280px;
-  overflow: hidden;
-  background: rgba(13, 17, 23, 0.9);
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 0 10px #00f0ff;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-background: rgba(10, 20, 10, 0.92);background: rgba(5, 10, 5, 0.98);}
-
-.project-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 15px #00ff00;
-  border: 1px solid #00ff00;
-}
-
-.project-card h3 {
-  margin-top: 0;
-  transition: color 0.3s ease;
-}
-.project-card:hover h3 {
-  color: #00ff00;
-}
-
-.project-card p {
-  flex-grow: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* Repo Stats */
-.repo-stats {
-  margin-top: auto;
-  margin-bottom: 0.5rem;
-  font-size: 0.9rem;
-  color: #aaffaa;
-}
-
-/* GitHub Button */
-.repo-btn {
-  display: inline-block;
-  margin-top: 0.5rem;
-  padding: 0.5rem 1rem;
-  background: transparent;
-  color: #00ff00;
-  border: 2px solid #00ff00;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: all 0.3s ease-in-out;
-}
-.repo-btn:hover {
-  background: #00ff00;
-  color: black;
-  box-shadow: 0 0 5px #00ff00;
-  transform: scale(1.02);
-}
-
-/* Badge New */
-.new-badge {
-  display: inline-block;
-  background: rgba(0, 255, 0, 0.2);
-  color: #00ff00;
-  font-size: 0.75rem;
-  padding: 0.15rem 0.4rem;
-  border-radius: 5px;
-  font-weight: bold;
-  border: 1px solid rgba(0, 255, 0, 0.4);
-  backdrop-filter: blur(4px);
-  box-shadow: 0 0 5px rgba(0, 255, 0, 0.4);
-  margin-bottom: 0.3rem;
-  animation: badgePulse 3s ease-in-out infinite;
-}
-
-/* ==========================
-   7. Footer
-========================== */
-footer {
-  text-align: center;
-  padding: 1rem 0;
-  color: #aaffaa;
-}
-
-/* ==========================
-   8. Animations
-========================== */
-@keyframes sweep {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 200% 50%; }
+    animation: blink 1s steps(2, start) infinite;
 }
 
 @keyframes blink {
-  50% { opacity: 0; }
+    to { opacity: 0; }
 }
 
-@keyframes aurora {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-@keyframes badgePulse {
-  0%, 100% { box-shadow: 0 0 5px rgba(0, 255, 0, 0.4); }
-  50% { box-shadow: 0 0 12px rgba(0, 255, 0, 0.6); }
-}
-
-/* ==========================
-   9. Typing Highlight
-========================== */
-.typing-highlight {
-  color: #66ff66;
-  font-weight: bold;
-  display: inline-block;
-  transform: scale(1.5);
-  transition: transform 0.15s ease-in-out;
-  text-shadow: 0 0 8px #00ff00;
-}
-
-
-
-/* ==== Profil Section ==== */
 .profil-section {
     display: flex;
     justify-content: center;
-    margin: 2rem 0;
+    margin-top: 24px;
 }
 
+/* Effet de contour paramétrable pour toutes les tuiles (projets, logo et slogan) */
+:root {
+    --tile-shadow-intensity: 0.6; /* Modifie l'intensité du contour ici (0 à 1) */
+}
+
+/* Tuile profil (logo) : style Terminal/Console harmonisé */
 .profil-card {
+    background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%) !important;
+    border-radius: 8px !important;
+    border: 2px solid #333 !important;
+    border-top: 2px solid #555 !important;
+    border-left: 2px solid #555 !important;
+    box-shadow: 
+        0 0 20px rgba(0, 255, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 4px 12px rgba(0, 0, 0, 0.8) !important;
+    padding: 0 !important;
+    max-width: 400px;
+    width: 100%;
     text-align: center;
-    background: rgba(13, 17, 23, 0.85);
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 0 15px #00ff00;
-    max-width: 600px;
-}
-
-.profil-logo {
-    width: 120px;
-    height: auto;
-    border-radius: 50%;
-    box-shadow: 0 0 10px #00ff00;
-    margin-bottom: 1rem;
-}
-
-.profil-card h2 {
-    font-family: 'Orbitron', sans-serif;
-    color: #00ff00;
-}
-
-.profil-card p {
-    color: #aaffaa;
-    font-size: 1.1rem;
-    margin-bottom: 1.5rem;
-}
-
-.profil-buttons {
+    position: relative;
+    overflow: hidden;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    min-height: 320px;
     display: flex;
-    justify-content: center;
-    gap: 1rem;
+    flex-direction: column;
 }
 
-.profil-btn {
-    padding: 0.5rem 1rem;
-    background: transparent;
-    color: #00ff00;
-    border: 2px solid #00ff00;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: all 0.3s ease-in-out;
+/* Header du terminal pour la tuile profil */
+.profil-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 28px;
+    background: linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 100%);
+    border-bottom: 1px solid #555;
+    background-image: 
+        radial-gradient(circle at 15px 14px, #ff5555 4px, transparent 5px),
+        radial-gradient(circle at 35px 14px, #ffaa00 4px, transparent 5px),
+        radial-gradient(circle at 55px 14px, #00ff00 4px, transparent 5px);
+    z-index: 1;
 }
 
-.profil-btn:hover {
-    background: #00ff00;
-    color: black;
-    box-shadow: 0 0 10px #00ff00;
+/* Contenu de la tuile profil */
+.profil-card > * {
+    position: relative;
+    z-index: 2;
 }
 
-/* ==== Compétences Section ==== */
-.competences-section {
-    margin: 3rem auto;
-    text-align: center;
-    max-width: 1000px;
-}
-
-.competences-section h2 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 2rem;
-    color: #00ff00;
-    margin-bottom: 2rem;
-}
-
-.competences-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 1.5rem;
-    padding: 0 1rem;
-}
-
-.competence-card {
-    background: rgba(13, 17, 23, 0.85);
-    padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0 0 10px #00ff00;
-    color: #aaffaa;
-    font-size: 1rem;
-    line-height: 1.4;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.competence-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px #00ff00;
-}
-
-
-/* ==== Harmonisation des bordures et effets hover ==== */
-.project-card, .profil-card, .competence-card {
-    border: 2px solid #00ff00;
-    background: rgba(13, 17, 23, 0.70) !important;
-    border-radius: 10px;
-    box-shadow: 0 0 10px #00ff00;
-    color: #aaffaa;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-}
-
-.project-card:hover, .profil-card:hover, .competence-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px #00ff00;
-    border-color: #66ff66;
-}
-
-
-/* === Enhanced Profile Card === */
-.enhanced-profil {
-    padding: 2.5rem;
+.profil-card > *:first-child {
+    margin-top: 35px;
 }
 
 .profil-logo-container {
     display: flex;
     justify-content: center;
-    margin-bottom: 1rem;
+    margin-bottom: 16px;
+    padding-top: 16px;
 }
 
 .logo-wrapper {
     position: relative;
-    display: inline-block;
+    width: 80px;
+    height: 80px;
 }
 
 .profil-logo {
-    width: 140px;
-    height: auto;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
-    box-shadow: 0 0 20px #00ff00, 0 0 40px #00ff00;
-    animation: pulseGlow 2s infinite alternate;
+    border: 2px solid #00ff00;
+    background: #222;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
 }
 
-
-    to { box-shadow: 0 0 30px #66ff66, 0 0 60px #66ff66; }
-}
-
-/* Scanline effect */
 .scanlines {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
     background: repeating-linear-gradient(
         to bottom,
-        rgba(0, 255, 0, 0.1),
-        rgba(0, 255, 0, 0.1) 1px,
-        transparent 2px
+        rgba(0,255,0,0.04) 0px,
+        rgba(0,255,0,0.04) 2px,
+        transparent 2px,
+        transparent 4px
     );
-    pointer-events: none;
     border-radius: 50%;
 }
 
-.profil-slogan {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #00ff00;
-    margin-bottom: 0.5rem;
+/* Titre profil style Terminal */
+.profil-card h2 {
+    color: #00ff00 !important;
+    font-family: 'Consolas', monospace !important;
+    margin: 16px 0 !important;
+    position: relative;
+}
+
+.profil-card h2::before {
+    content: '┌──(root㉿kali)-[~/profile]';
+    display: block;
+    color: #00aaff;
+    font-size: 0.7em;
+    margin-bottom: 4px;
+}
+
+.profil-card h2::after {
+    content: '└─$ whoami';
+    display: block;
+    color: #00aaff;
+    font-size: 0.7em;
+    margin-top: 4px;
 }
 
 .profil-description {
-    color: #aaffaa;
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
+    font-size: 0.9em;
+    margin-bottom: auto;
+    color: #e0e0e0 !important;
+    font-family: 'Consolas', monospace !important;
+    line-height: 1.4;
+    padding: 0 16px;
+    flex: 1;
 }
 
-
-/* ==== Modernized Tiles ==== */
-.project-card, .profil-card, .competence-card {
-    background: rgba(13, 17, 23, 0.4);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(0, 255, 0, 0.4);
-    border-radius: 16px;
-    box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+.profil-buttons {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 0 16px 16px 16px;
 }
 
-.project-card:hover, .profil-card:hover, .competence-card:hover {
-    transform: translateY(-5px) scale(1.03);
-    box-shadow: 0 0 25px rgba(0, 255, 0, 0.6);
+.profil-btn {
+    background: transparent !important;
+    border: 1px solid #00ff00 !important;
+    color: #00ff00 !important;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 0.9em;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'Consolas', monospace !important;
+    transition: all 0.2s ease;
+    display: block;
+    text-align: center;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.profil-btn::before {
+    content: '$ git clone';
+    font-size: 0.8em;
+    color: #666;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.profil-btn:hover {
+    background: rgba(0, 255, 0, 0.1) !important;
+    border-color: #00ff00 !important;
+    color: #00ff00 !important;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    text-decoration: none;
+}
+
+.profil-btn:hover::before {
+    content: '$ git clone --recursive';
+    color: #00ff00;
+}
+
+/* Effet hover pour la tuile profil */
+.profil-card:hover {
+    transform: scale(1.02) translateY(-2px);
+    box-shadow: 
+        0 0 30px rgba(0, 255, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        0 8px 25px rgba(0, 0, 0, 0.9) !important;
     border-color: #00ff00;
 }
 
-.project-card h3, .profil-card h2, .competence-card strong {
-    font-family: 'Orbitron', sans-serif;
-    letter-spacing: 1px;
+/* Effet de scan pour la tuile profil */
+.profil-card::after {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(0, 255, 0, 0.1) 50%,
+        transparent 100%
+    );
+    transition: top 0.6s ease;
+    pointer-events: none;
+    z-index: 3;
 }
 
+.profil-card:hover::after {
+    top: 100%;
+}
 
-/* ==== Binary Effect Inside Tiles ==== */
-.project-card, .profil-card, .competence-card {
+.profil-buttons {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 0 16px 16px 16px;
+}
+
+.profil-btn {
+    background: transparent !important;
+    border: 1px solid #00ff00 !important;
+    color: #00ff00 !important;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 0.9em;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'Consolas', monospace !important;
+    transition: all 0.2s ease;
+    display: block;
+    text-align: center;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.profil-btn::before {
+    content: '$ git clone';
+    font-size: 0.8em;
+    color: #666;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.profil-btn:hover {
+    background: rgba(0, 255, 0, 0.1) !important;
+    border-color: #00ff00 !important;
+    color: #00ff00 !important;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    text-decoration: none;
+}
+
+.profil-btn:hover::before {
+    content: '$ git clone --recursive';
+    color: #00ff00;
+}
+
+/* Section accueil et projets */
+main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px 12px 48px 12px;
+}
+
+section#accueil {
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+section#projets {
+    margin-bottom: 32px;
+}
+
+#projects-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    margin-top: 24px;
+    padding: 0 12px;
+}
+
+/* Tuile projet : style Terminal/Console moderne */
+.project-tile {
+    background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%) !important;
+    border-radius: 8px !important;
+    border: 2px solid #333 !important;
+    border-top: 2px solid #555 !important;
+    border-left: 2px solid #555 !important;
+    box-shadow: 
+        0 0 20px rgba(0, 255, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 4px 12px rgba(0, 0, 0, 0.8) !important;
+    padding: 0 !important;
     position: relative;
     overflow: hidden;
-}
-
-/* ==== Keep binary effect behind tile content ==== */
-.project-card, .profil-card, .competence-card {
-    position: relative;
-    overflow: hidden;
-}
-
-.project-card > *:not(/* ==== Center competences grid ==== */
-.competences-grid {
     display: flex;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-}
-.competence-card {
-    flex: 0 1 280px;
-}
-
-
-/* Binary effect for profile card */
-.profil-card {
-    position: relative;
-    overflow: hidden;
-}
-.profil-card > *:not(/* Binary effect for project cards */
-.project-card {
-    position: relative;
-    overflow: hidden;
-background: rgba(10, 20, 10, 0.92);background: rgba(5, 10, 5, 0.98);}
-.project-card .project-card > *:not(/* Binary effect placement */
-.profil-card, .project-card {
-    position: relative;
-    overflow: hidden;
-background: rgba(10, 20, 10, 0.92);background: rgba(5, 10, 5, 0.98);}
-.profil-card > *:not(/* Binary effect placement for profile and project cards */
-.profil-card, .project-card {
-    position: relative;
-    overflow: hidden;
-background: rgba(10, 20, 10, 0.92);background: rgba(5, 10, 5, 0.98);}
-.profil-card > *:not(/* ==== Zoom + Halo Trail for Project Cards ==== */
-.project-card {
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-background: rgba(10, 20, 10, 0.92);background: rgba(5, 10, 5, 0.98);}
-.project-card:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 30px rgba(0, 255, 0, 0.6);
-}
-
-
-/* ==== Improved README Button Hover Effect ==== */
-.readme-button {
+    flex-direction: column;
+    min-height: 280px;
     transition: all 0.3s ease;
-}
-.readme-button:hover {
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
-    background-color: rgba(0, 255, 0, 0.2);
-    transform: scale(1.03);
+    cursor: pointer;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
 }
 
- Améliorations visuelles de la barre LED */
+/* Header du terminal */
+.project-tile::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 28px;
+    background: linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 100%);
+    border-bottom: 1px solid #555;
+    background-image: 
+        radial-gradient(circle at 15px 14px, #ff5555 4px, transparent 5px),
+        radial-gradient(circle at 30px 14px, #ffaa00 4px, transparent 5px),
+        radial-gradient(circle at 45px 14px, #00ff00 4px, transparent 5px);
 }
 
-.update-counter{
-  font-size:14px;
-  font-weight:bold;
-  color:#222;
-  margin-top:6px;
-  text-align:right;
-  text-shadow:0 0 2px #fff;
+/* Badge NEW dans la barre de titre du terminal */
+.project-tile[data-new="true"]::after {
+    content: 'NEW';
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    background: #ff5555;
+    color: #fff;
+    border-radius: 3px;
+    padding: 2px 6px;
+    font-size: 0.65em;
+    font-weight: bold;
+    font-family: 'Consolas', monospace;
+    text-transform: uppercase;
+    z-index: 2;
+    animation: terminalBlink 2s infinite;
+    box-shadow: 0 0 5px rgba(255, 85, 85, 0.5);
 }
 
- (prefers-reduced-motion: reduce){
-  
+/* Contenu du terminal */
+.project-tile-content {
+    padding: 35px 16px 16px 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
 }
 
-/* ==== LED bar haute visibilité ==== */
-
-
-
-.update-counter{
-  font-size:16px;
-  font-weight:bold;
-  color:#fff;
-  margin-top:6px;
-  text-align:right;
-  text-shadow:0 0 3px #000;
+/* Prompt Linux */
+.terminal-prompt {
+    margin-bottom: 12px !important;
+    font-family: 'Consolas', monospace !important;
+    font-size: 0.85em !important;
+    line-height: 1.3;
 }
 
-/* ==== LED bar harmonisée Matrix ==== */
-
+.prompt-user {
+    display: block !important;
+    color: #00aaff !important;
+    margin-bottom: 2px;
 }
 
-.update-counter{
-  font-size:16px;
-  font-weight:bold;
-  color:#00ff6e;
-  margin-top:6px;
-  text-align:right;
-  text-shadow:0 0 4px #00ff6e;
+.prompt-command {
+    display: block !important;
+    color: #00aaff !important;
 }
 
-/* Badge Nouveau */
-.update-badge{
-  background:#00ff6e;
-  color:#001300;
-  font-size:13px;
-  font-weight:bold;
-  padding:2px 6px;
-  border-radius:4px;
-  margin-top:6px;
-  margin-right:auto;
-  box-shadow:0 0 4px #00ff6e;
+.project-tile h3 {
+    margin: 0 0 12px 0;
+    font-size: 1em;
+    color: #00ff00;
+    font-family: 'Consolas', monospace;
+    word-break: break-word;
+    position: relative;
 }
 
-/* === Uniform LED bar (14px) === */
-.update-bar{
-  display:block;
-  width:100%;
-  height:14px;
-  flex:0 0 14px;
-  background:#001300;
-  border:1px solid #00ff88;
-  border-radius:4px;
-  box-sizing:border-box;
-  overflow:hidden;
-  margin-top:10px;
-  position:relative;
-}
-.update-bar__fill{
-  position:absolute;
-  top:0;
-  left:0;
-  height:100%;
-  width:0%;
-  background:linear-gradient(90deg,#004d00 0%,#00b33c 40%,#00ff6e 100%);
-  box-shadow:0 0 6px #00ff6e;
-  transition:width .4s ease;
-animation:pulse 3s ease-in-out infinite;
-
-/* Animated subtle sheen */
-.update-bar__fill::after{
-  content:'';
-  position:absolute;
-  inset:0;
-  background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,0.5) 50%,transparent 100%);
-  transform:translateX(-100%);
-  animation:scan 2.5s linear infinite;
-  opacity:0.15;
-  pointer-events:none;
-}
-@keyframes scan{
-  0%{transform:translateX(-100%);}
-  100%{transform:translateX(100%);}
+.terminal-output {
+    margin: 8px 0;
+    font-size: 0.9em;
+    color: #e0e0e0;
+    flex: 1;
+    line-height: 1.4;
+    font-family: 'Consolas', monospace;
 }
 
-
-/* stale color variable */
-.update-bar__fill{
-  background:var(--barColor,#004d00);
+.project-tile .badges {
+    display: none; /* Masqué car le badge NEW est maintenant dans la barre de titre */
 }
 
-@keyframes pulse{
-  0%,100%{filter:brightness(1);}
-  50%{filter:brightness(1.8);}
-}
-@media (prefers-reduced-motion: reduce){
-  .update-bar__fill{animation:none;}
+.badge {
+    display: none; /* Ancien système de badges désactivé */
 }
 
+.badge.nouveau {
+    display: none; /* Ancien système de badges désactivé */
+}
 
+.project-tile .infos {
+    font-size: 0.85em;
+    color: #888;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 12px 0 8px 0;
+    font-family: 'Consolas', monospace;
+    border-top: 1px solid #333;
+    padding-top: 8px;
+}
 
+.project-tile .infos span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
 
+.project-tile .infos .date {
+    color: #00ff00;
+    font-size: 0.9em;
+}
 
+.project-tile .btn-readme {
+    background: transparent;
+    border: 1px solid #00ff00;
+    color: #00ff00;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 0.9em;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'Consolas', monospace;
+    transition: all 0.2s ease;
+    display: block;
+    text-align: center;
+    margin-top: auto;
+    position: relative;
+}
 
+.project-tile .btn-readme::before {
+    content: '$ cat README.md';
+    font-size: 0.8em;
+    color: #666;
+    display: block;
+    margin-bottom: 4px;
+}
+
+/* Effet hover - Animation de frappe */
+.project-tile:hover {
+    transform: scale(1.02) translateY(-2px);
+    box-shadow: 
+        0 0 30px rgba(0, 255, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        0 8px 25px rgba(0, 0, 0, 0.9);
+    border-color: #00ff00;
+}
+
+.project-tile:hover .btn-readme {
+    background: rgba(0, 255, 0, 0.1);
+    border-color: #00ff00;
+    color: #00ff00;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+.project-tile:hover .btn-readme::before {
+    content: '$ cat README.md | less';
+    color: #00ff00;
+}
+
+/* Animation de clignotement terminal */
+@keyframes terminalBlink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0.3; }
+}
+
+/* Effet de scan terminal - utilise ::first-line pour éviter les conflits */
+.project-tile:hover::before {
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5) inset;
+}
+
+.project-tile .scan-effect {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(0, 255, 0, 0.1) 50%,
+        transparent 100%
+    );
+    transition: top 0.6s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.project-tile:hover .scan-effect {
+    top: 100%;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 24px 0 12px 0;
+    color: #00ff00;
+    font-size: 1em;
+    background: transparent;
+    border-top: 1px solid #222;
+}
