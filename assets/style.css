@@ -884,3 +884,254 @@ footer {
     background: linear-gradient(90deg, transparent, #00ff00, transparent);
     box-shadow: 0 0 3px rgba(0, 255, 0, 0.6);
 }
+
+/* ==========================================
+   RESPONSIVE DESIGN - MOBILE & TABLETTE
+   ========================================== */
+
+/* Tablettes (768px et moins) */
+@media screen and (max-width: 768px) {
+    /* Bandeau supérieur adaptatif */
+    .top-banner__title {
+        font-size: 1.2em;
+        letter-spacing: 2px;
+    }
+    
+    .top-banner__title::before {
+        font-size: 0.5em;
+    }
+    
+    .top-banner__title::after {
+        font-size: 0.45em;
+    }
+    
+    /* Section principale */
+    main {
+        padding: 16px 8px 32px 8px;
+    }
+    
+    /* Tuile profil */
+    .profil-card {
+        max-width: 100%;
+        margin: 0 12px;
+    }
+    
+    /* Section accueil */
+    section#accueil {
+        margin: 0 8px 24px 8px;
+        padding: 20px 16px;
+    }
+    
+    section#accueil h2 {
+        font-size: 1.4em;
+    }
+    
+    section#accueil p {
+        font-size: 0.95em;
+        padding-left: 25px;
+    }
+    
+    /* Titre "Mes dépôts publics" */
+    #projets h2 {
+        font-size: 1.5em;
+        margin: 25px 0 20px 0;
+    }
+    
+    /* Grille projets - 2 colonnes sur tablette */
+    #projects-list {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+        padding: 0 8px;
+    }
+    
+    /* Réduction des effets pour les performances */
+    .project-tile .scan-effect,
+    .profil-card::after {
+        display: none;
+    }
+}
+
+/* Mobiles (480px et moins) */
+@media screen and (max-width: 480px) {
+    /* Ajustement du padding-top pour bandeau mobile */
+    body {
+        padding-top: 75px;
+    }
+    
+    /* Bandeau mobile compact */
+    .top-banner {
+        box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+    }
+    
+    .top-banner__content {
+        padding: 18px 0 6px 0;
+    }
+    
+    .top-banner__title {
+        font-size: 1em;
+        letter-spacing: 1px;
+    }
+    
+    .top-banner__title::before {
+        content: '┌──(Portfolio㉿0xCyber)-[~/]';
+        font-size: 0.45em;
+    }
+    
+    .top-banner__title::after {
+        content: '└─$ echo "Welcome"';
+        font-size: 0.4em;
+    }
+    
+    /* Désactivation de l'effet de scan sur mobile */
+    .top-banner::after {
+        display: none;
+    }
+    
+    /* Section principale mobile */
+    main {
+        padding: 12px 4px 24px 4px;
+    }
+    
+    /* Tuile profil mobile */
+    .profil-card {
+        margin: 0 8px;
+        min-height: 280px;
+    }
+    
+    .profil-logo {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .logo-wrapper {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .profil-card h2 {
+        font-size: 0.9em;
+    }
+    
+    .profil-card h2::before,
+    .profil-card h2::after {
+        font-size: 0.6em;
+    }
+    
+    .profil-description {
+        font-size: 0.8em;
+        padding: 6px 12px 12px 12px;
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+    
+    /* Section accueil mobile */
+    section#accueil {
+        margin: 0 4px 16px 4px;
+        padding: 16px 12px;
+    }
+    
+    section#accueil h2 {
+        font-size: 1.2em;
+        margin: 25px 0 16px 0;
+    }
+    
+    section#accueil h2::before {
+        content: '┌──(visitor㉿0xCyber)-[~/welcome]';
+        font-size: 0.55em;
+    }
+    
+    section#accueil p {
+        font-size: 0.9em;
+        padding-left: 20px;
+        max-width: 100%;
+    }
+    
+    /* Titre projets mobile */
+    #projets h2 {
+        font-size: 1.3em;
+        letter-spacing: 1px;
+        margin: 20px 0 16px 0;
+    }
+    
+    /* Grille projets - 1 colonne sur mobile */
+    #projects-list {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 0 4px;
+    }
+    
+    /* Tuiles projets mobiles */
+    .project-tile {
+        min-height: 240px;
+    }
+    
+    .project-tile-content {
+        padding: 30px 12px 12px 12px;
+    }
+    
+    .project-tile h3 {
+        font-size: 0.95em;
+    }
+    
+    .terminal-prompt {
+        font-size: 0.75em !important;
+    }
+    
+    .terminal-output {
+        font-size: 0.8em;
+        padding: 6px 8px;
+    }
+    
+    .project-tile .infos {
+        font-size: 0.75em;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+    
+    .project-tile .btn-readme {
+        font-size: 0.85em;
+        padding: 6px 8px;
+    }
+    
+    /* Désactivation des effets gourmands sur mobile */
+    .project-tile:hover h3::before,
+    .project-tile .scan-effect,
+    .profil-card::after {
+        display: none;
+    }
+    
+    /* Réduction des animations Matrix sur mobile */
+    #matrix {
+        opacity: 0.3;
+    }
+    
+    /* Footer mobile */
+    footer {
+        padding: 16px 0 8px 0;
+        font-size: 0.9em;
+    }
+}
+
+/* Très petits écrans (360px et moins) */
+@media screen and (max-width: 360px) {
+    .top-banner__title {
+        font-size: 0.9em;
+    }
+    
+    .profil-card {
+        margin: 0 4px;
+    }
+    
+    section#accueil {
+        margin: 0 2px 12px 2px;
+        padding: 12px 8px;
+    }
+    
+    #projects-list {
+        padding: 0 2px;
+    }
+    
+    .project-tile-content {
+        padding: 25px 8px 8px 8px;
+    }
+}
