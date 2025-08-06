@@ -100,7 +100,7 @@ async function loadRepos() {
             const lastUpdate = new Date(repo.updated_at);
             const now = new Date();
             const daysElapsed = Math.floor((now - lastUpdate) / (1000 * 60 * 60 * 24));
-            const isNew = daysElapsed <= 7;
+            const isNew = daysElapsed <= 30; // Badge NEW disparaît après 30 jours
 
             const tile = document.createElement('div');
             tile.className = 'project-tile';
@@ -118,6 +118,7 @@ async function loadRepos() {
                     <div class="terminal-prompt">
                         <span class="prompt-user">┌──(0xCyberLiTech㉿kali)-[~/projects]</span>
                         <span class="prompt-command">└─$ ls -la ${showTitle ? repo.name : 'logo_repository'}/</span>
+                        ${isNew ? `<div class="badge-container"><span class="day-counter">${daysElapsed}j</span><span class="badge-new">NEW</span></div>` : ''}
                     </div>
                     ${showTitle ? `<h3>${repo.name}</h3>` : `<h3 style="color: #00aaff;">./logo_repository</h3>`}
                     <p class="terminal-output"># ${repo.description || 'Aucune description disponible.'}</p>
