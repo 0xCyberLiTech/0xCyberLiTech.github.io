@@ -32,6 +32,7 @@ Ce site présente mes projets, scripts et tutoriels en cybersécurité avec une 
 - **Badges NEW dynamiques** : Projets récents (≤ 30 jours) avec compteur + badge NEW intégrés
 - **Gestion d'erreurs** : Affichage gracieux en cas d'échec API
 - **Links directs** : Boutons "OPEN" vers les README des projets
+- **Preloader spectaculaire** : Écran de chargement Matrix avec progression Terminal (voir `PRELOADER_README.md`)
 
 ### 📱 **Responsive Design Complet**
 - **Desktop** (>768px) : Expérience Matrix complète
@@ -46,10 +47,13 @@ Ce portfolio est hébergé via **GitHub Pages** :
 ## 📂 Structure
 ```
 /
-├── index.html         # Page principale HTML5
+├── index.html         # Preloader Matrix spectaculaire (point d'entrée)
+├── portfolio.html     # Portfolio principal (ancien index.html)
 ├── .nojekyll          # Désactive Jekyll sur GitHub Pages
 ├── assets/            # Assets optimisés
-│   ├── style.css      # CSS avec media queries responsive complètes
+│   ├── preloader.css  # Styles du preloader Matrix
+│   ├── preloader.js   # Logique et animations du preloader
+│   ├── style.css      # CSS portfolio avec media queries responsive
 │   ├── script.js      # JavaScript Matrix 2.0 + GitHub API
 │   ├── logo.png       # Logo profile avec effet scanlines
 │   └── screenshot.png # Capture d'écran du portfolio Matrix
@@ -156,7 +160,8 @@ python -m http.server 8000
 3. **Personnaliser** :
    - Modifier le nom d'utilisateur GitHub dans `script.js`
    - Remplacer `logo.png` par votre logo
-   - Adapter les textes dans `index.html`
+   - Adapter les textes dans `index.html` (preloader) et `portfolio.html`
+   - Configurer les messages dans `preloader.js` si désiré
 
 ## 📜 Licence
 Ce projet est sous licence **MIT**. Vous pouvez le réutiliser librement en citant la source.
