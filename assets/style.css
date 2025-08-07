@@ -164,6 +164,23 @@ body {
     padding-top: 85px;
 }
 
+/* Animation d'entrée douce pour le portfolio */
+main {
+    animation: portfolioFadeIn 1.5s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes portfolioFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .logo-container h1 {
     font-size: 2.2em;
     color: #00ff00;
@@ -593,6 +610,22 @@ section#projets {
     transition: all 0.3s ease;
     cursor: pointer;
     font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+    animation: terminalTileGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes terminalTileGlow {
+    0% { 
+        box-shadow: 
+            0 0 20px rgba(0, 255, 0, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1),
+            0 4px 12px rgba(0, 0, 0, 0.8);
+    }
+    100% { 
+        box-shadow: 
+            0 0 25px rgba(0, 255, 0, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.15),
+            0 4px 15px rgba(0, 0, 0, 0.9);
+    }
 }
 
 /* Header du terminal */
@@ -606,9 +639,9 @@ section#projets {
     background: linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 100%);
     border-bottom: 1px solid #555;
     background-image: 
-        radial-gradient(circle at 15px 14px, #ff5555 4px, transparent 5px),
-        radial-gradient(circle at 30px 14px, #ffaa00 4px, transparent 5px),
-        radial-gradient(circle at 45px 14px, #00ff00 4px, transparent 5px);
+        radial-gradient(circle at 15px 14px, #ff5555 5px, transparent 6px),
+        radial-gradient(circle at 30px 14px, #ffaa00 5px, transparent 6px),
+        radial-gradient(circle at 45px 14px, #00ff00 5px, transparent 6px);
 }
 
 /* Container pour compteur et badge NEW */
@@ -692,11 +725,24 @@ section#projets {
     display: block !important;
     color: #00aaff !important;
     margin-bottom: 2px;
+    text-shadow: 0 0 3px rgba(0, 170, 255, 0.6);
+    animation: promptGlow 3s ease-in-out infinite alternate;
 }
 
 .prompt-command {
     display: block !important;
     color: #00aaff !important;
+    text-shadow: 0 0 3px rgba(0, 170, 255, 0.6);
+    animation: promptGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes promptGlow {
+    0% { 
+        text-shadow: 0 0 3px rgba(0, 170, 255, 0.6);
+    }
+    100% { 
+        text-shadow: 0 0 5px rgba(0, 170, 255, 0.8);
+    }
 }
 
 .project-tile h3 {

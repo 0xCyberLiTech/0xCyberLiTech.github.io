@@ -93,8 +93,11 @@ async function loadRepos() {
         const response = await fetch('https://api.github.com/users/0xCyberLiTech/repos');
         const repos = await response.json();
         
-        // Filtrer pour exclure le dépôt GitHub Pages
-        const filteredRepos = repos.filter(repo => repo.name !== '0xCyberLiTech.github.io');
+        // Filtrer pour exclure le dépôt GitHub Pages et le dépôt logo
+        const filteredRepos = repos.filter(repo => 
+            repo.name !== '0xCyberLiTech.github.io' && 
+            repo.name !== '0xCyberLiTech'
+        );
         
         filteredRepos.forEach(repo => {
             const lastUpdate = new Date(repo.updated_at);
@@ -110,17 +113,14 @@ async function loadRepos() {
                 tile.setAttribute('data-new', 'true');
             }
 
-            // Affiche le titre sauf pour la tuile du logo
-            const showTitle = repo.name !== "0xCyberLiTech";
-
             tile.innerHTML = `
                 <div class="project-tile-content">
                     <div class="terminal-prompt">
-                        <span class="prompt-user">┌──(0xCyberLiTech㉿kali)-[~/projects]</span>
-                        <span class="prompt-command">└─$ ls -la ${showTitle ? repo.name : 'logo_repository'}/</span>
+                        <span class="prompt-user">┌──(0xCyberLiTech㉿kali)-[~/portfolio]</span>
+                        <span class="prompt-command">└─$ ls -la ${repo.name}/</span>
                         ${isNew ? `<div class="badge-container"><span class="day-counter">${daysElapsed}j</span><span class="badge-new">NEW</span></div>` : ''}
                     </div>
-                    ${showTitle ? `<h3>${repo.name}</h3>` : `<h3 style="color: #00aaff;">./logo_repository</h3>`}
+                    <h3>${repo.name}</h3>
                     <p class="terminal-output"># ${repo.description || 'Aucune description disponible.'}</p>
                     <div class="infos">
                         <span title="Stars">★ ${repo.stargazers_count}</span>
