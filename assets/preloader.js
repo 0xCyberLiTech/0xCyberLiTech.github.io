@@ -265,17 +265,16 @@ class MatrixPreloader {
     
     // Transition vers le portfolio principal
     transitionToPortfolio() {
-        // Effet de transition Matrix
+        // Effet de transition Matrix (retour à l'ancien fondu simple)
         const preloaderContainer = document.querySelector('.preloader-container');
         const matrixCanvas = document.getElementById('matrix-preloader');
-        
+
         // Animation de fade out
         preloaderContainer.style.transition = 'opacity 1s ease-out';
         preloaderContainer.style.opacity = '0';
-        
         matrixCanvas.style.transition = 'opacity 1.5s ease-out';
         matrixCanvas.style.opacity = '0';
-        
+
         // Redirection vers le portfolio principal
         setTimeout(() => {
             window.location.href = 'portfolio.html';

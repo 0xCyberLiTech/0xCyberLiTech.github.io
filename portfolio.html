@@ -11,7 +11,9 @@
     <!-- Bandeau en haut de la page -->
     <header class="top-banner">
         <div class="top-banner__content">
-            <span class="top-banner__title">Portfolio 0xCyberLiTech</span>
+            <div class="top-banner__header"></div>
+            <span class="top-banner__title">&gt;Portfolio 0xCyberLiTech<span class="terminal-cursor">_</span></span>
+            <div class="top-banner__prompt">echo "Welcome to my cybersecurity portfolio"</div>
         </div>
     </header>
 
@@ -19,11 +21,6 @@
     <canvas id="matrix"></canvas>
 
     <main>
-        <section id="accueil">
-            <h2>$ ./system_status --portfolio</h2>
-            <p>→ Interface Portfolio 0xCyberLiTech opérationnelle<br>
-            → Accès aux dépôts publics : cybersécurité, scripts et outils</p>
-        </section>
         <section id="projets">
             <h2>$ ls -la ~/repositories/public</h2>
             <div id="error-message" style="display:none;color:red;"></div>
@@ -33,7 +30,7 @@
         </section>
     </main>
 
-    <footer>
+    <footer id="site-footer" style="display:none;">
         &copy; 2025 0xCyberLiTech. Tous droits réservés.
     </footer>
 </body>

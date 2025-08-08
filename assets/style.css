@@ -1,3 +1,22 @@
+/* Curseur terminal clignotant pour le titre du bandeau */
+.terminal-cursor {
+    display: inline-block;
+    color: #00ff80;
+    font-weight: bold;
+    animation: blink-cursor 1s steps(2, start) infinite;
+    font-size: 1.1em;
+    margin-left: 2px;
+}
+
+@keyframes blink-cursor {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+/* Hauteur du bandeau terminal */
+body {
+    padding-top: 110px;
+}
+
 /* Effet Matrix Digital Rain 2.0 en arrière-plan */
 #matrix {
     position: fixed;
@@ -11,16 +30,7 @@
     background: #000;
 }
 
-/* Structure générale */
-body, html {
-    width: 100vw;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-    background: #101010;
-    color: #e0e0e0;
-    font-family: 'Segoe UI', 'Consolas', monospace, Arial, sans-serif;
-}
+
 
 main, header, section, footer {
     position: relative;
@@ -32,25 +42,104 @@ header {
     text-align: center;
 }
 
-/* Bandeau fixe en haut : style Terminal/Console modernisé */
+/* =====================
+   BANDEAU TERMINAL CYBER HARMONISÉ
+   Structure : header, titre, prompt, double bordure lumineuse
+===================== */
 .top-banner {
     width: 100vw;
-    background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 50%, #0c0c0c 100%);
+    background:
+        radial-gradient(ellipse at 60% 40%, rgba(0,255,120,0.18) 0%, rgba(20,30,30,0.98) 70%, #14181a 100%),
+        linear-gradient(135deg, rgba(20,30,20,0.92) 0%, rgba(30,40,30,0.92) 100%);
     color: #e0e0e0;
-    padding: 0;
+    padding: 0 0 8px 0;
     text-align: center;
-    box-shadow: 
-        0 0 20px rgba(0, 255, 0, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1),
-        0 4px 15px rgba(0, 0, 0, 0.9);
+    box-shadow:
+        0 0 32px 4px #00ff80aa,
+        0 0 0 2px #00ff80 inset,
+        0 4px 18px rgba(0, 0, 0, 0.92),
+        0 0 48px 12px #00ff8033 inset;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 100;
-    border-bottom: 2px solid #333;
-    border-image: linear-gradient(90deg, #00ff00, #00aaff, #00ff00) 1;
+    border-bottom: 2px solid #00ff80;
+    border-image: linear-gradient(90deg, #00ff00, #00fff0 40%, #00aaff 60%, #00ff00) 1;
     overflow: hidden;
-    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-family: 'Fira Mono', 'Consolas', 'Monaco', monospace;
+    opacity: 0.97;
+    backdrop-filter: blur(1.5px);
+}
+
+.top-banner__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2em;
+    padding: 18px 0 0 0;
+    position: relative;
+    z-index: 2;
+}
+.top-banner__header,
+.top-banner__prompt {
+    text-align: center;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+}
+.top-banner__title {
+    font-size: 2.35em;
+    font-weight: 900;
+    color: #00ff80;
+    text-shadow:
+        0 0 7px #00ff80,
+        0 0 2px #00ff80,
+        0 2px 8px #000a,
+        0 4px 16px #000c;
+    font-family: 'Fira Mono', 'Consolas', 'Monaco', monospace;
+    margin: 0.1em 0 0.1em 0;
+    letter-spacing: 1.7px;
+    line-height: 1.1;
+    background: none;
+}
+.top-banner__header {
+    color: #00aaff;
+    font-size: 1.1em;
+    font-family: 'Fira Mono', 'Consolas', 'Monaco', monospace;
+    margin-bottom: 0.1em;
+    letter-spacing: 1px;
+    text-align: left;
+    width: 100%;
+    text-shadow: 0 0 6px #00aaff99;
+}
+.top-banner__prompt {
+    color: #b8ffe0;
+    font-size: 1em;
+    font-family: 'Fira Mono', 'Consolas', 'Monaco', monospace;
+    margin-top: 0.1em;
+    letter-spacing: 0.5px;
+    text-align: left;
+    width: 100%;
+    text-shadow: 0 0 4px #00ff8099;
+}
+.top-banner__header::before {
+    content: '┌──(Portfolio㉿0xCyberLiTech)-[~/]';
+    color: #00aaff;
+    font-size: 1em;
+    font-family: inherit;
+    letter-spacing: 1px;
+    margin-right: 0.5em;
+}
+.top-banner__prompt::before {
+    content: '└─$ ';
+    color: #00ff80;
+    font-family: inherit;
+    margin-right: 0.2em;
+}
+
+@media (max-width: 700px) {
+  .top-banner__title { font-size: 1.2em; }
+  .top-banner__header, .top-banner__prompt { font-size: 0.85em; }
 }
 
 /* Header terminal pour le bandeau */
@@ -89,328 +178,7 @@ header {
     z-index: 2;
 }
 
-@keyframes bannerScan {
-    0% { left: -100%; }
-    50% { left: 100%; }
-    100% { left: -100%; }
-}
 
-.top-banner__content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
-    padding: 22px 0 8px 0;
-    position: relative;
-    z-index: 3;
-}
-
-.top-banner__title {
-    font-size: 1.4em;
-    font-weight: bold;
-    letter-spacing: 3px;
-    font-family: 'Consolas', monospace;
-    color: #00ff00;
-    text-shadow: 
-        0 0 5px rgba(0, 255, 0, 0.8),
-        0 0 10px rgba(0, 255, 0, 0.4);
-    position: relative;
-    animation: terminalGlow 2s ease-in-out infinite alternate;
-}
-
-.top-banner__title::before {
-    content: '┌──(Portfolio㉿0xCyberLiTech)-[~/]';
-    display: block;
-    font-size: 0.6em;
-    color: #00aaff;
-    letter-spacing: 1px;
-    margin-bottom: 2px;
-    text-shadow: none;
-    animation: none;
-}
-
-.top-banner__title::after {
-    content: '└─$ echo "Welcome to my cybersecurity portfolio"';
-    display: block;
-    font-size: 0.5em;
-    color: #888;
-    letter-spacing: 1px;
-    margin-top: 2px;
-    text-shadow: none;
-    animation: typewriter 4s steps(40) infinite;
-}
-
-@keyframes terminalGlow {
-    0% { 
-        text-shadow: 
-            0 0 5px rgba(0, 255, 0, 0.6),
-            0 0 8px rgba(0, 255, 0, 0.3);
-    }
-    100% { 
-        text-shadow: 
-            0 0 8px rgba(0, 255, 0, 0.8),
-            0 0 12px rgba(0, 255, 0, 0.4);
-    }
-}
-
-@keyframes typewriter {
-    0%, 50% { opacity: 1; }
-    51%, 60% { opacity: 0.3; }
-    61%, 100% { opacity: 1; }
-}
-
-/* Décale le contenu pour ne pas passer sous le bandeau modernisé */
-body {
-    padding-top: 85px;
-}
-
-/* Animation d'entrée douce pour le portfolio */
-main {
-    animation: portfolioFadeIn 1.5s ease-out forwards;
-    opacity: 0;
-}
-
-@keyframes portfolioFadeIn {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.logo-container h1 {
-    font-size: 2.2em;
-    color: #00ff00;
-    font-family: 'Consolas', monospace;
-    letter-spacing: 2px;
-    margin: 0;
-}
-
-.cursor {
-    animation: blink 1s steps(2, start) infinite;
-}
-
-@keyframes blink {
-    to { opacity: 0; }
-}
-
-.profil-section {
-    display: flex;
-    justify-content: center;
-    margin-top: 24px;
-}
-
-/* Effet de contour paramétrable pour toutes les tuiles (projets, logo et slogan) */
-:root {
-    --tile-shadow-intensity: 0.6; /* Modifie l'intensité du contour ici (0 à 1) */
-}
-
-/* Tuile profil (logo) : style Terminal/Console harmonisé */
-.profil-card {
-    background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%) !important;
-    border-radius: 8px !important;
-    border: 2px solid #333 !important;
-    border-top: 2px solid #555 !important;
-    border-left: 2px solid #555 !important;
-    box-shadow: 
-        0 0 20px rgba(0, 255, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1),
-        0 4px 12px rgba(0, 0, 0, 0.8) !important;
-    padding: 0 !important;
-    max-width: 400px;
-    width: 100%;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    min-height: 320px;
-    display: flex;
-    flex-direction: column;
-}
-
-/* Header du terminal pour la tuile profil */
-.profil-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 28px;
-    background: linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 100%);
-    border-bottom: 1px solid #555;
-    background-image: 
-        radial-gradient(circle at 15px 14px, #ff5555 4px, transparent 5px),
-        radial-gradient(circle at 35px 14px, #ffaa00 4px, transparent 5px),
-        radial-gradient(circle at 55px 14px, #00ff00 4px, transparent 5px);
-    z-index: 1;
-}
-
-/* Contenu de la tuile profil */
-.profil-card > * {
-    position: relative;
-    z-index: 2;
-}
-
-.profil-card > *:first-child {
-    margin-top: 35px;
-}
-
-.profil-logo-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 16px;
-    padding-top: 16px;
-}
-
-.logo-wrapper {
-    position: relative;
-    width: 80px;
-    height: 80px;
-}
-
-.profil-logo {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    border: 2px solid #00ff00;
-    background: #222;
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
-}
-
-.scanlines {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    pointer-events: none;
-    background: repeating-linear-gradient(
-        to bottom,
-        rgba(0,255,0,0.04) 0px,
-        rgba(0,255,0,0.04) 2px,
-        transparent 2px,
-        transparent 4px
-    );
-    border-radius: 50%;
-}
-
-/* Titre profil style Terminal */
-.profil-card h2 {
-    color: #00ff00 !important;
-    font-family: 'Consolas', monospace !important;
-    margin: 16px 0 !important;
-    position: relative;
-}
-
-.profil-card h2::before {
-    content: '┌──(root㉿kali)-[~/profile]';
-    display: block;
-    color: #00aaff;
-    font-size: 0.7em;
-    margin-bottom: 4px;
-}
-
-.profil-card h2::after {
-    content: '└─$ whoami';
-    display: block;
-    color: #00aaff;
-    font-size: 0.7em;
-    margin-top: 4px;
-}
-
-.profil-description {
-    font-size: 0.9em;
-    margin-bottom: auto;
-    color: #b8b8b8 !important;
-    font-family: 'Segoe UI', 'Roboto', sans-serif !important;
-    font-weight: 400;
-    letter-spacing: 0.3px;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-    line-height: 1.5;
-    padding: 8px 16px 16px 16px;
-    background: rgba(0, 0, 0, 0.15);
-    border-left: 2px solid rgba(0, 255, 0, 0.3);
-    border-radius: 0 4px 4px 0;
-    margin-left: 12px;
-    margin-right: 12px;
-    position: relative;
-    transition: all 0.3s ease;
-    flex: 1;
-}
-
-.profil-description::before {
-    content: '// ';
-    color: #666;
-    font-family: 'Consolas', monospace;
-    font-size: 0.9em;
-    position: absolute;
-    left: 8px;
-    top: 8px;
-}
-
-.profil-description:hover {
-    background: rgba(0, 255, 0, 0.05);
-    border-left-color: rgba(0, 255, 0, 0.6);
-    color: #e0e0e0 !important;
-    transform: translateX(2px);
-}
-
-.profil-buttons {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 0 16px 16px 16px;
-}
-
-.profil-btn {
-    background: transparent !important;
-    border: 1px solid #00ff00 !important;
-    color: #00ff00 !important;
-    border-radius: 4px;
-    padding: 8px 12px;
-    font-size: 0.9em;
-    text-decoration: none;
-    font-weight: bold;
-    font-family: 'Consolas', monospace !important;
-    transition: all 0.2s ease;
-    display: block;
-    text-align: center;
-    position: relative;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.profil-btn::before {
-    content: '$ git clone';
-    font-size: 0.8em;
-    color: #666;
-    display: block;
-    margin-bottom: 4px;
-}
-
-.profil-btn:hover {
-    background: rgba(0, 255, 0, 0.1) !important;
-    border-color: #00ff00 !important;
-    color: #00ff00 !important;
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
-    text-decoration: none;
-}
-
-.profil-btn:hover::before {
-    content: '$ git clone --recursive';
-    color: #00ff00;
-}
-
-/* Effet hover pour la tuile profil */
-.profil-card:hover {
-    transform: scale(1.02) translateY(-2px);
-    box-shadow: 
-        0 0 30px rgba(0, 255, 0, 0.6),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2),
-        0 8px 25px rgba(0, 0, 0, 0.9) !important;
-    border-color: #00ff00;
-}
 
 /* Effet de scan pour la tuile profil */
 .profil-card::after {
@@ -592,12 +360,14 @@ section#projets {
 
 /* Tuile projet : style Terminal/Console moderne */
 .project-tile {
-    background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%) !important;
+    background: radial-gradient(ellipse at 50% 60%, rgba(0,255,120,0.38) 0%, rgba(0,255,120,0.18) 30%, rgba(20,30,30,0.98) 65%, #070a0a 100%),
+                linear-gradient(135deg, #070a0a 0%, #14181a 100%) !important;
     border-radius: 8px !important;
     border: 2px solid #333 !important;
     border-top: 2px solid #555 !important;
     border-left: 2px solid #555 !important;
     box-shadow: 
+        0 0 64px 12px rgba(0,255,120,0.22) inset, 0 2px 24px #000a,
         0 0 20px rgba(0, 255, 0, 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.1),
         0 4px 12px rgba(0, 0, 0, 0.8) !important;
@@ -611,6 +381,9 @@ section#projets {
     cursor: pointer;
     font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
     animation: terminalTileGlow 4s ease-in-out infinite alternate;
+    color: #eaffd0 !important;
+    text-shadow: 0 2px 8px #000c, 0 0 6px #00ff80, 0 0 2px #00ff80;
+    transition: box-shadow 0.25s, filter 0.25s, transform 0.18s;
 }
 
 @keyframes terminalTileGlow {
@@ -857,29 +630,57 @@ section#projets {
     font-size: 0.9em;
 }
 
+/* Bouton moderne Matrix pour les tuiles */
 .project-tile .btn-readme {
-    background: transparent;
-    border: 1px solid #00ff00;
-    color: #00ff00;
-    border-radius: 4px;
-    padding: 8px 12px;
-    font-size: 0.9em;
-    text-decoration: none;
-    font-weight: bold;
-    font-family: 'Consolas', monospace;
-    transition: all 0.2s ease;
-    display: block;
-    text-align: center;
-    margin-top: auto;
+    background: #181c1a;
+    color: #e0ffe0;
+    border: 1.5px solid #00ff80;
+    border-radius: 6px;
+    padding: 8px 22px;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 1em;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 8px #00ff8033;
+    cursor: pointer;
+    transition: box-shadow 0.25s, border-color 0.25s, background 0.25s, color 0.25s, filter 0.25s;
+    text-shadow: 0 1px 4px #000a;
+    outline: none;
     position: relative;
+    overflow: hidden;
 }
 
-.project-tile .btn-readme::before {
-    content: '$ cat README.md';
-    font-size: 0.8em;
-    color: #666;
-    display: block;
-    margin-bottom: 4px;
+.project-tile .btn-readme::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 70%;
+    background: radial-gradient(ellipse at center, rgba(0,255,120,0.18) 0%, rgba(0,255,120,0.08) 60%, transparent 100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+    z-index: 1;
+}
+
+.project-tile .btn-readme:hover, .project-tile .btn-readme:focus {
+    background: #232b23;
+    border-color: #00fff0;
+    box-shadow: 0 0 16px #00fff0cc, 0 2px 16px #00ff8033;
+    color: #e0ffe0;
+    filter: brightness(1.08);
+}
+
+.project-tile .btn-readme:hover::after, .project-tile .btn-readme:focus::after {
+    opacity: 1;
+    animation: btnPulse 1.2s infinite alternate;
+}
+
+@keyframes btnPulse {
+    0% { opacity: 0.7; filter: blur(0.5px); }
+    100% { opacity: 1; filter: blur(2.5px); }
 }
 
 /* Effet hover - Animation de frappe */
@@ -1046,9 +847,7 @@ footer {
     }
     
     /* Bandeau mobile compact */
-    .top-banner {
-        box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
-    }
+
     
     .top-banner__content {
         padding: 18px 0 6px 0;
@@ -1070,8 +869,10 @@ footer {
     }
     
     /* Désactivation de l'effet de scan sur mobile */
+    /* On ne masque que l'effet scan, pas le bandeau lui-même */
     .top-banner::after {
-        display: none;
+        opacity: 0;
+        pointer-events: none;
     }
     
     /* Section principale mobile */
@@ -1255,4 +1056,55 @@ footer {
         font-size: 0.55em;
         padding: 1px 4px;
     }
+}
+
+/* Masquer les boutons .btn-readme dans les tuiles projets */
+.btn-readme {
+  display: none !important;
+}
+
+.project-tile {
+  cursor: pointer;
+  transition: box-shadow 0.25s, filter 0.25s, transform 0.18s;
+}
+
+.project-tile:hover, .project-tile:focus {
+  box-shadow: 0 0 48px 8px #00ff80cc, 0 2px 24px #000a;
+  filter: brightness(1.08) saturate(1.08);
+  transform: translateY(-4px) scale(1.025);
+  outline: none;
+}
+
+/* Interaction moderne sur le titre de la tuile */
+.project-tile h3 a {
+  color: inherit;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.18s, text-shadow 0.18s;
+  cursor: pointer;
+}
+.project-tile h3 a::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -2px;
+  height: 2px;
+  background: linear-gradient(90deg, #00ff80 0%, #00c3ff 100%);
+  border-radius: 2px;
+  opacity: 0;
+  transform: scaleX(0.5);
+  transition: opacity 0.18s, transform 0.18s;
+}
+.project-tile h3 a:hover, .project-tile h3 a:focus {
+  color: #00ff80;
+  text-shadow: 0 0 8px #00ff80, 0 0 2px #00ff80;
+}
+.project-tile h3 a:active,
+.project-tile h3 a:visited {
+  color: inherit;
+  text-shadow: none;
+}
+.project-tile h3 a:active::after,
+.project-tile h3 a:visited::after {
+  opacity: 0;
+  transform: scaleX(0.5);
 }

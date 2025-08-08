@@ -10,11 +10,14 @@
 }
 
 body {
-    background: #000;
-    font-family: 'Consolas', 'Courier New', monospace;
+    background:
+        radial-gradient(ellipse at 60% 40%, rgba(0,255,120,0.18) 0%, rgba(20,30,30,0.98) 70%, #14181a 100%),
+        linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    font-family: 'Fira Mono', 'Consolas', 'Courier New', monospace;
     overflow: hidden;
     height: 100vh;
-    color: #00ff00;
+    color: #e0ffe0;
+    box-shadow: 0 0 64px 12px #00ff8033 inset;
 }
 
 /* Matrix Canvas Background */
@@ -41,15 +44,18 @@ body {
 
 /* Terminal Window */
 .terminal-window {
-    background: rgba(16, 16, 16, 0.95);
-    border: 2px solid #00ff00;
-    border-radius: 8px;
-    box-shadow: 
-        0 0 30px rgba(0, 255, 0, 0.3),
-        inset 0 0 20px rgba(0, 255, 0, 0.1);
+    background:
+        radial-gradient(ellipse at 60% 40%, rgba(0,255,128,0.18) 0%, rgba(20,30,30,0.98) 70%, #14181a 100%),
+        linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%) !important;
+    border-radius: 18px !important;
+    border: 2px solid #00ff80 !important;
+    box-shadow: 0 0 32px 4px #00ff8055, 0 0 0 2px #00ff80 inset, 0 2px 16px #000a;
     max-width: 600px;
     width: 100%;
     animation: terminalGlow 3s ease-in-out infinite alternate;
+    color: #e0ffe0 !important;
+    text-shadow: 0 1px 4px #000a, 0 0 2px #00ff80;
+    font-family: 'Fira Mono', 'Consolas', 'Courier New', monospace;
 }
 
 @keyframes terminalGlow {
@@ -62,10 +68,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: linear-gradient(90deg, #333, #444);
+    background: linear-gradient(90deg, #232b23 0%, #2a3a2a 100%);
     padding: 8px 12px;
-    border-radius: 6px 6px 0 0;
-    border-bottom: 1px solid #00ff00;
+    border-radius: 14px 14px 0 0;
+    border-bottom: 2px solid #00ff80;
+    color: #e0ffe0 !important;
+    text-shadow: 0 1px 4px #000a, 0 0 2px #00ff80;
 }
 
 .terminal-buttons {
@@ -85,16 +93,19 @@ body {
 .btn-maximize { background: #00ff00; }
 
 .terminal-title {
-    color: #00ff00;
-    font-size: 0.8em;
+    color: #00ff80;
+    font-size: 0.9em;
     font-weight: bold;
-    text-shadow: 0 0 5px #00ff00;
+    text-shadow: 0 0 8px #00ff80, 0 0 2px #00ff80;
+    font-family: 'Fira Mono', 'Consolas', 'Courier New', monospace;
 }
 
 /* Terminal Content */
 .terminal-content {
     padding: 30px;
     text-align: center;
+    color: #e0ffe0 !important;
+    text-shadow: 0 1px 4px #000a, 0 0 2px #00ff80;
 }
 
 /* Logo Section */
@@ -117,7 +128,7 @@ body {
         0 0 30px rgba(0, 255, 0, 0.5),
         inset 0 0 20px rgba(0, 255, 0, 0.2);
     animation: logoSpin 4s linear infinite, logoPulse 2s ease-in-out infinite alternate;
-    filter: brightness(1.2) contrast(1.1);
+    filter: brightness(1.5) contrast(1.2) drop-shadow(0 0 24px #00ff00) drop-shadow(0 0 8px #fff);
 }
 
 @keyframes logoSpin {
@@ -180,11 +191,8 @@ body {
 .brand-name {
     font-size: 2.5em;
     font-weight: bold;
-    color: #00ff00;
-    text-shadow: 
-        0 0 10px #00ff00,
-        0 0 20px #00ff00,
-        0 0 30px #00ff00;
+    color: #fff;
+    text-shadow: 0 0 24px #fff, 0 0 16px #00ff00, 0 0 8px #00ff00;
     margin-bottom: 10px;
     animation: textGlow 2s ease-in-out infinite alternate;
 }
