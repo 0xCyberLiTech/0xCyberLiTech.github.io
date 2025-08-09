@@ -238,22 +238,51 @@ window.addEventListener('DOMContentLoaded', loadRepos);
     banner.style.opacity = '1'; // Toujours visible au chargement
 })();
 
-// Affiche le footer uniquement après la transition du preloader
+// Bloc unique pour l'initialisation du portfolio, du footer et du bandeau
 window.addEventListener('DOMContentLoaded', () => {
+    // Affichage des projets
+    loadRepos();
+
+    // Gestion du footer : il ne s'affiche qu'après la transition du preloader ou après un court délai
     const footer = document.getElementById('site-footer');
-    if (!footer) return;
-    // Si le preloader existe, attendre sa disparition
-    const preloader = document.getElementById('preloader');
-    if (preloader) {
-        const observer = new MutationObserver(() => {
-            if (preloader.style.display === 'none' || preloader.style.opacity === '0' || preloader.hidden) {
+    if (footer) {
+        footer.style.display = 'none';
+        const preloader = document.getElementById('preloader');
+        if (preloader) {
+            const observer = new MutationObserver(() => {
+                if (preloader.style.display === 'none' || preloader.style.opacity === '0' || preloader.hidden) {
+                    footer.style.display = '';
+                    observer.disconnect();
+                }
+            });
+            observer.observe(preloader, { attributes: true, attributeFilter: ['style', 'hidden'] });
+        } else {
+            setTimeout(() => {
                 footer.style.display = '';
-                observer.disconnect();
+            }, 600); // délai pour laisser la transition se terminer
+        }
+    }
+
+    // Gestion de l'opacité du bandeau
+    const banner = document.querySelector('.top-banner');
+    if (banner) {
+        let hasScrolled = false;
+        let lastScrollY = window.scrollY;
+        function updateBannerOpacity() {
+            if (window.scrollY <= 2 && hasScrolled && lastScrollY - window.scrollY < 50) {
+                banner.style.transition = 'background 0.3s, opacity 0.3s';
+                banner.style.opacity = '1';
+            } else if (window.scrollY <= 2 && hasScrolled) {
+                banner.style.transition = 'background 0.3s, opacity 0.3s';
+                banner.style.opacity = '0.5';
+            } else {
+                banner.style.transition = 'background 0.3s, opacity 0.3s';
+                banner.style.opacity = '1';
+                if (window.scrollY > 2) hasScrolled = true;
             }
-        });
-        observer.observe(preloader, { attributes: true, attributeFilter: ['style', 'hidden'] });
-    } else {
-        // Si pas de preloader, afficher le footer directement
-        footer.style.display = '';
+            lastScrollY = window.scrollY;
+        }
+        window.addEventListener('scroll', updateBannerOpacity);
+        banner.style.opacity = '1';
     }
 });
