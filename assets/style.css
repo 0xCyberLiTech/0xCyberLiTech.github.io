@@ -1,12 +1,11 @@
-    0% {
-        box-shadow: 0 0 32px 6px rgba(0,255,120,0.10) inset, 0 2px 12px #000a;
-    }
-    50% {
-        box-shadow: 0 0 48px 12px rgba(0,255,120,0.18) inset, 0 2px 16px #000a;
-    }
-    100% {
-        box-shadow: 0 0 32px 6px rgba(0,255,120,0.10) inset, 0 2px 12px #000a;
-    }
+/* Curseur terminal clignotant pour le titre du bandeau */
+.terminal-cursor {
+    display: inline-block;
+    color: #00ff80;
+    font-weight: bold;
+    animation: blink-cursor 1s steps(2, start) infinite;
+    font-size: 1.1em;
+    margin-left: 2px;
 }
 
 /* Tuile d’absence de dépôt : harmonie totale avec .project-tile */
