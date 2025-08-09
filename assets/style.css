@@ -701,6 +701,10 @@ section#projets {
 
 /* Effet hover - Animation de frappe */
 .project-tile:hover {
+    box-shadow: 0 0 8px 2px #00ff8044, 0 0 12px 2px #00ff8015, 0 2px 24px #000a, 0 0 10px rgba(0,255,0,0.10), 0 4px 12px rgba(0,0,0,0.8) !important;
+    border-color: #00ff80;
+    filter: brightness(1.03) saturate(1.03);
+    transition: box-shadow 0.22s, filter 0.22s, border-color 0.22s;
     transform: scale(1.02) translateY(-2px);
     box-shadow: 
         0 0 30px rgba(0, 255, 0, 0.6),
@@ -1128,3 +1132,4 @@ footer {
 .project-tile h3 a:visited::after {
     opacity: 0;
     transform: scaleX(0.5);
+}
