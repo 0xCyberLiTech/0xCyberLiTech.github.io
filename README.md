@@ -1,6 +1,7 @@
 # 0xCyberLiTech - Portfolio GitHub
 
-![Aperçu du site](assets/screenshot.png)
+![Aperçu du site 1](assets/screenshot-1.png)
+![Aperçu du site 2](assets/screenshot-2.png)
 
 Bienvenue sur mon **portfolio GitHub cybersécurité** avec design **Matrix Terminal/Console**.  
 Ce site présente mes projets, scripts et tutoriels en cybersécurité avec une interface authentique **Kali Linux Terminal** et des effets **Matrix Digital Rain 2.0**.
@@ -50,7 +51,8 @@ Ce portfolio est hébergé via **GitHub Pages** :
 │   ├── style.css      # CSS portfolio avec media queries responsive
 │   ├── script.js      # JavaScript Matrix 2.0 + GitHub API
 │   ├── logo.png       # Logo profile avec effet scanlines
-│   └── screenshot.png # Capture d'écran du portfolio Matrix
+│   ├── screenshot-1.png # Capture d'écran du portfolio Matrix (vue 1)
+│   └── screenshot-2.png # Capture d'écran du portfolio Matrix (vue 2)
 ```
 
 ## Architecture Technique
