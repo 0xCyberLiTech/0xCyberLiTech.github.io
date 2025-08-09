@@ -1,3 +1,154 @@
+
+// Recherche dynamique sur les dépôts (filtre uniquement sur le nom)
+function filterAndRenderRepos() {
+    const searchInput = document.getElementById('search-repos');
+    if (!searchInput || !window.__allRepos) return;
+    const q = searchInput.value.trim().toLowerCase();
+    const filtered = window.__allRepos.filter(repo => repo.name.toLowerCase().includes(q));
+    renderRepos(filtered);
+}
+
+// Rendu des tuiles de dépôts (projets et tuile "aucun dépôt")
+function renderRepos(repos) {
+    const container = document.getElementById('projects-list');
+    const errorMessage = document.getElementById('error-message');
+    container.innerHTML = '';
+    errorMessage.style.display = 'none';
+    if (repos.length === 0) {
+        errorMessage.style.display = 'block';
+        errorMessage.innerHTML = `
+            <div class="project-tile no-repo-tile">
+                <div class="project-tile-content">
+                    <div class="terminal-prompt">
+                        <span class="prompt-user">┌──(0xCyberLiTech㉿kali)-[~/portfolio]</span>
+                        <span class="prompt-command">└─$ ls -la ~/repositories/public</span>
+                    </div>
+                    <h3><a href="#" tabindex="-1" style="color:inherit;text-decoration:none;pointer-events:none;">Aucun dépôt trouvé</a></h3>
+                    <p class="terminal-output no-repo-desc"></p>
+                    <div class="infos">
+                        <span title="Stars">★ 0</span>
+                        <span title="Forks">⑂ 0</span>
+                        <span title="Issues">⚠ 0</span>
+                        <span class="date">-</span>
+                    </div>
+                    <div class="scan-effect"></div>
+                </div>
+            </div>
+        `;
+        // Effet machine à écrire + lumière sur le message d’absence
+        const noRepoDescElem = errorMessage.querySelector('.no-repo-desc');
+        const noRepoDescText = '# Vérifiez l’orthographe ou explorez mes autres projets sur GitHub. Vous pouvez aussi réinitialiser la recherche.';
+        noRepoDescElem.innerHTML = noRepoDescText.split('').map(c => `<span>${c}</span>`).join('');
+        let noRepoScanIndex = 0;
+        let noRepoScanInterval = null;
+        function startNoRepoMatrixScan() {
+            const spans = noRepoDescElem.querySelectorAll('span');
+            if (!spans.length) return;
+            noRepoScanInterval = setInterval(() => {
+                spans.forEach(s => {
+                    s.style.color = '';
+                    s.style.textShadow = '';
+                    s.style.transform = '';
+                    s.style.transition = 'color 0.1s, transform 0.1s';
+                });
+                spans[noRepoScanIndex].style.color = '#ccff33';
+                spans[noRepoScanIndex].style.textShadow = '0 0 32px #ccff33, 0 0 16px #fff, 0 0 8px #00ff00, 0 0 2px #fff';
+                spans[noRepoScanIndex].style.transform = 'translateY(-2px) scale(1.0)';
+                noRepoScanIndex = (noRepoScanIndex + 1) % spans.length;
+            }, 90);
+        }
+        function stopNoRepoMatrixScan() {
+            clearInterval(noRepoScanInterval);
+            noRepoScanInterval = null;
+            const spans = noRepoDescElem.querySelectorAll('span');
+            spans.forEach(s => {
+                s.style.color = '';
+                s.style.textShadow = '';
+                s.style.transform = '';
+            });
+        }
+        startNoRepoMatrixScan();
+        errorMessage.addEventListener('mouseleave', stopNoRepoMatrixScan);
+        return;
+    }
+    errorMessage.innerHTML = '';
+    repos.forEach(repo => {
+        const lastUpdate = new Date(repo.updated_at);
+        const now = new Date();
+        const daysElapsed = Math.floor((now - lastUpdate) / (1000 * 60 * 60 * 24));
+        const isNew = daysElapsed <= 30;
+        const tile = document.createElement('div');
+        tile.className = 'project-tile';
+        if (isNew) tile.setAttribute('data-new', 'true');
+        tile.innerHTML = `
+            <div class="project-tile-content">
+                <div class="terminal-prompt">
+                    <span class="prompt-user">┌──(0xCyberLiTech㉿kali)-[~/portfolio]</span>
+                    <span class="prompt-command">└─$ ls -la ${repo.name}/</span>
+                    ${isNew ? `<div class="badge-container"><span class="day-counter">${daysElapsed}j</span><span class="badge-new">NEW</span></div>` : ''}
+                </div>
+                <h3><a href="${repo.html_url}/blob/${repo.default_branch || 'main'}/README.md" target="_blank" style="color:inherit;text-decoration:none;">${repo.name}</a></h3>
+                <p class="terminal-output"></p>
+                <div class="infos">
+                    <span title="Stars">★ ${repo.stargazers_count}</span>
+                    <span title="Forks">⑂ ${repo.forks_count}</span>
+                    <span title="Issues">⚠ ${repo.open_issues_count}</span>
+                    <span class="date">${lastUpdate.toLocaleDateString()}</span>
+                </div>
+                <div class="scan-effect"></div>
+            </div>
+        `;
+        container.appendChild(tile);
+        // Description animée Matrix
+        const desc = `# ${repo.description || 'Aucune description disponible.'}`;
+        const descElem = tile.querySelector('.terminal-output');
+        descElem.innerHTML = desc.split('').map(c => `<span>${c}</span>`).join('');
+        let scanIndex = 0;
+        let scanInterval = null;
+        function startMatrixScan() {
+            const spans = descElem.querySelectorAll('span');
+            if (!spans.length) return;
+            scanInterval = setInterval(() => {
+                spans.forEach(s => {
+                    s.style.color = '';
+                    s.style.textShadow = '';
+                    s.style.transform = '';
+                    s.style.transition = 'color 0.1s, transform 0.1s';
+                });
+                spans[scanIndex].style.color = '#ccff33';
+                spans[scanIndex].style.textShadow = '0 0 32px #ccff33, 0 0 16px #fff, 0 0 8px #00ff00, 0 0 2px #fff';
+                spans[scanIndex].style.transform = 'translateY(-2px) scale(1.0)';
+                scanIndex = (scanIndex + 1) % spans.length;
+            }, 90);
+        }
+        function stopMatrixScan() {
+            clearInterval(scanInterval);
+            scanInterval = null;
+            const spans = descElem.querySelectorAll('span');
+            spans.forEach(s => {
+                s.style.color = '';
+                s.style.textShadow = '';
+                s.style.transform = '';
+            });
+        }
+        tile.addEventListener('mouseenter', () => {
+            if (!scanInterval) {
+                scanIndex = 0;
+                startMatrixScan();
+            }
+        });
+        tile.addEventListener('mouseleave', () => {
+            stopMatrixScan();
+        });
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('search-repos');
+    if (searchInput) {
+        searchInput.addEventListener('input', filterAndRenderRepos);
+    }
+});
 // Matrix Digital Rain 3.0 - Effet avancé avec profondeur, reflets et couleurs secondaires
 window.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('matrix');
@@ -108,106 +259,27 @@ window.addEventListener('DOMContentLoaded', () => {
 
 // Récupération des dépôts GitHub et affichage des tuiles (sans barre LED)
 async function loadRepos() {
-    const container = document.getElementById('projects-list');
-    container.innerHTML = '';
+    window.__allRepos = [];
     try {
         const response = await fetch('https://api.github.com/users/0xCyberLiTech/repos');
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status} - ${response.statusText}`);
+        }
         const repos = await response.json();
-        
         // Filtrer pour exclure le dépôt GitHub Pages et le dépôt logo
         const filteredRepos = repos.filter(repo => 
             repo.name !== '0xCyberLiTech.github.io' && 
             repo.name !== '0xCyberLiTech'
         );
-        
-        filteredRepos.forEach(repo => {
-            const lastUpdate = new Date(repo.updated_at);
-            const now = new Date();
-            const daysElapsed = Math.floor((now - lastUpdate) / (1000 * 60 * 60 * 24));
-            const isNew = daysElapsed <= 30; // Badge NEW disparaît après 30 jours
+        window.__allRepos = filteredRepos;
+        filterAndRenderRepos();
 
-            const tile = document.createElement('div');
-            tile.className = 'project-tile';
-            if (isNew) {
-                tile.setAttribute('data-new', 'true');
-            }
 
-            // Génération du contenu sans la description
-            tile.innerHTML = `
-                <div class="project-tile-content">
-                    <div class="terminal-prompt">
-                        <span class="prompt-user">┌──(0xCyberLiTech㉿kali)-[~/portfolio]</span>
-                        <span class="prompt-command">└─$ ls -la ${repo.name}/</span>
-                        ${isNew ? `<div class="badge-container"><span class="day-counter">${daysElapsed}j</span><span class="badge-new">NEW</span></div>` : ''}
-                    </div>
-                    <h3><a href="${repo.html_url}/blob/${repo.default_branch || 'main'}/README.md" target="_blank" style="color:inherit;text-decoration:none;">${repo.name}</a></h3>
-                    <p class="terminal-output"></p>
-                    <div class="infos">
-                        <span title="Stars">★ ${repo.stargazers_count}</span>
-                        <span title="Forks">⑂ ${repo.forks_count}</span>
-                        <span title="Issues">⚠ ${repo.open_issues_count}</span>
-                        <span class="date">${lastUpdate.toLocaleDateString()}</span>
-                    </div>
-                    <!-- <a href="${repo.html_url}/blob/${repo.default_branch || 'main'}/README.md" target="_blank" class="btn-readme">OPEN</a> -->
-                    <div class="scan-effect"></div>
-                </div>
-            `;
-            container.appendChild(tile);
-
-            // Effet Matrix : description affichée en permanence, scan vert animé au survol
-            const desc = `# ${repo.description || 'Aucune description disponible.'}`;
-            const descElem = tile.querySelector('.terminal-output');
-            descElem.innerHTML = desc.split('').map(c => `<span>${c}</span>`).join('');
-
-            let scanIndex = 0;
-            let scanInterval = null;
-
-            function startMatrixScan() {
-                const spans = descElem.querySelectorAll('span');
-                if (!spans.length) return;
-                let prev = -1;
-                scanInterval = setInterval(() => {
-                    // Reset all
-                    spans.forEach((s, idx) => {
-                        s.style.color = '';
-                        s.style.textShadow = '';
-                        s.style.transform = '';
-                        s.style.transition = 'color 0.1s, transform 0.1s';
-                    });
-                    // Highlight current (plus lumineux et lisible)
-                    spans[scanIndex].style.color = '#ccff33';
-                    spans[scanIndex].style.textShadow = '0 0 32px #ccff33, 0 0 16px #fff, 0 0 8px #00ff00, 0 0 2px #fff';
-                    spans[scanIndex].style.transform = 'translateY(-2px) scale(1.0)';
-                    prev = scanIndex;
-                    scanIndex = (scanIndex + 1) % spans.length;
-                }, 90);
-            }
-
-            function stopMatrixScan() {
-                clearInterval(scanInterval);
-                scanInterval = null;
-                // Reset all
-                const spans = descElem.querySelectorAll('span');
-                spans.forEach(s => {
-                    s.style.color = '';
-                    s.style.textShadow = '';
-                    s.style.transform = '';
-                });
-            }
-
-            tile.addEventListener('mouseenter', () => {
-                if (!scanInterval) {
-                    scanIndex = 0;
-                    startMatrixScan();
-                }
-            });
-            tile.addEventListener('mouseleave', () => {
-                stopMatrixScan();
-            });
-        });
+// --- RENDU DES TUILES DE DÉPÔTS ---
     } catch (e) {
-        document.getElementById('error-message').style.display = 'block';
-        document.getElementById('error-message').textContent = "Erreur lors du chargement des dépôts.";
+        const errorDiv = document.getElementById('error-message');
+        errorDiv.style.display = 'block';
+        errorDiv.innerHTML = `<div>Erreur lors du chargement des dépôts.</div><pre style="font-size:0.95em;color:#ffb3b3;margin:6px 0 0 0;white-space:pre-wrap;">${e.message || e}</pre>`;
     }
 }
 

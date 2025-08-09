@@ -12,7 +12,8 @@ class MatrixPreloader {
         // Éléments DOM
         this.progressFill = document.getElementById('progress-fill');
         this.progressPercent = document.getElementById('progress-percent');
-        this.typingText = document.getElementById('typing-text');
+    this.typingPrompt = document.getElementById('typing-prompt');
+    this.typingText = document.getElementById('typing-text');
         this.statusMessages = document.getElementById('status-messages');
         
         // Configuration Matrix
@@ -35,14 +36,10 @@ class MatrixPreloader {
             "► Welcome to 0xCyberLiTech..."
         ];
         
-        // Textes de frappe
+        // Textes de frappe (réduit à 2 lignes pour test)
         this.typingTexts = [
             "sudo ./initialize_portfolio.sh",
-            "systemctl start matrix-display",
-            "nmap -sS portfolio.local",
-            "sudo chmod +x cyber_tools/*",
-            "ssh 0xCyberLiTech@portfolio",
-            "Loading complete... Redirecting..."
+            "systemctl start matrix-display"
         ];
         
         this.init();
@@ -162,58 +159,52 @@ class MatrixPreloader {
         setInterval(drawMatrix, 40);
     }
     
-    // Démarrage du processus de chargement
+    // Démarrage du processus de chargement (nouvelle version, effet terminal fluide)
     startLoading() {
         let currentTypingIndex = 0;
         let currentStatusIndex = 0;
-        
-        // Animation de frappe
-        const typeText = (text, callback) => {
-            let charIndex = 0;
-            this.typingText.textContent = '';
-            
-            const typeChar = () => {
-                if (charIndex < text.length) {
-                    this.typingText.textContent += text.charAt(charIndex);
-                    charIndex++;
-                    setTimeout(typeChar, 50 + Math.random() * 50);
-                } else if (callback) {
-                    setTimeout(callback, 800);
-                }
-            };
-            
-            typeChar();
-        };
-        
+
         // Ajout de messages de statut
-        const addStatusMessage = (message) => {
+        const addStatusMessage = () => {
             if (currentStatusIndex < this.statusTexts.length) {
                 const statusLine = document.createElement('div');
                 statusLine.className = 'status-line';
                 statusLine.textContent = this.statusTexts[currentStatusIndex];
                 statusLine.style.animationDelay = '0s';
                 this.statusMessages.appendChild(statusLine);
-                
-                // Limiter le nombre de messages visibles
                 if (this.statusMessages.children.length > 4) {
                     this.statusMessages.removeChild(this.statusMessages.firstChild);
                 }
-                
                 currentStatusIndex++;
             }
         };
-        
+
+        // Animation de frappe terminal fluide
+        const typeTextTerminal = (text, callback) => {
+            let charIndex = 0;
+            const cursor = '<span class="cursor-white">_</span>';
+            const typeChar = () => {
+                this.typingText.innerHTML = `<span class="typed-white">${text.slice(0, charIndex)}</span>` + cursor;
+                if (charIndex < text.length) {
+                    charIndex++;
+                    setTimeout(typeChar, 50 + Math.random() * 50);
+                } else {
+                    // Curseur reste à la fin pendant 800ms
+                    setTimeout(() => {
+                        if (callback) callback();
+                    }, 800);
+                }
+            };
+            typeChar();
+        };
+
         // Mise à jour de la progression
         const updateProgress = () => {
             if (this.progress < 100) {
-                // Progression variable pour plus de réalisme
                 const increment = Math.random() * 8 + 2;
                 this.progress = Math.min(100, this.progress + increment);
-                
                 this.progressFill.style.width = this.progress + '%';
                 this.progressPercent.textContent = Math.floor(this.progress);
-                
-                // Ajouter des messages de statut à certains seuils
                 if (this.progress > 10 && currentStatusIndex === 1) addStatusMessage();
                 if (this.progress > 25 && currentStatusIndex === 2) addStatusMessage();
                 if (this.progress > 40 && currentStatusIndex === 3) addStatusMessage();
@@ -221,89 +212,50 @@ class MatrixPreloader {
                 if (this.progress > 70 && currentStatusIndex === 5) addStatusMessage();
                 if (this.progress > 85 && currentStatusIndex === 6) addStatusMessage();
                 if (this.progress > 95 && currentStatusIndex === 7) addStatusMessage();
-                
                 if (this.progress >= 100) {
                     this.progress = 100;
                     this.progressFill.style.width = '100%';
                     this.progressPercent.textContent = '100';
-                    
-                    // Finalisation
                     setTimeout(() => {
                         this.completeLoading();
                     }, 500);
                 } else {
-                    // Continuer la progression avec délai variable
                     setTimeout(updateProgress, 200 + Math.random() * 300);
                 }
             }
         };
-        
-        // Séquence de frappe et progression
+
+        // Séquence de frappe terminal fluide (corrigée)
         const startSequence = () => {
-            // Premier message de statut
             addStatusMessage();
-            
-            // Démarrer la progression
             setTimeout(updateProgress, 500);
-            
-            // Frappe séquentielle
             const typeNextCommand = () => {
                 if (currentTypingIndex < this.typingTexts.length) {
-                    typeText(this.typingTexts[currentTypingIndex], () => {
+                    // Efface la ligne précédente (sauf la première)
+                    if (currentTypingIndex > 0) {
+                        this.typingText.innerHTML = '';
+                    }
+                    typeTextTerminal(this.typingTexts[currentTypingIndex], () => {
                         currentTypingIndex++;
                         if (currentTypingIndex < this.typingTexts.length) {
-                            setTimeout(typeNextCommand, 1000);
+                            setTimeout(typeNextCommand, 400);
                         }
                     });
                 }
             };
-            
             typeNextCommand();
         };
-        
-        // Démarrer après un délai initial
         setTimeout(startSequence, 1000);
     }
     
-    // Finalisation du chargement
+    // Finalisation du chargement (désactivée pour n'afficher que le prompt vert seul)
     completeLoading() {
         this.isComplete = true;
-        
-        // Message final
-        const finalStatus = document.createElement('div');
-        finalStatus.className = 'status-line';
-        finalStatus.textContent = '► Loading complete! Initializing portfolio...';
-        finalStatus.style.color = '#00ff00';
-        finalStatus.style.fontWeight = 'bold';
-        this.statusMessages.appendChild(finalStatus);
-        
-        // Frappe du message final
-        this.typingText.textContent = '';
-        const finalText = "Access granted. Welcome to 0xCyberLiTech!";
-        this.typeText(finalText, () => {
-            // Transition vers le portfolio principal
-            setTimeout(() => {
-                this.transitionToPortfolio();
-            }, 1500);
-        });
-    }
-    
-    // Fonction de frappe simplifiée pour le message final
-    typeText(text, callback) {
-        let charIndex = 0;
-        this.typingText.style.color = '#00ff00';
-        
-        const typeChar = () => {
-            if (charIndex < text.length) {
-                this.typingText.textContent += text.charAt(charIndex);
-                charIndex++;
-                setTimeout(typeChar, 80);
-            } else if (callback) {
-                setTimeout(callback, 500);
-            }
-        };
-        
-        typeChar();
+        // On n'affiche rien, juste le prompt vert reste visible
+        // (la redirection vers le portfolio reste inchangée)
+        setTimeout(() => {
+            this.transitionToPortfolio();
+        }, 1200);
     }
     
     // Transition vers le portfolio principal
