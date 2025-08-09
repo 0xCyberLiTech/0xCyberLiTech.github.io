@@ -1,9 +1,8 @@
 # Rapport d’état du projet 0xCyberLiTech (août 2025)
 
 ## Structure du dépôt
-
 ```
-/
+/ 
 ├── index.html
 ├── assets/
 │   ├── style.css
@@ -16,35 +15,29 @@
 ```
 
 ## Vérification des fichiers
-
 ### index.html
 - Structure propre, pas de trace de barre LED.
 - Liens recommandés vers `assets/style.css` et `assets/script.js`.
-
 ### assets/style.css
 - Aucun code lié aux barres LED (aucune classe `.led-bar-container`, `.led-bar-matrix`, `.led-bar-days`, `.update-bar`, etc.).
 - Effet de contour paramétrable pour toutes les tuiles via la variable CSS `--tile-shadow-intensity`.
 - Styles cohérents et modernes.
-
 ### assets/script.js
 - Aucun ajout ou création de barre LED dans le DOM.
 - Pas d’appel à une fonction `createMatrixEffect` ou équivalent.
 - Génération des tuiles projets propre : titre, badges, description, infos, bouton README.
 - Effet Matrix en arrière-plan fonctionnel.
 - Code JS moderne et lisible.
-
 ### README.md & Lisez-moi.txt
 - Structure et conseils conformes.
 - Pas de code obsolète ou problématique.
-
 ### .nojekyll
 - Présent pour compatibilité GitHub Pages.
 
 ## Conclusion
-
-**Tous les fichiers sont propres et ne contiennent plus aucune trace de barre LED.  
-Le projet est prêt pour archivage et publication sur GitHub Pages.**
+**Tous les fichiers sont propres et ne contiennent plus aucune trace de barre LED.**
+**Le projet est prêt pour archivage et publication sur GitHub Pages.**
 
 ---
 
-*Rapport généré le 6 août 2025 par GitHub
+*Rapport généré le 6 août 2025 par GitHub*
