@@ -17,7 +17,7 @@ class MatrixPreloader {
         
         // Configuration Matrix
         this.matrixChars = "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ$@#%&*+={}<>?[]|";
-        this.fontSize = 14;
+    this.fontSize = 16;
         this.drops = [];
         this.speeds = [];
         
@@ -59,9 +59,9 @@ class MatrixPreloader {
     setupCanvas() {
         this.resizeCanvas();
         
-        const cols = Math.floor(this.canvas.width / this.fontSize);
-        this.drops = Array(cols).fill(0);
-        this.speeds = Array(cols).fill(0).map(() => Math.random() * 0.5 + 0.3);
+    const cols = Math.floor(this.canvas.width / this.fontSize);
+    this.drops = Array(cols).fill(0);
+    this.speeds = Array(cols).fill(0).map(() => Math.random() * 0.5 + 0.3);
     }
     
     resizeCanvas() {
@@ -102,7 +102,6 @@ class MatrixPreloader {
 
         const drawMatrix = () => {
             if (this.isComplete) return;
-            // Effet de profondeur : léger flou et reflets
             this.ctx.save();
             this.ctx.globalAlpha = 0.92;
             this.ctx.filter = 'blur(0.5px)';
@@ -159,9 +158,8 @@ class MatrixPreloader {
             this.ctx.shadowBlur = 0;
             this.ctx.globalAlpha = 1;
             this.ctx.filter = 'none';
-            requestAnimationFrame(drawMatrix);
         };
-        drawMatrix();
+        setInterval(drawMatrix, 40);
     }
     
     // Démarrage du processus de chargement
