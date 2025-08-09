@@ -76,46 +76,91 @@ class MatrixPreloader {
         });
     }
     
-    // Animation Matrix Rain
+    // Animation Matrix Rain (identique au portfolio)
     startMatrixRain() {
+        // Initialisation des colonnes avancées
+        const cols = () => Math.floor(this.canvas.width / this.fontSize);
+        let brightnesses = [];
+        let focusColumns = [];
+        let colorColumns = [];
+        const initMatrix = () => {
+            const numCols = cols();
+            this.drops = Array(numCols).fill(0);
+            this.speeds = Array(numCols).fill(0).map(() => Math.random() * 0.5 + 0.3);
+            brightnesses = Array(numCols).fill(0).map(() => Math.random() * 0.5 + 0.5);
+            focusColumns = Array(numCols).fill(false).map(() => Math.random() < 0.13);
+            colorColumns = Array(numCols).fill('#00ff00').map(() => {
+                const r = Math.random();
+                if (r < 0.08) return '#00fff0'; // cyan
+                if (r < 0.15) return '#baff3b'; // vert lime
+                if (r < 0.18) return '#00aaff'; // bleu matrix
+                return '#00ff00';
+            });
+        };
+        initMatrix();
+        window.addEventListener('resize', initMatrix);
+
         const drawMatrix = () => {
             if (this.isComplete) return;
-            
-            // Fond semi-transparent pour l'effet de fade
-            this.ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            // Effet de profondeur : léger flou et reflets
+            this.ctx.save();
+            this.ctx.globalAlpha = 0.92;
+            this.ctx.filter = 'blur(0.5px)';
+            this.ctx.fillStyle = 'rgba(0, 0, 0, 0.10)';
             this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-            
-            this.ctx.font = `${this.fontSize}px 'Consolas', monospace`;
-            
-            const cols = Math.floor(this.canvas.width / this.fontSize);
-            
-            for (let i = 0; i < cols && i < this.drops.length; i++) {
+            this.ctx.restore();
+
+            this.ctx.font = `bold ${this.fontSize}px 'Consolas', monospace`;
+
+            for (let i = 0; i < cols(); i++) {
                 const char = this.matrixChars[Math.floor(Math.random() * this.matrixChars.length)];
                 const x = i * this.fontSize;
                 const y = this.drops[i] * this.fontSize;
-                
-                // Effet de couleur variable
-                const alpha = Math.random() * 0.5 + 0.5;
-                this.ctx.fillStyle = `rgba(0, 255, 0, ${alpha})`;
-                this.ctx.shadowBlur = 5;
-                this.ctx.shadowColor = '#00ff00';
-                
+
+                let color = colorColumns[i];
+
+                if (focusColumns[i]) {
+                    const brightness = Math.sin(Date.now() * 0.005 + i) * 0.3 + 0.8;
+                    this.ctx.fillStyle = `rgba(255,255,255,${0.18 + 0.5 * brightness})`;
+                    this.ctx.shadowBlur = 18;
+                    this.ctx.shadowColor = color;
+                    this.ctx.globalAlpha = 0.95;
+                } else {
+                    const alpha = brightnesses[i] * (1 - (y / this.canvas.height) * 0.5);
+                    this.ctx.fillStyle = color.replace(')', `,${alpha})`).replace('rgb', 'rgba');
+                    this.ctx.shadowBlur = 6;
+                    this.ctx.shadowColor = color;
+                    this.ctx.globalAlpha = 0.82;
+                }
+
+                if (focusColumns[i] && y > this.canvas.height * 0.2 && y < this.canvas.height * 0.8) {
+                    this.ctx.save();
+                    this.ctx.globalAlpha = 0.18;
+                    this.ctx.fillStyle = '#fff';
+                    this.ctx.fillRect(x, y - this.fontSize * 1.5, this.fontSize, this.fontSize * 1.5);
+                    this.ctx.restore();
+                }
+
                 this.ctx.fillText(char, x, y);
-                
-                // Reset colonne quand elle sort de l'écran
-                if (y > this.canvas.height && Math.random() > 0.98) {
+
+                if (y > this.canvas.height && Math.random() > 0.975) {
                     this.drops[i] = 0;
                     this.speeds[i] = Math.random() * 0.5 + 0.3;
+                    focusColumns[i] = Math.random() < 0.13;
+                    brightnesses[i] = Math.random() * 0.5 + 0.5;
+                    const r = Math.random();
+                    if (r < 0.08) colorColumns[i] = '#00fff0';
+                    else if (r < 0.15) colorColumns[i] = '#baff3b';
+                    else if (r < 0.18) colorColumns[i] = '#00aaff';
+                    else colorColumns[i] = '#00ff00';
                 }
-                
-                // Avancement avec vitesse variable
                 this.drops[i] += this.speeds[i];
             }
-            
             this.ctx.shadowBlur = 0;
+            this.ctx.globalAlpha = 1;
+            this.ctx.filter = 'none';
             requestAnimationFrame(drawMatrix);
         };
-        
         drawMatrix();
     }
     
@@ -265,20 +310,17 @@ class MatrixPreloader {
     
     // Transition vers le portfolio principal
     transitionToPortfolio() {
-        // Effet de transition Matrix (retour à l'ancien fondu simple)
         const preloaderContainer = document.querySelector('.preloader-container');
         const matrixCanvas = document.getElementById('matrix-preloader');
 
-        // Animation de fade out
-        preloaderContainer.style.transition = 'opacity 1s ease-out';
-        preloaderContainer.style.opacity = '0';
-        matrixCanvas.style.transition = 'opacity 1.5s ease-out';
-        matrixCanvas.style.opacity = '0';
+        // Ajout d'une classe fade-out pour une transition CSS harmonieuse
+        preloaderContainer.classList.add('fade-out');
+        matrixCanvas.classList.add('fade-out');
 
-        // Redirection vers le portfolio principal
+        // Redirection vers le portfolio principal après le fondu
         setTimeout(() => {
             window.location.href = 'portfolio.html';
-        }, 1500);
+        }, 1200);
     }
 }
 

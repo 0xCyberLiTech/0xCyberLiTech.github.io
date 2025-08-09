@@ -1,3 +1,9 @@
+/* Fondu harmonieux lors de la transition */
+.fade-out {
+    opacity: 0 !important;
+    transition: opacity 1.2s cubic-bezier(0.4,0,0.2,1);
+    pointer-events: none;
+}
 /* ================================================
    0xCyberLiTech - Preloader Styles Matrix Terminal
    ================================================ */
@@ -9,6 +15,7 @@
     box-sizing: border-box;
 }
 
+
 body {
     background:
         radial-gradient(ellipse at 60% 40%, rgba(0,255,120,0.18) 0%, rgba(20,30,30,0.98) 70%, #14181a 100%),
@@ -16,46 +23,126 @@ body {
     font-family: 'Fira Mono', 'Consolas', 'Courier New', monospace;
     overflow: hidden;
     height: 100vh;
-    color: #e0ffe0;
-    box-shadow: 0 0 64px 12px #00ff8033 inset;
+    color: var(--matrix-text);
+    box-shadow: 0 0 64px 12px var(--matrix-green)33 inset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    position: relative;
 }
 
-/* Matrix Canvas Background */
+:root {
+    --matrix-green: #00ff00;
+    --matrix-cyan: #00fff0;
+    --matrix-blue: #00aaff;
+    --matrix-lime: #baff3b;
+    --matrix-bg: #101010;
+    --matrix-text: #e0e0e0;
+    --matrix-accent: #ff5555;
+}
+
+body {
+    color: var(--matrix-text);
+}
+
+#matrix-preloader {
+    box-shadow: 0 0 64px 12px var(--matrix-green)33 inset;
+    border: 2px solid var(--matrix-green) !important;
+    color: var(--matrix-text) !important;
+}
+
+.preloader-container {
+    background: transparent;
+    border-bottom: 2px solid var(--matrix-green);
+    color: var(--matrix-text) !important;
+    text-shadow: 0 1px 4px #000a, 0 0 2px var(--matrix-green);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
 #matrix-preloader {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    opacity: 0.6;
-}
-
-/* Container principal */
-.preloader-container {
-    position: relative;
-    z-index: 10;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 100vw;
     height: 100vh;
-    padding: 20px;
+    z-index: 1;
+    pointer-events: none;
 }
 
 /* Terminal Window */
+
 .terminal-window {
-    background:
-        radial-gradient(ellipse at 60% 40%, rgba(0,255,128,0.18) 0%, rgba(20,30,30,0.98) 70%, #14181a 100%),
-        linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%) !important;
-    border-radius: 18px !important;
-    border: 2px solid #00ff80 !important;
-    box-shadow: 0 0 32px 4px #00ff8055, 0 0 0 2px #00ff80 inset, 0 2px 16px #000a;
+    background: radial-gradient(ellipse at 50% 60%, rgba(0,255,120,0.38) 0%, rgba(0,255,120,0.18) 30%, rgba(20,30,30,0.98) 65%, #070a0a 100%),
+                linear-gradient(135deg, #070a0a 0%, #14181a 100%) !important;
+    border-radius: 8px !important;
+    border: 2px solid #333 !important;
+    border-top: 2px solid #555 !important;
+    border-left: 2px solid #555 !important;
+    box-shadow: 
+        0 0 64px 12px rgba(0,255,120,0.22) inset, 0 2px 24px #000a,
+        0 0 20px rgba(0, 255, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 4px 12px rgba(0, 0, 0, 0.8) !important;
     max-width: 600px;
     width: 100%;
-    animation: terminalGlow 3s ease-in-out infinite alternate;
-    color: #e0ffe0 !important;
-    text-shadow: 0 1px 4px #000a, 0 0 2px #00ff80;
-    font-family: 'Fira Mono', 'Consolas', 'Courier New', monospace;
+    animation: terminalTileGlow 4s ease-in-out infinite alternate;
+    color: #eaffd0 !important;
+    text-shadow: 0 2px 8px #000c, 0 0 6px #00ff80, 0 0 2px #00ff80;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.25s, filter 0.25s, transform 0.18s;
+}
+
+@keyframes terminalTileGlow {
+    0% { 
+        box-shadow: 
+            0 0 20px rgba(0, 255, 0, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1),
+            0 4px 12px rgba(0, 0, 0, 0.8);
+    }
+    100% { 
+        box-shadow: 
+            0 0 25px rgba(0, 255, 0, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.15),
+            0 4px 15px rgba(0, 0, 0, 0.9);
+    }
+}
+
+/* Barre d'en-tête du terminal, harmonisée avec .project-tile::before */
+.terminal-window::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 28px;
+    background: linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 100%);
+    border-bottom: 1px solid #555;
+    background-image: 
+        radial-gradient(circle at 15px 14px, #ff5555 5px, transparent 6px),
+        radial-gradient(circle at 30px 14px, #ffaa00 5px, transparent 6px),
+        radial-gradient(circle at 45px 14px, #00ff00 5px, transparent 6px);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Pour que le contenu ne soit pas masqué par le ::before */
+.terminal-header {
+    position: relative;
+    z-index: 2;
 }
 
 @keyframes terminalGlow {
@@ -232,8 +319,24 @@ body {
 
 .typing-text {
     color: #ffffff;
-    min-width: 200px;
+    min-width: 0;
     text-align: left;
+    display: inline;
+    padding: 0;
+    margin: 0;
+    letter-spacing: normal;
+    word-break: break-all;
+    white-space: pre;
+}
+
+.cursor {
+    color: #00ff00;
+    animation: blink 1s infinite;
+    display: inline;
+    padding: 0;
+    margin: 0;
+    font-weight: bold;
+    font-family: inherit;
 }
 
 .cursor {

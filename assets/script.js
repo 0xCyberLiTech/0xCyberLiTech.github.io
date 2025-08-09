@@ -240,6 +240,15 @@ window.addEventListener('DOMContentLoaded', loadRepos);
 
 // Bloc unique pour l'initialisation du portfolio, du footer et du bandeau
 window.addEventListener('DOMContentLoaded', () => {
+    // Fade-in du body pour éviter le flash blanc
+    document.body.style.opacity = '1';
+
+    // Apparition harmonieuse du contenu du portfolio
+    document.body.classList.add('fade-in');
+    setTimeout(() => {
+        document.body.classList.remove('fade-in');
+    }, 1200);
+
     // Affichage des projets
     loadRepos();
 

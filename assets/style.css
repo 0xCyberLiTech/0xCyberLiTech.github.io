@@ -1,3 +1,12 @@
+/* Apparition harmonieuse du contenu du portfolio */
+.fade-in {
+    opacity: 0;
+    animation: fadeInPortfolio 1.2s cubic-bezier(0.4,0,0.2,1) 0.2s forwards;
+}
+
+@keyframes fadeInPortfolio {
+    to { opacity: 1; }
+}
 /* Curseur terminal clignotant pour le titre du bandeau */
 .terminal-cursor {
     display: inline-block;
@@ -479,6 +488,12 @@ section#projets {
 
 /* Contenu du terminal */
 .project-tile-content {
+    font-size: 0.95em;
+    padding: 35px 16px 16px 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
     padding: 35px 16px 16px 16px;
     flex: 1;
     display: flex;
@@ -520,13 +535,14 @@ section#projets {
 
 .project-tile h3 {
     margin: 0 0 12px 0;
-    font-size: 1em;
-    color: #00ff00;
-    font-family: 'Consolas', monospace;
+    font-size: 1.13em;
+    color: #baff3b;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
     word-break: break-word;
     position: relative;
     transition: all 0.4s ease;
-    text-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+    text-shadow: 0 0 8px #000c, 0 0 8px #00ff80, 0 0 2px #fff;
+    font-weight: 700;
     cursor: pointer;
 }
 
@@ -565,17 +581,17 @@ section#projets {
 
 .terminal-output {
     margin: 8px 0;
-    font-size: 0.85em;
-    color: #b8b8b8;
+    font-size: 0.93em;
+    color: #eaffd0;
     flex: 1;
-    line-height: 1.5;
-    font-family: 'Segoe UI', 'Roboto', sans-serif;
-    font-weight: 400;
-    letter-spacing: 0.3px;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-    padding: 8px 12px;
-    background: rgba(0, 0, 0, 0.15);
-    border-left: 2px solid rgba(0, 255, 0, 0.3);
+    line-height: 1.7;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-shadow: 0 2px 8px #000c, 0 0 6px #00ff80, 0 0 2px #fff;
+    padding: 10px 14px;
+    background: rgba(0, 0, 0, 0.18);
+    border-left: 2px solid rgba(0, 255, 0, 0.4);
     border-radius: 0 4px 4px 0;
     position: relative;
     transition: all 0.3s ease;
@@ -754,11 +770,16 @@ footer {
     margin: 35px 0 25px 0;
     color: #00ff00;
     font-family: 'Consolas', monospace;
-    font-size: 1.7em;
-    text-shadow: 0 0 8px rgba(0, 255, 0, 0.4);
-    letter-spacing: 1.5px;
+    margin: 0 0 12px 0;
+    font-size: 1em;
+    color: #00ff00;
+    font-family: 'Consolas', monospace;
+    word-break: break-word;
     position: relative;
-}
+    transition: all 0.4s ease;
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+    cursor: pointer;
+    font-weight: normal;
 
 /* Effet de soulignement Matrix pour le titre - allégé */
 #projets h2::after {
@@ -781,20 +802,20 @@ footer {
 @media screen and (max-width: 768px) {
     /* Bandeau supérieur adaptatif */
     .top-banner__title {
-        font-size: 1.2em;
-        letter-spacing: 2px;
-    }
-    
-    .top-banner__title::before {
-        font-size: 0.5em;
-    }
-    
-    .top-banner__title::after {
-        font-size: 0.45em;
-    }
-    
-    /* Section principale */
-    main {
+        font-size: 1em;
+        color: #00ff00;
+        font-family: 'Consolas', monospace;
+        text-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+        font-weight: normal;
+        font-size: 0.85em;
+        color: #b8b8b8;
+        font-family: 'Segoe UI', 'Roboto', sans-serif;
+        font-weight: 400;
+        letter-spacing: 0.3px;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        padding: 8px 12px;
+        background: rgba(0, 0, 0, 0.15);
+        border-left: 2px solid rgba(0, 255, 0, 0.3);
         padding: 16px 8px 32px 8px;
     }
     
@@ -1105,6 +1126,5 @@ footer {
 }
 .project-tile h3 a:active::after,
 .project-tile h3 a:visited::after {
-  opacity: 0;
-  transform: scaleX(0.5);
-}
+    opacity: 0;
+    transform: scaleX(0.5);
