@@ -37,4 +37,36 @@ if (canvas) {
         cancelAnimationFrame(animationId);
         if (canvas && canvas.parentNode) canvas.parentNode.removeChild(canvas);
     });
+// Fin du module preloader
+
+// Animation de la barre de progression du preloader
+const progressBar = document.getElementById('preloader-progress-bar');
+const statusText = document.getElementById('preloader-status-text');
+if (progressBar) {
+    let progress = 0;
+    const steps = [
+        { pct: 15, txt: "Chargement des modules..." },
+        { pct: 35, txt: "Connexion à GitHub..." },
+        { pct: 60, txt: "Récupération des dépôts..." },
+        { pct: 85, txt: "Préparation de l'interface..." },
+        { pct: 100, txt: "Portfolio prêt !" }
+    ];
+    let step = 0;
+    function animateProgress() {
+        if (step < steps.length) {
+            progress = steps[step].pct;
+            progressBar.style.width = progress + '%';
+            if (statusText) statusText.textContent = steps[step].txt;
+            step++;
+            setTimeout(animateProgress, 1100 + Math.random()*500);
+        } else {
+            // Déclenche la transition seulement à la fin de la barre
+            setTimeout(() => {
+                const event = new Event('preloader:done');
+                window.dispatchEvent(event);
+            }, 350);
+        }
+    }
+    animateProgress();
+}
 }

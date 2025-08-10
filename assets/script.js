@@ -30,7 +30,7 @@ function renderRepos(repos) {
         if (searchInput) {
             const oldPlaceholder = searchInput.placeholder;
             searchInput.value = '';
-            searchInput.placeholder = 'Aucun résultat';
+            searchInput.placeholder = 'Aucun résultat...';
             // Affiche le message 'Aucun résultat' 3 secondes, puis remet 'Recherche'
             renderRepos(window.__allRepos);
             setTimeout(() => {
