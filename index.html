@@ -17,6 +17,11 @@
             </div>
             <div class="preloader-status">
                 <div class="preloader-status-text" id="preloader-status-text">Initialisation du portfolio...</div>
+                <div class="preloader-progress-bar-container">
+                    <div class="preloader-progress-bar-bg">
+                        <div class="preloader-progress-bar" id="preloader-progress-bar"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -43,7 +48,7 @@
                             <line x1="16.1213" y1="16.1213" x2="20" y2="20" stroke="#00fff0" stroke-width="2" stroke-linecap="round"/>
                         </svg>
                     </span>
-                    <input id="search-repos" type="search" placeholder="Recherche" autocomplete="off">
+                    <input id="search-repos" type="search" placeholder="Recherche..." autocomplete="off">
                 </div>
                 <div id="projects-list"></div>
             </section>
@@ -56,25 +61,23 @@
     <link rel="stylesheet" href="assets/preloader-ultramodern.css">
     <script src="assets/preloader-ultramodern.js"></script>
     <script>
-    // Transition JS : fade-out du preloader, fade-in du portfolio (sans barre de progression)
-    window.addEventListener('DOMContentLoaded', function() {
+    // Transition JS : fade-out du preloader, fade-in du portfolio (après la barre de progression)
+    window.addEventListener('preloader:done', function() {
         const status = document.getElementById('preloader-status-text');
+        status.textContent = 'Bienvenue !';
         setTimeout(() => {
-            status.textContent = 'Bienvenue !';
+            const preloader = document.getElementById('preloader-ultramodern');
+            preloader.style.opacity = '0';
+            preloader.style.pointerEvents = 'none';
+            const root = document.getElementById('portfolio-root');
+            root.style.opacity = '1';
+            root.style.pointerEvents = 'auto';
             setTimeout(() => {
-                const preloader = document.getElementById('preloader-ultramodern');
-                preloader.style.opacity = '0';
-                preloader.style.pointerEvents = 'none';
-                const root = document.getElementById('portfolio-root');
-                root.style.opacity = '1';
-                root.style.pointerEvents = 'auto';
-                setTimeout(() => {
-                    if (preloader && preloader.parentNode) {
-                        preloader.parentNode.removeChild(preloader);
-                    }
-                }, 700);
-            }, 900);
-        }, 1200);
+                if (preloader && preloader.parentNode) {
+                    preloader.parentNode.removeChild(preloader);
+                }
+            }, 700);
+        }, 900);
     });
     </script>
     <script src="assets/tron-numbers-bg.js"></script>
