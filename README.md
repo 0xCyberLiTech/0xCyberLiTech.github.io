@@ -3,8 +3,8 @@
 ![Aperçu du site 1](assets/screenshot-1.png)
 ![Aperçu du site 2](assets/screenshot-2.png)
 
-Bienvenue sur mon **portfolio GitHub cybersécurité** avec design **Matrix Terminal/Console**.  
-Ce site présente mes projets, scripts et tutoriels en cybersécurité avec une interface authentique **Kali Linux Terminal** et des effets **Matrix Digital Rain 2.0**.
+Bienvenue sur mon **portfolio GitHub cybersécurité** nouvelle génération, avec un preloader moderne (index.html) et un portfolio cyber/Tron harmonisé.  
+Le preloader s’affiche d’abord (`index.html`), puis redirige automatiquement vers le portfolio (`portfolio.html`).
 
 ## 🎯 Fonctionnalités
 ### 🎭 **Interface Terminal/Console**
@@ -39,20 +39,52 @@ Ce site présente mes projets, scripts et tutoriels en cybersécurité avec une 
 Ce portfolio est hébergé via **GitHub Pages** :
 [https://0xcyberlitech.github.io/](https://0xcyberlitech.github.io/)
 
-## 📂 Structure
+## 📂 Structure du projet (2025)
 ```
-/ 
-├── index.html         # Preloader Matrix spectaculaire (point d'entrée)
-├── portfolio.html     # Portfolio principal (ancien index.html)
-├── .nojekyll          # Désactive Jekyll sur GitHub Pages
-├── assets/            # Assets optimisés
-│   ├── preloader.css  # Styles du preloader Matrix
-│   ├── preloader.js   # Logique et animations du preloader
-│   ├── style.css      # CSS portfolio avec media queries responsive
-│   ├── script.js      # JavaScript Matrix 2.0 + GitHub API
-│   ├── logo.png       # Logo profile avec effet scanlines
-│   ├── screenshot-1.png # Capture d'écran du portfolio Matrix (vue 1)
-│   └── screenshot-2.png # Capture d'écran du portfolio Matrix (vue 2)
+0xCyberLiTech.github.io/
+├── index.html                    # Page d’accueil (preloader animé, redirige vers portfolio.html)
+├── portfolio.html                # Portfolio principal (autonome, interface cyber/Tron)
+├── assets/
+│   ├── logo.png                  # Logo principal (utilisé par preloader & portfolio)
+│   ├── preloader-ultramodern.css # Styles du preloader (utilisé par index.html)
+│   ├── preloader-ultramodern.js  # Logique/animation du preloader (index.html)
+│   ├── style.css                 # Styles principaux du portfolio (portfolio.html)
+│   ├── script.js                 # Logique JS du portfolio (portfolio.html)
+│   ├── tron-numbers-bg.js        # Effet de fond Tron/cyber (portfolio.html)
+│   ├── screenshot-1.png          # Capture d’écran (pour README uniquement)
+│   └── screenshot-2.png          # Capture d’écran (pour README uniquement)
+├── Lisez-moi.txt                 # Conseils d’utilisation et structure
+├── Rapport.txt                   # Rapport d’état du projet
+├── README.md                     # Présentation du projet sur GitHub
+```
+
+### Interactions & dépendances
+- `index.html` (preloader animé) utilise :
+   - `assets/preloader-ultramodern.css`, `assets/preloader-ultramodern.js`, `assets/logo.png`
+   - Redirige automatiquement vers `portfolio.html` après l’animation
+- `portfolio.html` (portfolio principal) utilise :
+   - `assets/style.css`, `assets/script.js`, `assets/tron-numbers-bg.js`, `assets/logo.png`
+   - Fonctionne de façon totalement autonome (aucune dépendance à un autre HTML)
+- `assets/screenshot-1.png` et `assets/screenshot-2.png` : uniquement pour l’illustration dans le README
+
+### Schéma de la structure (arborescence)
+
+```text
+0xCyberLiTech.github.io/
+├── index.html
+├── portfolio.html
+├── assets/
+│   ├── logo.png
+│   ├── preloader-ultramodern.css
+│   ├── preloader-ultramodern.js
+│   ├── style.css
+│   ├── script.js
+│   ├── tron-numbers-bg.js
+│   ├── screenshot-1.png
+│   └── screenshot-2.png
+├── Lisez-moi.txt
+├── Rapport.txt
+├── README.md
 ```
 
 ## Architecture Technique
@@ -86,10 +118,10 @@ cd 0xcyberlitech.github.io
 ```
 2. **Ouvrir dans un navigateur** :
 ```bash
-# Option 1: Double-clic sur index.html
-# Option 2: Serveur local Python
+# Ouvrir index.html (point d’entrée principal)
+# ou lancer un serveur local Python
 python -m http.server 8000
-# Puis ouvrir http://localhost:8000
+# Puis ouvrir http://localhost:8000/index.html
 ```
 3. **Pour le développement** :
 - Utiliser VS Code avec Live Server extension

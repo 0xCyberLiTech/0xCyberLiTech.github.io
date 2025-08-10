@@ -39,6 +39,12 @@ function renderRepos(repos) {
         }
         return;
     }
+    // Fonction d'échappement XSS simple
+    function escapeHTML(str) {
+        return String(str).replace(/[&<>"]/g, function (c) {
+            return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];
+        });
+    }
     repos.forEach(repo => {
         const lastUpdate = new Date(repo.updated_at);
         const now = new Date();
@@ -47,15 +53,20 @@ function renderRepos(repos) {
         const tile = document.createElement('div');
         tile.className = 'project-tile';
         if (isNew) tile.setAttribute('data-new', 'true');
+        // On échappe tous les champs utilisateurs potentiels
+        const safeName = escapeHTML(repo.name);
+        const safeDesc = escapeHTML(repo.description || 'Aucune description disponible.');
+        const safeUrl = escapeHTML(repo.html_url);
+        const safeBranch = escapeHTML(repo.default_branch || 'main');
         tile.innerHTML = `
             <div class="project-tile-content">
                 <div class="terminal-prompt tron-terminal">
                     <div class="tron-prompt-line1"><span class="prompt-user tron-prompt-user">◢◤ <span class="tron-username">0xCyberLiTech</span></span></div>
                     <div class="tron-prompt-line2"><span class="tron-at">@</span> <span class="tron-host">TRON-CORE</span></div>
-                    <div class="tron-prompt-line3"><span class="tron-path">[~/grid/${repo.name}]</span></div>
+                    <div class="tron-prompt-line3"><span class="tron-path">[~/grid/${safeName}]</span></div>
                     <span class="prompt-command tron-prompt-command">◢◤ <span class="tron-cmd">$</span> <span class="tron-cmdline">ls -la</span></span>
                 </div>
-                <h3><a href="${repo.html_url}/blob/${repo.default_branch || 'main'}/README.md" target="_blank" style="color:inherit;text-decoration:none;">${repo.name}</a></h3>
+                <h3><a href="${safeUrl}/blob/${safeBranch}/README.md" target="_blank" style="color:inherit;text-decoration:none;">${safeName}</a></h3>
                 <p class="terminal-output project-description"></p>
                 <div class="infos" style="display:flex;align-items:center;gap:0.7em;justify-content:space-between;">
                     ${isNew ? `<span class="badge-new tron-glow">NEW</span><span class="days-left tron-glow" style="font-size:0.98em;color:#00fff0;opacity:0.92;">${30 - daysElapsed}j restantes</span>` : ''}
@@ -65,8 +76,8 @@ function renderRepos(repos) {
         container.appendChild(tile);
         // Effet scan : tout le texte est visible, une lettre surlignée en vert défile
         const descElem = tile.querySelector('.terminal-output');
-        const desc = `# ${repo.description || 'Aucune description disponible.'}`;
-        descElem.innerHTML = desc.split('').map((c, idx) => `<span data-idx="${idx}">${c}</span>`).join('');
+        // On échappe chaque caractère de la description
+        descElem.innerHTML = safeDesc.split('').map((c, idx) => `<span data-idx="${idx}">${escapeHTML(c)}</span>`).join('');
         const spans = descElem.querySelectorAll('span');
         let scanIdx = 0;
         let scanInterval = null;

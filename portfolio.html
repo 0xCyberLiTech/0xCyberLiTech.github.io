@@ -1,34 +1,63 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>0xCyberLiTech - Portfolio GitHub</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="assets/style.css">
-    <script defer src="assets/script.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio | 0xCyberLiTech</title>
+  <meta name="description" content="Portfolio cybersécurité, scripts, projets, et tutoriels par 0xCyberLiTech. Thème cyber/Tron, responsive, sécurisé.">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="stylesheet" href="assets/style.css">
 </head>
-<body style="background:#000;opacity:0;transition:opacity 1.2s cubic-bezier(0.4,0,0.2,1);">
+<body>
+
+  <div id="portfolio-root" style="opacity:1;pointer-events:auto;transition:opacity 0.8s cubic-bezier(0.4,0,0.2,1);">
     <header class="top-banner">
-        <div class="top-banner__content">
-            <div class="top-banner__header"></div>
-            <span class="top-banner__title">&gt;Portfolio 0xCyberLiTech<span class="terminal-cursor">_</span></span>
-            <div class="top-banner__prompt">echo "Welcome to my cybersecurity portfolio"</div>
+      <div class="top-banner__content">
+        <span class="top-banner__title">&gt;Portfolio 0xCyberLiTech<span class="terminal-cursor">_</span></span>
+        <div class="top-banner__prompt">
+          <span class="top-banner__prompt-inner">
+            echo "Welcome to my cybersecurity portfolio"
+          </span>
         </div>
+      </div>
     </header>
-    <canvas id="matrix"></canvas>
     <main>
-        <section id="projets">
-            <h2>$ ls -la ~/repositories/public</h2>
-            <div class="search-terminal">
-                <span class="search-prompt">└─$</span>
-                <input id="search-repos" type="search" placeholder="Rechercher un dépôt, une description..." autocomplete="off">
-            </div>
-            <div id="error-message" style="display:none;color:red;"></div>
-            <div id="projects-list"></div>
-        </section>
+      <section id="projets">
+        <h2 class="tron-section-title">$ ls -la ~/repositories/public</h2>
+        <div class="search-terminal">
+          <span class="search-prompt">└─$</span>
+          <span class="search-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="10" cy="10" r="7.5" stroke="#00fff0" stroke-width="2"/>
+              <line x1="16.1213" y1="16.1213" x2="20" y2="20" stroke="#00fff0" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <input id="search-repos" type="search" placeholder="Recherche" autocomplete="off">
+        </div>
+        <div id="projects-list"></div>
+      </section>
     </main>
-    <footer id="site-footer" style="display:none;">
-        &copy; 2025 0xCyberLiTech. Tous droits réservés.
+    <footer id="site-footer" style="width:100vw;left:0;right:0;position:relative;margin:2.5em 0 0 0;padding:0.7em 0 0.5em 0;text-align:center;font-size:0.98em;color:#00fff0cc;background:rgba(10,20,30,0.82);border-top:1.5px solid #00fff055;box-shadow:0 0 16px #00fff022 inset,0 1px 0 #00fff033;backdrop-filter:blur(2px);border-radius:0;">
+      &copy; 2025 0xCyberLiTech. Tous droits réservés.
     </footer>
+  </div>
+
+  <script src="assets/tron-numbers-bg.js"></script>
+  <script src="assets/script.js"></script>
+  <script>
+    // Initialisation automatique du chargement des projets GitHub
+    if (typeof window !== 'undefined' && typeof fetch === 'function') {
+      if (typeof loadAndRenderRepos === 'function') {
+        loadAndRenderRepos();
+      } else if (typeof filterAndRenderRepos === 'function') {
+        filterAndRenderRepos();
+      }
+      // Ajout du filtre sur la recherche
+      const searchInput = document.getElementById('search-repos');
+      if (searchInput) {
+        searchInput.addEventListener('input', filterAndRenderRepos);
+      }
+    }
+  </script>
 </body>
 </html>
