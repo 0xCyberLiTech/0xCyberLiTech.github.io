@@ -1,0 +1,98 @@
+/* PRELOADER ULTRA-MODERNE FULLSCREEN & TRANSITION */
+.preloader-ultramodern {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #050d18 linear-gradient(120deg,#0ff2 0%,#00fff0 100%);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1);
+    opacity: 1;
+    pointer-events: auto;
+    overflow: hidden;
+}
+.preloader-ultramodern[style*="opacity: 0"] {
+    pointer-events: none;
+}
+#preloader-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    display: block;
+    pointer-events: none;
+}
+.preloader-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding-bottom: 0.5em;
+}
+.preloader-logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.2rem;
+    position: relative;
+    z-index: 2;
+    background: none;
+    box-shadow: none;
+}
+.preloader-logo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: #0a0f1c;
+    object-fit: cover;
+    filter: drop-shadow(0 0 8px #00f0ff88);
+    box-shadow: none;
+    margin-bottom: 0.5em;
+}
+.preloader-logo-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background: #0a0f1c;
+        animation: logo-glow 2.2s infinite alternate;
+        object-fit: cover;
+        filter: drop-shadow(0 0 18px #00f0ffcc) drop-shadow(0 0 4px #7ffcff99);
+        box-shadow: 0 0 0 0 transparent;
+@keyframes logo-glow {
+    0% { box-shadow: 0 0 32px #00fff0cc, 0 0 0 4px #0ff2; }
+    100% { box-shadow: 0 0 64px #00fff0, 0 0 0 8px #0ff4; }
+}
+.preloader-status {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.7rem;
+}
+/* Effet Tron subtil : lueur animée sur la barre */
+.preloader-progress-fill::after {
+    display: none;
+}
+.preloader-status-text {
+    color: var(--tron-blue);
+    font-family: 'Consolas', 'Roboto Mono', monospace;
+    font-size: 1.08rem;
+    letter-spacing: 0.06em;
+    text-shadow: 0 0 4px var(--tron-blue);
+    text-align: center;
+    margin-bottom: 0.7em;
+}
+@media (max-width: 600px) {
+    .preloader-content { gap: 1.2rem; }
+    .preloader-logo { width: 60px; height: 60px; }
+    .preloader-progress-bar { width: 140px; }
+}

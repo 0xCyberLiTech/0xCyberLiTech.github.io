@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="420" height="420" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="420" height="420" fill="transparent"/>
+  <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" font-family="'Share Tech Mono', 'Fira Mono', 'Consolas', 'Menlo', 'monospace'" font-size="180" font-weight="bold" fill="#00fff0" stroke="#7ffcff" stroke-width="6" paint-order="stroke" style="filter: drop-shadow(0 0 32px #00fff0) drop-shadow(0 0 8px #7ffcff);">
+    CLT
+  </text>
+  <g filter="url(#glow)"></g>
+  <defs>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="18" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+</svg>
