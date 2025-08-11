@@ -1,3 +1,20 @@
+#projets-list-title {
+    display: block;
+    text-align: center;
+    color: #00fff0;
+    font-family: 'Share Tech Mono', 'Fira Mono', 'Consolas', 'Menlo', 'monospace';
+    font-size: 1.35em;
+    word-break: break-word;
+    position: relative;
+    transition: all 0.4s ease;
+    text-shadow: 0 0 12px #00fff0, 0 0 2px #00fff0, 0 2px 8px #000a;
+    cursor: pointer;
+    font-weight: 700;
+    box-sizing: border-box;
+    margin: 0 auto 1.2em auto;
+    left: 0;
+    right: 0;
+}
 .days-left {
     background: linear-gradient(90deg, #00fff033 60%, #00fff011 100%);
     color: #0a1a1c;
@@ -1091,20 +1108,7 @@ footer {
     50% { box-shadow: 0 0 48px #00fff0cc, 0 -2px 12px #000a, 0 0 0 3.5px #00fff0cc inset, 0 0 32px 4px #00fff0cc inset, 0 0 64px 16px #00fff0cc; }
     100% { box-shadow: 0 0 32px #00fff055, 0 -2px 8px #000a, 0 0 0 2.5px #00fff055 inset, 0 0 24px 2px #00fff033 inset, 0 0 32px 8px #00fff099; }
 }
-#projets h2 {
-    text-align: center;
-    margin-top: 2.2em;
-    margin-bottom: 1.2em;
-    color: #00ff00;
-    font-family: 'Consolas', monospace;
-    font-size: 1.18em;
-    word-break: break-word;
-    position: relative;
-    transition: all 0.4s ease;
-    text-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
-    cursor: pointer;
-    font-weight: normal;
-
+/* Titre de la liste des projets */
 /* Effet de soulignement Matrix pour le titre - allégé */
 #projets h2::after {
     content: '';
