@@ -1,3 +1,18 @@
+@media screen and (max-width: 900px) {
+    footer, #site-footer {
+        background: linear-gradient(120deg, #0a0f1c 0%, #101a1c 60%, #00fff022 100%) !important;
+        box-shadow: 0 0 32px #00fff055, 0 -2px 8px #000a, 0 0 0 2.5px #00fff055 inset, 0 0 24px 2px #00fff033 inset, 0 0 32px 8px #00fff099 !important;
+        color: #00fff0cc !important;
+        border-radius: 0 !important;
+        border-top: 2.5px solid #00fff0 !important;
+        min-height: 60px;
+        position: relative;
+        z-index: 1;
+    }
+    body {
+        background: linear-gradient(135deg, #101820 0%, #0a1a1c 60%, #00fff022 100%) fixed, radial-gradient(ellipse at 60% 40%, #0a1a1c 60%, #101820 100%) fixed !important;
+    }
+}
 .terminal-output.project-description {
     background: #0f3032 !important;
     border: 1.5px solid #00fff055 !important;
