@@ -4,7 +4,7 @@
     border-radius: 10px !important;
     box-shadow: none !important;
     backdrop-filter: none !important;
-    color: #eaffd0 !important;
+    color: #fff !important;
     font-family: 'Share Tech Mono', 'Fira Mono', 'Consolas', 'Menlo', 'monospace' !important;
     font-size: 1em !important;
     font-weight: normal !important;
@@ -21,7 +21,7 @@
     display: block !important;
 }
 .terminal-output.project-description span {
-    color: #eaffd0 !important;
+    color: #fff !important;
     background: none !important;
     text-shadow: none !important;
     font-weight: normal !important;
@@ -853,24 +853,6 @@ section#projets {
     pointer-events: auto;
     box-shadow: none !important;
     transform: none !important;
-}
-.project-description {
-    background: #0f3032;
-    margin-bottom: 0;
-    padding: 0;
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
-    backdrop-filter: none;
-    color: inherit;
-    font-family: inherit;
-    font-size: inherit;
-    line-height: normal;
-    min-height: unset;
-    max-height: unset;
-    height: auto;
-    display: block;
-    box-sizing: border-box;
 }
 .terminal-prompt.tron-terminal + .project-description {
     margin-top: -2px;
