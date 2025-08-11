@@ -1,4 +1,5 @@
 
+
 # 0xCyberLiTech - Portfolio GitHub
 
 ![Aperçu du site 1](assets/screenshot-1.png)
@@ -7,60 +8,20 @@
 Bienvenue sur mon **portfolio GitHub cybersécurité** nouvelle génération, avec un preloader cyber/Tron moderne et un portfolio sécurisé, responsive et immersif.
 
 ## 🚀 Fonctionnalités principales
-- **Preloader ultra-moderne** : animation canvas, logo, barre de progression animée, statut dynamique, transition fluide vers le portfolio.
-- **Portfolio cyber/Tron** : interface terminal, effet fond dynamique, curseur clignotant, recherche sécurisée (XSS safe), affichage des dépôts GitHub publics.
-- **Recherche avancée** : champ de recherche avec placeholder « Recherche... », message « Aucun résultat... » en cas d’échec, filtrage instantané.
-- **Responsive design** : expérience optimale sur desktop, tablette et mobile.
-- **Accessibilité** : textes alternatifs, contrastes, navigation clavier, police monospace.
-- **Sécurité** : protection XSS sur toutes les entrées dynamiques.
-- **Documentation à jour** : README, Lisez-moi.txt, Rapport.txt.
 
-## 📂 Structure du projet (août 2025)
-```
-0xCyberLiTech.github.io/
-├── index.html                    # Page d’accueil (preloader animé + portfolio)
-├── portfolio.html                # Portfolio seul (autonome, interface cyber/Tron)
-├── assets/
-│   ├── logo.png                  # Logo principal (utilisé partout)
-│   ├── preloader-ultramodern.css # Styles du preloader (index.html)
-│   ├── preloader-ultramodern.js  # Logique/animation du preloader (index.html)
-│   ├── style.css                 # Styles principaux du portfolio
-│   ├── script.js                 # Logique JS du portfolio (sécurisé XSS)
-│   ├── tron-numbers-bg.js        # Effet de fond dynamique Tron
-│   ├── screenshot-1.png          # Capture d’écran (README)
-│   └── screenshot-2.png          # Capture d’écran (README)
-├── Lisez-moi.txt                 # Conseils d’utilisation et structure
-├── Rapport.txt                   # Rapport d’état du projet
-├── README.md                     # Présentation du projet sur GitHub
-```
+- Preloader animé (canvas, logo, progression, statut dynamique)
+- Interface cyber/Tron, terminal, fond dynamique, curseur clignotant
+- Recherche sécurisée (XSS safe), filtrage instantané
+- Responsive design (desktop, tablette, mobile)
+- Accessibilité (contrastes, navigation clavier, police monospace)
+- Documentation à jour (README, Rapport.txt)
 
-## 🛡️ Sécurité & bonnes pratiques
-- Toutes les entrées utilisateur sont échappées (XSS safe)
-- Aucune dépendance externe non maîtrisée
-- Code commenté, lisible, maintenable
-
-## 📱 Responsive & accessibilité
-- Design fluide, adaptatif, police lisible
-- Navigation clavier et contrastes respectés
-
-## 📸 Aperçu
-Voir captures d’écran ci-dessus ou tester sur : [https://0xcyberlitech.github.io/](https://0xcyberlitech.github.io/)
-
-### Interactions & dépendances
-- `index.html` (preloader animé) utilise :
-   - `assets/preloader-ultramodern.css`, `assets/preloader-ultramodern.js`, `assets/logo.png`
-   - Redirige automatiquement vers `portfolio.html` après l’animation
-- `portfolio.html` (portfolio principal) utilise :
-   - `assets/style.css`, `assets/script.js`, `assets/tron-numbers-bg.js`, `assets/logo.png`
-   - Fonctionne de façon totalement autonome (aucune dépendance à un autre HTML)
-- `assets/screenshot-1.png` et `assets/screenshot-2.png` : uniquement pour l’illustration dans le README
-
-### Schéma de la structure (arborescence)
+## 📂 Structure du projet
 
 ```text
 0xCyberLiTech.github.io/
-├── index.html
-├── portfolio.html
+├── index.html                # Page d’accueil (preloader + portfolio)
+├── portfolio.html            # Portfolio seul (interface cyber/Tron)
 ├── assets/
 │   ├── logo.png
 │   ├── preloader-ultramodern.css
@@ -75,29 +36,105 @@ Voir captures d’écran ci-dessus ou tester sur : [https://0xcyberlitech.gith
 ├── README.md
 ```
 
-## Architecture Technique
-### **Frontend Stack**
-- **HTML5 Sémantique** : Structure accessible et SEO-friendly
-- **CSS3 Avancé** : Grid layout, Flexbox, animations keyframes, media queries
-- **JavaScript ES6+** : Async/await, Canvas 2D, DOM manipulation optimisée
-- **Performance** : Code defer, animations GPU-accélérées
-### **Design System**
-- **Couleurs Matrix** : `#00ff00` (vert Matrix), `#00aaff` (bleu Terminal)
-- **Typography** : Consolas (Terminal), Segoe UI/Roboto (descriptions)
-- **Layout** : CSS Grid responsive avec auto-fit et minmax
-- **Animations** : Transitions fluides, effets de glow, scan effects
-### **APIs & Intégrations**
-- **GitHub REST API** : Récupération automatique des repositories
-- **Canvas API** : Rendu Matrix Digital Rain 2.0 optimisé
-- **Responsive Design** : 4 breakpoints (Desktop/Tablette/Mobile/Petit)
-## 🎨 **Palette de Couleurs**
-```css
-Primary:   #00ff00  /* Matrix Green */
-Secondary: #00aaff  /* Terminal Blue */  
-Background: #101010 /* Deep Black */
-Text:      #e0e0e0  /* Light Gray */
-Accent:    #ff5555  /* Alert Red (badges NEW) */
+## 🔗 Logigramme d’architecture (interconnexions)
+
+```mermaid
+graph TD
+    A[index.html] -- preloader, puis portfolio --> B[portfolio.html]
+    A -- charge --> C[assets/preloader-ultramodern.js]
+    A -- charge --> D[assets/preloader-ultramodern.css]
+    B -- charge --> E[assets/style.css]
+    B -- charge --> F[assets/script.js]
+    B -- charge --> G[assets/tron-numbers-bg.js]
+    A & B -- logo --> H[assets/logo.png]
+    B -- affiche projets --> |API GitHub| I[github.com/0xCyberLiTech]
 ```
+
+## 🛡️ Sécurité & bonnes pratiques
+
+- Toutes les entrées utilisateur sont échappées (XSS safe)
+- Aucune dépendance externe non maîtrisée
+- Code commenté, lisible, maintenable
+
+## 📱 Responsive & accessibilité
+
+- Design fluide, adaptatif, police lisible
+- Navigation clavier et contrastes respectés
+
+## 📸 Aperçu
+
+Voir captures d’écran ci-dessus ou tester sur : [https://0xcyberlitech.github.io/](https://0xcyberlitech.github.io/)
+
+## 🛠 Installation en local
+
+1. **Cloner le repository** :
+   ```bash
+   git clone https://github.com/0xCyberLiTech/0xcyberlitech.github.io.git
+   cd 0xcyberlitech.github.io
+   ```
+2. **Ouvrir dans un navigateur** :
+   ```bash
+   # Ouvrir index.html (point d’entrée principal)
+   # ou lancer un serveur local Python
+   python -m http.server 8000
+   # Puis ouvrir http://localhost:8000/index.html
+   ```
+3. **Pour le développement** :
+   - Utiliser VS Code avec Live Server extension
+   - Ouvrir les DevTools pour tester responsive
+   - Tester sur différents navigateurs
+
+## 🎨 Palette de couleurs
+
+| Nom        | Couleur    | Usage principal         |
+|------------|------------|------------------------|
+| Primary    | #00ff00    | Matrix Green           |
+| Secondary  | #00aaff    | Terminal Blue          |
+| Background | #101010    | Deep Black             |
+| Text       | #e0e0e0    | Light Gray             |
+| Accent     | #ff5555    | Alert Red (badges NEW) |
+
+## 📦 Technologies utilisées
+
+- **HTML5** sémantique, accessibilité
+- **CSS3** (Grid, Flexbox, keyframes, media queries)
+- **JavaScript ES6+** (Canvas API, Fetch API, DOM)
+- **GitHub API** (intégration dynamique des projets)
+
+## 🌟 Fonctionnalités avancées
+
+- Matrix Digital Rain 2.0 (canvas performant)
+- Prompts terminal Kali, headers, badges NEW dynamiques
+- Effets visuels : glow, scan, hover, transitions fluides
+- Gestion intelligente des erreurs API
+
+## 🎯 Compatibilité navigateurs
+
+- Chrome/Edge, Firefox, Safari (desktop/mobile)
+- iOS Safari, Chrome Mobile optimisés
+
+## 🚀 Déploiement GitHub Pages
+
+1. Fork/Clone ce repository
+2. Activer GitHub Pages dans les settings
+3. Personnaliser :
+   - Modifier le nom d'utilisateur GitHub dans `script.js`
+   - Remplacer `logo.png` par votre logo
+   - Adapter les textes dans `index.html` et `portfolio.html`
+   - Configurer les messages dans `preloader.js` si besoin
+
+## 📜 Licence
+
+Projet sous licence **MIT**. Réutilisation libre avec citation de la source.
+
+---
+
+## 🔥 Crédits & inspiration
+
+- Matrix Digital Rain : inspiré du film Matrix (1999)
+- Terminal Design : basé sur Kali Linux Terminal
+- Cybersecurity Theme : esthétique hacker éthique
+- Développé avec passion par **0xCyberLiTech** 💚
 ## 🛠 Installation en local
 1. **Cloner le repository** :
 ```bash

@@ -8,7 +8,7 @@
     <script defer src="assets/script.js"></script>
 </head>
 <body>
-    <!-- PRELOADER ULTRA-MODERNE -->
+    <!-- PRELOADER ULTRA-MODERNE (canvas animé, logo, barre de progression) -->
     <div id="preloader-ultramodern" class="preloader-ultramodern">
         <canvas id="preloader-canvas"></canvas>
         <div class="preloader-content">
@@ -31,6 +31,7 @@
         </div>
     </div>
 
+    <!-- Contenu principal du portfolio (affiché après le preloader) -->
     <div id="portfolio-root" style="opacity:0;pointer-events:none;transition:opacity 0.8s cubic-bezier(0.4,0,0.2,1);">
         <header class="top-banner">
             <div class="top-banner__content">
@@ -45,6 +46,7 @@
         <main>
             <section id="projets">
                 <h2 class="tron-section-title" id="projets-list-title">$ ls -la ~/repositories/public</h2>
+                <!-- Module de recherche -->
                 <div class="search-terminal">
                     <span class="search-prompt">└─$</span>
                     <span class="search-icon" aria-hidden="true">
@@ -55,14 +57,16 @@
                     </span>
                     <input id="search-repos" type="search" placeholder="Recherche..." autocomplete="off">
                 </div>
+                <!-- Liste des projets GitHub -->
                 <div id="projects-list"></div>
             </section>
         </main>
-    <footer id="site-footer" style="width:100vw;left:0;right:0;position:relative;margin:2.5em 0 0 0;padding:0.7em 0 0.5em 0;text-align:center;font-size:0.98em;color:#00fff0cc;background:rgba(10,20,30,0.82);border-top:1.5px solid #00fff055;box-shadow:0 0 16px #00fff022 inset,0 1px 0 #00fff033;backdrop-filter:blur(2px);border-radius:0;">
+        <footer id="site-footer" style="width:100vw;left:0;right:0;position:relative;margin:2.5em 0 0 0;padding:0.7em 0 0.5em 0;text-align:center;font-size:0.98em;color:#00fff0cc;background:rgba(10,20,30,0.82);border-top:1.5px solid #00fff055;box-shadow:0 0 16px #00fff022 inset,0 1px 0 #00fff033;backdrop-filter:blur(2px);border-radius:0;">
             &copy; 2025 0xCyberLiTech. Tous droits réservés.
         </footer>
     </div>
 
+    <!-- Styles et scripts du preloader -->
     <link rel="stylesheet" href="assets/preloader-ultramodern.css">
     <script src="assets/preloader-ultramodern.js"></script>
     <script>

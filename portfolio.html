@@ -10,6 +10,7 @@
 </head>
 <body>
 
+  <!-- Racine du portfolio, tout le contenu principal est ici -->
   <div id="portfolio-root" style="opacity:1;pointer-events:auto;transition:opacity 0.8s cubic-bezier(0.4,0,0.2,1);">
     <header class="top-banner">
       <div class="top-banner__content">
@@ -22,8 +23,8 @@
       </div>
     </header>
     <main>
-  <section id="projets" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; padding-top: 3vh;">
-        </div>
+      <section id="projets" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; padding-top: 3vh;">
+        <!-- Module de recherche -->
         <div class="search-terminal">
           <span class="search-prompt">└─$</span>
           <span class="search-icon" aria-hidden="true">
@@ -34,6 +35,7 @@
           </span>
           <input id="search-repos" type="search" placeholder="Recherche" autocomplete="off">
         </div>
+        <!-- Liste des projets GitHub -->
         <div id="projects-list"></div>
       </section>
     </main>
@@ -42,6 +44,7 @@
     </footer>
   </div>
 
+  <!-- Scripts principaux du portfolio -->
   <script src="assets/tron-numbers-bg.js"></script>
   <script src="assets/script.js"></script>
   <script>
