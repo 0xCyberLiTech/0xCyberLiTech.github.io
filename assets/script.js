@@ -1,10 +1,13 @@
 
-// Recherche dynamique sur les dépôts (filtre uniquement sur le nom)
+/* =============================
+   SCRIPT PRINCIPAL PORTFOLIO
+   Nettoyage, XSS safe, gestion dynamique des projets
+   ============================= */
+
+// Recherche dynamique sur les dépôts GitHub (filtre sur le nom)
 function filterAndRenderRepos() {
     const searchInput = document.getElementById('search-repos');
-    if (!searchInput || !window.__allRepos) {
-        return;
-    }
+    if (!searchInput || !window.__allRepos) return;
     const q = searchInput.value.trim().toLowerCase();
     if (q.length > 0 && q.length < 3) {
         renderRepos(window.__allRepos);
@@ -25,10 +28,8 @@ function renderRepos(repos) {
     const searchInput = document.getElementById('search-repos');
     container.innerHTML = '';
     if (repos.length === 0) {
-        // Recherche infructueuse : garder les tuiles précédentes, afficher un message dans le champ
-        const searchInput = document.getElementById('search-repos');
+        // Recherche infructueuse : message dans le champ, reset après 5s
         if (searchInput) {
-            const oldPlaceholder = searchInput.placeholder;
             searchInput.value = '';
             searchInput.placeholder = 'Aucun résultat...';
             renderRepos(window.__allRepos);
@@ -38,11 +39,9 @@ function renderRepos(repos) {
         }
         return;
     }
-    // Fonction d'échappement XSS simple
+    // Fonction d'échappement XSS (sécurise les champs dynamiques)
     function escapeHTML(str) {
-        return String(str).replace(/[&<>"]/g, function (c) {
-            return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];
-        });
+        return String(str).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
     }
     repos.forEach(repo => {
         const lastUpdate = new Date(repo.updated_at);

@@ -1,4 +1,35 @@
+/* =============================
+    STYLES PRINCIPAUX PORTFOLIO
+    Nettoyage, responsive, effets cyber/Tron
+    ============================= */
+/* Correction stricte du module de recherche pour mobile */
+@media screen and (max-width: 700px) {
+    /* Module de recherche 100% mobile, sans débordement */
+    .search-terminal {
+        width: 100vw !important;
+        max-width: 100vw !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        overflow-x: hidden !important;
+    }
+    #search-repos {
+        width: 100% !important;
+        max-width: 100vw !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 0.5em !important;
+        padding-right: 0.5em !important;
+        overflow-x: hidden !important;
+    }
+}
 @media screen and (max-width: 900px) {
+    /* Footer et body adaptés pour tablette/mobile */
     footer, #site-footer {
         background: linear-gradient(120deg, #0a0f1c 0%, #101a1c 60%, #00fff022 100%) !important;
         box-shadow: 0 0 32px #00fff055, 0 -2px 8px #000a, 0 0 0 2.5px #00fff055 inset, 0 0 24px 2px #00fff033 inset, 0 0 32px 8px #00fff099 !important;
