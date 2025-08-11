@@ -69,10 +69,10 @@
     .top-banner__title {
         font-size: 2.35em;
         font-weight: 900;
-        color: #00ff80;
+        color: #00fff0;
         text-shadow:
-            0 0 7px #00ff80,
-            0 0 2px #00ff80,
+            0 0 12px #00fff0,
+            0 0 2px #00fff0,
             0 2px 8px #000a,
             0 4px 16px #000c;
         font-family: 'Share Tech Mono', 'Fira Mono', 'Consolas', 'Menlo', 'monospace';
@@ -80,7 +80,8 @@
         letter-spacing: 1.7px;
         line-height: 1.1;
         background: none;
-        text-align: left;
+        opacity: 1 !important;
+    }
     }
 
     /* Fusion des styles .search-terminal */
