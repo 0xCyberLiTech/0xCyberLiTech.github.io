@@ -1,3 +1,41 @@
+.project-tile h3 {
+    position: relative;
+    color: #00fff0;
+    font-family: 'Share Tech Mono', 'Fira Mono', 'Consolas', 'Menlo', 'monospace';
+    font-size: 1.18em;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 1px;
+    margin: 0 0 12px 0;
+    text-shadow: 0 0 8px #00fff088, 0 2px 8px #000a;
+    transition: color 0.22s, text-shadow 0.22s, transform 0.22s;
+    cursor: pointer;
+}
+.project-tile h3::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -6px;
+    transform: translateX(-50%) scaleX(0.3);
+    width: 70%;
+    height: 2.5px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #00fff0 0%, #00ff80 100%);
+    box-shadow: 0 0 8px #00fff055, 0 0 2px #00ff8055;
+    opacity: 0.85;
+    transition: transform 0.35s cubic-bezier(.4,0,.2,1), opacity 0.22s;
+    pointer-events: none;
+}
+.project-tile h3:hover, .project-tile h3:focus {
+    color: #00ffea;
+    text-shadow: 0 0 16px #00fff0cc, 0 0 8px #00ff80cc, 0 2px 12px #000a;
+    transform: translateY(-2px) scale(1.04);
+}
+.project-tile h3:hover::after, .project-tile h3:focus::after {
+    transform: translateX(-50%) scaleX(1);
+    opacity: 1;
+    background: linear-gradient(90deg, #00ff80 0%, #00fff0 100%);
+}
 #projets-list-title {
     display: block;
     text-align: center;
@@ -935,12 +973,15 @@ section#projets {
     font-weight: 500;
     letter-spacing: 0.04em;
     text-shadow: 0 2px 8px #000c, 0 0 6px #00fff0, 0 0 2px #fff;
-    padding: 10px 14px;
-    background: rgba(16, 24, 26, 0.82);
-    border-left: 2px solid #00fff0;
-    border-radius: 0 4px 4px 0;
+    padding: 14px 18px;
+    background: linear-gradient(120deg, rgba(0,255,240,0.13) 0%, rgba(10,20,30,0.82) 100%);
+    border: 1.5px solid #00fff055;
+    border-radius: 10px;
     position: relative;
-    transition: all 0.3s cubic-bezier(.4,0,.2,1);
+    box-shadow: 0 2px 24px 0 #00fff033, 0 1.5px 0 #00fff0 inset;
+    backdrop-filter: blur(4px) saturate(1.12);
+    transition: box-shadow 0.3s, border-color 0.3s, background 0.3s;
+    overflow: hidden;
 }
 
 .terminal-output::before {
@@ -951,10 +992,11 @@ section#projets {
 }
 
 .terminal-output:hover {
-    background: rgba(0, 255, 0, 0.05);
-    border-left-color: rgba(0, 255, 0, 0.6);
+    background: linear-gradient(120deg, rgba(0,255,240,0.22) 0%, rgba(10,20,30,0.92) 100%);
+    border-color: #00fff0cc;
+    box-shadow: 0 0 32px 8px #00fff055, 0 2px 16px #000a;
     color: #e0e0e0;
-    transform: translateX(2px);
+    transform: translateY(-2px) scale(1.015);
 }
 
 .project-tile .badges {
