@@ -1,3 +1,36 @@
+.terminal-output.project-description {
+    background: #0f3032 !important;
+    border: 1.5px solid #00fff055 !important;
+    border-radius: 10px !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    color: #eaffd0 !important;
+    font-family: 'Share Tech Mono', 'Fira Mono', 'Consolas', 'Menlo', 'monospace' !important;
+    font-size: 1em !important;
+    font-weight: normal !important;
+    letter-spacing: normal !important;
+    font-style: normal !important;
+    line-height: 1.5 !important;
+    padding: 14px 18px 10px 18px !important;
+    min-height: unset !important;
+    max-height: unset !important;
+    height: auto !important;
+    text-shadow: none !important;
+    transition: none !important;
+    overflow: visible !important;
+    display: block !important;
+}
+.terminal-output.project-description span {
+    color: #eaffd0 !important;
+    background: none !important;
+    text-shadow: none !important;
+    font-weight: normal !important;
+    letter-spacing: normal !important;
+    font-style: normal !important;
+    font-family: inherit !important;
+    font-size: inherit !important;
+    animation: none !important;
+}
 .project-tile h3 {
     position: relative;
     color: #00fff0;
@@ -7,34 +40,20 @@
     text-align: center;
     letter-spacing: 1px;
     margin: 0 0 12px 0;
-    text-shadow: 0 0 8px #00fff088, 0 2px 8px #000a;
-    transition: color 0.22s, text-shadow 0.22s, transform 0.22s;
+    text-shadow: none;
+    transition: none;
     cursor: pointer;
 }
 .project-tile h3::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: -6px;
-    transform: translateX(-50%) scaleX(0.3);
-    width: 70%;
-    height: 2.5px;
-    border-radius: 2px;
-    background: linear-gradient(90deg, #00fff0 0%, #00ff80 100%);
-    box-shadow: 0 0 8px #00fff055, 0 0 2px #00ff8055;
-    opacity: 0.85;
-    transition: transform 0.35s cubic-bezier(.4,0,.2,1), opacity 0.22s;
-    pointer-events: none;
+    display: none;
 }
 .project-tile h3:hover, .project-tile h3:focus {
-    color: #00ffea;
-    text-shadow: 0 0 16px #00fff0cc, 0 0 8px #00ff80cc, 0 2px 12px #000a;
-    transform: translateY(-2px) scale(1.04);
+    color: #00fff0;
+    text-shadow: none;
+    transform: none;
 }
 .project-tile h3:hover::after, .project-tile h3:focus::after {
-    transform: translateX(-50%) scaleX(1);
-    opacity: 1;
-    background: linear-gradient(90deg, #00ff80 0%, #00fff0 100%);
+    display: none;
 }
 #projets-list-title {
     display: block;
@@ -810,9 +829,9 @@ section#projets {
     font-size: 0.97em !important;
     line-height: 1.3;
     background: #0f3032;
-    border: 1.5px solid #00fff055;
-    border-radius: 10px;
-    box-shadow: none;
+    border: 1.5px solid #00fff055 !important;
+    border-radius: 10px !important;
+    box-shadow: none !important;
     position: relative;
     overflow: hidden;
     padding: 14px 18px 10px 18px;
@@ -827,23 +846,29 @@ section#projets {
     height: auto;
     display: block;
     box-sizing: border-box;
-    backdrop-filter: none;
-    transition: box-shadow 0.3s, border-color 0.3s, background 0.3s, transform 0.22s;
+    backdrop-filter: none !important;
+    transition: none !important;
     pointer-events: auto;
-    border-color: #00fff0cc;
-    box-shadow: none;
-    transform: none;
+    box-shadow: none !important;
+    transform: none !important;
 }
 .project-description {
-    position: relative;
-    z-index: 2;
     background: #0f3032;
     margin-bottom: 0;
-    padding-bottom: 16px;
-    border-radius: 10px;
-    border: 1.5px solid #00fff055;
+    padding: 0;
+    border: none;
+    border-radius: 0;
     box-shadow: none;
     backdrop-filter: none;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: normal;
+    min-height: unset;
+    max-height: unset;
+    height: auto;
+    display: block;
+    box-sizing: border-box;
 }
 .terminal-prompt.tron-terminal + .project-description {
     margin-top: -2px;
@@ -1398,13 +1423,7 @@ footer {
         margin-bottom: 0 !important;
         padding-bottom: 0;
     }
-    .project-description {
-        position: relative;
-        z-index: 2;
-        background: none;
-        margin-bottom: 0;
-        padding-bottom: 16px;
-    }
+    /* .project-description redondant supprimé pour garantir le fond uni */
     .terminal-prompt.tron-terminal + .project-description {
         margin-top: -2px;
         padding-top: 0;
@@ -1453,10 +1472,11 @@ footer {
 }
 
 .project-tile:hover, .project-tile:focus {
-  box-shadow: 0 0 48px 8px #00ff80cc, 0 2px 24px #000a;
-  filter: brightness(1.08) saturate(1.08);
-  transform: translateY(-4px) scale(1.025);
-  outline: none;
+    box-shadow: 0 0 28px 6px #00fff055, 0 2px 12px #000a;
+    filter: brightness(1.06) saturate(1.06);
+    transform: translateY(-3px) scale(1.018);
+    outline: none;
+    z-index: 1;
 }
 
 /* Interaction moderne sur le titre de la tuile */
