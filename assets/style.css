@@ -55,7 +55,7 @@ header.top-banner {
 }
 
 .terminal-cursor {
-    color: #00ff80;
+    color: #00fff0;
     font-weight: bold;
 }
 
@@ -116,6 +116,7 @@ section#projets {
     flex: 1;
     display: flex;
     flex-direction: column;
+    background: #181c24;
 }
 .terminal-output, .terminal-output.project-description, .terminal-prompt {
     background: #181c24;
@@ -293,9 +294,18 @@ footer#site-footer, footer {
     0%, 50% { opacity: 1; }
     51%, 100% { opacity: 0.3; }
 }
-/* Import de la police cyber lisible */
-@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
-
+    #site-footer {
+        background: #101820;
+        color: #00fff0;
+        text-align: center;
+        font-size: 0.98em;
+        margin: 2.5em 0 0 0;
+        padding: 0.7em 0 0.5em 0;
+        border: none;
+        box-shadow: none;
+        backdrop-filter: none;
+        border-radius: 0;
+    }
 /* Terminal styles */
 .terminal-output {
     margin: 8px 0;
