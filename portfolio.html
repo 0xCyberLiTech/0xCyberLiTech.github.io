@@ -10,7 +10,6 @@
 </head>
 <body>
 
-  <!-- Racine du portfolio, tout le contenu principal est ici -->
   <div id="portfolio-root" style="opacity:1;pointer-events:auto;transition:opacity 0.8s cubic-bezier(0.4,0,0.2,1);">
     <header class="top-banner">
       <div class="top-banner__content">
@@ -23,19 +22,8 @@
       </div>
     </header>
     <main>
-      <section id="projets" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; padding-top: 3vh;">
-        <!-- Module de recherche -->
-        <div class="search-terminal">
-          <span class="search-prompt">└─$</span>
-          <span class="search-icon" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="10" cy="10" r="7.5" stroke="#00fff0" stroke-width="2"/>
-              <line x1="16.1213" y1="16.1213" x2="20" y2="20" stroke="#00fff0" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </span>
-          <input id="search-repos" type="search" placeholder="Recherche" autocomplete="off">
+  <section id="projets" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; padding-top: 3vh;">
         </div>
-        <!-- Liste des projets GitHub -->
         <div id="projects-list"></div>
       </section>
     </main>
@@ -44,23 +32,7 @@
     </footer>
   </div>
 
-  <!-- Scripts principaux du portfolio -->
   <script src="assets/tron-numbers-bg.js"></script>
   <script src="assets/script.js"></script>
-  <script>
-    // Initialisation automatique du chargement des projets GitHub
-    if (typeof window !== 'undefined' && typeof fetch === 'function') {
-      if (typeof loadAndRenderRepos === 'function') {
-        loadAndRenderRepos();
-      } else if (typeof filterAndRenderRepos === 'function') {
-        filterAndRenderRepos();
-      }
-      // Ajout du filtre sur la recherche
-      const searchInput = document.getElementById('search-repos');
-      if (searchInput) {
-        searchInput.addEventListener('input', filterAndRenderRepos);
-      }
-    }
-  </script>
 </body>
 </html>
