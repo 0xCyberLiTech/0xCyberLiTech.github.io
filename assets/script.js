@@ -97,7 +97,7 @@ window.addEventListener('DOMContentLoaded', loadRepos);
     banner.style.opacity = '1'; // Toujours visible au chargement
 })();
 
-// Bloc unique pour l'initialisation du portfolio, du footer et du bandeau
+// Initialisation du portfolio et du bandeau principal
 window.addEventListener('DOMContentLoaded', () => {
     // Fade-in du body pour éviter le flash blanc
     document.body.style.opacity = '1';
@@ -108,28 +108,9 @@ window.addEventListener('DOMContentLoaded', () => {
         document.body.classList.remove('fade-in');
     }, 1200);
 
+
     // Affichage des projets
     loadRepos();
-
-    // Gestion du footer : il ne s'affiche qu'après la transition du preloader ou après un court délai
-    const footer = document.getElementById('site-footer');
-    if (footer) {
-        footer.style.display = 'none';
-        const preloader = document.getElementById('preloader');
-        if (preloader) {
-            const observer = new MutationObserver(() => {
-                if (preloader.style.display === 'none' || preloader.style.opacity === '0' || preloader.hidden) {
-                    footer.style.display = '';
-                    observer.disconnect();
-                }
-            });
-            observer.observe(preloader, { attributes: true, attributeFilter: ['style', 'hidden'] });
-        } else {
-            setTimeout(() => {
-                footer.style.display = '';
-            }, 600); // délai pour laisser la transition se terminer
-        }
-    }
 
     // Gestion de l'opacité du bandeau
     const banner = document.querySelector('.top-banner');

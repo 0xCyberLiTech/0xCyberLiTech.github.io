@@ -315,65 +315,6 @@ header {
    Structure : header, titre, prompt, double bordure lumineuse
 ===================== */
 
-/* Module de recherche moderne et aéré */
-.search-terminal {
-    display: flex;
-    align-items: center;
-    gap: 1.1em;
-    margin-bottom: 2em;
-    background: linear-gradient(90deg, rgba(0,255,120,0.10) 0%, rgba(0,255,120,0.04) 100%);
-    border-radius: 12px;
-    padding: 1.1em 1.5em 1.1em 1.2em;
-    box-shadow: 0 2px 24px 0 rgba(0,255,120,0.10), 0 1.5px 0 #00ff80 inset;
-    position: relative;
-    animation: fadeInPortfolio 1.2s cubic-bezier(0.4,0,0.2,1) 0.1s both;
-    width: 100%;
-    max-width: 520px;
-    margin-left: auto;
-    margin-right: auto;
-}
-.search-prompt {
-    color: #00ff80;
-    font-family: 'Share Tech Mono', 'Fira Mono', 'Consolas', 'Menlo', 'monospace';
-    font-size: 1.18em;
-    font-weight: bold;
-    margin-right: 0.7em;
-    letter-spacing: 0.5px;
-    text-shadow: 0 0 8px #00ff80, 0 2px 8px #000a;
-    display: flex;
-    align-items: center;
-}
-.search-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 0.7em;
-    font-size: 1.25em;
-    display: none;
-    border-radius: 8px;
-    font-size: 1.13em;
-    font-family: 'Share Tech Mono', 'Fira Mono', 'Consolas', 'Menlo', 'monospace';
-    padding: 0.65em 1.2em 0.65em 1.2em;
-    outline: none;
-    width: 100%;
-    max-width: 340px;
-    box-shadow: 0 0 0 0 rgba(0,255,120,0);
-    transition: border 0.18s, box-shadow 0.18s, background 0.18s;
-    caret-color: #00ff80;
-    margin-left: 0;
-}
-#search-repos:focus {
-    border: 2px solid #00fff0;
-    background: linear-gradient(90deg, #101a1c 60%, #0a1012 100%);
-    box-shadow: 0 0 24px 6px rgba(0,255,120,0.18) inset, 0 0 12px #00fff0;
-    animation: searchPulse 1.2s cubic-bezier(0.4,0,0.2,1) infinite alternate;
-}
-#search-repos::placeholder {
-    color: #b8ffe0cc;
-    opacity: 1;
-    font-style: italic;
-    letter-spacing: 0.5px;
-}
 
 .top-banner__title {
     font-size: 2.35em;
@@ -1325,48 +1266,12 @@ footer {
         opacity: 0.3;
     }
     
-    /* Footer mobile */
-    footer {
-            padding: 16px 0 8px 0;
-            font-size: 0.9em;
-            background: none !important;
-            background-color: transparent !important;
-            box-shadow: none !important;
-            margin: 0 !important;
-    }
-
-    @media (max-width: 700px) {
-        html, body {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #101820 0%, #0a1a1c 60%, #00fff022 100%) fixed, 
-                                    radial-gradient(ellipse at 60% 40%, #0a1a1c 60%, #101820 100%) fixed;
-        }
-        footer {
-            background: none !important;
-            background-color: transparent !important;
-            box-shadow: none !important;
-            margin: 0 !important;
-        }
-    }
-    
-    /* Adaptation mobile du badge container */
-    .badge-container {
-        top: 4px;
-        height: unset;
-        display: block;
-        box-sizing: border-box;
-        position: relative;
-        padding-bottom: 0;
-        padding: 1px 4px;
-        /* ...existing code... */
-        margin-bottom: 0 !important;
         padding-bottom: 0;
     }
     /* .project-description redondant supprimé pour garantir le fond uni */
     .terminal-prompt.tron-terminal + .project-description {
         margin-top: -2px;
         padding-top: 0;
-    }
     }
     
     section#accueil {
