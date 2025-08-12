@@ -1,3 +1,18 @@
+html {
+    background: #101820;
+}
+
+body {
+    background: #101820;
+    margin: 0;
+    padding: 0;
+    font-family: 'Share Tech Mono', 'Fira Mono', 'Consolas', 'Menlo', 'monospace', Arial, sans-serif;
+    color: #e0e0e0;
+}
+
+#portfolio-root {
+    background: #101820;
+}
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
 body {
