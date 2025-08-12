@@ -1,43 +1,22 @@
+Rapport de nettoyage du portfolio 0xCyberLiTech.github.io
 
+Fichiers analysés et nettoyés :
 
-# Rapport d'audit et de nettoyage du portfolio 0xCyberLiTech (12/08/2025)
+- assets/style.css : Doublons supprimés, syntaxe corrigée, import Google Fonts clarifié. Code fiable et fonctionnel.
+- index.html : Aucune erreur détectée, structure HTML propre.
+- portfolio.html : Aucune erreur détectée, structure HTML propre.
+- assets/tron-numbers-bg.js : Aucun code mort, pas de doublons, code JS optimisé.
+- assets/script.js : Code fonctionnel, aucune anomalie détectée.
+- assets/preloader-ultramodern.js : Code propre, aucune erreur détectée.
+- assets/preloader-ultramodern.css : Feuille de style valide, pas de doublons ni de code obsolète.
 
+Tous les fichiers principaux du portfolio sont considérés comme fiables et fonctionnels après nettoyage.
 
-## 1. Check-list de conformité
+Conseil : chaque modification reste réversible via l’historique Git ou une sauvegarde manuelle.
 
-- [x] Suppression complète du module de recherche (HTML, CSS, JS)
-- [x] Nettoyage des scripts inlines obsolètes
-- [x] Suppression des règles CSS orphelines (#search-repos, etc.)
-- [x] Mise à jour des commentaires dans le code JS
-- [x] Vérification de l'absence de code mort ou doublons
-- [x] README.md à mettre à jour (voir contenu proposé ci-dessous)
+Statut actuel : le code du portfolio est propre, optimisé et prêt à l’emploi.
 
-
-## 2. Logigramme des interconnexions
-
-```mermaid
-graph TD;
-	A[index.html] -- preloader --> B[portfolio.html]
-	B -- charge --> C[assets/script.js]
-	B -- applique --> D[assets/style.css]
-	B -- fond animé --> E[assets/tron-numbers-bg.js]
-	B -- logo --> F[assets/logo.png]
-	B -- illustre --> G[assets/screenshot-1.png]
-	B -- illustre --> H[assets/screenshot-2.png]
-	A -- preloader --> I[assets/preloader-ultramodern.js]
-	A -- style preloader --> J[assets/preloader-ultramodern.css]
-```
-
-
-## 3. Explication des flux
-
-- `index.html` affiche le preloader, puis le portfolio (section principale).
-- `portfolio.html` charge dynamiquement les dépôts GitHub via `assets/script.js` et applique tous les styles via `assets/style.css`.
-- Les effets de fond sont gérés par `assets/tron-numbers-bg.js`.
-- Les images sont utilisées pour le logo et les illustrations du README.
-- Aucun module de recherche n'est présent, ni dans le code, ni dans les dépendances.
-
-## 4. Conseils de maintenance
+— Généré automatiquement le 13/08/2025 par GitHub Copilot
 
 - Pour ajouter un nouveau projet, il suffit de le publier sur GitHub (public) : il sera affiché automatiquement.
 - Pour modifier le style ou l’animation, éditer `assets/style.css` ou `assets/tron-numbers-bg.js`.
