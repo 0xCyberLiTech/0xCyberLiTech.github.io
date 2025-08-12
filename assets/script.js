@@ -1,47 +1,35 @@
 
-/* =============================
-   SCRIPT PRINCIPAL PORTFOLIO
-   Nettoyage, XSS safe, gestion dynamique des projets
-   ============================= */
 
-// Recherche dynamique sur les dépôts GitHub (filtre sur le nom)
-function filterAndRenderRepos() {
-    const searchInput = document.getElementById('search-repos');
-    if (!searchInput || !window.__allRepos) return;
-    const q = searchInput.value.trim().toLowerCase();
-    if (q.length > 0 && q.length < 3) {
-        renderRepos(window.__allRepos);
-        return;
-    }
-    let filtered = window.__allRepos;
-    if (q.length >= 3) {
-        filtered = window.__allRepos.filter(repo =>
-            repo.name.toLowerCase().includes(q)
+// Récupération des dépôts GitHub et affichage des tuiles
+async function loadRepos() {
+    window.__allRepos = [];
+    try {
+        const response = await fetch('https://api.github.com/users/0xCyberLiTech/repos');
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status} - ${response.statusText}`);
+        }
+        const repos = await response.json();
+    // Filtrer pour exclure le dépôt GitHub Pages et le dépôt logo (affichage direct)
+        const filteredRepos = repos.filter(repo => 
+            repo.name !== '0xCyberLiTech.github.io' && 
+            repo.name !== '0xCyberLiTech'
         );
-    }
-    renderRepos(filtered);
-}
-
-// Rendu des tuiles de dépôts (projets et tuile "aucun dépôt")
+    window.__allRepos = filteredRepos;
+    renderRepos(filteredRepos);
+// Affichage des dépôts dans #projects-list
 function renderRepos(repos) {
     const container = document.getElementById('projects-list');
-    const searchInput = document.getElementById('search-repos');
+    if (!container) return;
     container.innerHTML = '';
-    if (repos.length === 0) {
-        // Recherche infructueuse : message dans le champ, reset après 5s
-        if (searchInput) {
-            searchInput.value = '';
-            searchInput.placeholder = 'Aucun résultat...';
-            renderRepos(window.__allRepos);
-            setTimeout(() => {
-                searchInput.placeholder = 'Recherche...';
-            }, 5000);
-        }
+    if (!repos || repos.length === 0) {
+        container.innerHTML = '<div style="color:#00fff0;text-align:center;margin:2em auto;">Aucun dépôt public trouvé.</div>';
         return;
     }
-    // Fonction d'échappement XSS (sécurise les champs dynamiques)
+    // Fonction d'échappement XSS pour sécuriser l'affichage dynamique
     function escapeHTML(str) {
-        return String(str).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+        return String(str).replace(/[&<>\"]/g, function (c) {
+            return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];
+        });
     }
     repos.forEach(repo => {
         const lastUpdate = new Date(repo.updated_at);
@@ -65,75 +53,15 @@ function renderRepos(repos) {
                     <span class="prompt-command tron-prompt-command">◢◤ <span class="tron-cmd">$</span> <span class="tron-cmdline">ls -la</span></span>
                 </div>
                 <h3><a href="${safeUrl}/blob/${safeBranch}/README.md" target="_blank" style="color:inherit;text-decoration:none;">${safeName}</a></h3>
-                <p class="terminal-output project-description"></p>
+                <p class="terminal-output project-description">${safeDesc}</p>
                 <div class="infos" style="display:flex;align-items:center;gap:0.7em;justify-content:space-between;">
                     ${isNew ? `<span class="badge-new tron-glow">NEW</span><span class="days-left tron-glow" style="font-size:0.98em;color:#00fff0;opacity:0.92;">${30 - daysElapsed}j restantes</span>` : ''}
                 </div>
             </div>
         `;
         container.appendChild(tile);
-        // Effet scan : tout le texte est visible, une lettre surlignée en vert défile
-        const descElem = tile.querySelector('.terminal-output');
-        // On échappe chaque caractère de la description
-        descElem.innerHTML = safeDesc.split('').map((c, idx) => `<span data-idx="${idx}">${escapeHTML(c)}</span>`).join('');
-        const spans = descElem.querySelectorAll('span');
-        let scanIdx = 0;
-        let scanInterval = null;
-        function clearScan() {
-            spans.forEach(s => {
-                s.style.color = '';
-                s.style.background = '';
-                s.style.textShadow = '';
-                s.style.animation = '';
-            });
-        }
-        function scanEffect() {
-            clearScan();
-            if (spans[scanIdx]) {
-                spans[scanIdx].style.color = '#00fff0'; // cyan harmonieux
-                spans[scanIdx].style.background = 'none';
-                spans[scanIdx].style.textShadow = '0 0 14px #00fff0, 0 0 4px #fff, 0 0 2px #00fff0';
-                spans[scanIdx].style.animation = 'scan-blink 0.32s alternate infinite';
-            }
-            scanIdx = (scanIdx + 1) % spans.length;
-        }
-        tile.addEventListener('mouseenter', () => {
-            if (!scanInterval) {
-                scanIdx = 0;
-                scanInterval = setInterval(scanEffect, 120);
-            }
-        });
-        tile.addEventListener('mouseleave', () => {
-            clearInterval(scanInterval);
-            scanInterval = null;
-            clearScan();
-        });
     });
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    const searchInput = document.getElementById('search-repos');
-    if (searchInput) {
-        searchInput.addEventListener('input', filterAndRenderRepos);
-    }
-});
-
-// Récupération des dépôts GitHub et affichage des tuiles (sans barre LED)
-async function loadRepos() {
-    window.__allRepos = [];
-    try {
-        const response = await fetch('https://api.github.com/users/0xCyberLiTech/repos');
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status} - ${response.statusText}`);
-        }
-        const repos = await response.json();
-        // Filtrer pour exclure le dépôt GitHub Pages et le dépôt logo
-        const filteredRepos = repos.filter(repo => 
-            repo.name !== '0xCyberLiTech.github.io' && 
-            repo.name !== '0xCyberLiTech'
-        );
-        window.__allRepos = filteredRepos;
-        filterAndRenderRepos();
 
 
 // --- RENDU DES TUILES DE DÉPÔTS ---
