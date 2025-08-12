@@ -1,33 +1,27 @@
 
 
-# Rapport d'audit et de nettoyage du portfolio 0xCyberLiTech (12/08/2025)
 
+# Rapport d'audit et de nettoyage du portfolio 0xCyberLiTech (12/08/2025)
 
 ## 1. Check-list de conformité
 
 - [x] Suppression complète du module de recherche (HTML, CSS, JS)
-- [x] Nettoyage des scripts inlines obsolètes
-- [x] Suppression des règles CSS orphelines (#search-repos, etc.)
-- [x] Mise à jour des commentaires dans le code JS
-- [x] Vérification de l'absence de code mort ou doublons
-- [x] README.md à mettre à jour (voir contenu proposé ci-dessous)
+- [x] Nettoyage des scripts inlines et vestiges obsolètes
+- [x] Suppression des règles CSS orphelines et doublons
+- [x] Mise à jour des commentaires dans le code JS/CSS/HTML
+- [x] Vérification de l'absence de code mort ou vestiges
+- [x] README.md réécrit et logigramme ajouté
 
+## 2. Logigramme ASCII des interconnexions
 
-## 2. Logigramme des interconnexions
-
-```mermaid
-graph TD;
-	A[index.html] -- preloader --> B[portfolio.html]
-	B -- charge --> C[assets/script.js]
-	B -- applique --> D[assets/style.css]
-	B -- fond animé --> E[assets/tron-numbers-bg.js]
-	B -- logo --> F[assets/logo.png]
-	B -- illustre --> G[assets/screenshot-1.png]
-	B -- illustre --> H[assets/screenshot-2.png]
-	A -- preloader --> I[assets/preloader-ultramodern.js]
-	A -- style preloader --> J[assets/preloader-ultramodern.css]
 ```
-
+index.html
+	└─> preloader-ultramodern.js, preloader-ultramodern.css, logo.png
+	└─> (après animation) portfolio.html
+portfolio.html
+	└─> style.css, script.js, tron-numbers-bg.js, logo.png
+	└─> (affichage dynamique des dépôts)
+```
 
 ## 3. Explication des flux
 
@@ -47,40 +41,6 @@ graph TD;
 ## 5. Conclusion
 
 Le portfolio est désormais propre, sans code mort ni vestige de modules supprimés. La structure est claire, chaque fichier a un rôle précis, et la documentation est à jour. Le projet est prêt pour la maintenance ou de nouvelles évolutions.
-
----
-
-## Contenu proposé pour README.md (à copier/coller)
-
-```
-# 0xCyberLiTech - Portfolio GitHub
-
-Bienvenue sur mon portfolio cybersécurité nouvelle génération, avec preloader cyber/Tron, portfolio sécurisé, responsive et immersif.
-
-## Fonctionnalités principales
-- Preloader ultra-moderne (canvas, logo, barre de progression, transition fluide)
-- Portfolio cyber/Tron : interface terminal, fond dynamique, curseur clignotant, affichage automatique des dépôts GitHub publics (XSS safe)
-- Responsive design, accessibilité, sécurité XSS
-- Documentation à jour (README, Lisez-moi.txt, Rapport.txt)
-
-## Structure du projet
-```
-0xCyberLiTech.github.io/
-├── index.html                # Page d’accueil (preloader animé + portfolio)
-├── portfolio.html            # Portfolio seul (autonome, interface cyber/Tron)
-├── assets/
-│   ├── logo.png
-│   ├── preloader-ultramodern.css
-│   ├── preloader-ultramodern.js
-│   ├── style.css
-│   ├── script.js
-│   ├── tron-numbers-bg.js
-│   ├── screenshot-1.png
-│   └── screenshot-2.png
-├── Lisez-moi.txt
-├── Rapport.txt
-├── README.md
-```
 
 ## Interconnexions
 - `index.html` : point d’entrée, affiche le preloader puis le portfolio (utilise `assets/preloader-ultramodern.css`, `assets/preloader-ultramodern.js`, `assets/logo.png`).

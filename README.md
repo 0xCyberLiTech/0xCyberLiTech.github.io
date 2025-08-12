@@ -1,65 +1,20 @@
 
+
 # 0xCyberLiTech - Portfolio GitHub
 
-![Aperçu du site 1](assets/screenshot-1.png)
-![Aperçu du site 2](assets/screenshot-2.png)
+Bienvenue sur mon portfolio cybersécurité nouvelle génération, avec preloader cyber/Tron, portfolio sécurisé, responsive et immersif.
 
-Bienvenue sur mon **portfolio GitHub cybersécurité** nouvelle génération, avec un preloader cyber/Tron moderne et un portfolio sécurisé, responsive et immersif.
+## Fonctionnalités principales
+- Preloader ultra-moderne (canvas, logo, barre de progression, transition fluide)
+- Portfolio cyber/Tron : interface terminal, fond dynamique, curseur clignotant, affichage automatique des dépôts GitHub publics (XSS safe)
+- Responsive design, accessibilité, sécurité XSS
+- Documentation à jour (README, Lisez-moi.txt, Rapport.txt)
 
-## 🚀 Fonctionnalités principales
-- **Preloader ultra-moderne** : animation canvas, logo, barre de progression animée, statut dynamique, transition fluide vers le portfolio.
-- **Portfolio cyber/Tron** : interface terminal, effet fond dynamique, curseur clignotant, affichage automatique des dépôts GitHub publics (XSS safe).
-- **Responsive design** : expérience optimale sur desktop, tablette et mobile.
-- **Accessibilité** : textes alternatifs, contrastes, navigation clavier, police monospace.
-- **Sécurité** : protection XSS sur toutes les entrées dynamiques.
-- **Documentation à jour** : README, Lisez-moi.txt, Rapport.txt.
-
-## 📂 Structure du projet (août 2025)
+## Structure du projet
 ```
 0xCyberLiTech.github.io/
-├── index.html                    # Page d’accueil (preloader animé + portfolio)
-├── portfolio.html                # Portfolio seul (autonome, interface cyber/Tron)
-├── assets/
-│   ├── logo.png                  # Logo principal (utilisé partout)
-│   ├── preloader-ultramodern.css # Styles du preloader (index.html)
-│   ├── preloader-ultramodern.js  # Logique/animation du preloader (index.html)
-│   ├── style.css                 # Styles principaux du portfolio
-│   ├── script.js                 # Logique JS du portfolio (sécurisé XSS)
-│   ├── tron-numbers-bg.js        # Effet de fond dynamique Tron
-│   ├── screenshot-1.png          # Capture d’écran (README)
-│   └── screenshot-2.png          # Capture d’écran (README)
-├── Lisez-moi.txt                 # Conseils d’utilisation et structure
-├── Rapport.txt                   # Rapport d’état du projet
-├── README.md                     # Présentation du projet sur GitHub
-```
-
-## 🛡️ Sécurité & bonnes pratiques
-- Toutes les entrées utilisateur sont échappées (XSS safe)
-- Aucune dépendance externe non maîtrisée
-- Code commenté, lisible, maintenable
-
-## 📱 Responsive & accessibilité
-- Design fluide, adaptatif, police lisible
-- Navigation clavier et contrastes respectés
-
-## 📸 Aperçu
-Voir captures d’écran ci-dessus ou tester sur : [https://0xcyberlitech.github.io/](https://0xcyberlitech.github.io/)
-
-### Interactions & dépendances
-- `index.html` (preloader animé) utilise :
-   - `assets/preloader-ultramodern.css`, `assets/preloader-ultramodern.js`, `assets/logo.png`
-   - Redirige automatiquement vers `portfolio.html` après l’animation
-- `portfolio.html` (portfolio principal) utilise :
-   - `assets/style.css`, `assets/script.js`, `assets/tron-numbers-bg.js`, `assets/logo.png`
-   - Fonctionne de façon totalement autonome (aucune dépendance à un autre HTML)
-- `assets/screenshot-1.png` et `assets/screenshot-2.png` : uniquement pour l’illustration dans le README
-
-### Schéma de la structure (arborescence)
-
-```text
-0xCyberLiTech.github.io/
-├── index.html
-├── portfolio.html
+├── index.html                # Page d’accueil (preloader animé + portfolio)
+├── portfolio.html            # Portfolio seul (autonome, interface cyber/Tron)
 ├── assets/
 │   ├── logo.png
 │   ├── preloader-ultramodern.css
@@ -74,8 +29,30 @@ Voir captures d’écran ci-dessus ou tester sur : [https://0xcyberlitech.gith
 ├── README.md
 ```
 
+## Logigramme des interconnexions
+
+```text
+index.html
+   └─> preloader-ultramodern.js, preloader-ultramodern.css, logo.png
+   └─> (après animation) portfolio.html
+portfolio.html
+   └─> style.css, script.js, tron-numbers-bg.js, logo.png
+   └─> (affichage dynamique des dépôts)
+```
+
+## Sécurité & bonnes pratiques
+- Toutes les entrées utilisateur sont échappées (XSS safe)
+- Aucune dépendance externe non maîtrisée
+- Code commenté, lisible, maintenable
+
+## Responsive & accessibilité
+- Design fluide, adaptatif, police lisible
+- Navigation clavier et contrastes respectés
+
+## Aperçu
+Voir captures d’écran dans `assets/` ou tester sur : [https://0xcyberlitech.github.io/](https://0xcyberlitech.github.io/)
+
 ## Architecture Technique
-### **Frontend Stack**
 - **HTML5 Sémantique** : Structure accessible et SEO-friendly
 - **CSS3 Avancé** : Grid layout, Flexbox, animations keyframes, media queries
 - **JavaScript ES6+** : Async/await, Canvas 2D, DOM manipulation optimisée

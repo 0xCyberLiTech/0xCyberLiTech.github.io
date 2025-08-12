@@ -35,6 +35,7 @@
         <header class="top-banner">
             <div class="top-banner__content">
                 <span class="top-banner__title">&gt;Portfolio 0xCyberLiTech<span class="terminal-cursor">_</span></span>
+                <!-- Message d'accueil cyber/Tron -->
                 <div class="top-banner__prompt">
                     <span class="top-banner__prompt-inner">
                         echo "Welcome to my cybersecurity portfolio"
@@ -44,37 +45,16 @@
         </header>
         <main>
             <section id="projets">
-                <h2 class="tron-section-title" id="projets-list-title">$ ls -la ~/repositories/public</h2>
+                <h2 class="tron-section-title" id="projets-list-title">Projets publics GitHub</h2>
                 <div id="projects-list"></div>
             </section>
         </main>
-    <footer id="site-footer" style="width:100vw;left:0;right:0;position:relative;margin:2.5em 0 0 0;padding:0.7em 0 0.5em 0;text-align:center;font-size:0.98em;color:#00fff0cc;background:rgba(10,20,30,0.82);border-top:1.5px solid #00fff055;box-shadow:0 0 16px #00fff022 inset,0 1px 0 #00fff033;backdrop-filter:blur(2px);border-radius:0;">
-            &copy; 2025 0xCyberLiTech. Tous droits réservés.
-        </footer>
+    
     </div>
 
     <link rel="stylesheet" href="assets/preloader-ultramodern.css">
     <script src="assets/preloader-ultramodern.js"></script>
-    <script>
-    // Transition JS : fade-out du preloader, fade-in du portfolio (après la barre de progression)
-    window.addEventListener('preloader:done', function() {
-        const status = document.getElementById('preloader-status-text');
-        status.textContent = 'Bienvenue !';
-        setTimeout(() => {
-            const preloader = document.getElementById('preloader-ultramodern');
-            preloader.style.opacity = '0';
-            preloader.style.pointerEvents = 'none';
-            const root = document.getElementById('portfolio-root');
-            root.style.opacity = '1';
-            root.style.pointerEvents = 'auto';
-            setTimeout(() => {
-                if (preloader && preloader.parentNode) {
-                    preloader.parentNode.removeChild(preloader);
-                }
-            }, 700);
-        }, 900);
-    });
-    </script>
+    <!-- Animation de transition du preloader -->
     <script src="assets/tron-numbers-bg.js"></script>
 </body>
 </html>
