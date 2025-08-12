@@ -1,3 +1,187 @@
+/* Import de la police cyber lisible */
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+/* Terminal styles */
+.terminal-output {
+    margin: 8px 0;
+    font-size: 0.98em;
+    color: #eaffd0;
+    flex: 1;
+    line-height: 1.7;
+    font-family: 'Share Tech Mono', 'Fira Mono', 'Consolas', 'Menlo', 'monospace' !important;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-shadow: 0 2px 8px #000c, 0 0 6px #00fff0, 0 0 2px #fff;
+    padding: 14px 18px;
+    background: linear-gradient(120deg, rgba(0,255,240,0.13) 0%, rgba(10,20,30,0.82) 100%);
+    border: 1.5px solid #00fff055;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 2px 24px 0 #00fff033, 0 1.5px 0 #00fff0 inset;
+    backdrop-filter: blur(4px) saturate(1.12);
+    transition: box-shadow 0.3s, border-color 0.3s, background 0.3s;
+    overflow: hidden;
+}
+
+.terminal-output::before {
+    content: '// ';
+    color: #666;
+    font-family: 'Consolas', monospace;
+    font-size: 0.9em;
+}
+
+.terminal-output:hover {
+    background: linear-gradient(120deg, rgba(0,255,240,0.22) 0%, rgba(10,20,30,0.92) 100%);
+    border-color: #00fff0cc;
+    box-shadow: 0 0 32px 8px #00fff055, 0 2px 16px #000a;
+    color: #e0e0e0;
+    transform: translateY(-2px) scale(1.015);
+}
+
+.project-tile .badges {
+    display: none; /* Masqué car le badge NEW est maintenant dans la barre de titre */
+}
+
+.badge {
+    display: none; /* Ancien système de badges désactivé */
+}
+
+.badge.nouveau {
+    display: none; /* Ancien système de badges désactivé */
+}
+
+.project-tile .infos {
+    font-size: 0.85em;
+    color: #888;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 12px 0 8px 0;
+    font-family: 'Consolas', monospace;
+    border-top: 1px solid #333;
+    padding-top: 8px;
+}
+
+.project-tile .infos span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.project-tile .infos .date {
+    color: #00ff00;
+    font-size: 0.9em;
+}
+
+/* Bouton moderne Matrix pour les tuiles */
+.project-tile .btn-readme {
+    background: #181c1a;
+    color: #e0ffe0;
+    border: 1.5px solid #00ff80;
+    border-radius: 6px;
+    padding: 8px 22px;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 2.35em;
+    font-weight: 900;
+    color: #00ff80;
+    text-shadow:
+        0 0 7px #00ff80,
+        0 0 2px #00ff80,
+        0 2px 8px #000a,
+        0 4px 16px #000c;
+    font-family: 'Share Tech Mono', 'Fira Mono', 'Consolas', 'Menlo', 'monospace';
+    margin: 0.1em 0 0.1em 0;
+    letter-spacing: 1.7px;
+    line-height: 1.1;
+    background: none;
+    text-align: center;
+    width: 100%;
+}
+
+@keyframes btnPulse {
+    0% { opacity: 0.7; filter: blur(0.5px); }
+    100% { opacity: 1; filter: blur(2.5px); }
+}
+
+/* Effet hover - Animation de frappe */
+.project-tile:hover {
+    box-shadow: 0 0 18px 2px #00fff0cc, 0 2px 16px #000a;
+    border-color: #00fff0;
+    filter: brightness(1.04) saturate(1.04);
+    transform: scale(1.025) translateY(-2px);
+}
+
+.project-tile:hover .btn-readme {
+    background: rgba(0, 255, 0, 0.1);
+    border-color: #00ff00;
+    color: #b8ffe0;
+    font-size: 1em;
+    font-family: 'Share Tech Mono', 'Fira Mono', 'Consolas', 'Menlo', 'monospace';
+    margin-top: 0.1em;
+    letter-spacing: 0.5px;
+    text-align: center;
+    width: 100%;
+    text-shadow: 0 0 4px #00ff8099;
+}
+
+/* Animation de clignotement terminal */
+@keyframes terminalBlink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0.3; }
+}
+
+/* Effet de scan terminal - utilise ::first-line pour éviter les conflits */
+.project-tile:hover::before {
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5) inset;
+}
+
+.project-tile .scan-effect {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(0, 255, 0, 0.1) 50%,
+        transparent 100%
+    );
+    transition: top 0.6s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.project-tile:hover .scan-effect {
+    top: 100%;
+}
+
+/* Footer */
+footer {
+    width: 100vw;
+    left: 0;
+    right: 0;
+    position: relative;
+    margin: 2.5em 0 0 0;
+    padding: 1.1em 0 1em 0;
+    text-align: center;
+    font-size: 1.08em;
+    color: #00fff0ee;
+    background: linear-gradient(120deg, #0a0f1c 0%, #101a1c 60%, #00fff022 100%);
+    border-top: 2.5px solid #00fff0;
+    box-shadow:
+        0 0 32px #00fff055,
+        0 -2px 8px #000a,
+        0 0 0 2.5px #00fff055 inset,
+        0 0 24px 2px #00fff033 inset,
+        0 0 32px 8px #00fff099;
+    backdrop-filter: blur(7px) saturate(1.15);
+    border-radius: 0 0 12px 12px;
+    overflow: hidden;
+    transition: background 0.3s, box-shadow 0.3s, backdrop-filter 0.3s;
+    animation: tron-glow-footer 2.8s linear infinite alternate;
+}
 .terminal-output.project-description {
     background: #0f3032 !important;
     border: 1.5px solid #00fff055 !important;
@@ -315,6 +499,65 @@ header {
    Structure : header, titre, prompt, double bordure lumineuse
 ===================== */
 
+/* Module de recherche moderne et aéré */
+.search-terminal {
+    display: flex;
+    align-items: center;
+    gap: 1.1em;
+    margin-bottom: 2em;
+    background: linear-gradient(90deg, rgba(0,255,120,0.10) 0%, rgba(0,255,120,0.04) 100%);
+    border-radius: 12px;
+    padding: 1.1em 1.5em 1.1em 1.2em;
+    box-shadow: 0 2px 24px 0 rgba(0,255,120,0.10), 0 1.5px 0 #00ff80 inset;
+    position: relative;
+    animation: fadeInPortfolio 1.2s cubic-bezier(0.4,0,0.2,1) 0.1s both;
+    width: 100%;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.search-prompt {
+    color: #00ff80;
+    font-family: 'Share Tech Mono', 'Fira Mono', 'Consolas', 'Menlo', 'monospace';
+    font-size: 1.18em;
+    font-weight: bold;
+    margin-right: 0.7em;
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 8px #00ff80, 0 2px 8px #000a;
+    display: flex;
+    align-items: center;
+}
+.search-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.7em;
+    font-size: 1.25em;
+    display: none;
+    border-radius: 8px;
+    font-size: 1.13em;
+    font-family: 'Share Tech Mono', 'Fira Mono', 'Consolas', 'Menlo', 'monospace';
+    padding: 0.65em 1.2em 0.65em 1.2em;
+    outline: none;
+    width: 100%;
+    max-width: 340px;
+    box-shadow: 0 0 0 0 rgba(0,255,120,0);
+    transition: border 0.18s, box-shadow 0.18s, background 0.18s;
+    caret-color: #00ff80;
+    margin-left: 0;
+}
+#search-repos:focus {
+    border: 2px solid #00fff0;
+    background: linear-gradient(90deg, #101a1c 60%, #0a1012 100%);
+    box-shadow: 0 0 24px 6px rgba(0,255,120,0.18) inset, 0 0 12px #00fff0;
+    animation: searchPulse 1.2s cubic-bezier(0.4,0,0.2,1) infinite alternate;
+}
+#search-repos::placeholder {
+    color: #b8ffe0cc;
+    opacity: 1;
+    font-style: italic;
+    letter-spacing: 0.5px;
+}
 
 .top-banner__title {
     font-size: 2.35em;
@@ -1266,12 +1509,48 @@ footer {
         opacity: 0.3;
     }
     
+    /* Footer mobile */
+    footer {
+            padding: 16px 0 8px 0;
+            font-size: 0.9em;
+            background: none !important;
+            background-color: transparent !important;
+            box-shadow: none !important;
+            margin: 0 !important;
+    }
+
+    @media (max-width: 700px) {
+        html, body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #101820 0%, #0a1a1c 60%, #00fff022 100%) fixed, 
+                                    radial-gradient(ellipse at 60% 40%, #0a1a1c 60%, #101820 100%) fixed;
+        }
+        footer {
+            background: none !important;
+            background-color: transparent !important;
+            box-shadow: none !important;
+            margin: 0 !important;
+        }
+    }
+    
+    /* Adaptation mobile du badge container */
+    .badge-container {
+        top: 4px;
+        height: unset;
+        display: block;
+        box-sizing: border-box;
+        position: relative;
+        padding-bottom: 0;
+        padding: 1px 4px;
+        /* ...existing code... */
+        margin-bottom: 0 !important;
         padding-bottom: 0;
     }
     /* .project-description redondant supprimé pour garantir le fond uni */
     .terminal-prompt.tron-terminal + .project-description {
         margin-top: -2px;
         padding-top: 0;
+    }
     }
     
     section#accueil {
