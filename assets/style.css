@@ -166,12 +166,15 @@
 }
 
 /* Hauteur du bandeau terminal */
-body {
+
+html, body {
+    min-height: 100vh;
     background: linear-gradient(135deg, #101820 0%, #0a1a1c 60%, #00fff022 100%) fixed, 
                 radial-gradient(ellipse at 60% 40%, #0a1a1c 60%, #101820 100%) fixed;
     padding-top: 0 !important;
     margin: 0 !important;
 }
+
 
 .top-banner {
     width: 100vw;
@@ -1324,8 +1327,26 @@ footer {
     
     /* Footer mobile */
     footer {
-        padding: 16px 0 8px 0;
-        font-size: 0.9em;
+            padding: 16px 0 8px 0;
+            font-size: 0.9em;
+            background: none !important;
+            background-color: transparent !important;
+            box-shadow: none !important;
+            margin: 0 !important;
+    }
+
+    @media (max-width: 700px) {
+        html, body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #101820 0%, #0a1a1c 60%, #00fff022 100%) fixed, 
+                                    radial-gradient(ellipse at 60% 40%, #0a1a1c 60%, #101820 100%) fixed;
+        }
+        footer {
+            background: none !important;
+            background-color: transparent !important;
+            box-shadow: none !important;
+            margin: 0 !important;
+        }
     }
     
     /* Adaptation mobile du badge container */
