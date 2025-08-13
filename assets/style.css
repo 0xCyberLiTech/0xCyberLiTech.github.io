@@ -23,14 +23,17 @@ footer#site-footer, footer {
 /* .infos et .btn-readme conservés si utilisés, .badges supprimé */
 /* === Palette centralisée === */
 /*
-============================
+/* --- CSS épuré, optimisé, responsive, thème Tron --- */
     DOCUMENTATION DES SELECTEURS CSS
 ============================
 Chaque sélecteur est commenté pour indiquer sa fonction et sa zone d’action sur la page HTML.
 */
-:root {
+ :root {
     --color-bg-main: #101820;
     --color-bg-secondary: #181c24;
+    --color-accent: #00fff0;
+    --color-accent-dark: #181c24;
+}
 
 header.top-banner {
     width: 100%;
