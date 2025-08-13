@@ -1,30 +1,29 @@
+/* === Zone : Bannière principale === */
+header.top-banner { /* ... */ }
+.top-banner__content { /* ... */ }
+.top-banner__title { /* ... */ }
+.top-banner__prompt { /* ... */ }
 
-
-body {
-    background: #101820;
-    margin: 0;
-    padding: 0;
-    font-family: 'Share Tech Mono', 'Fira Mono', 'Consolas', 'Menlo', 'monospace', Arial, sans-serif;
-    color: #e0e0e0;
-}
-
-
-@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
-
-html, body, #portfolio-root {
-    background: #101820;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Share Tech Mono', 'Fira Mono', 'Consolas', 'Menlo', 'monospace', Arial, sans-serif;
-    color: #e0e0e0;
-}
+/* === Zone : Liste des projets === */
+#projects-list { /* ... */ }
+.project-tile { /* ... */ }
+.project-tile::before { /* ... */ }
+.project-tile h3 { /* ... */ }
+.project-tile-content { /* ... */ }
+/* .infos et .btn-readme conservés si utilisés, .badges supprimé */
+/* === Palette centralisée === */
+/*
+============================
+    DOCUMENTATION DES SELECTEURS CSS
+============================
+Chaque sélecteur est commenté pour indiquer sa fonction et sa zone d’action sur la page HTML.
+*/
+:root {
+    --color-bg-main: #101820;
+    --color-bg-secondary: #181c24;
 
 header.top-banner {
     width: 100%;
-    background: #181c24;
     border-bottom: 2px solid #00fff0;
     border-top: 2px solid #00fff0;
     box-sizing: border-box;
@@ -50,7 +49,6 @@ header.top-banner {
     margin: 0.1em 0 0.1em 0;
     letter-spacing: 1.2px;
     line-height: 1.1;
-    background: none;
 }
 
 .terminal-cursor {
@@ -94,7 +92,7 @@ section#projets {
 }
 
 .project-tile {
-    background: #181c24;
+    background: transparent;
     border-radius: 8px;
     border: 1.5px solid #00fff0;
     padding: 0;
@@ -127,16 +125,7 @@ section#projets {
     margin: 8px 0;
     box-sizing: border-box;
 }
-.badge-container, .tron-badge-container {
-    position: absolute;
-    top: 10px;
-    right: 14px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 8px;
-    z-index: 2;
-}
+/* .badge-container et .tron-badge-container supprimés car non utilisés */
 .day-counter, .badge-new {
     background: #00fff0;
     color: #181c24;
@@ -197,20 +186,6 @@ footer#site-footer, footer {
         padding: 0.3em 0.5vw 0.2em 0.5vw;
     }
     main {
-@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
-
-html, body, #portfolio-root {
-    background: #101820;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Share Tech Mono', 'Fira Mono', 'Consolas', 'Menlo', 'monospace', Arial, sans-serif;
-    color: #e0e0e0;
-}
-
-/* ...existing code... */
         padding: 8px 1vw 12px 1vw;
     }
     #projects-list {
@@ -278,7 +253,7 @@ body {
     transform: scale(1.025) translateY(-2px);
 }
 .project-tile:hover .btn-readme {
-    background: rgba(0, 255, 0, 0.1);
+    background: #ffffff14;
     border-color: #00ff00;
     color: #b8ffe0;
     font-size: 1em;
@@ -289,9 +264,7 @@ body {
     width: 100%;
     text-shadow: 0 0 4px #00ff8099;
 }
-.project-tile:hover::before {
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5) inset;
-}
+/* Règle vide supprimée : aucun effet au survol du bandeau supérieur de la tuile */
 .project-tile:hover .scan-effect {
     top: 100%;
 }
@@ -1011,12 +984,7 @@ section#accueil::before {
     left: 0;
     right: 0;
     height: 28px;
-    background: linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 100%);
-    border-bottom: 1px solid #555;
-    background-image: 
-        radial-gradient(circle at 15px 14px, #ff5555 4px, transparent 5px),
-        radial-gradient(circle at 30px 14px, #ffaa00 4px, transparent 5px),
-        radial-gradient(circle at 45px 14px, #00ff00 4px, transparent 5px);
+        background: none; /* Suppression des pastilles */
 }
 
 /* Style pour le titre d'accueil */
@@ -1160,20 +1128,6 @@ section#projets {
 }
 
 /* Header du terminal */
-.project-tile::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 28px;
-    background: linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 100%);
-    border-bottom: 1px solid #555;
-    background-image: 
-        radial-gradient(circle at 15px 14px, #ff5555 5px, transparent 6px),
-        radial-gradient(circle at 30px 14px, #ffaa00 5px, transparent 6px),
-        radial-gradient(circle at 45px 14px, #00ff00 5px, transparent 6px);
-}
 
 /* Container pour compteur et badge NEW */
 .badge-container {
