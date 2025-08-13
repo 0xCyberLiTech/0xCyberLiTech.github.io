@@ -37,20 +37,3 @@ Dossier analysé : D:\DOSSIER_TRAVAIL_GITHUB\PROJET_PORTFOLIO_GITHUB\0xCyberLiTe
 Le dossier est propre, bien structuré et sans code mort ou obsolète. La documentation est à jour.
 
 Analyse réalisée le 13/08/2025.
-
-5. Audit sécurité :
-------------------
-- Fonction d’échappement XSS globale (`escapeHTML`) utilisée pour tous les champs dynamiques JS.
-- Pas de vulnérabilité XSS détectée.
-
-6. Optimisation et responsive :
-------------------------------
-- Code JS moderne, lisible et optimisé.
-- CSS épuré, utilisation de variables et flexbox.
-- Mise en page adaptative (flexbox, unités relatives).
-- Compatible mobile et tablette.
-
-7. Conformité :
---------------
-- Le projet respecte les bonnes pratiques de sécurité et d’accessibilité.
-- Prêt pour déploiement ou publication.

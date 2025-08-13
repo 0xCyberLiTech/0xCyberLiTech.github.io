@@ -15,27 +15,11 @@ Ce dossier contient le site portfolio de 0xCyberLiTech, orienté cybersécurité
     - `style.css` : Feuille de style principale
     - `tron-numbers-bg.js` : Script décoratif
 
-## Interactions des fichiers
-- `index.html` charge le CSS et JS depuis `assets/`.
-- `script.js` récupère les dépôts GitHub et les affiche dynamiquement.
-- Tous les champs dynamiques sont protégés contre les injections XSS via `escapeHTML`.
-- Le CSS gère la mise en page, le thème, et l’adaptation mobile/tablette.
-
 ## Fonctionnalités principales
 - Préloader animé et moderne
 - Thème cyber/Tron, responsive
 - Affichage dynamique des projets
 - Footer personnalisé
-
-## Sécurité
-- Protection XSS assurée par la fonction `escapeHTML` dans le JS.
-- Aucun code mort, doublon ou fichier orphelin détecté.
-
-## Responsive & Optimisation
-- Utilisation de flexbox, unités relatives, marges adaptatives.
-- Compatible mobile et tablette.
-- Code JS moderne, lisible et optimisé.
-- CSS épuré, utilisation de variables et flexbox.
 
 ## Utilisation
 Ouvrez `index.html` ou `portfolio.html` dans un navigateur pour accéder au portfolio.
