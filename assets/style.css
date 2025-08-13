@@ -1,3 +1,13 @@
+body, html {
+    background: #101820 !important;
+}
+
+footer#site-footer, footer {
+    background: #181c24 !important;
+    color: #00fff0 !important;
+    border: none !important;
+    box-shadow: none !important;
+}
 /* === Zone : Bannière principale === */
 header.top-banner { /* ... */ }
 .top-banner__content { /* ... */ }
