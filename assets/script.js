@@ -1,3 +1,5 @@
+
+
 // Récupération des dépôts GitHub et affichage des tuiles
 async function loadRepos() {
     window.__allRepos = [];
@@ -43,14 +45,6 @@ function renderRepos(repos) {
         const safeUrl = escapeHTML(repo.html_url);
         const safeBranch = escapeHTML(repo.default_branch || 'main');
         tile.innerHTML = `
-            <div class="tile-terminal-bar">
-                <span class="terminal-buttons">
-                    <span class="terminal-btn red"></span>
-                    <span class="terminal-btn yellow"></span>
-                    <span class="terminal-btn green"></span>
-                </span>
-                <span class="tile-terminal-prompt">$</span>
-            </div>
             <div class="project-tile-content">
                 <div class="terminal-prompt tron-terminal">
                     <div class="tron-prompt-line1"><span class="prompt-user tron-prompt-user">◢◤ <span class="tron-username">0xCyberLiTech</span></span></div>
