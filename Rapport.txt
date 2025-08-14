@@ -6,49 +6,70 @@ Dossier analysé : D:\DOSSIER_TRAVAIL_GITHUB\PROJET_PORTFOLIO_GITHUB\0xCyberLiTe
 1. Structure des fichiers et dossiers :
 ---------------------------------------
 
-├── index.html
+```
+0xCyberLiTech.github.io/
+│
 ├── portfolio.html
+├── index.html
 ├── README.md
 ├── Rapport.txt
-├── assets/
-│   ├── logo.png
-│   ├── preloader-ultramodern.css
-│   ├── preloader-ultramodern.js
-│   ├── script.js
-│   ├── style.css
-│   └── tron-numbers-bg.js
+│
+└── assets/
+    └── portfolio/
+    │   ├── style.css
+    │   ├── script.js
+    │   └── tron-numbers-bg.js
+    ├── preloader/
+    │   ├── preloader-ultramodern.css
+    │   └── preloader-ultramodern.js
+    └── logo/
+         └── logo.png
+```
 
-2. Points de vigilance :
+2. Logigramme d’interconnexion des fichiers :
+---------------------------------------------
+
+```
+[index.html] ──► [assets/preloader/preloader-ultramodern.css, .js]
+      │
+      └─► [assets/logo/logo.png]
+      │
+      └─► [assets/portfolio/style.css, script.js, tron-numbers-bg.js]
+
+[portfolio.html] ──► [assets/portfolio/style.css, script.js, tron-numbers-bg.js]
+      │
+      └─► [assets/logo/logo.png]
+```
+
+3. Points de vigilance :
 -----------------------
 - Aucun code mort, obsolète ou orphelin détecté dans les fichiers HTML et JS principaux.
-- Les images screenshot-1.png et screenshot-2.png ne semblent pas utilisées dans le HTML (à documenter ou supprimer si inutile).
 - Tous les scripts et styles sont référencés et utilisés.
 
-3. Recommandations :
+4. Recommandations :
 --------------------
-- Supprimer ou documenter les images non utilisées si besoin.
 - Mettre à jour le README.md pour refléter la structure réelle (fait).
 - Vérifier régulièrement l’usage des ressources pour éviter l’accumulation de fichiers orphelins.
 
-4. Conclusion :
+5. Conclusion :
 --------------
 Le dossier est propre, bien structuré et sans code mort ou obsolète. La documentation est à jour.
 
 Analyse réalisée le 14/08/2025.
 
-5. Audit sécurité :
+6. Audit sécurité :
 ------------------
 - Fonction d’échappement XSS globale (`escapeHTML`) utilisée pour tous les champs dynamiques JS.
 - Pas de vulnérabilité XSS détectée.
 
-6. Optimisation et responsive :
+7. Optimisation et responsive :
 ------------------------------
 - Code JS moderne, lisible et optimisé.
 - CSS épuré, utilisation de variables et flexbox.
 - Mise en page adaptative (flexbox, unités relatives).
 - Compatible mobile et tablette.
 
-7. Conformité :
+8. Conformité :
 --------------
 - Le projet respecte les bonnes pratiques de sécurité et d’accessibilité.
 - Prêt pour déploiement ou publication.

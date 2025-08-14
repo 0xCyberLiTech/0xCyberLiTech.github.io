@@ -3,20 +3,48 @@
 Ce dossier contient le site portfolio de 0xCyberLiTech, orienté cybersécurité et développement.
 
 ## Structure du dossier
-- `index.html` : Page d’accueil du portfolio, avec préloader et présentation.
-- `portfolio.html` : Page principale du portfolio, affichage des projets.
-- `assets/` : Dossier des ressources (images, scripts, styles).
-    - `logo.png` : Logo du site
-    - `preloader-ultramodern.css` : Style du préloader
-    - `preloader-ultramodern.js` : Script du préloader
-    - `script.js` : Script principal du site
-    - `style.css` : Feuille de style principale
-    - `tron-numbers-bg.js` : Script décoratif
+```
+0xCyberLiTech.github.io/
+│
+├── portfolio.html
+├── index.html
+├── README.md
+├── Rapport.txt
+│
+└── assets/
+    └── portfolio/
+    │   ├── style.css
+    │   ├── script.js
+    │   └── tron-numbers-bg.js
+    ├── preloader/
+    │   ├── preloader-ultramodern.css
+    │   └── preloader-ultramodern.js
+    └── logo/
+         └── logo.png
+```
+
+## Logigramme d’interconnexion des fichiers
+
+```
+[index.html] ──► [assets/preloader/preloader-ultramodern.css, .js]
+      │
+      └─► [assets/logo/logo.png]
+      │
+      └─► [assets/portfolio/style.css, script.js, tron-numbers-bg.js]
+
+[portfolio.html] ──► [assets/portfolio/style.css, script.js, tron-numbers-bg.js]
+      │
+      └─► [assets/logo/logo.png]
+```
+
+- Les fichiers du portfolio sont séparés de ceux du préloader et du logo.
+- Les pages HTML importent les ressources nécessaires selon leur usage.
+- Le logigramme montre les dépendances et l’organisation claire du projet.
 
 ## Interactions des fichiers
-- `index.html` charge le CSS et JS depuis `assets/`.
-- `script.js` récupère les dépôts GitHub et les affiche dynamiquement.
-- Tous les champs dynamiques sont protégés contre les injections XSS via `escapeHTML`.
+- `index.html` charge le CSS et JS depuis `assets/portfolio/` et le préloader depuis `assets/preloader/`.
+- `portfolio.html` utilise les ressources du portfolio et le logo commun.
+- Tous les champs dynamiques JS sont protégés contre les injections XSS via `escapeHTML`.
 - Le CSS gère la mise en page, le thème, et l’adaptation mobile/tablette.
 
 ## Fonctionnalités principales
