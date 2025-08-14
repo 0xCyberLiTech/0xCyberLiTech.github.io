@@ -19,6 +19,31 @@ footer#site-footer, footer {
 /* === Zone : Bannière principale === */
 
 /* === Zone : Liste des projets === */
+/* === Bandeau terminal Kali Linux pour chaque tuile === */
+.terminal-bar {
+    display: flex;
+    align-items: center;
+    background: #222;
+    padding: 6px 12px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+.terminal-bar .btn {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 6px;
+    display: inline-block;
+}
+.terminal-bar .btn.red { background: #ff5f56; }
+.terminal-bar .btn.yellow { background: #ffbd2e; }
+.terminal-bar .btn.green { background: #27c93f; }
+.terminal-bar .prompt {
+    color: #00ff00;
+    font-family: monospace;
+    margin-left: 12px;
+    font-size: 1em;
+}
 
 /* .infos et .btn-readme conservés si utilisés, .badges supprimé */
 /* --- CSS épuré, optimisé, responsive, thème Tron --- */

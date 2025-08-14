@@ -24,21 +24,27 @@ function renderRepos(repos) {
         const safeDesc = escapeHTML(repo.description || 'Aucune description disponible.');
         const safeUrl = escapeHTML(repo.html_url);
         const safeBranch = escapeHTML(repo.default_branch || 'main');
-        tile.innerHTML = `
-            <div class="project-tile-content">
-                <div class="terminal-prompt tron-terminal">
-                    <div class="tron-prompt-line1"><span class="prompt-user tron-prompt-user">◢◤ <span class="tron-username">0xCyberLiTech</span></span></div>
-                    <div class="tron-prompt-line2"><span class="tron-at">@</span> <span class="tron-host">TRON-CORE</span></div>
-                    <div class="tron-prompt-line3"><span class="tron-path">[~/grid/${safeName}]</span></div>
-                    <span class="prompt-command tron-prompt-command">◢◤ <span class="tron-cmd">$</span> <span class="tron-cmdline">ls -la</span></span>
+            tile.innerHTML = `
+                <div class="terminal-bar">
+                    <span class="btn red"></span>
+                    <span class="btn yellow"></span>
+                    <span class="btn green"></span>
+                    <span class="prompt">kali@root:~$</span>
                 </div>
-                <h3><a href="${safeUrl}/blob/${safeBranch}/README.md" target="_blank" style="color:inherit;text-decoration:none;">${safeName}</a></h3>
-                <p class="terminal-output project-description">${safeDesc}</p>
-                <div class="infos" style="display:flex;align-items:center;gap:0.7em;justify-content:space-between;">
-                    ${isNew ? `<span class="badge-new tron-glow">NEW</span><span class="days-left tron-glow" style="font-size:0.98em;color:#00fff0;opacity:0.92;">${30 - daysElapsed}j restantes</span>` : ''}
+                <div class="project-tile-content">
+                    <div class="terminal-prompt tron-terminal">
+                        <div class="tron-prompt-line1"><span class="prompt-user tron-prompt-user">◢◤ <span class="tron-username">0xCyberLiTech</span></span></div>
+                        <div class="tron-prompt-line2"><span class="tron-at">@</span> <span class="tron-host">TRON-CORE</span></div>
+                        <div class="tron-prompt-line3"><span class="tron-path">[~/grid/${safeName}]</span></div>
+                        <span class="prompt-command tron-prompt-command">◢◤ <span class="tron-cmd">$</span> <span class="tron-cmdline">ls -la</span></span>
+                    </div>
+                    <h3><a href="${safeUrl}/blob/${safeBranch}/README.md" target="_blank" style="color:inherit;text-decoration:none;">${safeName}</a></h3>
+                    <p class="terminal-output project-description">${safeDesc}</p>
+                    <div class="infos" style="display:flex;align-items:center;gap:0.7em;justify-content:space-between;">
+                        ${isNew ? `<span class="badge-new tron-glow">NEW</span><span class="days-left tron-glow" style="font-size:0.98em;color:#00fff0;opacity:0.92;">${30 - daysElapsed}j restantes</span>` : ''}
+                    </div>
                 </div>
-            </div>
-        `;
+            `;
         container.appendChild(tile);
     });
 }
