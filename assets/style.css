@@ -33,6 +33,13 @@ footer#site-footer, footer {
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 }
+    .terminal-bar-title {
+    color: #181c24;
+        font-weight: bold;
+        font-size: 0.9em;
+        letter-spacing: 0px;
+        font-family: 'Fira Mono', 'Consolas', monospace;
+    }
 .terminal-bar .btn {
     width: 10px;
     height: 10px;

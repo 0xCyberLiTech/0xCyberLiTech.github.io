@@ -29,7 +29,7 @@ function renderRepos(repos) {
                     <span class="btn red"></span>
                     <span class="btn yellow"></span>
                     <span class="btn green"></span>
-                    <span class="prompt">kali@root:~$</span>
+                        <span class="terminal-bar-title">kali@root:~$</span>
                 </div>
                 <div class="project-tile-content">
                     <div class="terminal-prompt tron-terminal">
