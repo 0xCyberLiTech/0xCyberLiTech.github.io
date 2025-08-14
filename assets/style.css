@@ -23,7 +23,7 @@ footer#site-footer, footer {
 .terminal-bar {
     display: flex;
     align-items: center;
-    background: #222;
+    background: linear-gradient(90deg, #181c24 0%, #101820 60%, #00fff080 100%);
     padding: 6px 12px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
@@ -39,28 +39,36 @@ footer#site-footer, footer {
 .terminal-bar .btn.yellow { background: #ffbd2e; }
 .terminal-bar .btn.green { background: #27c93f; }
 .terminal-bar .prompt {
-    color: #00ff00;
-    font-family: monospace;
-    margin-left: 12px;
-    font-size: 1em;
-}
-
+    display: flex;
+    align-items: center;
+    background: linear-gradient(90deg, #181c24 0%, #101820 100%);
+    padding: 8px 18px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,255,240,0.08);
+    border-bottom: 1.5px solid #00fff0;
+    position: relative;
+    z-index: 2;
 /* .infos et .btn-readme conservés si utilisés, .badges supprimé */
 /* --- CSS épuré, optimisé, responsive, thème Tron --- */
-:root {
-    --color-bg-main: #101820;
-    --color-bg-secondary: #181c24;
-    --color-accent: #00fff0;
-    --color-accent-dark: #181c24;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    margin-right: 7px;
+    display: inline-block;
+    box-shadow: 0 0 4px rgba(0,0,0,0.18);
 }
 
 header.top-banner {
     width: 100%;
     border-bottom: 2px solid #00fff0;
-    border-top: 2px solid #00fff0;
-    box-sizing: border-box;
-    padding: 0.5em 0 0.5em 0;
-    margin: 0;
+    color: #00fff0;
+    font-family: 'Fira Mono', 'Consolas', monospace;
+    margin-left: 16px;
+    font-size: 1.08em;
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 6px #00fff0a0;
+    font-weight: 500;
     text-align: center;
 }
 
