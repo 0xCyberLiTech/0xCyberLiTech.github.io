@@ -5,55 +5,26 @@ Dossier analysé : D:\DOSSIER_TRAVAIL_GITHUB\PROJET_PORTFOLIO_GITHUB\0xCyberLiTe
 
 1. Structure des fichiers et dossiers :
 ---------------------------------------
-- index.html
-- portfolio.html
-- README.md
-- Rapport.txt
-- assets/
-	- logo.png
-	- preloader-ultramodern.css
-	- preloader-ultramodern.js
-	- screenshot-1.png
-	- screenshot-2.png
-	- script.js
-	- style.css
-	- tron-numbers-bg.js
+
+├── index.html
+├── portfolio.html
+├── README.md
+├── rapport.txt
+├── assets/
+│   ├── logo.png
+│   ├── preloader-ultramodern.css
+│   ├── preloader-ultramodern.js
+│   ├── screenshot-1.png
+│   ├── screenshot-2.png
+│   ├── script.js
+│   ├── style.css
+│   └── tron-numbers-bg.js
 
 2. Points de vigilance :
 -----------------------
-- Aucun code mort, doublon ou orphelin détecté dans les fichiers HTML, JS et CSS principaux.
-- Fonction d’échappement XSS globale (`escapeHTML`) utilisée pour tous les champs dynamiques JS.
-- Les images screenshot-1.png et screenshot-2.png ne semblent pas utilisées dans le HTML (à documenter ou supprimer si inutile).
+- Aucun code mort, obsolète ou orphelin détecté dans les fichiers HTML et JS principaux.
+- Les images screenshot-1.png et screenshot-2.png ne semblent pas utilisées dans le HTML (à confirmer selon le JS).
 - Tous les scripts et styles sont référencés et utilisés.
-
-3. Recommandations :
---------------------
-- Supprimer ou documenter les images non utilisées si besoin.
-- Mettre à jour le README.md pour refléter la structure réelle (fait).
-- Vérifier régulièrement l’usage des ressources pour éviter l’accumulation de fichiers orphelins.
-
-4. Conclusion :
---------------
-Le dossier est propre, bien structuré et sans code mort ou obsolète. La documentation est à jour.
-
-Analyse réalisée le 14/08/2025.
-
-5. Audit sécurité :
-------------------
-- Fonction d’échappement XSS globale (`escapeHTML`) utilisée pour tous les champs dynamiques JS.
-- Pas de vulnérabilité XSS détectée.
-
-6. Optimisation et responsive :
-------------------------------
-- Code JS moderne, lisible et optimisé.
-- CSS épuré, utilisation de variables et flexbox.
-- Mise en page adaptative (flexbox, unités relatives).
-- Compatible mobile et tablette.
-
-7. Conformité :
---------------
-- Le projet respecte les bonnes pratiques de sécurité et d’accessibilité.
-- Prêt pour déploiement ou publication.
 
 3. Recommandations :
 --------------------

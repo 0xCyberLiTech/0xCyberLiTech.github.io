@@ -1,3 +1,8 @@
+@keyframes neonGlow {
+    0% { box-shadow: 0 0 0 1px #00FD7F, 0 0 8px 2px #00FD7F, 0 2px 6px #000a; }
+    50% { box-shadow: 0 0 0 2px #00FD7F, 0 0 16px 4px #00FD7F, 0 2px 8px #000a; }
+    100% { box-shadow: 0 0 0 1px #00FD7F, 0 0 8px 2px #00FD7F, 0 2px 6px #000a; }
+}
 footer#site-footer, footer {
     background: #181c24 !important;
     color: #00fff0 !important;
@@ -23,7 +28,7 @@ footer#site-footer, footer {
 .terminal-bar {
     display: flex;
     align-items: center;
-    background: linear-gradient(90deg, #181c24 0%, #101820 60%, #00fff080 100%);
+    background: #00fff0cc !important;
     padding: 6px 12px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
@@ -39,36 +44,28 @@ footer#site-footer, footer {
 .terminal-bar .btn.yellow { background: #ffbd2e; }
 .terminal-bar .btn.green { background: #27c93f; }
 .terminal-bar .prompt {
-    display: flex;
-    align-items: center;
-    background: linear-gradient(90deg, #181c24 0%, #101820 100%);
-    padding: 8px 18px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,255,240,0.08);
-    border-bottom: 1.5px solid #00fff0;
-    position: relative;
-    z-index: 2;
+    color: #00ff00;
+    font-family: monospace;
+    margin-left: 12px;
+    font-size: 1em;
+}
+
 /* .infos et .btn-readme conservés si utilisés, .badges supprimé */
 /* --- CSS épuré, optimisé, responsive, thème Tron --- */
-    width: 11px;
-    height: 11px;
-    border-radius: 50%;
-    margin-right: 7px;
-    display: inline-block;
-    box-shadow: 0 0 4px rgba(0,0,0,0.18);
+:root {
+    --color-bg-main: #101820;
+    --color-bg-secondary: #181c24;
+    --color-accent: #00fff0;
+    --color-accent-dark: #181c24;
 }
 
 header.top-banner {
     width: 100%;
     border-bottom: 2px solid #00fff0;
-    color: #00fff0;
-    font-family: 'Fira Mono', 'Consolas', monospace;
-    margin-left: 16px;
-    font-size: 1.08em;
-    letter-spacing: 0.5px;
-    text-shadow: 0 0 6px #00fff0a0;
-    font-weight: 500;
+    border-top: 2px solid #00fff0;
+    box-sizing: border-box;
+    padding: 0.5em 0 0.5em 0;
+    margin: 0;
     text-align: center;
 }
 
@@ -287,10 +284,11 @@ footer#site-footer, footer {
     transform: translateY(-2px) scale(1.015);
 }
 .project-tile:hover {
-    box-shadow: 0 0 18px 2px #00fff0cc, 0 2px 16px #000a;
-    border-color: #00fff0;
+    box-shadow: 0 0 0 1px #00FD7F, 0 0 8px 2px #00FD7F, 0 2px 6px #000a;
+    border-color: #00FD7F;
     filter: brightness(1.04) saturate(1.04);
     transform: scale(1.025) translateY(-2px);
+    animation: neonGlow 1.2s infinite;
 }
 .project-tile:hover .btn-readme {
     background: #ffffff14;
