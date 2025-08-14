@@ -9,13 +9,11 @@ Dossier analysé : D:\DOSSIER_TRAVAIL_GITHUB\PROJET_PORTFOLIO_GITHUB\0xCyberLiTe
 ├── index.html
 ├── portfolio.html
 ├── README.md
-├── rapport.txt
+├── Rapport.txt
 ├── assets/
 │   ├── logo.png
 │   ├── preloader-ultramodern.css
 │   ├── preloader-ultramodern.js
-│   ├── screenshot-1.png
-│   ├── screenshot-2.png
 │   ├── script.js
 │   ├── style.css
 │   └── tron-numbers-bg.js
@@ -23,7 +21,7 @@ Dossier analysé : D:\DOSSIER_TRAVAIL_GITHUB\PROJET_PORTFOLIO_GITHUB\0xCyberLiTe
 2. Points de vigilance :
 -----------------------
 - Aucun code mort, obsolète ou orphelin détecté dans les fichiers HTML et JS principaux.
-- Les images screenshot-1.png et screenshot-2.png ne semblent pas utilisées dans le HTML (à confirmer selon le JS).
+- Les images screenshot-1.png et screenshot-2.png ne semblent pas utilisées dans le HTML (à documenter ou supprimer si inutile).
 - Tous les scripts et styles sont référencés et utilisés.
 
 3. Recommandations :
@@ -36,7 +34,7 @@ Dossier analysé : D:\DOSSIER_TRAVAIL_GITHUB\PROJET_PORTFOLIO_GITHUB\0xCyberLiTe
 --------------
 Le dossier est propre, bien structuré et sans code mort ou obsolète. La documentation est à jour.
 
-Analyse réalisée le 13/08/2025.
+Analyse réalisée le 14/08/2025.
 
 5. Audit sécurité :
 ------------------
