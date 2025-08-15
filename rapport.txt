@@ -1,0 +1,75 @@
+RAPPORT D’ANALYSE DU DOSSIER PORTFOLIO
+=======================================
+
+Dossier analysé : D:\DOSSIER_TRAVAIL_GITHUB\PROJET_PORTFOLIO_GITHUB\0xCyberLiTech.github.io
+
+1. Structure des fichiers et dossiers :
+---------------------------------------
+
+```
+0xCyberLiTech.github.io/
+│
+├── portfolio.html
+├── index.html
+├── README.md
+├── Rapport.txt
+│
+└── assets/
+    └── portfolio/
+    │   ├── style.css
+    │   ├── script.js
+    │   └── tron-numbers-bg.js
+    ├── preloader/
+    │   ├── preloader-ultramodern.css
+    │   └── preloader-ultramodern.js
+    └── logo/
+         └── logo.png
+```
+
+2. Logigramme d’interconnexion des fichiers :
+---------------------------------------------
+
+```
+[index.html] ──► [assets/preloader/preloader-ultramodern.css, .js]
+      │
+      └─► [assets/logo/logo.png]
+      │
+      └─► [assets/portfolio/style.css, script.js, tron-numbers-bg.js]
+
+[portfolio.html] ──► [assets/portfolio/style.css, script.js, tron-numbers-bg.js]
+      │
+      └─► [assets/logo/logo.png]
+```
+
+3. Points de vigilance :
+-----------------------
+- Aucun code mort, obsolète ou orphelin détecté dans les fichiers HTML et JS principaux.
+- Tous les scripts et styles sont référencés et utilisés.
+
+4. Recommandations :
+--------------------
+- Mettre à jour le README.md pour refléter la structure réelle (fait).
+- Vérifier régulièrement l’usage des ressources pour éviter l’accumulation de fichiers orphelins.
+
+5. Conclusion :
+--------------
+Le dossier est propre, bien structuré et sans code mort ou obsolète. La documentation est à jour.
+
+Analyse réalisée le 14/08/2025.
+
+6. Audit sécurité :
+------------------
+- Fonction d’échappement XSS globale (`escapeHTML`) utilisée pour tous les champs dynamiques JS.
+- Pas de vulnérabilité XSS détectée.
+
+7. Optimisation et responsive :
+------------------------------
+- Code JS moderne, lisible et optimisé.
+- CSS épuré, utilisation de variables et flexbox.
+- Mise en page adaptative (flexbox, unités relatives).
+- Compatible mobile et tablette.
+
+8. Conformité :
+--------------
+- Le projet respecte les bonnes pratiques de sécurité et d’accessibilité.
+- Prêt pour déploiement ou publication.
