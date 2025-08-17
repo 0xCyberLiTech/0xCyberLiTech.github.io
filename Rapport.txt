@@ -34,13 +34,26 @@ Date : 17 août 2025
 Auteur : 0xCyberLiTech
 
 ## 1. Relecture complète du code
-- Doublons CSS supprimés, règles regroupées pour une meilleure maintenabilité.
-- Structure des fichiers et dossiers vérifiée : claire et cohérente.
-- Aucun code mort ou élément orphelin détecté dans JS/HTML/CSS.
 
 ## 2. Sécurité XSS
-- Tous les points d’entrée utilisateur sont protégés via la fonction `escapeHTML`.
-- Aucune faille XSS détectée.
+- Tous les points d’injection HTML dans le JS utilisent la fonction `escapeHTML` pour éviter les attaques XSS.
+- Aucun formulaire ou champ d’entrée utilisateur détecté dans le projet.
+- Pas d’utilisation de `eval` ou de méthodes dangereuses dans le JS.
+
+## 3. Optimisation du code
+- JS factorisé : fonctions réutilisables, pas de code mort.
+- CSS : utilisation de variables, media queries, animations modernes.
+- Suppression des classes/styles non utilisés (à poursuivre lors de futures évolutions).
+
+## 4. Compatibilité mobile & tablette
+- Media queries présents dans tous les fichiers CSS principaux.
+- Tests réalisés sur différentes résolutions : affichage optimal confirmé.
+
+## 5. Recommandations
+- Continuer à documenter toute modification dans le README.md et le rapport.txt.
+- Vérifier la sécurité si des formulaires sont ajoutés.
+- Tester sur plusieurs navigateurs et appareils.
+
 - Pas de formulaire ou champ de saisie non sécurisé.
 
 ## 3. Optimisation du code

@@ -56,6 +56,39 @@ assets/
 
 - Design responsive pour mobile et tablette (media queries).
 
+## Recommandations
+
+- Vérifier régulièrement la sécurité des points d’entrée si des formulaires sont ajoutés.
+- Garder le code CSS et JS épuré, supprimer les classes/styles non utilisés.
+- Documenter toute nouvelle fonctionnalité ou modification dans le README.md et le rapport.txt.
+
+
+## Installation & utilisation
+
+1. Clonez le dépôt :
+  ```bash
+  git clone https://github.com/0xCyberLiTech/0xCyberLiTech.github.io.git
+  ```
+2. Ouvrez le dossier dans votre navigateur ou éditeur préféré.
+3. Accédez à `index.html` pour lancer le site.
+
+Le site est statique : aucune dépendance ou installation supplémentaire n’est requise.
+
+## Prérequis techniques
+
+- Navigateur moderne recommandé : Chrome, Firefox, Edge, Safari (support des ES6, CSS3, fetch API).
+- Résolutions supportées : desktop, mobile, tablette.
+
+## Contribuer
+
+Les contributions sont les bienvenues !
+
+1. Forkez le projet.
+2. Créez une branche pour vos modifications.
+3. Proposez une pull request avec une description claire.
+
+Merci de respecter la structure du projet et de documenter vos changements dans le README.md et le rapport.txt.
+
 ## Auteur
 
 0xCyberLiTech
