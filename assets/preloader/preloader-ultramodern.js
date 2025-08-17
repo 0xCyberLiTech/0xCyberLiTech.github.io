@@ -1,43 +1,6 @@
-// Preloader canvas animation (Tron/cyber grid, optionnel)
-const canvas = document.getElementById('preloader-canvas');
-if (canvas) {
-    const ctx = canvas.getContext('2d');
-    let w, h, animationId;
-    function resize() {
-        w = canvas.width = window.innerWidth;
-        h = canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resize);
-    resize();
-    // Simple grid/scanlines animation (peut être remplacé par un effet plus complexe)
-    function draw() {
-        ctx.clearRect(0,0,w,h);
-        ctx.save();
-        ctx.globalAlpha = 0.13;
-        ctx.strokeStyle = '#00fff0';
-        for(let y=0; y<h; y+=32) {
-            ctx.beginPath();
-            ctx.moveTo(0,y);
-            ctx.lineTo(w,y);
-            ctx.stroke();
-        }
-        ctx.globalAlpha = 0.08;
-        for(let x=0; x<w; x+=32) {
-            ctx.beginPath();
-            ctx.moveTo(x,0);
-            ctx.lineTo(x,h);
-            ctx.stroke();
-        }
-        ctx.restore();
-        animationId = requestAnimationFrame(draw);
-    }
-    draw();
-    // Arrêt et suppression du canvas après transition
-    window.addEventListener('preloader:remove', () => {
-        cancelAnimationFrame(animationId);
-        if (canvas && canvas.parentNode) canvas.parentNode.removeChild(canvas);
-    });
-// Fin du module preloader
+
+// Preloader sans grille de fond
+// (Le canvas peut être utilisé pour d'autres effets si besoin, mais la grille est supprimée)
 
 // Animation de la barre de progression du preloader
 const progressBar = document.getElementById('preloader-progress-bar');
@@ -61,12 +24,26 @@ if (progressBar) {
             setTimeout(animateProgress, 1100 + Math.random()*500);
         } else {
             // Déclenche la transition seulement à la fin de la barre
+            // Ajout d'un fondu au noir avant la redirection
+            const fadeOverlay = document.createElement('div');
+            fadeOverlay.style.position = 'fixed';
+            fadeOverlay.style.top = 0;
+            fadeOverlay.style.left = 0;
+            fadeOverlay.style.width = '100vw';
+            fadeOverlay.style.height = '100vh';
+            fadeOverlay.style.background = '#101820';
+            fadeOverlay.style.opacity = '0';
+            fadeOverlay.style.transition = 'opacity 0.5s cubic-bezier(0.4,0,0.2,1)';
+            fadeOverlay.style.zIndex = '9999';
+            document.body.appendChild(fadeOverlay);
             setTimeout(() => {
-                const event = new Event('preloader:done');
-                window.dispatchEvent(event);
-            }, 350);
+                fadeOverlay.style.opacity = '1';
+                setTimeout(() => {
+                    window.location.href = "portfolio.html";
+                }, 520);
+            }, 100);
         }
     }
     animateProgress();
-}
+// ...fin du module preloader
 }

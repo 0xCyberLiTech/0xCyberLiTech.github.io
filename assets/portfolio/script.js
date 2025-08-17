@@ -24,29 +24,34 @@ function renderRepos(repos) {
         const safeDesc = escapeHTML(repo.description || 'Aucune description disponible.');
         const safeUrl = escapeHTML(repo.html_url);
         const safeBranch = escapeHTML(repo.default_branch || 'main');
-            tile.innerHTML = `
-                <div class="terminal-bar">
-                    <span class="btn red"></span>
-                    <span class="btn yellow"></span>
-                    <span class="btn green"></span>
-                        <span class="terminal-bar-title">kali@root:~$</span>
-                </div>
-                <div class="project-tile-content">
-                    <div class="terminal-prompt tron-terminal">
-                        <div class="tron-prompt-line1"><span class="prompt-user tron-prompt-user">◢◤ <span class="tron-username">0xCyberLiTech</span></span></div>
-                        <div class="tron-prompt-line2"><span class="tron-at">@</span> <span class="tron-host">TRON-CORE</span></div>
-                        <div class="tron-prompt-line3"><span class="tron-path">[~/grid/${safeName}]</span></div>
-                        <span class="prompt-command tron-prompt-command">◢◤ <span class="tron-cmd">$</span> <span class="tron-cmdline">ls -la</span></span>
-                    </div>
-                    <h3><a href="${safeUrl}/blob/${safeBranch}/README.md" target="_blank" style="color:inherit;text-decoration:none;">${safeName}</a></h3>
-                    <p class="terminal-output project-description">${safeDesc}</p>
-                    <div class="infos" style="display:flex;align-items:center;gap:0.7em;justify-content:space-between;">
-                        ${isNew ? `<span class="badge-new tron-glow">NEW</span><span class="days-left tron-glow" style="font-size:0.98em;color:#00fff0;opacity:0.92;">${30 - daysElapsed}j restantes</span>` : ''}
-                    </div>
-                </div>
-            `;
+        tile.innerHTML = renderPromptTile({safeName, safeDesc, safeUrl, safeBranch, isNew, daysElapsed});
         container.appendChild(tile);
     });
+}
+
+// Fonction factorisée pour générer le HTML du prompt
+function renderPromptTile({safeName, safeDesc, safeUrl, safeBranch, isNew, daysElapsed}) {
+    return `
+        <div class="terminal-bar">
+            <span class="btn red"></span>
+            <span class="btn yellow"></span>
+            <span class="btn green"></span>
+            <span class="terminal-bar-title">kali@root:~$</span>
+        </div>
+        <div class="project-tile-content">
+            <div class="terminal-prompt tron-terminal">
+                <div class="tron-prompt-line1"><span class="prompt-user tron-prompt-user">◢◤ <span class="tron-username">0xCyberLiTech</span></span></div>
+                <div class="tron-prompt-line2"><span class="tron-at">@</span> <span class="tron-host">TRON-CORE</span></div>
+                <div class="tron-prompt-line3"><span class="tron-path">[~/grid/${safeName}]</span></div>
+                <span class="prompt-command tron-prompt-command">◢◤ <span class="tron-cmd">$</span> <span class="tron-cmdline">ls -la</span></span>
+            </div>
+            <h3><a href="${safeUrl}/blob/${safeBranch}/README.md" style="color:inherit;text-decoration:none;">${safeName}</a></h3>
+            <p class="terminal-output project-description">${safeDesc}</p>
+            <div class="infos" style="display:flex;align-items:center;gap:0.7em;justify-content:space-between;">
+                ${isNew ? `<span class="badge-new tron-glow">NEW</span><span class="days-left tron-glow" style="font-size:0.98em;color:#00fff0;opacity:0.92;">${30 - daysElapsed}j restantes</span>` : ''}
+            </div>
+        </div>
+    `;
 }
 
 // Récupération des dépôts GitHub et affichage des tuiles
@@ -65,6 +70,7 @@ async function loadRepos() {
 }
 
 // Initialisation unique du portfolio, du footer et du bandeau
+
 window.addEventListener('DOMContentLoaded', () => {
     // Fade-in du body pour éviter le flash blanc
     document.body.style.opacity = '1';
@@ -109,62 +115,6 @@ window.addEventListener('DOMContentLoaded', () => {
             }
             lastScrollY = window.scrollY;
         };
-        window.addEventListener('scroll', updateBannerOpacity);
-        banner.style.opacity = '1';
-    }
-});
-window.addEventListener('DOMContentLoaded', () => {
-    // Fade-in du body pour éviter le flash blanc
-    document.body.style.opacity = '1';
-
-    // Apparition harmonieuse du contenu du portfolio
-    document.body.classList.add('fade-in');
-    setTimeout(() => {
-        document.body.classList.remove('fade-in');
-    }, 1200);
-
-    // Affichage des projets
-    loadRepos();
-
-    // Gestion du footer : il ne s'affiche qu'après la transition du preloader ou après un court délai
-    const footer = document.getElementById('site-footer');
-    if (footer) {
-        footer.style.display = 'none';
-        const preloader = document.getElementById('preloader');
-        if (preloader) {
-            const observer = new MutationObserver(() => {
-                if (preloader.style.display === 'none' || preloader.style.opacity === '0' || preloader.hidden) {
-                    footer.style.display = '';
-                    observer.disconnect();
-                }
-            });
-            observer.observe(preloader, { attributes: true, attributeFilter: ['style', 'hidden'] });
-        } else {
-            setTimeout(() => {
-                footer.style.display = '';
-            }, 600); // délai pour laisser la transition se terminer
-        }
-    }
-
-    // Gestion de l'opacité du bandeau
-    const banner = document.querySelector('.top-banner');
-    if (banner) {
-        let hasScrolled = false;
-        let lastScrollY = window.scrollY;
-        function updateBannerOpacity() {
-            if (window.scrollY <= 2 && hasScrolled && lastScrollY - window.scrollY < 50) {
-                banner.style.transition = 'background 0.3s, opacity 0.3s';
-                banner.style.opacity = '1';
-            } else if (window.scrollY <= 2 && hasScrolled) {
-                banner.style.transition = 'background 0.3s, opacity 0.3s';
-                banner.style.opacity = '0.5';
-            } else {
-                banner.style.transition = 'background 0.3s, opacity 0.3s';
-                banner.style.opacity = '1';
-                if (window.scrollY > 2) hasScrolled = true;
-            }
-            lastScrollY = window.scrollY;
-        }
         window.addEventListener('scroll', updateBannerOpacity);
         banner.style.opacity = '1';
     }

@@ -1,5 +1,6 @@
 // Effet fond Tron 3D ultra-dynamique : grille fuyante, couleurs dynamiques, scrolling latéral, points et lignes qui pulsent
-(function tronGrid3DPlusBG(){
+
+window.startTronNumbersBG = function tronGrid3DPlusBG(){
   const canvas = document.createElement('canvas');
   canvas.id = 'tron-numbers-bg';
   canvas.style.position = 'fixed';
@@ -9,8 +10,15 @@
   canvas.style.height = '100vh';
   canvas.style.zIndex = '0';
   canvas.style.pointerEvents = 'none';
-  canvas.style.opacity = '0.38';
+
+  canvas.style.opacity = '0';
+  canvas.style.transition = 'opacity 7s cubic-bezier(0.4,0,0.2,1)';
   document.body.prepend(canvas);
+
+  // Transition douce d'apparition
+  setTimeout(() => {
+    canvas.style.opacity = '0.38';
+  }, 80);
 
   let ctx, w, h, t = 0;
   const gridSize = 32;
@@ -102,4 +110,4 @@
     draw();
   }
   setTimeout(init, 1000);
-})();
+};
