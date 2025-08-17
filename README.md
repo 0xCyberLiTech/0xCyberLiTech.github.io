@@ -1,74 +1,65 @@
 # Portfolio 0xCyberLiTech
 
-Ce dossier contient le site portfolio de 0xCyberLiTech, orienté cybersécurité et développement.
-
-## Structure du dossier
-```
-0xCyberLiTech.github.io/
-│
-├── portfolio.html
-├── index.html
-├── README.md
-├── Rapport.txt
-│
-└── assets/
-    └── portfolio/
-    │   ├── style.css
-    │   ├── script.js
-    │   └── tron-numbers-bg.js
-    ├── preloader/
-    │   ├── preloader-ultramodern.css
-    │   └── preloader-ultramodern.js
-    └── logo/
-         └── logo.png
-```
-
-## Logigramme d’interconnexion des fichiers
+## Structure du projet
 
 ```
-[index.html] ──► [assets/preloader/preloader-ultramodern.css, .js]
-      │
-      └─► [assets/logo/logo.png]
-      │
-      └─► [assets/portfolio/style.css, script.js, tron-numbers-bg.js]
-
-[portfolio.html] ──► [assets/portfolio/style.css, script.js, tron-numbers-bg.js]
-      │
-      └─► [assets/logo/logo.png]
+index.html
+portfolio.html
+rapport.txt
+README.md
+assets/
+  logo/
+    logo.png
+  portfolio/
+    script.js
+    style.css
+    tron-numbers-bg.js
+  preloader/
+    preloader-ultramodern.css
+    preloader-ultramodern.js
 ```
 
-- Les fichiers du portfolio sont séparés de ceux du préloader et du logo.
-- Les pages HTML importent les ressources nécessaires selon leur usage.
-- Le logigramme montre les dépendances et l’organisation claire du projet.
+## Description des dossiers et fichiers
 
-## Interactions des fichiers
-- `index.html` charge le CSS et JS depuis `assets/portfolio/` et le préloader depuis `assets/preloader/`.
-- `portfolio.html` utilise les ressources du portfolio et le logo commun.
-- Tous les champs dynamiques JS sont protégés contre les injections XSS via `escapeHTML`.
-- Le CSS gère la mise en page, le thème, et l’adaptation mobile/tablette.
+- **index.html** : Page d’accueil avec préloader et accès au portfolio.
+- **portfolio.html** : Page principale du portfolio, affichage des projets.
+- **rapport.txt** : Rapport d’audit et d’optimisation (généré automatiquement).
+- **README.md** : Documentation du projet (ce fichier).
+- **assets/** : Dossier des ressources statiques.
+  - **logo/** : Contient le logo du site.
+  - **portfolio/** : Scripts et styles du portfolio.
+    - **script.js** : Logique d’affichage des projets, protection XSS, gestion du DOM.
+    - **style.css** : Styles principaux, responsive design, thème Tron.
+    - **tron-numbers-bg.js** : Script d’arrière-plan animé Tron.
+  - **preloader/** : Ressources pour l’animation de préchargement.
+    - **preloader-ultramodern.css** : Styles du préloader.
+    - **preloader-ultramodern.js** : Logique d’animation du préloader.
 
-## Fonctionnalités principales
-- Préloader animé et moderne
-- Thème cyber/Tron, responsive
-- Affichage dynamique des projets
-- Footer personnalisé
+## Interactions et rôles
+
+- Les fichiers JS manipulent le DOM et injectent du contenu sécurisé via `escapeHTML`.
+- Le CSS gère la responsivité et le style Tron.
+- Les fichiers HTML sont structurés pour la clarté et la performance.
 
 ## Sécurité
-- Protection XSS assurée par la fonction `escapeHTML` dans le JS.
-- Aucun code mort, doublon ou fichier orphelin détecté.
 
-## Responsive & Optimisation
-- Utilisation de flexbox, unités relatives, marges adaptatives.
-- Compatible mobile et tablette.
-- Code JS moderne, lisible et optimisé.
-- CSS épuré, utilisation de variables et flexbox.
+- Toutes les données injectées dans le DOM sont filtrées pour éviter les attaques XSS.
+- Aucun formulaire ou champ de saisie utilisateur non protégé.
 
-## Utilisation
-Ouvrez `index.html` ou `portfolio.html` dans un navigateur pour accéder au portfolio.
+## Optimisation
+
+- CSS optimisé : doublons supprimés, règles regroupées.
+- JS factorisé et sécurisé.
+- Structure de projet claire et maintenable.
+
+## Compatibilité
+
+- Design responsive pour mobile et tablette (media queries).
 
 ## Auteur
-- 0xCyberLiTech
-- Année : 2025
+
+0xCyberLiTech
 
 ---
-Ce site est destiné à présenter des projets, scripts et tutoriels liés à la cybersécurité et au développement.
+
+Pour toute question ou amélioration, contactez l’auteur via GitHub.

@@ -78,12 +78,37 @@ header.top-banner {
 
 .top-banner__content {
     max-width: 1100px;
-    margin: 0 auto;
-    padding: 0.7em 2vw 0.5em 2vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+}
+
+/* === Responsive : mobile & tablette === */
+@media (max-width: 900px) {
+    .top-banner__content {
+        max-width: 98vw;
+        padding: 0 2vw;
+    }
+    .project-tile,
+    .tron-section-title {
+        font-size: 0.98em;
+        min-width: 220px;
+        max-width: 98vw;
+    }
+}
+@media (max-width: 600px) {
+    header.top-banner {
+        font-size: 0.98em;
+        padding: 0.3em 0;
+    }
+    .top-banner__title,
+    .project-tile,
+    .tron-section-title {
+        font-size: 1em;
+        min-width: 160px;
+        padding: 0.7em 0.5em;
+    }
+    #projects-list {
+        flex-direction: column;
+        gap: 1.2em;
+    }
 }
 
 .top-banner__title {
@@ -170,7 +195,7 @@ section#projets {
     box-sizing: border-box;
 }
 /* .badge-container et .tron-badge-container supprimés car non utilisés */
-.day-counter, .badge-new {
+.badge-new {
     background: #00fff0;
     color: #181c24;
     border-radius: 4px;
@@ -206,10 +231,9 @@ footer#site-footer, footer {
     }
 }
 @media (max-width: 700px) {
-    .top-banner__title {
-        font-size: 1.2em;
-    }
+    .top-banner__title,
     .top-banner__content {
+        font-size: 1.2em;
         padding: 0.5em 1vw 0.3em 1vw;
     }
     main {
@@ -222,11 +246,10 @@ footer#site-footer, footer {
     }
 }
 @media (max-width: 480px) {
-    .top-banner__title {
+    .top-banner__title,
+    .top-banner__content {
         font-size: 1em;
         letter-spacing: 1px;
-    }
-    .top-banner__content {
         padding: 0.3em 0.5vw 0.2em 0.5vw;
     }
     main {
@@ -373,17 +396,7 @@ footer#site-footer, footer {
     transform: translateY(-2px) scale(1.015);
 }
 
-.project-tile .badges {
-    display: none; /* Masqué car le badge NEW est maintenant dans la barre de titre */
-}
 
-.badge {
-    display: none; /* Ancien système de badges désactivé */
-}
-
-.badge.nouveau {
-    display: none; /* Ancien système de badges désactivé */
-}
 
 .project-tile .infos {
     font-size: 0.85em;
@@ -1440,17 +1453,6 @@ section#projets {
     transform: translateY(-2px) scale(1.015);
 }
 
-.project-tile .badges {
-    display: none; /* Masqué car le badge NEW est maintenant dans la barre de titre */
-}
-
-.badge {
-    display: none; /* Ancien système de badges désactivé */
-}
-
-.badge.nouveau {
-    display: none; /* Ancien système de badges désactivé */
-}
 
 .project-tile .infos {
     font-size: 0.85em;
