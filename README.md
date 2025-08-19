@@ -21,11 +21,6 @@ assets/
 
 ## Description des dossiers et fichiers
 
-- **index.html** : Page d’accueil avec préloader et accès au portfolio.
-- **portfolio.html** : Page principale du portfolio, affichage des projets.
-- **rapport.txt** : Rapport d’audit et d’optimisation (généré automatiquement).
-- **README.md** : Documentation du projet (ce fichier).
-- **assets/** : Dossier des ressources statiques.
   - **logo/** : Contient le logo du site.
   - **portfolio/** : Scripts et styles du portfolio.
     - **script.js** : Logique d’affichage des projets, protection XSS, gestion du DOM.
@@ -37,62 +32,75 @@ assets/
 
 ## Interactions et rôles
 
-- Les fichiers JS manipulent le DOM et injectent du contenu sécurisé via `escapeHTML`.
-- Le CSS gère la responsivité et le style Tron.
-- Les fichiers HTML sont structurés pour la clarté et la performance.
 
 ## Sécurité
 
-- Toutes les données injectées dans le DOM sont filtrées pour éviter les attaques XSS.
-- Aucun formulaire ou champ de saisie utilisateur non protégé.
 
 ## Optimisation
 
-- CSS optimisé : doublons supprimés, règles regroupées.
-- JS factorisé et sécurisé.
-- Structure de projet claire et maintenable.
 
 ## Compatibilité
 
-- Design responsive pour mobile et tablette (media queries).
-
-## Recommandations
-
-- Vérifier régulièrement la sécurité des points d’entrée si des formulaires sont ajoutés.
-- Garder le code CSS et JS épuré, supprimer les classes/styles non utilisés.
-- Documenter toute nouvelle fonctionnalité ou modification dans le README.md et le rapport.txt.
-
-
-## Installation & utilisation
-
-1. Clonez le dépôt :
-  ```bash
-  git clone https://github.com/0xCyberLiTech/0xCyberLiTech.github.io.git
-  ```
-2. Ouvrez le dossier dans votre navigateur ou éditeur préféré.
-3. Accédez à `index.html` pour lancer le site.
-
-Le site est statique : aucune dépendance ou installation supplémentaire n’est requise.
-
-## Prérequis techniques
-
-- Navigateur moderne recommandé : Chrome, Firefox, Edge, Safari (support des ES6, CSS3, fetch API).
-- Résolutions supportées : desktop, mobile, tablette.
-
-## Contribuer
-
-Les contributions sont les bienvenues !
-
-1. Forkez le projet.
-2. Créez une branche pour vos modifications.
-3. Proposez une pull request avec une description claire.
-
-Merci de respecter la structure du projet et de documenter vos changements dans le README.md et le rapport.txt.
 
 ## Auteur
 
 0xCyberLiTech
 
----
 
 Pour toute question ou amélioration, contactez l’auteur via GitHub.
+
+## Structure du projet
+
+```
+index.html
+portfolio.html
+rapport.txt
+README.md
+assets/
+  logo/
+    logo.png
+  portfolio/
+    script.js
+    style.css
+    tron-numbers-bg.js
+  preloader/
+    preloader-ultramodern.css
+    preloader-ultramodern.js
+```
+
+## Description des fichiers et dossiers
+
+- **index.html** : Page d’accueil, lance le préloader puis le portfolio.
+- **portfolio.html** : Page principale du portfolio, affiche les projets et le contenu dynamique.
+- **rapport.txt** : Rapport d’audit et d’optimisation (généré automatiquement).
+- **README.md** : Ce fichier, documentation complète du projet.
+- **assets/logo/logo.png** : Logo du site.
+- **assets/portfolio/script.js** : Script principal du portfolio, gestion de l’affichage des dépôts GitHub, protection XSS, animations.
+- **assets/portfolio/style.css** : Feuille de style principale, thème Tron, responsivité mobile/tablette, animations.
+- **assets/portfolio/tron-numbers-bg.js** : Script d’arrière-plan animé Tron.
+- **assets/preloader/preloader-ultramodern.css** : Styles du préloader animé.
+- **assets/preloader/preloader-ultramodern.js** : Script du préloader, gestion de la progression et transition vers le portfolio.
+
+## Interactions et rôles
+
+- Les fichiers JS et CSS sont séparés pour faciliter la maintenance et l’optimisation.
+- Le préloader s’affiche au chargement, puis le portfolio devient interactif.
+- Les données dynamiques (dépôts GitHub) sont protégées contre les attaques XSS.
+- La structure responsive garantit une expérience optimale sur mobile et tablette.
+
+## Sécurité
+
+- Protection XSS assurée par l’échappement des données dynamiques.
+- Aucun formulaire ou champ input non sécurisé détecté.
+
+## Optimisation
+
+- Code épuré, sans doublons ni éléments orphelins.
+- Utilisation de variables CSS, animations et transitions modernes.
+- Media queries pour la compatibilité mobile/tablette.
+
+## Recommandations
+
+- Continuer à séparer les responsabilités (JS/CSS/HTML).
+- Vérifier régulièrement les dépendances et les points d’entrée utilisateur.
+- Documenter toute modification majeure dans le rapport.txt.

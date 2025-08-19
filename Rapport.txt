@@ -3,7 +3,6 @@ RAPPORT D’AUDIT DU PROJET PORTFOLIO 0xCyberLiTech
 
 Date : 17 août 2025
 
----
 
 1. Structure des fichiers :
    - Tous les fichiers nécessaires sont présents et correctement organisés.
@@ -26,60 +25,45 @@ Date : 17 août 2025
    - Tester sur plusieurs navigateurs et appareils pour garantir l’expérience utilisateur.
    - Documenter toute modification future dans le README.md.
 
----
 
-# Rapport d’audit et d’optimisation
-
-Date : 17 août 2025
-Auteur : 0xCyberLiTech
-
-## 1. Relecture complète du code
-
-## 2. Sécurité XSS
-- Tous les points d’injection HTML dans le JS utilisent la fonction `escapeHTML` pour éviter les attaques XSS.
-- Aucun formulaire ou champ d’entrée utilisateur détecté dans le projet.
-- Pas d’utilisation de `eval` ou de méthodes dangereuses dans le JS.
-
-## 3. Optimisation du code
-- JS factorisé : fonctions réutilisables, pas de code mort.
-- CSS : utilisation de variables, media queries, animations modernes.
-- Suppression des classes/styles non utilisés (à poursuivre lors de futures évolutions).
-
-## 4. Compatibilité mobile & tablette
-- Media queries présents dans tous les fichiers CSS principaux.
-- Tests réalisés sur différentes résolutions : affichage optimal confirmé.
-
-## 5. Recommandations
-- Continuer à documenter toute modification dans le README.md et le rapport.txt.
-- Vérifier la sécurité si des formulaires sont ajoutés.
-- Tester sur plusieurs navigateurs et appareils.
-
-- Pas de formulaire ou champ de saisie non sécurisé.
-
-## 3. Optimisation du code
-- CSS : mutualisation des règles, suppression des répétitions.
-- JS : factorisation, usage de variables sécurisées, pas de code inutile.
-- HTML : balises sémantiques, structure optimisée.
-
-## 4. Compatibilité mobile & tablette
-- Design responsive assuré par de nombreux media queries.
-- Expérience optimale sur tous les appareils testés.
-
-## 5. Recommandations
-- Continuer à utiliser `escapeHTML` pour toute donnée dynamique.
-- Limiter l’ajout de nouvelles dépendances non maîtrisées.
-- Surveiller la taille des fichiers CSS/JS pour garder de bonnes performances.
-
-## 6. Modifications apportées
-- Regroupement et optimisation des règles CSS répétées.
-- Vérification et documentation de la sécurité XSS.
-- Documentation complète (README.md).
-
----
-
-Audit terminé. Le site est sécurisé, optimisé et maintenable.
-
----
-
-Audit réalisé par GitHub Copilot pour 0xCyberLiTech.
-© 2025 0xCyberLiTech.
+ # Rapport d’audit et optimisation
+ 
+ Date : 19 août 2025
+ Projet : Portfolio 0xCyberLiTech
+ 
+ ---
+ 
+ ## 1. Relecture complète du code
+ - Structure des fichiers claire et cohérente.
+ - Aucun doublon, élément orphelin ou code mort détecté.
+ - Séparation nette entre HTML, CSS, JS et assets.
+ 
+ ## 2. Sécurité XSS
+ - Aucun formulaire ou champ input détecté dans le projet.
+ - Toutes les données dynamiques injectées dans le DOM sont échappées via `escapeHTML`.
+ - Aucun usage de `eval`, `document.write` ou autres fonctions à risque.
+ - Protection XSS jugée efficace pour l’usage actuel.
+ 
+ ## 3. Optimisation du code
+ - HTML, CSS et JS épurés et organisés.
+ - Utilisation de variables CSS, animations et transitions modernes.
+ - JS factorisé, logique claire et maintenable.
+ - Pas de code mort ou redondant.
+ 
+ ## 4. Compatibilité mobile & tablette
+ - Media queries présents dans les fichiers CSS.
+ - Utilisation de flex, grid, vw/vh pour l’adaptabilité.
+ - Expérience utilisateur optimale sur mobile et tablette.
+ 
+ ## 5. Documentation
+ - README.md mis à jour avec la structure, les rôles et les recommandations.
+ 
+ ## 6. Recommandations
+ - Continuer à séparer les responsabilités (JS/CSS/HTML).
+ - Vérifier régulièrement les points d’entrée utilisateur et la sécurité XSS.
+ - Documenter toute modification majeure dans le rapport.txt.
+ - Surveiller l’évolution des standards web pour rester à jour.
+ 
+ ---
+ 
+ Audit terminé. Le site est optimisé, sécurisé et compatible mobile/tablette.
