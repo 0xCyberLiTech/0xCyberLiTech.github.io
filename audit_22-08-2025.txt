@@ -1,0 +1,88 @@
+# Audit du maillage des fichiers du dépôt 0xCyberLiTech.github.io
+
+Date : 22 août 2025
+
+Ce rapport détaille les interactions et dépendances entre les principaux fichiers du dépôt.
+
+---
+
+## 1. Fichiers HTML
+
+### index.html
+- **Dépendances CSS** :
+  - `assets/portfolio/style.css` (mise en forme générale)
+- **Dépendances JS** :
+  - `assets/portfolio/script.js` (affichage dynamique des projets, gestion du DOM)
+  - `assets/preloader/preloader-ultramodern.js` (animation et gestion du préchargeur)
+  - `assets/portfolio/tron-numbers-bg.js` (animation de fond Tron)
+- **Ressources graphiques** :
+  - `assets/logo/logo.png` (logo affiché dans le préchargeur)
+
+### portfolio.html
+- **Dépendances CSS** :
+  - `assets/portfolio/style.css` (mise en forme générale)
+- **Dépendances JS** :
+  - `assets/portfolio/script.js` (affichage dynamique des projets, gestion du DOM)
+  - `assets/portfolio/tron-numbers-bg.js` (animation de fond Tron)
+- **Ressources graphiques** :
+  - `assets/logo/logo.png` (favicon)
+
+---
+
+## 2. Fichiers JavaScript
+
+### script.js
+- **Utilisé par** : `index.html`, `portfolio.html`
+- **Fonctions principales** :
+  - Récupération des dépôts GitHub via l’API
+  - Affichage dynamique des projets dans `#projects-list`
+  - Gestion de l’opacité du bandeau et du footer
+
+### tron-numbers-bg.js
+- **Utilisé par** : `index.html`, `portfolio.html`
+- **Fonction** : Animation de fond visuelle (effet Tron)
+
+### preloader-ultramodern.js
+- **Utilisé par** : `index.html`
+- **Fonction** : Animation et gestion du préchargeur (affichage avant chargement du portfolio)
+
+---
+
+## 3. Fichiers CSS
+
+### style.css
+- **Utilisé par** : `index.html`, `portfolio.html`
+- **Fonction** : Mise en forme visuelle globale (bannière, terminal, footer, etc.)
+
+### preloader-ultramodern.css
+- **Utilisé par** : `index.html` (via le JS du préchargeur)
+- **Fonction** : Styles spécifiques au préchargeur
+
+---
+
+## 4. Ressources graphiques
+
+### logo.png
+- **Utilisé par** : `index.html`, `portfolio.html` (favicon et affichage dans le préchargeur)
+
+---
+
+## 5. Synthèse du maillage
+
+- Les deux fichiers HTML partagent la majorité de leurs dépendances (CSS, JS, images).
+- `index.html` utilise en plus le préchargeur (`preloader-ultramodern.js` et son CSS).
+- Le JS principal (`script.js`) gère l’affichage dynamique des projets pour les deux pages.
+- Le CSS est mutualisé pour l’ensemble du site.
+- Les ressources graphiques sont utilisées pour le branding et l’UX.
+
+---
+
+## Recommandations
+
+- Fusion possible de `index.html` et `portfolio.html` pour simplifier la maintenance.
+- Centralisation des scripts et styles pour éviter les doublons.
+- Vérifier l’utilité de chaque ressource pour éviter le code mort ou les fichiers inutilisés.
+
+---
+
+Fin du rapport.
