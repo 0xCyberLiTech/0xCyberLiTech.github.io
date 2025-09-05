@@ -1,3 +1,9 @@
+@media (max-width: 700px) {
+    footer {
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+    }
+}
 body {
     box-sizing: border-box;
     margin: 0;
@@ -112,6 +118,10 @@ header.top-banner {
         gap: 10px;
         padding: 0 1vw;
     }
+    footer {
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+    }
 }
 
 .terminal-cursor {
@@ -191,12 +201,6 @@ section#projets {
         padding: 0 1vw;
     }
 }
-@media (max-width: 480px) {
-    main {
-        padding: 8px 1vw 12px 1vw;
-    }
-    #projects-list {
-        grid-template-columns: 1fr;
         gap: 8px;
         padding: 0 0.5vw;
     }
