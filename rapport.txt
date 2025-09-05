@@ -1,0 +1,158 @@
+Correctifs CSS prioritaires – imports, syntaxe invalide, duplications
+
+Objectif
+- Corriger les erreurs de parsing, supprimer les duplications conflictuelles et normaliser les imports pour fiabiliser l’affichage et faciliter la maintenance.
+
+1) Imports Google Fonts
+Problème
+- @import est présent au milieu du fichier (et même dans un bloc), ce qui est invalide/risqué. En CSS, @import doit être en tête de fichier, avant toute règle.
+
+Action
+- Déplacer tous les @import en tout début de style.css (et supprimer les doublons).
+- Idéal: remplacer totalement @import par un <link> dans <head> avec font-display: swap. Si vous gardez @import, appliquez le bloc ci-dessous.
+
+À mettre tout en haut de assets/portfolio/style.css (ligne 1):
+@import url("https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap");
+
+À supprimer dans le fichier:
+- Toute autre ligne @import, notamment celle autour de ~ligne 921 et toute @import à l’intérieur d’un bloc.
+
+2) Règle imbriquée invalide (syntaxe type SCSS non compilée)
+Problème
+- .days-left { ... .top-banner__title { ... } } vers ~lignes 607–636.
+- L’imbrication de .top-banner__title à l’intérieur de .days-left est invalide en CSS natif; le parseur peut ignorer le bloc suivant.
+
+Action
+- Fermer correctement .days-left puis déclarer .top-banner__title au niveau racine.
+
+Patch recommandé (remplacez le bloc fautif par ceci):
+.days-left {
+  background: linear-gradient(90deg, #00fff033 60%, #00fff011 100%);
+  color: #0a1a1c;
+  font-family: 'Share Tech Mono', 'Fira Mono', 'Consolas', 'Menlo', 'monospace';
+  font-weight: 600;
+  border-radius: 0.6em;
+  border: 1px solid #00fff088;
+  box-shadow: 0 0 2px #00fff044;
+  padding: 0.08em 0.65em;
+  margin-left: 0.7em;
+  letter-spacing: 0.03em;
+}
+
+/* Extrait du bloc imbriqué: placer cette définition au niveau racine */
+.top-banner__title {
+  font-size: 2.35em;
+  font-weight: 900;
+  color: #00fff0;
+  text-shadow:
+    0 0 12px #00fff0,
+    0 0 2px #00fff0,
+    0 2px 8px #000a,
+    0 4px 16px #000c;
+  font-family: 'Share Tech Mono', 'Fira Mono', 'Consolas', 'Menlo', 'monospace';
+  margin: 0.1em 0;
+  letter-spacing: 1.7px;
+  line-height: 1.1;
+  background: none;
+  opacity: 1 !important;
+}
+
+3) Duplications et conflits – .terminal-output
+Problème
+- .terminal-output est défini deux fois avec des styles divergents. Selon l’ordre de cascade, le rendu varie et devient difficile à maintenir.
+
+Action
+- Conserver UNE seule définition “canonique” pour .terminal-output.
+- Utiliser .terminal-output.project-description pour les variations spécifiques (déjà présente, OK).
+- Supprimer l’autre définition en double et le second ::before.
+
+Definition canonique recommandée (garder celle-ci, supprimer l’autre et ses ::before/hover dupliqués):
+.terminal-output {
+  margin: 8px 0;
+  font-size: 0.98em;
+  color: #e0e0e0;
+  line-height: 1.7;
+  font-family: 'Share Tech Mono', 'Fira Mono', 'Consolas', 'Menlo', monospace;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 14px 18px;
+  background: #181c24;
+  border: 1.5px solid #00fff055;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.terminal-output::before {
+  content: "// ";
+  color: #666;
+  font-family: Consolas, monospace;
+  font-size: 0.9em;
+}
+
+.terminal-output.project-description {
+  background: #0f3032 !important;
+  border: 1.5px solid #00fff055 !important;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  color: #fff !important;
+  font-family: 'Share Tech Mono', 'Fira Mono', 'Consolas', 'Menlo', monospace !important;
+  font-size: 1em !important;
+  line-height: 1.5 !important;
+  padding: 14px 18px 10px 18px !important;
+  text-shadow: none !important;
+  transition: none !important;
+  overflow: visible !important;
+  display: block !important;
+}
+
+4) Duplications – .top-banner__title et .top-banner__content
+Action
+- Conserver une seule définition cohérente pour .top-banner__title (voir ci-dessus) et pour .top-banner__content garder:
+.top-banner__content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.7em 2vw 0.5em 2vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+5) Duplications – @keyframes blink-cursor
+Action
+- Ne garder qu’une seule déclaration:
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0; }
+}
+
+6) Duplications – footer/#site-footer
+Action
+- Conserver un seul bloc canonique et remplacer 100vw par 100%:
+footer, #site-footer {
+  position: relative;
+  width: 100%;
+  left: 0;
+  right: 0;
+  margin: 2.5em 0 0 0;
+  padding: 1.1em 0 1em 0;
+  text-align: center;
+  font-size: 1em;
+  color: #00fff0;
+  background: #181c24;
+  border-top: 2px solid #00fff0;
+  box-shadow: none;
+}
+
+7) Nettoyage complémentaire (optionnel)
+- Supprimer les doublons inutiles de .project-tile:hover et .project-tile:hover .btn-readme.
+- Supprimer les re-déclarations identiques de .top-banner__prompt et .top-banner__header.
+
+—
+Fin du rapport.
