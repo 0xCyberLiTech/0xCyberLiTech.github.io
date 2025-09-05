@@ -1,3 +1,8 @@
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding-bottom: 0 !important;
+}
 /* Fix mobile : évite la barre blanche en bas lors du scroll */
 html, body {
     background: #101820; /* ou ton dégradé habituel */
