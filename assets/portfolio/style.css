@@ -3,24 +3,7 @@
     50% { box-shadow: 0 0 0 2px #00FD7F, 0 0 16px 4px #00FD7F, 0 2px 8px #000a; }
     100% { box-shadow: 0 0 0 1px #00FD7F, 0 0 8px 2px #00FD7F, 0 2px 6px #000a; }
 }
-footer#site-footer, footer {
-    background: #181c24 !important;
-    color: #00fff0 !important;
-    width: 100vw !important;
-    left: 0 !important;
-    right: 0 !important;
-    min-height: 2.5em;
-}
-body, html {
-    background: #101820 !important;
-}
-
-footer#site-footer, footer {
-    background: #181c24 !important;
-    color: #00fff0 !important;
-    border: none !important;
-    box-shadow: none !important;
-}
+/* doublons supprimés, version canonique plus bas */
 /* === Zone : Bannière principale === */
 
 /* === Zone : Liste des projets === */
@@ -76,10 +59,6 @@ header.top-banner {
     text-align: center;
 }
 
-.top-banner__content {
-    max-width: 1100px;
-}
-
 /* === Responsive : mobile & tablette === */
 @media (max-width: 900px) {
     .top-banner__content {
@@ -98,7 +77,6 @@ header.top-banner {
         font-size: 0.98em;
         padding: 0.3em 0;
     }
-    .top-banner__title,
     .project-tile,
     .tron-section-title {
         font-size: 1em;
@@ -111,26 +89,9 @@ header.top-banner {
     }
 }
 
-.top-banner__title {
-    font-size: 2em;
-    font-weight: 700;
-    color: #00fff0;
-    margin: 0.1em 0 0.1em 0;
-    letter-spacing: 1.2px;
-    line-height: 1.1;
-}
-
 .terminal-cursor {
     color: #00ff80;
     font-weight: bold;
-}
-
-.top-banner__prompt {
-    color: #b8ffe0;
-    font-size: 1em;
-    margin-top: 0.1em;
-    letter-spacing: 0.5px;
-    text-align: center;
 }
 
 main {
@@ -183,41 +144,8 @@ section#projets {
     display: flex;
     flex-direction: column;
 }
-.terminal-output, .terminal-output.project-description, .terminal-prompt {
-    background: #181c24;
-    border: 1px solid #00fff0;
-    border-radius: 6px;
-    color: #e0e0e0;
-    font-family: inherit;
-    font-size: 1em;
-    padding: 10px 12px;
-    margin: 8px 0;
-    box-sizing: border-box;
-}
-/* .badge-container et .tron-badge-container supprimés car non utilisés */
-.badge-new {
-    background: #00fff0;
-    color: #181c24;
-    border-radius: 4px;
-    padding: 2px 8px;
-    font-size: 0.93em;
-    font-weight: 600;
-    margin: 0;
-}
-footer#site-footer, footer {
-    width: 100%;
-    left: 0;
-    right: 0;
-    position: relative;
-    margin: 2.5em 0 0 0;
-    padding: 1.1em 0 1em 0;
-    text-align: center;
-    font-size: 1em;
-    color: #00fff0;
-    background: #181c24;
-    border-top: 2px solid #00fff0;
-    font-family: inherit;
-}
+
+/* doublon supprimé, version canonique plus bas */
 
 /* Responsive Tablette */
 @media (max-width: 900px) {
@@ -231,11 +159,6 @@ footer#site-footer, footer {
     }
 }
 @media (max-width: 700px) {
-    .top-banner__title,
-    .top-banner__content {
-        font-size: 1.2em;
-        padding: 0.5em 1vw 0.3em 1vw;
-    }
     main {
         padding: 12px 2vw 24px 2vw;
     }
@@ -246,12 +169,7 @@ footer#site-footer, footer {
     }
 }
 @media (max-width: 480px) {
-    .top-banner__title,
-    .top-banner__content {
-        font-size: 1em;
-        letter-spacing: 1px;
-        padding: 0.3em 0.5vw 0.2em 0.5vw;
-    }
+    /* doublon supprimé, version canonique plus bas */
     main {
         padding: 8px 1vw 12px 1vw;
     }
@@ -272,10 +190,7 @@ footer#site-footer, footer {
         right: 6px;
         gap: 4px;
     }
-    .day-counter, .badge-new {
-        font-size: 0.7em;
-        padding: 1px 4px;
-    }
+    /* doublon supprimé, version canonique plus bas */
     footer#site-footer, footer {
         font-size: 0.9em;
         padding: 0.7em 0 0.7em 0;
@@ -283,23 +198,6 @@ footer#site-footer, footer {
 }
 /* Import de la police cyber lisible */
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
-/* Terminal styles épurés */
-.terminal-output {
-    margin: 8px 0;
-    font-size: 0.98em;
-    color: #e0e0e0;
-    flex: 1;
-    line-height: 1.7;
-    font-family: 'Share Tech Mono', 'Fira Mono', 'Consolas', 'Menlo', 'monospace' !important;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    padding: 14px 18px;
-    background: #181c24;
-    border: 1.5px solid #00fff055;
-    border-radius: 10px;
-    position: relative;
-    overflow: hidden;
-}
 .terminal-output::before {
     content: '// ';
     color: #666;
@@ -506,30 +404,7 @@ footer#site-footer, footer {
 }
 
 /* Footer */
-footer {
-    width: 100vw;
-    left: 0;
-    right: 0;
-    position: relative;
-    margin: 2.5em 0 0 0;
-    padding: 1.1em 0 1em 0;
-    text-align: center;
-    font-size: 1.08em;
-    color: #00fff0ee;
-    background: linear-gradient(120deg, #0a0f1c 0%, #101a1c 60%, #00fff022 100%);
-    border-top: 2.5px solid #00fff0;
-    box-shadow:
-        0 0 32px #00fff055,
-        0 -2px 8px #000a,
-        0 0 0 2.5px #00fff055 inset,
-        0 0 24px 2px #00fff033 inset,
-        0 0 32px 8px #00fff099;
-    backdrop-filter: blur(7px) saturate(1.15);
-    border-radius: 0 0 12px 12px;
-    overflow: hidden;
-    transition: background 0.3s, box-shadow 0.3s, backdrop-filter 0.3s;
-    animation: tron-glow-footer 2.8s linear infinite alternate;
-}
+/* doublon supprimé, version canonique plus bas */
 .terminal-output.project-description {
     background: #0f3032 !important;
     border: 1.5px solid #00fff055 !important;
@@ -954,13 +829,17 @@ header {
     margin-right: 0.2em;
 }
 
-@media (max-width: 700px) {
-  .top-banner__title { font-size: 1.2em; }
-  .top-banner__header, .top-banner__prompt { font-size: 0.85em; }
+@media (max-width: 480px) {
+    /* ...existing code... */
+    footer {
+        font-size: 0.9em;
+        padding: 0.7em 0 0.7em 0;
+        background: none !important;
+        background-color: transparent !important;
+        box-shadow: none !important;
+        margin: 0 !important;
+    }
 }
-
-/* Header terminal pour le bandeau */
-
 
 
 
@@ -1560,33 +1439,24 @@ section#projets {
     top: 100%;
 }
 
-/* Footer */
 footer {
-    width: 100vw;
+    width: 100%;
     left: 0;
     right: 0;
     position: relative;
     margin: 2.5em 0 0 0;
     padding: 1.1em 0 1em 0;
     text-align: center;
-    font-size: 1.08em;
-    color: #00fff0ee;
-    background: linear-gradient(120deg, #0a0f1c 0%, #101a1c 60%, #00fff022 100%);
-    border-top: 2.5px solid #00fff0;
-    box-shadow:
-        0 0 32px #00fff055,
-        0 -2px 8px #000a,
-        0 0 0 2.5px #00fff055 inset,
-        0 0 24px 2px #00fff033 inset,
-        0 0 32px 8px #00fff099;
-    backdrop-filter: blur(7px) saturate(1.15);
-    border-radius: 0 0 12px 12px;
-    overflow: hidden;
-    transition: background 0.3s, box-shadow 0.3s, backdrop-filter 0.3s;
-    animation: tron-glow-footer 2.8s linear infinite alternate;
+    font-size: 1em;
+    color: #00fff0;
+    background: #181c24;
+    border-top: 2px solid #00fff0;
     font-family: 'Share Tech Mono', 'Fira Mono', 'Consolas', 'Menlo', 'monospace';
     letter-spacing: 0.5px;
     text-shadow: 0 0 8px #00fff0, 0 0 2px #00fff0, 0 2px 8px #000a;
+    box-shadow: none;
+    border-radius: 0;
+    overflow: hidden;
 }
 @keyframes tron-glow-footer {
     0% { box-shadow: 0 0 32px #00fff055, 0 -2px 8px #000a, 0 0 0 2.5px #00fff055 inset, 0 0 24px 2px #00fff033 inset, 0 0 32px 8px #00fff099; }
