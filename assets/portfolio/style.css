@@ -1,3 +1,9 @@
+body {
+    background: #101820 !important;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 @keyframes neonGlow {
     0% { box-shadow: 0 0 0 1px #00FD7F, 0 0 8px 2px #00FD7F, 0 2px 6px #000a; }
     50% { box-shadow: 0 0 0 2px #00FD7F, 0 0 16px 4px #00FD7F, 0 2px 8px #000a; }
@@ -195,6 +201,10 @@ section#projets {
     footer#site-footer, footer {
         font-size: 0.9em;
         padding: 0.7em 0 0.7em 0;
+        background: #101820 !important;
+        color: #00fff0;
+        border: none;
+        box-shadow: none;
     }
 }
 /* Import de la police cyber lisible */
