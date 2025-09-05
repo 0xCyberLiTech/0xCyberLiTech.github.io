@@ -440,11 +440,7 @@ section#projets {
     text-shadow: 0 0 4px #00ff8099;
 }
 
-/* Animation de clignotement terminal */
-@keyframes terminalBlink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0.3; }
-}
+/* Animation de clignotement terminal duplicate removed */
 
 /* Effet de scan terminal - utilise ::first-line pour éviter les conflits */
 .project-tile:hover::before {
@@ -620,10 +616,7 @@ section#projets {
     }
 }
 
-@keyframes blink-cursor {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-}
+/* Duplicate blink-cursor keyframes removed */
 
 /* Hauteur du bandeau terminal */
 
