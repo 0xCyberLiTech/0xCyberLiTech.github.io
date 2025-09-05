@@ -1526,8 +1526,8 @@ footer {
     }
     
     .top-banner__title {
-        font-size: 1em;
-        letter-spacing: 1px;
+        font-size: 0.78em;
+        letter-spacing: 0.5px;
     }
     
     .top-banner__title::before {
