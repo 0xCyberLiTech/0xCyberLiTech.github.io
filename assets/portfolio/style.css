@@ -3,8 +3,6 @@
     50% { box-shadow: 0 0 0 2px #00FD7F, 0 0 16px 4px #00FD7F, 0 2px 8px #000a; }
     100% { box-shadow: 0 0 0 1px #00FD7F, 0 0 8px 2px #00FD7F, 0 2px 6px #000a; }
 }
-/* doublons supprimés, version canonique plus bas */
-/* === Zone : Bannière principale === */
 
 /* === Zone : Liste des projets === */
 /* === Bandeau terminal Kali Linux pour chaque tuile === */
@@ -71,6 +69,14 @@ header.top-banner {
         min-width: 220px;
         max-width: 98vw;
     }
+    main {
+        padding: 18px 4vw 32px 4vw;
+    }
+    #projects-list {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 14px;
+        padding: 0 2vw;
+    }
 }
 @media (max-width: 600px) {
     header.top-banner {
@@ -86,6 +92,14 @@ header.top-banner {
     #projects-list {
         flex-direction: column;
         gap: 1.2em;
+    }
+    main {
+        padding: 12px 2vw 24px 2vw;
+    }
+    #projects-list {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        padding: 0 1vw;
     }
 }
 
@@ -145,8 +159,6 @@ section#projets {
     flex-direction: column;
 }
 
-/* doublon supprimé, version canonique plus bas */
-
 /* Responsive Tablette */
 @media (max-width: 900px) {
     main {
@@ -169,7 +181,6 @@ section#projets {
     }
 }
 @media (max-width: 480px) {
-    /* doublon supprimé, version canonique plus bas */
     main {
         padding: 8px 1vw 12px 1vw;
     }
@@ -190,7 +201,6 @@ section#projets {
         right: 6px;
         gap: 4px;
     }
-    /* doublon supprimé, version canonique plus bas */
     footer#site-footer, footer {
         font-size: 0.9em;
         padding: 0.7em 0 0.7em 0;
@@ -258,26 +268,6 @@ section#projets {
         border-radius: 0;
     }
 /* Terminal styles */
-.terminal-output {
-    margin: 8px 0;
-    font-size: 0.98em;
-    color: #eaffd0;
-    flex: 1;
-    line-height: 1.7;
-        font-family: 'Share Tech Mono', 'Fira Mono', 'Consolas', 'Menlo', 'monospace';
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    text-shadow: 0 2px 8px #000c, 0 0 6px #00fff0, 0 0 2px #fff;
-    padding: 14px 18px;
-    background: linear-gradient(120deg, rgba(0,255,240,0.13) 0%, rgba(10,20,30,0.82) 100%);
-    border: 1.5px solid #00fff055;
-    border-radius: 10px;
-    position: relative;
-    box-shadow: 0 2px 24px 0 #00fff033, 0 1.5px 0 #00fff0 inset;
-    backdrop-filter: blur(4px) saturate(1.12);
-    transition: box-shadow 0.3s, border-color 0.3s, background 0.3s;
-    overflow: hidden;
-}
 
 .terminal-output::before {
     content: '// ';
@@ -293,8 +283,6 @@ section#projets {
     color: #e0e0e0;
     transform: translateY(-2px) scale(1.015);
 }
-
-
 
 .project-tile .infos {
     font-size: 0.85em;
@@ -547,8 +535,6 @@ section#projets {
     font-family: inherit;
 }
 
-
-
 /* Apparition harmonieuse du contenu du portfolio */
 .fade-in {
     opacity: 0;
@@ -581,7 +567,6 @@ html, body {
     padding-top: 0 !important;
     margin: 0 !important;
 }
-
 
 .top-banner {
     width: 100vw;
@@ -841,11 +826,6 @@ header {
     }
 }
 
-
-
-
-
-
 .profil-buttons {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -964,44 +944,47 @@ section#accueil p {
     position: relative;
     padding-left: 30px;
     text-align: left;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    letter-spacing: 0.3px;
-}
+    @media (max-width: 700px) {
+        main {
+            padding: 12px 2vw 24px 2vw;
+        }
+        #projects-list {
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            padding: 0 1vw;
+        }
+        html, body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #101820 0%, #0a1a1c 60%, #00fff022 100%) fixed, 
+                                    radial-gradient(ellipse at 60% 40%, #0a1a1c 60%, #101820 100%) fixed;
+        }
+        footer {
+            background: none !important;
+            background-color: transparent !important;
+            box-shadow: none !important;
+            margin: 0 !important;
+        }
+    }
 
-section#accueil p::before {
-    content: '# ';
-    color: #00aaff;
-    position: absolute;
-    left: 8px;
-    font-family: 'Consolas', monospace;
-}
-
-section#accueil p::after {
-    content: '"';
-    color: #00aaff;
-    margin-left: 4px;
-}
-
-section#projets {
-    margin-bottom: 32px;
-}
-
-#projects-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 24px;
-    margin-top: 24px;
-    padding: 0 12px;
-}
-
-/* Tuile projet : style Terminal/Console moderne */
-
-.project-tile {
-    background: linear-gradient(135deg, #101a1c 0%, #14181a 100%) !important;
-    border-radius: 10px !important;
-    border: 1.5px solid #00fff0 !important;
+    @media (max-width: 480px) {
+        main {
+            padding: 8px 1vw 12px 1vw;
+        }
+        #projects-list {
+            grid-template-columns: 1fr;
+            gap: 8px;
+            padding: 0 0.5vw;
+        }
+        .project-tile {
+            min-height: 160px;
+        }
+        .project-tile-content {
+            padding: 12px 6px 8px 6px;
+        }
+        body {
+            padding-top: 0 !important;
+        }
+    }
     box-shadow: 0 0 32px #00fff033, 0 2px 16px #000a;
     padding: 0 !important;
     position: relative;
@@ -1294,8 +1277,6 @@ section#projets {
     cursor: pointer;
 }
 
-
-
 .terminal-output {
     margin: 8px 0;
     font-size: 0.98em;
@@ -1331,7 +1312,6 @@ section#projets {
     color: #e0e0e0;
     transform: translateY(-2px) scale(1.015);
 }
-
 
 .project-tile .infos {
     font-size: 0.85em;
@@ -1501,41 +1481,34 @@ footer {
         border-left: 2px solid rgba(0, 255, 0, 0.3);
         padding: 16px 8px 32px 8px;
     }
-    
     /* Tuile profil */
     .profil-card {
         max-width: 100%;
         margin: 0 12px;
     }
-    
     /* Section accueil */
     section#accueil {
         margin: 0 8px 24px 8px;
         padding: 20px 16px;
     }
-    
     section#accueil h2 {
         font-size: 1.4em;
     }
-    
     section#accueil p {
         font-size: 0.95em;
         padding-left: 25px;
     }
-    
     /* Titre "Mes dépôts publics" */
     #projets h2 {
         font-size: 1.5em;
         margin: 25px 0 20px 0;
     }
-    
     /* Grille projets - 2 colonnes sur tablette */
     #projects-list {
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         gap: 16px;
         padding: 0 8px;
     }
-    
     /* Réduction des effets pour les performances */
     .project-tile .scan-effect,
     .profil-card::after {
