@@ -96,26 +96,5 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Gestion de l'opacité du bandeau
-    const banner = document.querySelector('.top-banner');
-    if (banner) {
-        let hasScrolled = false;
-        let lastScrollY = window.scrollY;
-        const updateBannerOpacity = () => {
-            if (window.scrollY <= 2 && hasScrolled && lastScrollY - window.scrollY < 50) {
-                banner.style.transition = 'background 0.3s, opacity 0.3s';
-                banner.style.opacity = '1';
-            } else if (window.scrollY <= 2 && hasScrolled) {
-                banner.style.transition = 'background 0.3s, opacity 0.3s';
-                banner.style.opacity = '0.5';
-            } else {
-                banner.style.transition = 'background 0.3s, opacity 0.3s';
-                banner.style.opacity = '1';
-                if (window.scrollY > 2) hasScrolled = true;
-            }
-            lastScrollY = window.scrollY;
-        };
-        window.addEventListener('scroll', updateBannerOpacity);
-        banner.style.opacity = '1';
-    }
+    // Suppression de la gestion d'opacité du bandeau : il reste toujours opaque
 });
