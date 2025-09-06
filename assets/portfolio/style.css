@@ -690,15 +690,29 @@ header {
     margin-right: 0.2em;
 }
 
-@media (max-width: 480px) {
-    /* ...existing code... */
-    footer {
-        font-size: 0.9em;
-        padding: 0.7em 0 0.7em 0;
-        background: none !important;
-        background-color: transparent !important;
-        box-shadow: none !important;
-        margin: 0 !important;
+
+footer#site-footer {
+    width: 100%;
+    background: linear-gradient(90deg, rgba(16,24,32,0.98) 60%, rgba(0,255,240,0.07) 100%);
+    color: #00fff0cc;
+    font-family: 'Fira Mono', 'Consolas', monospace;
+    font-size: 1em;
+    text-align: center;
+    padding: 0.7em 0 0.7em 0;
+    border-top: 1.5px solid #00fff044;
+    box-shadow: 0 -2px 12px 0 #00fff022;
+    letter-spacing: 0.5px;
+    transition: background 0.3s;
+    z-index: 10;
+    position: relative;
+}
+
+@media (max-width: 600px) {
+    footer#site-footer {
+        font-size: 0.92em;
+        padding: 0.6em 0 0.6em 0;
+        background: linear-gradient(90deg, rgba(16,24,32,0.98) 80%, rgba(0,255,240,0.07) 100%);
+        border-top-width: 1px;
     }
 }
 
