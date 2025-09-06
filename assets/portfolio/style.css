@@ -115,6 +115,17 @@ section#projets {
     }
     #projects-list {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        .top-banner__title {
+            font-size: 0.85em;
+            color: #b8b8b8;
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            padding: 16px 8px 32px 8px;
+            background: rgba(0, 0, 0, 0.15);
+            border-left: 2px solid rgba(0, 255, 0, 0.3);
+        }
         gap: 14px;
         padding: 0 2vw;
     }
@@ -174,7 +185,7 @@ section#projets {
         min-height: 160px;
     }
     .project-tile-content {
-        padding: 12px 6px 8px 6px;
+        padding: 12px 6px 8px 6px; /* doublon supprimé, voir plus haut */
         font-size: 0.93em;
     }
     .badge-container, .tron-badge-container {
@@ -230,9 +241,6 @@ section#projets {
     }
 }
 /* Import Google Fonts Share Tech Mono pour l'effet cyber */
-.project-tile:hover {
-    /* Fusionné dans .project-tile:hover, .project-tile:focus */
-}
 .project-tile:hover .btn-readme {
     background: rgba(0, 255, 0, 0.1);
     border-color: #00ff00;
@@ -282,9 +290,6 @@ section#projets {
 
 
 /* Effet hover : animation de frappe lumineuse sur la tuile */
-.project-tile:hover {
-    /* Fusionné dans .project-tile:hover, .project-tile:focus */
-}
 
 
 /* Animation de clignotement du curseur terminal dans le terminal */
