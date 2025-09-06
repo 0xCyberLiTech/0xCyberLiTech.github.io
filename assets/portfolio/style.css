@@ -96,13 +96,6 @@ section#projets {
     display: flex;
     flex-direction: column;
 }
-.project-tile h3 {
-    color: #00fff0;
-    font-size: 1.1em;
-    font-weight: 700;
-    text-align: center;
-    margin: 0.7em 0 0.5em 0;
-}
 .project-tile-content {
     font-size: 0.98em;
     padding: 20px 14px 14px 14px;
@@ -237,22 +230,11 @@ section#projets {
     }
 }
 /* Import Google Fonts Share Tech Mono pour l'effet cyber */
-.terminal-output:hover {
-    background: linear-gradient(120deg, rgba(0,255,240,0.22) 0%, rgba(10,20,30,0.92) 100%);
-    border-color: #00fff0cc;
-    box-shadow: 0 0 32px 8px #00fff055, 0 2px 16px #000a;
-    color: #e0e0e0;
-    transform: translateY(-2px) scale(1.015);
-}
 .project-tile:hover {
-    box-shadow: 0 0 0 1px #00FD7F, 0 0 8px 2px #00FD7F, 0 2px 6px #000a;
-    border-color: #00FD7F;
-    filter: brightness(1.04) saturate(1.04);
-    transform: scale(1.025) translateY(-2px);
-    animation: neonGlow 1.2s infinite;
+    /* Fusionné dans .project-tile:hover, .project-tile:focus */
 }
 .project-tile:hover .btn-readme {
-    background: #ffffff14;
+    background: rgba(0, 255, 0, 0.1);
     border-color: #00ff00;
     color: #b8ffe0;
     font-size: 1em;
@@ -262,6 +244,7 @@ section#projets {
     text-align: center;
     width: 100%;
     text-shadow: 0 0 4px #00ff8099;
+    text-shadow: 0 0 4px #00ff8099;
 }
 /* Désactivation d'effet hover sur le bandeau supérieur de la tuile */
 .project-tile:hover .scan-effect {
@@ -269,15 +252,7 @@ section#projets {
 }
 /* Désactivation des effets visuels au survol des tuiles */
 
-@keyframes btnPulse {
-    0% { opacity: 0.7; filter: blur(0.5px); }
-    100% { opacity: 1; filter: blur(2.5px); }
-}
 /* Animation de clignotement du curseur terminal (terminalBlink) */
-@keyframes terminalBlink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0.3; }
-}
 /* ...existing code... */
 /* Styles pour la sortie terminal (terminal-output) */
 
@@ -291,17 +266,6 @@ section#projets {
     transform: translateY(-2px) scale(1.015);
 }
 
-.project-tile .infos {
-    font-size: 0.85em;
-    color: #888;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 12px 0 8px 0;
-    font-family: 'Consolas', monospace;
-    border-top: 1px solid #333;
-    padding-top: 8px;
-}
 
 .project-tile .infos span {
     display: flex;
@@ -315,61 +279,15 @@ section#projets {
 }
 
 /* Bouton style Matrix/Tron pour les tuiles projets */
-.project-tile .btn-readme {
-    background: #181c1a;
-    color: #e0ffe0;
-    border: 1.5px solid #00ff80;
-    border-radius: 6px;
-    padding: 8px 22px;
-    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-    font-size: 2.35em;
-    font-weight: 900;
-    color: #00ff80;
-    text-shadow:
-        0 0 7px #00ff80,
-        0 0 2px #00ff80,
-        0 2px 8px #000a,
-        0 4px 16px #000c;
-    font-family: 'Share Tech Mono', 'Fira Mono', 'Consolas', 'Menlo', 'monospace';
-    margin: 0.1em 0 0.1em 0;
-    letter-spacing: 1.7px;
-    line-height: 1.1;
-    background: none;
-    text-align: center;
-    width: 100%;
-}
 
-@keyframes btnPulse {
-    0% { opacity: 0.7; filter: blur(0.5px); }
-    100% { opacity: 1; filter: blur(2.5px); }
-}
 
 /* Effet hover : animation de frappe lumineuse sur la tuile */
 .project-tile:hover {
-    box-shadow: 0 0 18px 2px #00fff0cc, 0 2px 16px #000a;
-    border-color: #00fff0;
-    filter: brightness(1.04) saturate(1.04);
-    transform: scale(1.025) translateY(-2px);
+    /* Fusionné dans .project-tile:hover, .project-tile:focus */
 }
 
-.project-tile:hover .btn-readme {
-    background: rgba(0, 255, 0, 0.1);
-    border-color: #00ff00;
-    color: #b8ffe0;
-    font-size: 1em;
-    font-family: 'Share Tech Mono', 'Fira Mono', 'Consolas', 'Menlo', 'monospace';
-    margin-top: 0.1em;
-    letter-spacing: 0.5px;
-    text-align: center;
-    width: 100%;
-    text-shadow: 0 0 4px #00ff8099;
-}
 
 /* Animation de clignotement du curseur terminal dans le terminal */
-@keyframes terminalBlink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0.3; }
-}
 
 /* Effet de scan lumineux sur la tuile projet (hover) */
 .project-tile:hover::before {
@@ -400,50 +318,16 @@ section#projets {
 
 
 
-.terminal-output.project-description {
-    background: #0f3032 !important;
-    border: 1.5px solid #00fff055 !important;
-    border-radius: 10px !important;
-    box-shadow: none !important;
-    backdrop-filter: none !important;
-    color: #fff !important;
-    font-family: 'Share Tech Mono', 'Fira Mono', 'Consolas', 'Menlo', 'monospace' !important;
-    font-size: 1em !important;
-    font-weight: normal !important;
-    letter-spacing: normal !important;
-    font-style: normal !important;
-    line-height: 1.5 !important;
-    padding: 14px 18px 10px 18px !important;
-    min-height: unset !important;
-    max-height: unset !important;
-    height: auto !important;
-    text-shadow: none !important;
-    transition: none !important;
-    overflow: visible !important;
-    display: block !important;
-}
 .terminal-output.project-description span {
     color: #fff !important;
     background: none !important;
     text-shadow: none !important;
-    font-weight: normal !important;
-    letter-spacing: normal !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.01em !important;
     font-style: normal !important;
-    font-family: inherit !important;
-    font-size: inherit !important;
+    font-family: 'Share Tech Mono', 'Fira Mono', 'Consolas', 'Menlo', 'monospace' !important;
+    font-size: 1.08em !important;
     animation: none !important;
-}
-/* doublon supprimé, version canonique plus haut */
-.project-tile h3::after {
-    display: none;
-}
-.project-tile h3:hover, .project-tile h3:focus {
-    color: #00fff0;
-    text-shadow: none;
-    transform: none;
-}
-.project-tile h3:hover::after, .project-tile h3:focus::after {
-    display: none;
 }
 #projets-list-title {
     display: block;
@@ -474,7 +358,6 @@ section#projets {
     margin-left: 0.7em;
     letter-spacing: 0.03em;
 
-    /* Fusion des styles .top-banner__title (Share Tech Mono par défaut) */
     .top-banner__title {
         font-size: 2.35em;
         font-weight: 900;
@@ -500,10 +383,6 @@ section#projets {
     font-weight: bold;
 }
 
-@keyframes blink-cursor {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-}
 /* Ligne de prompt stylisée sous le titre du bandeau */
 .top-banner__prompt {
     display: flex;
@@ -548,10 +427,6 @@ section#projets {
     }
 }
 
-@keyframes blink-cursor {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-}
 
 /* Hauteur et fond du bandeau terminal principal */
 
@@ -1255,12 +1130,13 @@ section#projets {
     text-shadow: 0 0 8px #000c, 0 0 8px #00fff0, 0 0 2px #fff;
     font-weight: 700;
     cursor: pointer;
+    text-align: center;
 }
 
 .terminal-output {
     margin: 8px 0;
     font-size: 0.98em;
-    color: #eaffd0;
+    color: #fff;
     flex: 1;
     line-height: 1.7;
     font-family: 'Share Tech Mono', 'Fira Mono', 'Consolas', 'Menlo', 'monospace' !important;
@@ -1269,13 +1145,20 @@ section#projets {
     text-shadow: 0 2px 8px #000c, 0 0 6px #00fff0, 0 0 2px #fff;
     padding: 14px 18px;
     background: linear-gradient(120deg, rgba(0,255,240,0.13) 0%, rgba(10,20,30,0.82) 100%);
-    border: 1.5px solid #00fff055;
-    border-radius: 10px;
+}
+
+.terminal-output.project-description {
+    background: #0F3032 !important;
+    background-image: none !important;
+    background-blend-mode: normal !important;
+    border: 1.5px solid #00fff055 !important;
+    border-radius: 10px !important;
+    box-shadow: none !important;
+    filter: none !important;
     position: relative;
-    box-shadow: 0 2px 24px 0 #00fff033, 0 1.5px 0 #00fff0 inset;
-    backdrop-filter: blur(4px) saturate(1.12);
-    transition: box-shadow 0.3s, border-color 0.3s, background 0.3s;
     overflow: hidden;
+    box-sizing: border-box;
+    /* Bordure identique à la zone terminal-prompt.tron-terminal */
 }
 
 .terminal-output::before {
@@ -1285,13 +1168,6 @@ section#projets {
     font-size: 0.9em;
 }
 
-.terminal-output:hover {
-    background: linear-gradient(120deg, rgba(0,255,240,0.22) 0%, rgba(10,20,30,0.92) 100%);
-    border-color: #00fff0cc;
-    box-shadow: 0 0 32px 8px #00fff055, 0 2px 16px #000a;
-    color: #e0e0e0;
-    transform: translateY(-2px) scale(1.015);
-}
 
 .project-tile .infos {
     font-size: 0.85em;
@@ -1341,10 +1217,6 @@ section#projets {
     width: 100%;
 }
 
-@keyframes btnPulse {
-    0% { opacity: 0.7; filter: blur(0.5px); }
-    100% { opacity: 1; filter: blur(2.5px); }
-}
 
 /* Effet hover - Animation de frappe */
 .project-tile:hover {
@@ -1367,10 +1239,6 @@ section#projets {
     text-shadow: 0 0 4px #00ff8099;
 
 /* Animation de clignotement terminal */
-@keyframes terminalBlink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0.3; }
-}
 
 /* Effet de scan terminal - utilise ::first-line pour éviter les conflits */
 .project-tile:hover::before {
@@ -1658,11 +1526,6 @@ section#projets {
         margin-bottom: 0 !important;
         padding-bottom: 0;
     }
-    /* .project-description redondant supprimé pour garantir le fond uni */
-    .terminal-prompt.tron-terminal + .project-description {
-        margin-top: -2px;
-        padding-top: 0;
-    }
     }
     
     section#accueil {
@@ -1707,9 +1570,10 @@ section#projets {
 }
 
 .project-tile:hover, .project-tile:focus {
-    box-shadow: 0 0 32px 8px #00fff088, 0 2px 12px #000a;
-    filter: brightness(1.06) saturate(1.06);
-    transform: translateY(-3px) scale(1.015);
+    box-shadow: 0 0 18px 2px #00fff0cc, 0 2px 16px #000a;
+    border-color: #00fff0;
+    filter: brightness(1.04) saturate(1.04);
+    transform: scale(1.025) translateY(-2px);
     outline: none;
     z-index: 0;
 }
