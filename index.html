@@ -32,25 +32,14 @@
     </div>
 
     <div id="portfolio-root" style="opacity:0;pointer-events:none;transition:opacity 0.8s cubic-bezier(0.4,0,0.2,1);">
-        <header class="top-banner">
-            <div class="top-banner__content">
-                <span class="top-banner__title">&gt;Portfolio 0xCyberLiTech<span class="terminal-cursor">_</span></span>
-                <div class="top-banner__prompt">
-                    <span class="top-banner__prompt-inner">
-                        echo "Welcome to my cybersecurity portfolio"
-                    </span>
-                </div>
-            </div>
-        </header>
+    <div id="header"></div>
         <main>
             <section id="projets">
                 <h2 class="tron-section-title" id="projets-list-title">$ ls -la ~/repositories/public</h2>
                 <div id="projects-list"></div>
             </section>
         </main>
-    <footer id="site-footer">
-            &copy; 2025 0xCyberLiTech. Tous droits réservés.
-        </footer>
+    <div id="footer"></div>
     </div>
 
     <link rel="stylesheet" href="assets/preloader/preloader-ultramodern.css">
@@ -76,5 +65,6 @@
     });
     </script>
     <script src="assets/portfolio/tron-numbers-bg.js"></script>
+    <script src="assets/partials/inject-partials.js"></script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 /* ===============================
    ANIMATIONS GLOBALES - Regroupées pour clarté et maintenance
    =============================== */
+
 /* Animations ACTIVES sur le site : */
 
 @keyframes searchPulse {
@@ -42,6 +43,7 @@
 }
 
 /* Animations utilisées ponctuellement (ex : transitions, effets de texte) : */
+
 @keyframes fadeInPortfolio {
     0% { opacity: 0; transform: translateY(24px) scale(0.98); }
     100% { opacity: 1; transform: none; }
