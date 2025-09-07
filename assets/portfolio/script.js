@@ -72,29 +72,47 @@ async function loadRepos() {
 // Initialisation unique du portfolio, du footer et du bandeau
 
 window.addEventListener('DOMContentLoaded', () => {
-    // Fade-in du body pour éviter le flash blanc
-    document.body.style.opacity = '1';
-    document.body.classList.add('fade-in');
-    setTimeout(() => document.body.classList.remove('fade-in'), 1200);
+    // Fade-in harmonisé : body ou #portfolio-root selon la page
+    const portfolioRoot = document.getElementById('portfolio-root');
+    if (portfolioRoot) {
+        portfolioRoot.style.opacity = '1';
+        portfolioRoot.classList.add('fade-in');
+        setTimeout(() => portfolioRoot.classList.remove('fade-in'), 1200);
+    } else {
+        document.body.style.opacity = '1';
+        document.body.classList.add('fade-in');
+        setTimeout(() => document.body.classList.remove('fade-in'), 1200);
+    }
     loadRepos();
 
     // Gestion du footer : il ne s'affiche qu'après la transition du preloader ou après un court délai
-    const footer = document.getElementById('site-footer');
-    if (footer) {
-        footer.style.display = 'none';
-        const preloader = document.getElementById('preloader');
-        if (preloader) {
-            const observer = new MutationObserver(() => {
-                if (preloader.style.display === 'none' || preloader.style.opacity === '0' || preloader.hidden) {
-                    footer.style.display = '';
-                    observer.disconnect();
+    // On cible le footer injecté dynamiquement
+    const footerContainer = document.getElementById('footer');
+    let siteFooter = null;
+    if (footerContainer) {
+        // Attendre que le partiel soit injecté
+        const tryShowFooter = () => {
+            siteFooter = footerContainer.querySelector('#site-footer');
+            if (siteFooter) {
+                siteFooter.style.display = 'none';
+                // Préloader : harmonisation du sélecteur
+                const preloader = document.getElementById('preloader-ultramodern');
+                if (preloader) {
+                    const observer = new MutationObserver(() => {
+                        if (preloader.style.display === 'none' || preloader.style.opacity === '0' || preloader.hidden) {
+                            siteFooter.style.display = '';
+                            observer.disconnect();
+                        }
+                    });
+                    observer.observe(preloader, { attributes: true, attributeFilter: ['style', 'hidden'] });
+                } else {
+                    setTimeout(() => { siteFooter.style.display = ''; }, 600);
                 }
-            });
-            observer.observe(preloader, { attributes: true, attributeFilter: ['style', 'hidden'] });
-        } else {
-            setTimeout(() => { footer.style.display = ''; }, 600);
-        }
+            } else {
+                setTimeout(tryShowFooter, 100); // Réessayer jusqu'à ce que le partiel soit injecté
+            }
+        };
+        tryShowFooter();
     }
-
     // Suppression de la gestion d'opacité du bandeau : il reste toujours opaque
 });

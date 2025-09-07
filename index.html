@@ -31,7 +31,7 @@
         </div>
     </div>
 
-    <div id="portfolio-root" style="opacity:0;pointer-events:none;transition:opacity 0.8s cubic-bezier(0.4,0,0.2,1);">
+    <div id="portfolio-root" style="opacity:0;pointer-events:none;display:none;transition:opacity 0.8s cubic-bezier(0.4,0,0.2,1);">
     <div id="header"></div>
         <main>
             <section id="projets">
@@ -54,6 +54,7 @@
             preloader.style.opacity = '0';
             preloader.style.pointerEvents = 'none';
             const root = document.getElementById('portfolio-root');
+            root.style.display = '';
             root.style.opacity = '1';
             root.style.pointerEvents = 'auto';
             setTimeout(() => {
