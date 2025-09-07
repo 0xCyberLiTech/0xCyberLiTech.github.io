@@ -1,106 +1,75 @@
+
 # Portfolio 0xCyberLiTech
 
-## Structure du projet
+_Dernière mise à jour : 7 septembre 2025_
+
+## Schéma structurel du projet
 
 ```
-index.html
-portfolio.html
-rapport.txt
-README.md
-assets/
-  logo/
-    logo.png
-  portfolio/
-    script.js
-    style.css
-    tron-numbers-bg.js
-  preloader/
-    preloader-ultramodern.css
-    preloader-ultramodern.js
+.
+├── index.html
+├── portfolio.html
+├── README.md
+├── audit-technique_0xCyberLiTech_2025-09-07.md
+├── assets/
+│   ├── logo/
+│   │   └── logo.png
+│   ├── portfolio/
+│   │   ├── _keyframes-group.css
+│   │   ├── script.js
+│   │   ├── style.css
+│   │   └── tron-numbers-bg.js
+│   ├── preloader/
+│   │   ├── preloader-ultramodern.css
+│   │   └── preloader-ultramodern.js
+│   └── partials/
+│       ├── footer.html
+│       ├── header.html
+│       └── inject-partials.js
 ```
 
-## Description des dossiers et fichiers
+## Détail de la construction et des rôles
 
-  - **logo/** : Contient le logo du site.
-  - **portfolio/** : Scripts et styles du portfolio.
-    - **script.js** : Logique d’affichage des projets, protection XSS, gestion du DOM.
-    - **style.css** : Styles principaux, responsive design, thème Tron.
-    - **tron-numbers-bg.js** : Script d’arrière-plan animé Tron.
-  - **preloader/** : Ressources pour l’animation de préchargement.
-    - **preloader-ultramodern.css** : Styles du préloader.
-    - **preloader-ultramodern.js** : Logique d’animation du préloader.
+### 1. Fichiers racine
 
-## Interactions et rôles
+- **index.html** : Page d’accueil, lance le préloader puis redirige vers le portfolio.
+- **portfolio.html** : Page principale affichant les projets, utilise les scripts et styles du dossier `assets/portfolio`.
+- **README.md** : Documentation du projet (ce fichier).
+- **audit-technique_0xCyberLiTech_2025-09-07.md** : Rapport d’audit technique.
 
+### 2. Dossier `assets/`
 
-## Sécurité
+#### a. `logo/`
+- **logo.png** : Logo du site, utilisé dans l’en-tête ou le favicon.
 
+#### b. `portfolio/`
+- **_keyframes-group.css** : Animations CSS réutilisables.
+- **script.js** : Logique d’affichage dynamique des projets, protection XSS, gestion du DOM.
+- **style.css** : Styles principaux, responsive design, thème Tron.
+- **tron-numbers-bg.js** : Script d’arrière-plan animé façon Tron.
 
-## Optimisation
+#### c. `preloader/`
+- **preloader-ultramodern.css** : Styles du préloader animé.
+- **preloader-ultramodern.js** : Logique d’animation du préloader, transition vers le portfolio.
 
+#### d. `partials/`
+- **header.html** & **footer.html** : Fragments HTML pour l’en-tête et le pied de page, injectés dynamiquement.
+- **inject-partials.js** : Script d’injection des partials dans les pages.
 
-## Compatibilité
+## Approche pédagogique
 
+- **Séparation des responsabilités** : Les scripts, styles, images et fragments HTML sont organisés par dossier pour faciliter la maintenance.
+- **Modularité** : Les partials permettent de réutiliser l’en-tête et le pied de page sur plusieurs pages.
+- **Sécurité** : Les données dynamiques sont échappées pour éviter les attaques XSS.
+- **Responsive design** : Les media queries et animations assurent une expérience fluide sur tous les appareils.
+- **Préloader** : Améliore l’expérience utilisateur en affichant une animation pendant le chargement.
 
-## Auteur
+## Conseils d’évolution
 
-0xCyberLiTech
+- Continuer à documenter chaque modification dans le README et le rapport d’audit.
+- Vérifier régulièrement la sécurité des scripts et la compatibilité mobile.
+- Ajouter des tests automatiques pour les scripts critiques.
 
+---
 
-Pour toute question ou amélioration, contactez l’auteur via GitHub.
-
-## Structure du projet
-
-```
-index.html
-portfolio.html
-rapport.txt
-README.md
-assets/
-  logo/
-    logo.png
-  portfolio/
-    script.js
-    style.css
-    tron-numbers-bg.js
-  preloader/
-    preloader-ultramodern.css
-    preloader-ultramodern.js
-```
-
-## Description des fichiers et dossiers
-
-- **index.html** : Page d’accueil, lance le préloader puis le portfolio.
-- **portfolio.html** : Page principale du portfolio, affiche les projets et le contenu dynamique.
-- **rapport.txt** : Rapport d’audit et d’optimisation (généré automatiquement).
-- **README.md** : Ce fichier, documentation complète du projet.
-- **assets/logo/logo.png** : Logo du site.
-- **assets/portfolio/script.js** : Script principal du portfolio, gestion de l’affichage des dépôts GitHub, protection XSS, animations.
-- **assets/portfolio/style.css** : Feuille de style principale, thème Tron, responsivité mobile/tablette, animations.
-- **assets/portfolio/tron-numbers-bg.js** : Script d’arrière-plan animé Tron.
-- **assets/preloader/preloader-ultramodern.css** : Styles du préloader animé.
-- **assets/preloader/preloader-ultramodern.js** : Script du préloader, gestion de la progression et transition vers le portfolio.
-
-## Interactions et rôles
-
-- Les fichiers JS et CSS sont séparés pour faciliter la maintenance et l’optimisation.
-- Le préloader s’affiche au chargement, puis le portfolio devient interactif.
-- Les données dynamiques (dépôts GitHub) sont protégées contre les attaques XSS.
-- La structure responsive garantit une expérience optimale sur mobile et tablette.
-
-## Sécurité
-
-- Protection XSS assurée par l’échappement des données dynamiques.
-- Aucun formulaire ou champ input non sécurisé détecté.
-
-## Optimisation
-
-- Code épuré, sans doublons ni éléments orphelins.
-- Utilisation de variables CSS, animations et transitions modernes.
-- Media queries pour la compatibilité mobile/tablette.
-
-## Recommandations
-
-- Continuer à séparer les responsabilités (JS/CSS/HTML).
-- Vérifier régulièrement les dépendances et les points d’entrée utilisateur.
-- Documenter toute modification majeure dans le rapport.txt.
+Pour toute question ou suggestion, contactez l’auteur via GitHub.
