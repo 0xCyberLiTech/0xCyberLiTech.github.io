@@ -1,7 +1,7 @@
-# ──────────────────────────────────────────────
+# ───────────────────────────────────────
 # Nomenclature du projet 0xCyberLiTech.github.io
 # Date d’audit : 7 septembre 2025
-# ──────────────────────────────────────────────
+# ───────────────────────────────────────
 
 # 🛡️ Audit technique — 0xCyberLiTech.github.io
 
