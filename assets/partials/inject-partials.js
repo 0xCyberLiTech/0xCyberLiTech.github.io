@@ -1,4 +1,3 @@
-
 // Script pour injecter dynamiquement header et footer
 function loadPartial(id, url) {
   fetch(url)
@@ -9,12 +8,10 @@ function loadPartial(id, url) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  // Détecte si le site est servi depuis un sous-dossier (GitHub Pages)
-  const base = location.pathname.startsWith('/0xCyberLiTech.github.io/') ? '/0xCyberLiTech.github.io/' : '/';
   if(document.getElementById('header')) {
-    loadPartial('header', base + 'assets/partials/header.html');
+    loadPartial('header', 'assets/partials/header.html');
   }
   if(document.getElementById('footer')) {
-    loadPartial('footer', base + 'assets/partials/footer.html');
+    loadPartial('footer', 'assets/partials/footer.html');
   }
 });
