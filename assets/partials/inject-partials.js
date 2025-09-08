@@ -15,12 +15,3 @@ document.addEventListener('DOMContentLoaded', function() {
     loadPartial('footer', 'assets/partials/footer.html');
   }
 });
-
-fetch('assets/partials/header.html')
-  .then(res => res.text())
-  .then(data => {
-    document.getElementById('header').innerHTML = data;
-    if (typeof startTerminalCursorAnimation === 'function') {
-      startTerminalCursorAnimation();
-    }
-  });
