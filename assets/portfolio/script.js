@@ -54,6 +54,16 @@ function renderPromptTile({safeName, safeDesc, safeUrl, safeBranch, isNew, daysE
     `;
 }
 
+// start Terminal Cursor Animation
+
+function startTerminalCursorAnimation() {
+  const cursor = document.querySelector('.terminal-cursor');
+  if (!cursor) return;
+  setInterval(() => {
+    cursor.style.visibility = (cursor.style.visibility === 'hidden') ? 'visible' : 'hidden';
+  }, 500);
+}
+
 // Récupération des dépôts GitHub et affichage des tuiles
 async function loadRepos() {
     window.__allRepos = [];
