@@ -4,8 +4,6 @@
 
 /* Animations ACTIVES sur le site : */
 
-/* Test : */
-
 @keyframes searchPulse {
     0% {
         box-shadow: 0 0 32px 6px rgba(0,255,120,0.10) inset, 0 2px 12px #000a;
