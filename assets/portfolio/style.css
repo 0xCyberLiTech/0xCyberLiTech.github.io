@@ -1,6 +1,12 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
-@import url('_keyframes-group.css');
+@import url('/assets/portfolio/_keyframes-group.css');
+
+/* Fallback local pour l'animation blink-cursor si l'import échoue (GitHub Pages) */
+@keyframes blink-cursor {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
 
 body {
     background: #101820 !important;
