@@ -18,19 +18,27 @@
   ```
 - Cela évite le « saut » du bandeau lors du chargement de la page `portfolio.html`.
 
+
 ## 3. Préfixe pour les fonctions utilitaires
 - La fonction utilitaire d’échappement HTML a été renommée :
   - `escapeHTML` → `utilEscapeHTML`
 - Tous les appels à cette fonction dans `script.js` ont été mis à jour.
 - Cette convention permet de mieux distinguer les utilitaires si le projet grandit.
 
-## 4. Vérifications d’intégrité et de cohérence
+## 4. Commentaires et documentation
+- Ajout de commentaires explicites sur toutes les fonctions critiques de `script.js`.
+- Deux fichiers README ajoutés :
+  - `assets/portfolio/README.md` : décrit le rôle de chaque script/style du portfolio.
+  - `assets/preloader/README.md` : explique le fonctionnement du préchargeur.
+- Ces ajouts facilitent la prise en main et la maintenance du code.
+
+## 5. Vérifications d’intégrité et de cohérence
 - Analyse de l’arborescence, des doublons, du code mort et orphelin :
   - Aucun doublon de fichier ni code orphelin détecté.
   - Toutes les fonctions principales sont utilisées et référencées.
   - Les noms de fichiers, fonctions et variables sont explicites et cohérents.
 
-## 5. Schéma d’arborescence du projet (après optimisations)
+## 6. Schéma d’arborescence du projet (après optimisations)
 
 ```
 0xCyberLiTech.github.io/
@@ -50,13 +58,15 @@
 │   │   ├── _keyframes-group.css
 │   │   ├── script.js
 │   │   ├── style.css
-│   │   └── tronNumbersBg.js
+│   │   ├── tronNumbersBg.js
+│   │   └── README.md
 │   └── preloader/
 │       ├── preloader-ultramodern.css
-│       └── preloaderUltramodern.js
+│       ├── preloaderUltramodern.js
+│       └── README.md
 ```
 
-## 6. Conseils pour la suite
+## 7. Conseils pour la suite
 - Continuer à utiliser des conventions de nommage claires (camelCase, préfixes util pour les utilitaires).
 - Documenter les fonctions utilitaires et les modules réutilisables.
 - Vérifier régulièrement l’intégrité du code lors de l’ajout de nouvelles fonctionnalités.

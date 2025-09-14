@@ -1,9 +1,12 @@
 
 
 // Fonction d'échappement XSS globale
+// Fonction utilitaire d'échappement XSS pour sécuriser l'affichage des données dynamiques
+// Remplace les caractères spéciaux HTML par leur entité pour éviter les injections
 const utilEscapeHTML = str => String(str).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
-// Affichage des dépôts dans #projects-list
+// Affiche dynamiquement la liste des dépôts GitHub dans la grille du portfolio
+// Utilise utilEscapeHTML pour sécuriser chaque champ affiché
 function renderRepos(repos) {
     const container = document.getElementById('projects-list');
     if (!container) return;
@@ -29,7 +32,7 @@ function renderRepos(repos) {
     });
 }
 
-// Fonction factorisée pour générer le HTML du prompt
+// Génère le HTML d'une tuile projet façon terminal, avec badge NEW si récent
 function renderPromptTile({safeName, safeDesc, safeUrl, safeBranch, isNew, daysElapsed}) {
     return `
         <div class="terminal-bar">
@@ -54,7 +57,8 @@ function renderPromptTile({safeName, safeDesc, safeUrl, safeBranch, isNew, daysE
     `;
 }
 
-// Récupération des dépôts GitHub et affichage des tuiles
+// Récupère les dépôts publics GitHub via l'API et déclenche l'affichage
+// Gère les erreurs réseau et filtre les dépôts non pertinents
 async function loadRepos() {
     window.__allRepos = [];
     try {
@@ -71,6 +75,8 @@ async function loadRepos() {
 
 // Initialisation unique du portfolio, du footer et du bandeau
 
+// Initialisation du portfolio au chargement de la page
+// Gère le fade-in, le chargement des dépôts et l'affichage conditionnel du footer
 window.addEventListener('DOMContentLoaded', () => {
     // Fade-in du body pour éviter le flash blanc
     document.body.style.opacity = '1';
