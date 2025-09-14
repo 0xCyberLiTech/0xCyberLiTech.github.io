@@ -1,7 +1,7 @@
 
 
 // Fonction d'échappement XSS globale
-const escapeHTML = str => String(str).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const utilEscapeHTML = str => String(str).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 // Affichage des dépôts dans #projects-list
 function renderRepos(repos) {
@@ -20,10 +20,10 @@ function renderRepos(repos) {
         const tile = document.createElement('div');
         tile.className = 'project-tile';
         if (isNew) tile.setAttribute('data-new', 'true');
-        const safeName = escapeHTML(repo.name);
-        const safeDesc = escapeHTML(repo.description || 'Aucune description disponible.');
-        const safeUrl = escapeHTML(repo.html_url);
-        const safeBranch = escapeHTML(repo.default_branch || 'main');
+        const safeName = utilEscapeHTML(repo.name);
+        const safeDesc = utilEscapeHTML(repo.description || 'Aucune description disponible.');
+        const safeUrl = utilEscapeHTML(repo.html_url);
+        const safeBranch = utilEscapeHTML(repo.default_branch || 'main');
         tile.innerHTML = renderPromptTile({safeName, safeDesc, safeUrl, safeBranch, isNew, daysElapsed});
         container.appendChild(tile);
     });
