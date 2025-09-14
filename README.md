@@ -36,8 +36,9 @@
 
 ## 5. Vérifications d’intégrité et de cohérence
 - Analyse de l’arborescence, des doublons, du code mort et orphelin :
-	- Aucun doublon de fichier ni code orphelin détecté.
-	- Toutes les fonctions principales sont utilisées et référencées.
+	- Aucun doublon de fichier, tous les anciens doublons JS ont été supprimés.
+	- Aucun code mort : toutes les fonctions sont utilisées ou appelées.
+	- Aucun fichier orphelin : tous les fichiers utiles sont référencés ou injectés.
 	- Les noms de fichiers, fonctions et variables sont explicites et cohérents.
 
 ## 6. Schéma d’arborescence du projet (après optimisations)
