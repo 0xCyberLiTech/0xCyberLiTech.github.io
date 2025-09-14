@@ -1,3 +1,7 @@
+/* Réserve la place du header injecté dynamiquement pour éviter le saut visuel */
+#header {
+    min-height: 60px;
+}
 
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 @import url('/assets/portfolio/_keyframes-group.css');
