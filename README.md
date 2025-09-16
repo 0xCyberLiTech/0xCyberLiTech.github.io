@@ -50,18 +50,22 @@ Le portfolio utilise une architecture statique, optimisée pour GitHub Pages :
 ├── index.html                        # Page d’accueil du portfolio
 ├── portfolio.html                    # Page détaillée des projets/compétences
 ├── assets/
+│   │ 
 │   ├── logo/
 │   │   └── logo.png                  # Logo principal du site
+│   │ 
 │   ├── partials/
 │   │   ├── footer.html               # Pied de page HTML à injecter
 │   │   ├── header.html               # Entête HTML à injecter
 │   │   └── inject-partials.js        # Script d’injection dynamique des partiels
+│   │ 
 │   ├── portfolio/
 │   │   ├── _keyframes-group.css      # Animations CSS dédiées au portfolio
 │   │   ├── script.js                 # Scripts JS pour la page portfolio
 │   │   ├── style.css                 # Styles CSS spécifiques au portfolio
 │   │   ├── tronNumbersBg.js          # Fond animé "Tron Numbers"
 │   │   └── README.md                 # Documentation spécifique au dossier portfolio
+│   │ 
 │   └── preloader/
 │       ├── preloader-ultramodern.css # Styles du préchargeur
 │       ├── preloaderUltramodern.js   # Script JS du préchargeur
@@ -82,4 +86,5 @@ Le portfolio utilise une architecture statique, optimisée pour GitHub Pages :
 
 **Auteur** : [0xCyberLiTech](https://github.com/0xCyberLiTech)  
 **Dernière mise à jour** : 16 septembre 2025
+
 
