@@ -1,79 +1,84 @@
+# 0xCyberLiTech.github.io — Portfolio Technique & Présentation
 
-
-# Rapport d’optimisations du projet 0xCyberLiTech.github.io
-
-**Date : 14 septembre 2025**
-
-## 1. Harmonisation du nommage (camelCase)
-- Les fichiers JavaScript principaux ont été renommés pour respecter le camelCase :
-	- `preloader-ultramodern.js` → `preloaderUltramodern.js`
-	- `tron-numbers-bg.js` → `tronNumbersBg.js`
-- Toutes les références à ces fichiers dans `index.html` et `portfolio.html` ont été mises à jour.
-- Les anciens fichiers sont conservés pour référence mais ne sont plus utilisés.
-
-## 2. Correction du saut visuel du header
-- Ajout d’un style CSS pour réserver la place du header injecté dynamiquement :
-	```css
-	#header {
-		min-height: 60px;
-	}
-	```
-- Cela évite le « saut » du bandeau lors du chargement de la page `portfolio.html`.
-
-
-## 3. Préfixe pour les fonctions utilitaires
-- La fonction utilitaire d’échappement HTML a été renommée :
-	- `escapeHTML` → `utilEscapeHTML`
-- Tous les appels à cette fonction dans `script.js` ont été mis à jour.
-- Cette convention permet de mieux distinguer les utilitaires si le projet grandit.
-
-## 4. Commentaires et documentation
-- Ajout de commentaires explicites sur toutes les fonctions critiques de `script.js`.
-- Deux fichiers README ajoutés :
-	- `assets/portfolio/README.md` : décrit le rôle de chaque script/style du portfolio.
-	- `assets/preloader/README.md` : explique le fonctionnement du préchargeur.
-- Ces ajouts facilitent la prise en main et la maintenance du code.
-
-## 5. Vérifications d’intégrité et de cohérence
-- Analyse de l’arborescence, des doublons, du code mort et orphelin :
-	- Aucun doublon de fichier, tous les anciens doublons JS ont été supprimés.
-	- Aucun code mort : toutes les fonctions sont utilisées ou appelées.
-	- Aucun fichier orphelin : tous les fichiers utiles sont référencés ou injectés.
-	- Les noms de fichiers, fonctions et variables sont explicites et cohérents.
-
-## 6. Schéma d’arborescence du projet (après optimisations)
-
-```
-0xCyberLiTech.github.io/
-├── README.md
-├── index.html
-├── portfolio.html
-├── assets/
-│   ├── logo/
-│   │   └── logo.png
-│   ├── partials/
-│   │   ├── footer.html
-│   │   ├── header.html
-│   │   └── inject-partials.js
-│   ├── portfolio/
-│   │   ├── _keyframes-group.css
-│   │   ├── script.js
-│   │   ├── style.css
-│   │   ├── tronNumbersBg.js
-│   │   └── README.md
-│   └── preloader/
-│       ├── preloader-ultramodern.css
-│       ├── preloaderUltramodern.js
-│       └── README.md
-```
-
-## 7. Conseils pour la suite
-- Continuer à utiliser des conventions de nommage claires (camelCase, préfixes util pour les utilitaires).
-- Documenter les fonctions utilitaires et les modules réutilisables.
-- Vérifier régulièrement l’intégrité du code lors de l’ajout de nouvelles fonctionnalités.
+Bienvenue sur le dépôt GitHub du portfolio de [0xCyberLiTech](https://0xcyberlitech.github.io).  
+Ce site web présente mes compétences, réalisations et projets en cybersécurité, développement, et administration système.  
+Le portfolio a été conçu pour être **modulaire, maintenable et optimisé** pour la performance et l’accessibilité.
 
 ---
 
-**Optimisations réalisées par GitHub Copilot le 14/09/2025**
+## Description Technique
 
+### Architecture Générale
 
+Le portfolio utilise une architecture statique, optimisée pour GitHub Pages :  
+- **HTML sémantique** pour une structure claire et compatible SEO.
+- **CSS modulaire** pour la personnalisation et l’animation (animations CSS natives, keyframes dédiées au portfolio).
+- **JavaScript organisé** : 
+  - Scripts séparés par fonction (préchargeur, effets visuels, injection de partials).
+  - Utilisation de la convention camelCase + préfixes (`util`) pour les fonctions utilitaires.
+  - Chargement asynchrone des composants dynamiques (`header`, `footer` injectés).
+- **Assets structurés** (_logos, partiels, scripts spécifiques, etc._) pour faciliter la maintenance et l’évolution du site.
+
+### Fonctionnalités Clés
+
+- **Préchargeur ultramoderne** :  
+  Affichage d’une animation de chargement personnalisée, retirée dès que la page est prête.
+- **Effet visuel "Tron Numbers"** :  
+  Script dédié pour le fond animé de la section portfolio.
+- **Injection dynamique de partiels** :  
+  Les entêtes et pieds de page sont chargés dynamiquement pour éviter la duplication et simplifier les modifications globales.
+- **Accessibilité & Responsive** :  
+  - Navigation clavier possible, contraste respecté.
+  - Design responsive (desktop/mobile/tablette).
+- **Documentation interne** :  
+  Chaque dossier clé possède un `README.md` décrivant précisément son rôle et les scripts/styles associés.
+
+### Bonnes Pratiques Adoptées
+
+- **Nommage explicite & cohérent** (camelCase, préfixes utilitaires).
+- **Fichiers et fonctions documentés**.
+- **Aucune ressource orpheline ou code mort** : nettoyage régulier de l’arborescence.
+- **Séparation des préoccupations** : JS, CSS, HTML, assets, partiels.
+
+---
+
+## Arborescence du Projet
+
+```text
+0xCyberLiTech.github.io/
+├── README.md                        # Documentation principale (ce fichier)
+├── index.html                       # Page d’accueil du portfolio
+├── portfolio.html                   # Page détaillée des projets/compétences
+├── assets/
+│   ├── logo/
+│   │   └── logo.png                 # Logo principal du site
+│   ├── partials/
+│   │   ├── footer.html              # Pied de page HTML à injecter
+│   │   ├── header.html              # Entête HTML à injecter
+│   │   └── inject-partials.js       # Script d’injection dynamique des partiels
+│   ├── portfolio/
+│   │   ├── _keyframes-group.css     # Animations CSS dédiées au portfolio
+│   │   ├── script.js                # Scripts JS pour la page portfolio
+│   │   ├── style.css                # Styles CSS spécifiques au portfolio
+│   │   ├── tronNumbersBg.js         # Fond animé "Tron Numbers"
+│   │   └── README.md                # Documentation spécifique au dossier portfolio
+│   └── preloader/
+│       ├── preloader-ultramodern.css# Styles du préchargeur
+│       ├── preloaderUltramodern.js  # Script JS du préchargeur
+│       └── README.md                # Documentation du préchargeur
+```
+
+---
+
+## Conseils d’Évolution & Maintenance
+
+- Poursuivre la documentation à chaque évolution.
+- Utiliser la même convention de nommage pour les futurs modules/scripts.
+- Nettoyer régulièrement les ressources inutilisées.
+- Tester systématiquement sur différentes plateformes et navigateurs.
+- Ajouter des tests unitaires JS pour les logiques complexes (si le projet évolue).
+
+---
+
+**Auteur** : [0xCyberLiTech](https://github.com/0xCyberLiTech)  
+**Dernière mise à jour** : 16 septembre 2025
