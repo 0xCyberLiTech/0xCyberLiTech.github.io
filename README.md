@@ -48,7 +48,6 @@
 ├── README.md
 ├── index.html
 ├── portfolio.html
-├── audit-technique_0xCyberLiTech_2025-09-07.md
 ├── assets/
 │   ├── logo/
 │   │   └── logo.png
@@ -76,4 +75,5 @@
 ---
 
 **Optimisations réalisées par GitHub Copilot le 14/09/2025**
+
 
