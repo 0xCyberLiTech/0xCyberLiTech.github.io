@@ -12,6 +12,11 @@ Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/)
 - Ajout du dossier assets/ pour les ressources (images, styles, etc.).
 
 ### Modifié
+- Vérification complète de l’optimisation et de la simplification du code (HTML, CSS, JS) : aucun code mort ou doublon détecté, structure optimisée confirmée.
+- Factorisation du code déjà réalisée pour améliorer la maintenance et la clarté du projet.
+- La factorisation reste effective : fonctions utilitaires mutualisées (ex. utilEscapeHTML), partiels HTML injectés dynamiquement (header, footer), styles centralisés via variables CSS et imports. Aucun retour en arrière ou duplication majeure détecté.
+
+### Modifié
 - Rien pour le moment.
 
 ### Corrigé
