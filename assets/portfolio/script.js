@@ -25,22 +25,9 @@ function renderRepos(repos) {
         if (isNew) tile.setAttribute('data-new', 'true');
         const safeName = utilEscapeHTML(repo.name);
         const safeDesc = utilEscapeHTML(repo.description || 'Aucune description disponible.');
-        // Nettoyer et tronquer les descriptions pour maintenir l'uniformité parfaite des tuiles
-        const cleanedDesc = safeDesc
-            .replace(/\?\?\?/g, '...') // Remplacer les caractères spéciaux corrompus
-            .replace(/\?\?/g, 'é') // Corriger les caractères accentués doubles
-            .replace(/cl\?s/g, "clés") // Correction spécifique pour "clés"
-            .replace(/s\?curis\?es/g, "sécurisées") // Correction spécifique pour "sécurisées"
-            .replace(/d\?installation/g, "d'installation") // Correction spécifique
-            .replace(/param\?tres/g, "paramètres") // Correction spécifique
-            .replace(/r\?seau/g, "réseau") // Correction spécifique
-            .replace(/\?/g, "è") // Corriger les autres caractères accentués après les corrections spécifiques
-            .replace(/\s+/g, ' ') // Normaliser les espaces
-            .trim();
-        const truncatedDesc = cleanedDesc.length > 120 ? cleanedDesc.substring(0, 117) + '...' : cleanedDesc;
         const safeUrl = utilEscapeHTML(repo.html_url);
         const safeBranch = utilEscapeHTML(repo.default_branch || 'main');
-        tile.innerHTML = renderPromptTile({safeName, safeDesc: truncatedDesc, safeUrl, safeBranch, isNew, daysElapsed});
+        tile.innerHTML = renderPromptTile({safeName, safeDesc, safeUrl, safeBranch, isNew, daysElapsed});
         container.appendChild(tile);
     });
 }
@@ -64,7 +51,7 @@ function renderPromptTile({safeName, safeDesc, safeUrl, safeBranch, isNew, daysE
             <h3><a href="${safeUrl}/blob/${safeBranch}/README.md" style="color:inherit;text-decoration:none;">${safeName}</a></h3>
             <p class="terminal-output project-description">${safeDesc}</p>
             <div class="infos" style="display:flex;align-items:center;gap:0.7em;justify-content:space-between;">
-                ${isNew ? `<span class="badge-new tron-glow">NEW</span><span class="days-left tron-glow" style="font-size:0.98em;color:#00fff0;opacity:0.92;">${(30 - daysElapsed).toString().padStart(2, '0')} jours restants</span>` : ''}
+                ${isNew ? `<span class="badge-new tron-glow">NEW</span><span class="days-left tron-glow" style="font-size:0.98em;color:#00fff0;opacity:0.92;">${30 - daysElapsed}j restantes</span>` : ''}
             </div>
         </div>
     `;
@@ -82,29 +69,7 @@ async function loadRepos() {
         window.__allRepos = filteredRepos;
         renderRepos(filteredRepos);
     } catch (e) {
-        console.error('Erreur lors du chargement des dépôts :', e);
-        const container = document.getElementById('projects-list');
-        if (container) {
-            container.innerHTML = `
-                <div class="terminal-output error" style="grid-column: 1/-1; text-align: center; padding: 48px 24px;">
-                    <div class="terminal-bar">
-                        <span class="btn red"></span>
-                        <span class="btn yellow"></span>
-                        <span class="btn green"></span>
-                        <span class="terminal-bar-title">error.log</span>
-                    </div>
-                    <div class="project-tile-content">
-                        <div class="terminal-output project-description">
-                            <span class="top-banner__prompt-prompt">!</span>
-                            <span>Impossible de charger les repositories GitHub</span>
-                        </div>
-                        <div class="terminal-output project-description">
-                            <span>${e.message || 'Erreur réseau inconnue'}</span>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
+        alert('Erreur lors du chargement des dépôts : ' + (e.message || e));
     }
 }
 
