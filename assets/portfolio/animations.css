@@ -1,0 +1,18 @@
+/* Animations globales pour le projet 0xCyberLiTech */
+
+@keyframes blink-cursor {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+@keyframes preloader-bar-glow {
+    0% { filter: drop-shadow(0 0 6px #00fff0cc) drop-shadow(0 0 2px #0ff); }
+    100% { filter: drop-shadow(0 0 22px #00fff0cc) drop-shadow(0 0 8px #0ff); }
+}
+
+@keyframes preloaderFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Ajoutez ici d'autres animations réutilisables */

@@ -1,63 +1,65 @@
 # 0xCyberLiTech.github.io — Portfolio Technique & Présentation
 
-Bienvenue sur le dépôt GitHub du portfolio de [0xCyberLiTech](https://0xcyberlitech.github.io).  
-Ce site web présente mes compétences, réalisations et projets en cybersécurité, développement, et administration système.  
-Le portfolio a été conçu pour être **modulaire, maintenable et optimisé** pour la performance et l’accessibilité.
+Bienvenue sur le dépôt GitHub du portfolio de [0xCyberLiTech](https://0xcyberlitech.github.io).
 
----
+Ce site présente mes compétences, réalisations et projets en cybersécurité, développement et administration système.
 
-## Description Technique
+## Points clés du projet
 
-### Architecture Générale
+- **Architecture modulaire** :
+  - HTML sémantique, CSS factorisé (variables, animations, keyframes), JS organisé par fonctionnalité.
+  - Partiels HTML injectés dynamiquement (`header`, `footer`, `modal`).
+  - Fonctions utilitaires centralisées (`assets/utils/`).
+- **Effets visuels avancés** :
+  - Préchargeur animé, fond Tron 3D, transitions soignées.
+- **Accessibilité & responsive** :
+  - Contraste, navigation clavier, design adaptatif.
+- **Documentation** :
+  - Chaque dossier clé possède un `README.md`.
+  - Les scripts principaux sont documentés (dépendances, usage).
 
-Le portfolio utilise une architecture statique, optimisée pour GitHub Pages :  
-- **HTML sémantique** pour une structure claire et compatible SEO.
-- **CSS modulaire** pour la personnalisation et l’animation (animations CSS natives, keyframes dédiées au portfolio).
-- **JavaScript organisé** : 
-  - Scripts séparés par fonction (préchargeur, effets visuels, injection de partials).
-  - Utilisation de la convention camelCase + préfixes (`util`) pour les fonctions utilitaires.
-  - Chargement asynchrone des composants dynamiques (`header`, `footer` injectés).
-- **Assets structurés** (_logos, partiels, scripts spécifiques, etc._) pour faciliter la maintenance et l’évolution du site.
-
-### Fonctionnalités Clés
-
-- **Préchargeur ultramoderne** :  
-  Affichage d’une animation de chargement personnalisée, retirée dès que la page est prête.
-- **Effet visuel "Tron Numbers"** :  
-  Script dédié pour le fond animé de la section portfolio.
-- **Injection dynamique de partiels** :  
-  Les entêtes et pieds de page sont chargés dynamiquement pour éviter la duplication et simplifier les modifications globales.
-- **Accessibilité & Responsive** :  
-  - Navigation clavier possible, contraste respecté.
-  - Design responsive (desktop/mobile/tablette).
-- **Documentation interne** :  
-  Chaque dossier clé possède un `README.md` décrivant précisément son rôle et les scripts/styles associés.
-
-### Bonnes Pratiques Adoptées
-
-- **Nommage explicite & cohérent** (camelCase, préfixes utilitaires).
-- **Fichiers et fonctions documentés**.
-- **Aucune ressource orpheline ou code mort** : nettoyage régulier de l’arborescence.
-- **Séparation des préoccupations** : JS, CSS, HTML, assets, partiels.
-
----
-
-## Arborescence du Projet
+## Structure du projet
 
 ```text
 0xCyberLiTech.github.io/
-├── README.md                         # Documentation principale (ce fichier)
-├── index.html                        # Page d’accueil du portfolio
-├── portfolio.html                    # Page détaillée des projets/compétences
+├── README.md                  # Documentation principale
+├── index.html                 # Page d’accueil
+├── portfolio.html             # Page projets/compétences
 ├── assets/
-│   │ 
 │   ├── logo/
-│   │   └── logo.png                  # Logo principal du site
-│   │ 
+│   │   └── logo.png           # Logo principal
 │   ├── partials/
-│   │   ├── footer.html               # Pied de page HTML à injecter
-│   │   ├── header.html               # Entête HTML à injecter
-│   │   └── inject-partials.js        # Script d’injection dynamique des partiels
+│   │   ├── header.html        # Entête HTML à injecter
+│   │   ├── footer.html        # Pied de page HTML à injecter
+│   │   ├── inject-partials.js # Script d’injection des partiels
+│   │   ├── modal.html         # Modale réutilisable
+│   │   └── modal.js           # Script de gestion du modal
+│   ├── portfolio/
+│   │   ├── script.js          # JS principal du portfolio
+│   │   ├── tronNumbersBg.js   # Effet Tron 3D
+│   │   ├── style.css          # Styles principaux
+│   │   ├── variables.css      # Variables CSS globales
+│   │   ├── animations.css     # Animations CSS globales
+│   │   └── _keyframes-group.css # Keyframes spécifiques
+│   ├── preloader/
+│   │   ├── preloaderUltramodern.js # JS du preloader
+│   │   └── preloader-ultramodern.css # CSS du preloader
+│   └── utils/
+│       ├── utils.js           # Fonctions utilitaires JS
+│       └── README.md          # Documentation des utilitaires
+└── ...
+```
+
+## Bonnes pratiques
+
+- Nommage explicite et cohérent (camelCase, préfixes utilitaires)
+- Factorisation maximale (CSS, JS, HTML)
+- Documentation systématique
+- Séparation claire des préoccupations
+
+---
+
+Pour toute contribution ou suggestion, voir le fichier `CONTRIBUTING.md` (à venir).
 │   │ 
 │   ├── portfolio/
 │   │   ├── _keyframes-group.css      # Animations CSS dédiées au portfolio

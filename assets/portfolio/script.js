@@ -1,9 +1,21 @@
+/**
+ * script.js — Portfolio principal
+ *
+ * Dépendances :
+ *   - ../utils/utils.js (utilEscapeHTML)
+ *   - API GitHub (fetch)
+ *   - Nécessite <script type="module">
+ *   - Optionnel : modal.js pour affichage de modale
+ *
+ * Utilisation :
+ *   - Affichage dynamique des dépôts GitHub
+ *   - Sécurisation XSS via utilEscapeHTML
+ *   - Peut ouvrir un modal via openModal()
+ */
 
 
-// Fonction d'échappement XSS globale
-// Fonction utilitaire d'échappement XSS pour sécuriser l'affichage des données dynamiques
-// Remplace les caractères spéciaux HTML par leur entité pour éviter les injections
-const utilEscapeHTML = str => String(str).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+// Import de la fonction utilitaire d'échappement XSS depuis utils.js
+import { utilEscapeHTML } from '../utils/utils.js';
 
 // Affiche dynamiquement la liste des dépôts GitHub dans la grille du portfolio
 // Utilise utilEscapeHTML pour sécuriser chaque champ affiché

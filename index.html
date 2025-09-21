@@ -5,7 +5,7 @@
     <title>0xCyberLiTech - Portfolio GitHub</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="assets/portfolio/style.css">
-    <script defer src="assets/portfolio/script.js"></script>
+    <script type="module" src="assets/portfolio/script.js"></script>
 </head>
 <body>
     <!-- PRELOADER ULTRA-MODERNE -->
@@ -31,20 +31,29 @@
         </div>
     </div>
 
+
+    <!-- Injection du modal réutilisable -->
+    <div id="modal-container"></div>
+
     <div id="portfolio-root" style="opacity:0;pointer-events:none;display:none;transition:opacity 0.8s cubic-bezier(0.4,0,0.2,1);">
-    <div id="header"></div>
+        <div id="header"></div>
         <main>
             <section id="projets">
                 <h2 class="tron-section-title" id="projets-list-title">$ ls -la ~/repositories/public</h2>
                 <div id="projects-list"></div>
             </section>
         </main>
-    <div id="footer"></div>
+        <div id="footer"></div>
     </div>
 
     <link rel="stylesheet" href="assets/preloader/preloader-ultramodern.css">
     <script src="assets/preloader/preloaderUltramodern.js"></script>
+    <script src="assets/partials/modal.js" type="module"></script>
     <script>
+    // Injection dynamique du modal
+    fetch('assets/partials/modal.html').then(r=>r.text()).then(html=>{
+        document.getElementById('modal-container').innerHTML = html;
+    });
     // Transition JS : fade-out du preloader, fade-in du portfolio (après la barre de progression)
     window.addEventListener('preloader:done', function() {
         const status = document.getElementById('preloader-status-text');

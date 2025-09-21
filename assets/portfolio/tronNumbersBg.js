@@ -1,3 +1,14 @@
+/**
+ * tronNumbersBg.js — Effet de fond Tron 3D
+ *
+ * Dépendances :
+ *   - Aucune dépendance externe
+ *   - Peut être appelé via window.startTronNumbersBG()
+ *
+ * Utilisation :
+ *   - Ajoute un canvas animé en fond de page
+ *   - À appeler après chargement du DOM
+ */
 // Effet fond Tron 3D ultra-dynamique : grille fuyante, couleurs dynamiques, scrolling latéral, points et lignes qui pulsent
 
 window.startTronNumbersBG = function tronGrid3DPlusBG(){

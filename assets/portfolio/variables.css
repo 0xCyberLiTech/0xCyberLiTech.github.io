@@ -1,0 +1,9 @@
+:root {
+    --color-bg-main: #101820;
+    --color-bg-secondary: #181c24;
+    --color-accent: #00fff0;
+    --color-accent-dark: #181c24;
+    --font-main: 'Share Tech Mono', monospace;
+    --border-radius: 8px;
+    --transition-main: 0.35s cubic-bezier(0.4,0,0.2,1);
+}

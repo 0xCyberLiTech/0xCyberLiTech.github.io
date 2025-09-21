@@ -4,6 +4,8 @@
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+@import url('/assets/portfolio/variables.css');
+@import url('/assets/portfolio/animations.css');
 @import url('/assets/portfolio/_keyframes-group.css');
 
 /* Fallback local pour l'animation blink-cursor si l'import échoue (GitHub Pages) */

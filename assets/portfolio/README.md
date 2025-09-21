@@ -1,12 +1,19 @@
 # assets/portfolio
 
-Ce dossier contient tous les scripts et styles liés à l’affichage du portfolio :
+Scripts et styles pour l’affichage du portfolio.
 
-- `script.js` : Logique principale d’affichage des dépôts GitHub, gestion du DOM, utilitaires JS.
-- `tronNumbersBg.js` : Effet visuel de fond façon Tron 3D (canvas animé).
+## Fichiers principaux
+
+- `script.js` : Logique d’affichage dynamique, appels API GitHub, sécurisation XSS, gestion du DOM.
+- `tronNumbersBg.js` : Effet visuel de fond Tron 3D (canvas animé).
 - `style.css` : Styles principaux du portfolio.
-- `_keyframes-group.css` : Animations CSS utilisées dans le portfolio.
+- `variables.css` : Variables CSS globales (couleurs, polices, rayons, transitions).
+- `animations.css` : Animations CSS globales.
+- `_keyframes-group.css` : Keyframes spécifiques au portfolio.
 
-**À retenir :**
-- Les fonctions utilitaires sont préfixées par `util`.
-- Les effets visuels sont séparés du code métier.
+## Bonnes pratiques
+
+- Utiliser les variables CSS pour toute couleur ou taille récurrente.
+- Importer les utilitaires JS via `import` ES6.
+- Documenter chaque fonction ou module ajouté.
+- Ne pas dupliquer de logique entre les scripts.
