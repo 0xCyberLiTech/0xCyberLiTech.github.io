@@ -59,6 +59,23 @@ Ce site présente mes compétences, réalisations et projets en cybersécurité,
 
 ---
 
+Pour toute contribution ou suggestion, voir le fichier `CONTRIBUTING.md` (à venir).
+│   │ 
+│   ├── portfolio/
+│   │   ├── _keyframes-group.css      # Animations CSS dédiées au portfolio
+│   │   ├── script.js                 # Scripts JS pour la page portfolio
+│   │   ├── style.css                 # Styles CSS spécifiques au portfolio
+│   │   ├── tronNumbersBg.js          # Fond animé "Tron Numbers"
+│   │   └── README.md                 # Documentation spécifique au dossier portfolio
+│   │ 
+│   └── preloader/
+│       ├── preloader-ultramodern.css # Styles du préchargeur
+│       ├── preloaderUltramodern.js   # Script JS du préchargeur
+│       └── README.md                 # Documentation du préchargeur
+```
+
+---
+
 ## Conseils d’Évolution & Maintenance
 
 - Poursuivre la documentation à chaque évolution.
@@ -71,6 +88,5 @@ Ce site présente mes compétences, réalisations et projets en cybersécurité,
 
 **Auteur** : [0xCyberLiTech](https://github.com/0xCyberLiTech)  
 **Dernière mise à jour** : 16 septembre 2025
-
 
 
