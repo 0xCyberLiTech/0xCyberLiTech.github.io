@@ -1,6 +1,4 @@
-# 0xCyberLiTech.github.io — Portfolio
-# -----------------------------------
-Technique & Présentation
+# 0xCyberLiTech.github.io — Portfolio Technique & Présentation
 
 Bienvenue sur le dépôt GitHub du portfolio de [0xCyberLiTech](https://0xcyberlitech.github.io).
 
