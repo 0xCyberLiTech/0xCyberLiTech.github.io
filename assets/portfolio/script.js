@@ -79,9 +79,12 @@ async function loadRepos() {
         const repos = await response.json();
         const filteredRepos = repos.filter(repo => repo.name !== '0xCyberLiTech.github.io' && repo.name !== '0xCyberLiTech');
         window.__allRepos = filteredRepos;
+        console.log('[DEBUG] Dépôts récupérés:', filteredRepos.map(r => r.name));
         renderRepos(filteredRepos);
     } catch (e) {
-        alert('Erreur lors du chargement des dépôts : ' + (e.message || e));
+        console.error('[ERREUR] Chargement des dépôts GitHub:', e);
+        const container = document.getElementById('projects-list');
+        if (container) container.innerHTML = '<div style="color:#ff0055;text-align:center;margin:2em auto;">Erreur lors du chargement des dépôts GitHub.<br>' + (e.message || e) + '</div>';
     }
 }
 
@@ -168,8 +171,18 @@ window.addEventListener('DOMContentLoaded', () => {
     // Liste récursive des fichiers d'un dépôt (API GitHub)
     async function listRepoFiles(owner, repo, path = '') {
         const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-        const resp = await fetch(url);
-        if (!resp.ok) return [];
+        console.log(`[API] listRepoFiles: ${url}`);
+        let resp;
+        try {
+            resp = await fetch(url);
+        } catch (err) {
+            console.error(`[ERREUR] Appel API GitHub échoué: ${url}`, err);
+            return [];
+        }
+        if (!resp.ok) {
+            console.error(`[ERREUR] API GitHub: ${url} => ${resp.status} ${resp.statusText}`);
+            return [];
+        }
         const data = await resp.json();
         let files = [];
         for (const item of data) {
