@@ -130,6 +130,11 @@ window.addEventListener('DOMContentLoaded', () => {
                             console.log(`Fichiers trouvés dans ${repo.name}:`, files.map(f => f.path));
                         }
                         for (const file of files) {
+                            // Recherche sur le nom du fichier
+                            if ((file.path || '').toLowerCase().includes(query)) {
+                                foundRepos.push({ ...repo, __matchedFile: file.path });
+                                break;
+                            }
                             if (file.size > 50000) continue; // Ignore gros fichiers
                             const content = await fetchFileContent('0xCyberLiTech', repo.name, file.path, repo.default_branch || 'main');
                             if (content && content.toLowerCase().includes(query)) {
