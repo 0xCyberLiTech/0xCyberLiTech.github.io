@@ -96,6 +96,24 @@ window.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => document.body.classList.remove('fade-in'), 1200);
     loadRepos();
 
+    // Moteur de recherche dynamique sur les projets (titre et description)
+    const searchInput = document.getElementById('search-repo');
+    if (searchInput) {
+        searchInput.addEventListener('input', function () {
+            const query = this.value.trim().toLowerCase();
+            if (query.length < 3) {
+                renderRepos(window.__allRepos || []);
+                return;
+            }
+            const filtered = (window.__allRepos || []).filter(repo => {
+                const name = (repo.name || '').toLowerCase();
+                const desc = (repo.description || '').toLowerCase();
+                return name.includes(query) || desc.includes(query);
+            });
+            renderRepos(filtered);
+        });
+    }
+
     // Gestion du footer : il ne s'affiche qu'après la transition du preloader ou après un court délai
     const footer = document.getElementById('site-footer');
     if (footer) {
