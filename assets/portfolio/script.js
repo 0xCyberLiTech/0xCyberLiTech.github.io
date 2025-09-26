@@ -112,9 +112,8 @@ window.addEventListener('DOMContentLoaded', () => {
                 const desc = (repo.description || '').toLowerCase();
                 return name.includes(query) || desc.includes(query);
             });
-            renderRepos(filtered);
-            // Recherche avancée dans les fichiers si rien trouvé et au moins 4 caractères
-            if (filtered.length === 0 && query.length >= 4) {
+            // Recherche avancée dans les fichiers si au moins 4 caractères
+            if (query.length >= 4) {
                 const container = document.getElementById('projects-list');
                 if (container) container.innerHTML = '<div style="color:#00fff0;text-align:center;margin:2em auto;">Recherche dans les fichiers des dépôts...</div>';
                 const searchId = ++lastSearchId;
@@ -152,11 +151,16 @@ window.addEventListener('DOMContentLoaded', () => {
                 }
                 // Si l'utilisateur a tapé autre chose entre temps, on annule l'affichage
                 if (searchId !== lastSearchId) return;
-                if (foundRepos.length > 0) {
-                    renderRepos(foundRepos, query);
+                // Fusionne les résultats sans doublons (priorité aux fichiers trouvés)
+                const filteredIds = new Set(filtered.map(r => r.id));
+                const merged = [...foundRepos, ...filtered.filter(r => !filteredIds.has(r.id))];
+                if (merged.length > 0) {
+                    renderRepos(merged, query);
                 } else if (container) {
                     container.innerHTML = '<div style="color:#00fff0;text-align:center;margin:2em auto;">Aucun résultat dans les fichiers des dépôts.<br><span style="color:#ff0055;font-size:0.95em;">(Vérifiez la console pour les détails)</span></div>';
                 }
+            } else {
+                renderRepos(filtered);
             }
         });
     }
