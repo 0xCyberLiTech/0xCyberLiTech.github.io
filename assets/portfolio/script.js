@@ -99,19 +99,104 @@ window.addEventListener('DOMContentLoaded', () => {
     // Moteur de recherche dynamique sur les projets (titre et description)
     const searchInput = document.getElementById('search-repo');
     if (searchInput) {
-        searchInput.addEventListener('input', function () {
+        let lastSearchId = 0;
+        searchInput.addEventListener('input', async function () {
             const query = this.value.trim().toLowerCase();
             if (query.length < 3) {
                 renderRepos(window.__allRepos || []);
                 return;
             }
-            const filtered = (window.__allRepos || []).filter(repo => {
+            // Recherche dans titre/description
+            let filtered = (window.__allRepos || []).filter(repo => {
                 const name = (repo.name || '').toLowerCase();
                 const desc = (repo.description || '').toLowerCase();
                 return name.includes(query) || desc.includes(query);
             });
             renderRepos(filtered);
+            // Recherche avancée dans les fichiers si rien trouvé et au moins 4 caractères
+            if (filtered.length === 0 && query.length >= 4) {
+                const container = document.getElementById('projects-list');
+                if (container) container.innerHTML = '<div style="color:#00fff0;text-align:center;margin:2em auto;">Recherche dans les fichiers des dépôts...</div>';
+                const searchId = ++lastSearchId;
+                let foundRepos = [];
+                for (const repo of window.__allRepos || []) {
+                    // Limite à 10 dépôts pour éviter l'abus
+                    if (foundRepos.length >= 10) break;
+                    try {
+                        const files = await listRepoFiles('0xCyberLiTech', repo.name);
+                        if (!files || !files.length) {
+                            console.warn(`Aucun fichier trouvé dans le dépôt ${repo.name}`);
+                        } else {
+                            console.log(`Fichiers trouvés dans ${repo.name}:`, files.map(f => f.path));
+                        }
+                        for (const file of files) {
+                            if (file.size > 50000) continue; // Ignore gros fichiers
+                            const content = await fetchFileContent('0xCyberLiTech', repo.name, file.path, repo.default_branch || 'main');
+                            if (content && content.toLowerCase().includes(query)) {
+                                // Ajoute une propriété pour indiquer le fichier trouvé
+                                foundRepos.push({ ...repo, __matchedFile: file.path });
+                                break;
+                            }
+                        }
+                    } catch (e) { /* ignore */ }
+                }
+                // Si l'utilisateur a tapé autre chose entre temps, on annule l'affichage
+                if (searchId !== lastSearchId) return;
+                if (foundRepos.length > 0) {
+                    renderRepos(foundRepos, query);
+                } else if (container) {
+                    container.innerHTML = '<div style="color:#00fff0;text-align:center;margin:2em auto;">Aucun résultat dans les fichiers des dépôts.<br><span style="color:#ff0055;font-size:0.95em;">(Vérifiez la console pour les détails)</span></div>';
+                }
+            }
         });
+    }
+
+    // Liste récursive des fichiers d'un dépôt (API GitHub)
+    async function listRepoFiles(owner, repo, path = '') {
+        const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+        const resp = await fetch(url);
+        if (!resp.ok) return [];
+        const data = await resp.json();
+        let files = [];
+        for (const item of data) {
+            if (item.type === 'file') files.push(item);
+            else if (item.type === 'dir') {
+                const subFiles = await listRepoFiles(owner, repo, item.path);
+                files = files.concat(subFiles);
+            }
+        }
+        return files;
+    }
+
+    // Récupère le contenu brut d'un fichier (API GitHub), branche paramétrable
+    async function fetchFileContent(owner, repo, path, branch) {
+        const url = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
+        try {
+            const resp = await fetch(url);
+            if (!resp.ok) return '';
+            return await resp.text();
+        } catch {
+            return '';
+        }
+    }
+
+    // Surcharge renderRepos pour afficher le nom du fichier trouvé si présent
+    const origRenderRepos = renderRepos;
+    function renderRepos(repos, query) {
+        if (!Array.isArray(repos)) return origRenderRepos(repos);
+        if (repos.length && repos[0].__matchedFile) {
+            const container = document.getElementById('projects-list');
+            container.innerHTML = '';
+            repos.forEach(repo => {
+                const tile = document.createElement('div');
+                tile.className = 'project-tile';
+                tile.innerHTML = `<div style="margin-bottom:0.5em;color:#00fff0;font-size:1em;">Fichier trouvé : <b>${utilEscapeHTML(repo.__matchedFile)}</b></div>` +
+                    origRenderRepos([repo]);
+                container.appendChild(tile);
+            });
+        } else {
+            origRenderRepos(repos);
+        }
     }
 
     // Gestion du footer : il ne s'affiche qu'après la transition du preloader ou après un court délai
