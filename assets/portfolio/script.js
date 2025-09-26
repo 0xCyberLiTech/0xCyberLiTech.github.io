@@ -73,18 +73,105 @@ function renderPromptTile({safeName, safeDesc, safeUrl, safeBranch, isNew, daysE
 // Gère les erreurs réseau et filtre les dépôts non pertinents
 async function loadRepos() {
     window.__allRepos = [];
+    
+    // Vérifier le cache local d'abord
+    const cachedData = localStorage.getItem('github-repos-cache');
+    const cacheTime = localStorage.getItem('github-repos-cache-time');
+    const CACHE_DURATION = 10 * 60 * 1000; // 10 minutes
+    
+    if (cachedData && cacheTime && (Date.now() - parseInt(cacheTime)) < CACHE_DURATION) {
+        console.log('[INFO] Utilisation du cache local');
+        const repos = JSON.parse(cachedData);
+        window.__allRepos = repos;
+        renderRepos(repos);
+        return;
+    }
+
+    // Fonction fallback pour charger les données statiques
+    async function loadStaticRepos() {
+        try {
+            const response = await fetch('/data/repos.json');
+            if (response.ok) {
+                const staticRepos = await response.json();
+                console.log('[INFO] Utilisation des données statiques');
+                return staticRepos;
+            }
+        } catch (e) {
+            console.warn('[WARNING] Impossible de charger les données statiques:', e);
+        }
+        return [];
+    }
+    
     try {
-        const response = await fetch('https://api.github.com/users/0xCyberLiTech/repos');
-        if (!response.ok) throw new Error(`HTTP ${response.status} - ${response.statusText}`);
+        const response = await fetch('https://api.github.com/users/0xCyberLiTech/repos', {
+            headers: {
+                'User-Agent': '0xCyberLiTech-Portfolio',
+                'Accept': 'application/vnd.github.v3+json'
+            }
+        });
+        if (!response.ok) {
+            // Récupérer les détails du rate limit si disponibles
+            const rateLimitRemaining = response.headers.get('X-RateLimit-Remaining');
+            const rateLimitReset = response.headers.get('X-RateLimit-Reset');
+            let errorMsg = `HTTP ${response.status} - ${response.statusText}`;
+            
+            if (response.status === 403 && rateLimitRemaining === '0') {
+                const resetTime = new Date(rateLimitReset * 1000);
+                errorMsg += ` | Rate limit atteinte. Réessayez après ${resetTime.toLocaleTimeString()}`;
+            }
+            
+            throw new Error(errorMsg);
+        }
         const repos = await response.json();
         const filteredRepos = repos.filter(repo => repo.name !== '0xCyberLiTech.github.io' && repo.name !== '0xCyberLiTech');
         window.__allRepos = filteredRepos;
+        
+        // Mettre en cache les données
+        localStorage.setItem('github-repos-cache', JSON.stringify(filteredRepos));
+        localStorage.setItem('github-repos-cache-time', Date.now().toString());
+        
         console.log('[DEBUG] Dépôts récupérés:', filteredRepos.map(r => r.name));
         renderRepos(filteredRepos);
     } catch (e) {
         console.error('[ERREUR] Chargement des dépôts GitHub:', e);
+        
+        // En cas d'erreur, essayer d'utiliser le cache même expiré
+        const cachedData = localStorage.getItem('github-repos-cache');
+        if (cachedData) {
+            console.log('[INFO] Utilisation du cache expiré en fallback');
+            const repos = JSON.parse(cachedData);
+            window.__allRepos = repos;
+            renderRepos(repos);
+            
+            const container = document.getElementById('projects-list');
+            if (container) {
+                // Ajouter un message d'avertissement
+                const warning = document.createElement('div');
+                warning.style.cssText = 'color:#ff9500;text-align:center;margin:1em auto;font-size:0.9em;';
+                warning.textContent = '⚠️ Données mises en cache (API GitHub temporairement indisponible)';
+                container.insertBefore(warning, container.firstChild);
+            }
+            return;
+        }
+
+        // Fallback final : utiliser les données statiques
+        const staticRepos = await loadStaticRepos();
+        if (staticRepos.length > 0) {
+            window.__allRepos = staticRepos;
+            renderRepos(staticRepos);
+            
+            const container = document.getElementById('projects-list');
+            if (container) {
+                const warning = document.createElement('div');
+                warning.style.cssText = 'color:#ff9500;text-align:center;margin:1em auto;font-size:0.9em;';
+                warning.textContent = '⚠️ Données statiques (API GitHub indisponible)';
+                container.insertBefore(warning, container.firstChild);
+            }
+            return;
+        }
+        
         const container = document.getElementById('projects-list');
-        if (container) container.innerHTML = '<div style="color:#ff0055;text-align:center;margin:2em auto;">Erreur lors du chargement des dépôts GitHub.<br>' + (e.message || e) + '</div>';
+        if (container) container.innerHTML = '<div style="color:#ff0055;text-align:center;margin:2em auto;">Erreur lors du chargement des dépôts GitHub.<br>' + (e.message || e) + '<br><br><small>Conseil : Rafraîchissez la page dans quelques minutes.</small></div>';
     }
 }
 
@@ -174,13 +261,22 @@ window.addEventListener('DOMContentLoaded', () => {
         console.log(`[API] listRepoFiles: ${url}`);
         let resp;
         try {
-            resp = await fetch(url);
+            resp = await fetch(url, {
+                headers: {
+                    'User-Agent': '0xCyberLiTech-Portfolio',
+                    'Accept': 'application/vnd.github.v3+json'
+                }
+            });
         } catch (err) {
             console.error(`[ERREUR] Appel API GitHub échoué: ${url}`, err);
             return [];
         }
         if (!resp.ok) {
-            console.error(`[ERREUR] API GitHub: ${url} => ${resp.status} ${resp.statusText}`);
+            if (resp.status === 403) {
+                console.warn(`[RATE LIMIT] API GitHub rate limit atteinte pour: ${url}`);
+            } else {
+                console.error(`[ERREUR] API GitHub: ${url} => ${resp.status} ${resp.statusText}`);
+            }
             return [];
         }
         const data = await resp.json();
@@ -199,8 +295,17 @@ window.addEventListener('DOMContentLoaded', () => {
     async function fetchFileContent(owner, repo, path, branch) {
         const url = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
         try {
-            const resp = await fetch(url);
-            if (!resp.ok) return '';
+            const resp = await fetch(url, {
+                headers: {
+                    'User-Agent': '0xCyberLiTech-Portfolio'
+                }
+            });
+            if (!resp.ok) {
+                if (resp.status === 403) {
+                    console.warn(`[RATE LIMIT] Raw GitHub rate limit atteinte pour: ${url}`);
+                }
+                return '';
+            }
             return await resp.text();
         } catch {
             return '';
