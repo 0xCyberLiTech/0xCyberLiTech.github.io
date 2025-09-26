@@ -132,15 +132,20 @@ window.addEventListener('DOMContentLoaded', () => {
                         for (const file of files) {
                             // Recherche sur le nom du fichier
                             if ((file.path || '').toLowerCase().includes(query)) {
+                                console.log(`[MATCH NOM] ${repo.name} : ${file.path}`);
                                 foundRepos.push({ ...repo, __matchedFile: file.path });
                                 break;
+                            } else {
+                                console.log(`[TEST NOM] ${repo.name} : ${file.path}`);
                             }
                             if (file.size > 50000) continue; // Ignore gros fichiers
                             const content = await fetchFileContent('0xCyberLiTech', repo.name, file.path, repo.default_branch || 'main');
                             if (content && content.toLowerCase().includes(query)) {
-                                // Ajoute une propriété pour indiquer le fichier trouvé
+                                console.log(`[MATCH CONTENU] ${repo.name} : ${file.path}`);
                                 foundRepos.push({ ...repo, __matchedFile: file.path });
                                 break;
+                            } else {
+                                console.log(`[TEST CONTENU] ${repo.name} : ${file.path}`);
                             }
                         }
                     } catch (e) { /* ignore */ }
