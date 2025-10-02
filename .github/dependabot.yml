@@ -1,0 +1,45 @@
+# Configuration Dependabot pour 0xCyberLiTech Portfolio
+# Surveillance des dépendances et actions de sécurité
+
+version: 2
+
+updates:
+  # Surveillance des GitHub Actions (pour CodeQL)
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "0xCyberLiTech"
+    commit-message:
+      prefix: "🔧 [Security]"
+      include: "scope"
+
+  # Surveillance npm (si vous ajoutez un package.json à l'avenir)
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+      time: "09:00"
+    open-pull-requests-limit: 5
+    reviewers:
+      - "0xCyberLiTech"
+    commit-message:
+      prefix: "📦 [Dependencies]"
+      include: "scope"
+    # Ignorer les updates majeures pour éviter les breaking changes
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+    
+  # Surveillance Docker (si vous ajoutez des conteneurs à l'avenir)
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "🐳 [Docker]"

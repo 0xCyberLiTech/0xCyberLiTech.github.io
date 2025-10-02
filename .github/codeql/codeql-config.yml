@@ -1,0 +1,47 @@
+# Configuration CodeQL personnalisée pour 0xCyberLiTech Portfolio
+# Analyse de sécurité adaptée aux projets JavaScript ES6+ / GitHub Pages
+
+name: codeql-config
+
+# Chemins à analyser spécifiquement
+paths:
+  - assets/portfolio/script.js
+  - assets/utils/utils.js
+  - assets/partials/inject-partials.js
+  - assets/preloader/preloaderUltramodern.js
+  - assets/portfolio/tronNumbersBg.js
+  - index.html
+  - portfolio.html
+
+# Chemins à ignorer (non critiques pour la sécurité)
+paths-ignore:
+  - "**/*.css"
+  - "**/*.md"
+  - docs/
+  - assets/logo/
+  - "*.png"
+  - "*.jpg"
+  - "*.gif"
+
+# Requêtes de sécurité spécifiques aux projets web frontend
+queries:
+  - name: security-extended
+    uses: security-extended
+  - name: security-and-quality 
+    uses: security-and-quality
+
+# Configuration pour projets GitHub Pages / Portfolio
+disable-default-path-filters: false
+
+# Langages à analyser
+languages:
+  - javascript
+
+# Configuration avancée pour JavaScript ES6+
+javascript:
+  # Analyse des modules ES6
+  index-files: true
+  # Détection XSS améliorée (important pour votre utilEscapeHTML)
+  max-paths: 10000
+  # Analyse des APIs externes (GitHub API dans votre cas)
+  external-api-tracking: true

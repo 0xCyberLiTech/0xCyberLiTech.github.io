@@ -1,0 +1,48 @@
+# Configuration CodeQL pour portfolio JavaScript ES6+
+# Analyse de sécurité automatique adaptée au projet 0xCyberLiTech
+
+name: "CodeQL Analysis"
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  schedule:
+    # Analyse hebdomadaire le dimanche à 03:00 UTC
+    - cron: '0 3 * * 0'
+
+jobs:
+  analyze:
+    name: Analyze JavaScript/HTML
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'javascript' ]
+        # CodeQL supporte: 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby'
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+        languages: ${{ matrix.language }}
+        # Queries spécifiques pour projets web front-end
+        queries: security-extended,security-and-quality
+        
+        # Configuration personnalisée pour votre architecture
+        config-file: ./.github/codeql/codeql-config.yml
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2
+      with:
+        category: "/language:${{matrix.language}}"
