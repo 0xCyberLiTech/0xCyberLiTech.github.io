@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>0xCyberLiTech - Portfolio GitHub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="assets/portfolio/style.css">
+    <script type="module" src="assets/portfolio/script.js"></script>
+</head>
+<body>
+    <!-- PRELOADER ULTRA-MODERNE -->
+    <div id="preloader-ultramodern" class="preloader-ultramodern">
+        <canvas id="preloader-canvas"></canvas>
+        <div class="preloader-content">
+            <div class="preloader-logo-container">
+                <img src="assets/logo/logo.png" alt="Logo 0xCyberLiTech" class="preloader-logo">
+            </div>
+            <div class="preloader-status">
+                <div class="preloader-status-text" id="preloader-status-text">Initialisation du portfolio...</div>
+                <div class="preloader-progress-bar-container">
+                    <div class="preloader-progress-bar-bg">
+                        <div class="preloader-progress-bar" id="preloader-progress-bar"></div>
+                        <div class="preloader-progress-bar-marks">
+                            <span>0%</span>
+                            <span>50%</span>
+                            <span>100%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="portfolio-root" style="opacity:0;pointer-events:none;display:none;transition:opacity 0.8s cubic-bezier(0.4,0,0.2,1);">
+        <div id="header"></div>
+        <main>
+            <section id="projets">
+                <h2 class="tron-section-title" id="projets-list-title">$ ls -la ~/repositories/public</h2>
+                <div id="projects-list"></div>
+            </section>
+        </main>
+        <div id="footer"></div>
+    </div>
+
+    <link rel="stylesheet" href="assets/preloader/preloader-ultramodern.css">
+    <script src="assets/preloader/preloaderUltramodern.js"></script>
+    <script>
+    // Transition JS : fade-out du preloader, fade-in du portfolio (après la barre de progression)
+    window.addEventListener('preloader:done', function() {
+        const status = document.getElementById('preloader-status-text');
+        status.textContent = 'Bienvenue !';
+        setTimeout(() => {
+            const preloader = document.getElementById('preloader-ultramodern');
+            preloader.style.opacity = '0';
+            preloader.style.pointerEvents = 'none';
+            const root = document.getElementById('portfolio-root');
+            root.style.display = '';
+            root.style.opacity = '1';
+            root.style.pointerEvents = 'auto';
+            setTimeout(() => {
+                if (preloader && preloader.parentNode) {
+                    preloader.parentNode.removeChild(preloader);
+                }
+            }, 700);
+        }, 900);
+    });
+    </script>
+    <script src="assets/portfolio/tronNumbersBg.js"></script>
+    <script>
+    // Démarrage de l'animation de fond Tron
+    if (window.startTronNumbersBG) {
+        window.startTronNumbersBG();
+    }
+    </script>
+    <script src="assets/partials/inject-partials.js"></script>
+</body>
+</html>

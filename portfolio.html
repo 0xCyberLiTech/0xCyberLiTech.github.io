@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio | 0xCyberLiTech</title>
+  <meta name="description" content="Portfolio cybersécurité, scripts, projets, et tutoriels par 0xCyberLiTech. Thème cyber/Tron, responsive, sécurisé.">
+  <link rel="icon" type="image/png" href="assets/logo/logo.png">
+  <link rel="stylesheet" href="assets/portfolio/variables.css">
+  <link rel="stylesheet" href="assets/portfolio/style.css">
+</head>
+<body>
+  <div id="portfolio-root">
+  <div id="header"></div>
+    <main>
+      <!-- MOTEUR DE RECHERCHE -->
+      <section id="search-section" style="padding: 2vh 5vw; max-width: 900px; margin: 0 auto;">
+        <div class="search-container" style="position: relative; margin-bottom: 2rem;">
+          <div class="search-input-wrapper" style="position: relative;">
+            <input 
+              type="text" 
+              id="search-input" 
+              placeholder="Rechercher dans les repositories (min. 3 caractères)..." 
+              style="width: 100%; padding: 15px 50px 15px 20px; font-size: 1.1rem; border: 2px solid var(--tron-cyan); border-radius: var(--border-radius); background: rgba(10, 10, 10, 0.9); box-shadow: var(--tron-shadow); transition: var(--transition-main); color: var(--tron-cyan);"
+            >
+            <button 
+              id="search-clear" 
+              style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--tron-orange); font-size: 1.2rem; cursor: pointer; opacity: 0; transition: opacity 0.3s ease;"
+              title="Effacer la recherche"
+            >✕</button>
+          </div>
+          <div id="search-results-info" style="margin-top: 10px; color: var(--tron-cyan); opacity: 0.8; font-size: 0.95rem; text-align: center;"></div>
+        </div>
+      </section>
+      
+      <section id="projets" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; padding-top: 1vh;">
+        <div id="projects-list"></div>
+      </section>
+    </main>
+  <div id="footer"></div>
+  </div>
+  <script type="module" src="assets/portfolio/script.js"></script>
+  <script src="assets/portfolio/tronNumbersBg.js"></script>
+  <script>
+    if (window.startTronNumbersBG) {
+      window.startTronNumbersBG();
+    }
+  </script>
+  <script src="assets/partials/inject-partials.js"></script>
+</body>
+</html>

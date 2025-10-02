@@ -1,0 +1,57 @@
+/* ===============================
+   ANIMATIONS GLOBALES - Regroupées pour clarté et maintenance
+   =============================== */
+
+/* Animations ACTIVES sur le site : */
+
+@keyframes searchPulse {
+    0% {
+        box-shadow: 0 0 32px 6px rgba(0,255,120,0.10) inset, 0 2px 12px #000a;
+    }
+    50% {
+        box-shadow: 0 0 48px 12px rgba(0,255,120,0.18) inset, 0 2px 16px #000a;
+    }
+    100% {
+        box-shadow: 0 0 32px 6px rgba(0,255,120,0.10) inset, 0 2px 12px #000a;
+    }
+}
+
+@keyframes tron-glow-border {
+    0% { box-shadow: 0 0 32px #00fff055, 0 2px 8px #000a, 0 0 0 2.5px #00fff055 inset, 0 0 24px 2px #00fff033 inset, 0 0 32px 8px #00fff099; }
+    50% { box-shadow: 0 0 48px #00fff0cc, 0 2px 12px #000a, 0 0 0 3.5px #00fff0cc inset, 0 0 32px 4px #00fff0cc inset, 0 0 64px 16px #00fff0cc; }
+    100% { box-shadow: 0 0 32px #00fff055, 0 2px 8px #000a, 0 0 0 2.5px #00fff055 inset, 0 0 24px 2px #00fff033 inset, 0 0 32px 8px #00fff099; }
+}
+
+@keyframes banner-scanline {
+    0% { background-position-y: 0; }
+    100% { background-position-y: 8px; }
+}
+
+@keyframes tron-tile-glow {
+    0% {
+        background-position: 60% 40%, 0% 0%;
+        filter: blur(0.5px) brightness(1.1);
+    }
+    50% {
+        background-position: 40% 60%, 100% 100%;
+        filter: blur(1.5px) brightness(1.25);
+    }
+    100% {
+        background-position: 60% 40%, 0% 0%;
+        filter: blur(0.5px) brightness(1.1);
+    }
+}
+
+/* Animations utilisées ponctuellement (ex : transitions, effets de texte) : */
+
+@keyframes fadeInPortfolio {
+    0% { opacity: 0; transform: translateY(24px) scale(0.98); }
+    100% { opacity: 1; transform: none; }
+}
+
+@keyframes blink-cursor {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* =============================== */
