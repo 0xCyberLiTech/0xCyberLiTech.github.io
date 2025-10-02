@@ -2,9 +2,12 @@
 
 🧩 **Composants HTML partagés et système d'injection dynamique**
 
-## 🔄 Changements v2.1 (Octobre 2025)
+## 🔄 Changements v2.1 (2 Octobre 2025)
 - 📚 **DOCUMENTATION** : Mise à jour complète de la documentation
 - ✅ **VALIDATION** : Vérification de l'intégrité du système d'injection
+- 🛡️ **SECURITY COMPLIANCE** : Compatible avec CodeQL et analyse de sécurité
+- 🔍 **XSS PROTECTION** : Utilisation de `utilEscapeHTML()` pour tous les contenus injectés
+- 📋 **MONITORING READY** : Prêt pour surveillance Dependabot
 
 ## 🔄 Héritage v2.0
 - ❌ **SUPPRESSION** : Système modal (modal.html + modal.js) - Code mort éliminé

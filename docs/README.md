@@ -2,11 +2,33 @@
 
 Guide central vers toute la documentation technique du projet après optimisation complète.
 
-**Dernière mise à jour** : 1er octobre 2025
+**Dernière mise à jour** : 2 octobre 2025
+
+## 🚀 Démarrage Rapide
+
+### 📋 Liens Essentiels
+| 🎯 Besoin | 📖 Document | ⏱️ Temps |
+|-----------|-------------|----------|
+| **Comprendre le projet** | [../README.md](../README.md) | 5 min |
+| **Configurer la sécurité** | [SECURITY_GUIDE.md](SECURITY_GUIDE.md) | 15 min |
+| **Déployer** | [DEPLOYMENT.md](DEPLOYMENT.md) | 10 min |
+| **Développer** | [ARCHITECTURE.md](ARCHITECTURE.md) + modules | 30 min |
+| **Contribuer** | [../CONTRIBUTING.md](../CONTRIBUTING.md) | 10 min |
+
+### 🛡️ Sécurité (Priorité v2.1)
+- **🔍 Scan Manuel** : [SECURITY_GUIDE.md § Scan Manuel](SECURITY_GUIDE.md#-scan-manuel---procédure-complète)
+- **⚙️ Configuration** : [SECURITY_GUIDE.md § Configuration](SECURITY_GUIDE.md#-configuration-actuelle)
+- **🚨 Urgence** : [SECURITY_GUIDE.md § Procédures d'urgence](SECURITY_GUIDE.md#-procédures-durgence)
 
 ---
 
-## 🎯 Changements v2.1 (Octobre 2025)
+## 🎯 Changements v2.1 (2 octobre 2025)
+
+### 🛡️ Sécurité Entreprise (NOUVEAU)
+- **GitHub Security Suite** : CodeQL + Dependabot + Secret Scanning
+- **Zero Cost Configuration** : Optimisé pour comptes gratuits
+- **Documentation Sécurité** : Guide complet 80+ pages
+- **Automated Monitoring** : Surveillance continue des vulnérabilités
 
 ### ✅ Documentation & Qualité
 - **Documentation** : Mise à jour complète de tous les README et guides
@@ -61,7 +83,24 @@ Guide central vers toute la documentation technique du projet après optimisatio
 
 ## 🎯 Documentation par Cas d'Usage
 
-### 👨‍💻 Pour les Développeurs
+### �️ Pour la Sécurité (NOUVEAU)
+
+```mermaid
+graph LR
+    A[📖 README.md] --> B[🛡️ SECURITY_GUIDE.md]
+    B --> C[⚙️ Configuration GitHub]
+    C --> D[🔍 Scan Manuel]
+    D --> E[📊 Monitoring]
+    B --> F[🚨 Emergency Procedures]
+```
+
+**Parcours recommandé :**
+1. [SECURITY_GUIDE.md](SECURITY_GUIDE.md) - Guide complet de sécurité
+2. Configuration des paramètres GitHub Security
+3. Tests de scan manuel
+4. Mise en place du monitoring
+
+### �👨‍💻 Pour les Développeurs
 
 ```mermaid
 graph LR

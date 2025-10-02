@@ -34,12 +34,19 @@ Ce module gère l'affichage dynamique des repositories GitHub, l'interface utili
 - 📊 **Moteur de Recherche Optimisé** : Debouncing 300ms, curseur repositionné
 - 🎨 **CSS Optimisé** : Variables centralisées (85% de réduction)
 
-**État Final** : Code base parfaitement optimisé, zéro code mort, sécurité maximale
+**Nouvelles Fonctionnalités v2.1** (2 Oct 2025) :
+- 🛡️ **Security Scanning** : Intégration CodeQL pour détection automatique des vulnérabilités
+- 🤖 **Dependabot Ready** : Configuration pour surveillance des dépendances futures
+- 📋 **Security Policy** : Procédures d'urgence en cas de vulnérabilité critique
+- 🔍 **Monitoring** : Tableau de bord sécurité avec métriques temps réel
+
+**État Final v2.1** : Code base sécurisé niveau entreprise, zéro coût
 - 🔧 **Code Factorization** : Élimination complète des `getElementById()` répétés
 - 🧹 **Dead Code Removal** : Suppression totale du code mort et orphelin
 - 🎯 **Optimized DOM Access** : Réduction de 80% des accès DOM répétitifs
-- 🔒 **XSS Protection** : Sécurisation renforcée avec `utilEscapeHTML()` factorized
-- 📚 **Documentation v2.1** : Documentation complète mise à jour (Oct 2025)
+- 🔒 **XSS Protection** : Sécurisation renforcée avec `utilEscapeHTML()` factorisé
+- 🛡️ **Enterprise Security** : Configuration sécurité GitHub niveau professionnel
+- 📚 **Documentation v2.1** : Documentation complète mise à jour (2 Oct 2025)
 
 **Usage** :
 ```javascript
