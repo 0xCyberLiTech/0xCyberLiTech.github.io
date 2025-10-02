@@ -6,11 +6,18 @@ name: "CodeQL Analysis"
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - '**.js'
+      - '**.html'
+      - '.github/workflows/codeql.yml'
   pull_request:
     branches: [ "main" ]
-  schedule:
-    # Analyse hebdomadaire le dimanche à 03:00 UTC
-    - cron: '0 3 * * 0'
+    paths:
+      - '**.js'
+      - '**.html'
+      - '.github/workflows/codeql.yml'
+  # Pas d'analyse programmée = 0 minute consommée automatiquement
+  # L'analyse ne se déclenche que sur modification des fichiers JS/HTML
 
 jobs:
   analyze:
@@ -26,23 +33,21 @@ jobs:
       fail-fast: false
       matrix:
         language: [ 'javascript' ]
-        # CodeQL supporte: 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby'
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
 
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@v2
+      uses: github/codeql-action/init@v3
       with:
         languages: ${{ matrix.language }}
-        # Queries spécifiques pour projets web front-end
         queries: security-extended,security-and-quality
-        
-        # Configuration personnalisée pour votre architecture
-        config-file: ./.github/codeql/codeql-config.yml
+
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v3
 
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v2
+      uses: github/codeql-action/analyze@v3
       with:
-        category: "/language:${{matrix.language}}"
+        category: "/language:${{ matrix.language }}"
