@@ -36,7 +36,14 @@ Guide central vers toute la documentation technique du projet après optimisatio
 | [DEPLOYMENT.md](DEPLOYMENT.md) | Guide complet de déploiement multi-plateformes | 🔶 Intermédiaire |
 | [TESTING.md](TESTING.md) | **NOUVEAU** Guide complet de tests et validation | 🔶 Intermédiaire |
 
-### 📊 Suivi et Évolution
+### �️ Sécurité et Conformité
+
+| Document | Contenu | Niveau |
+|----------|---------|---------|
+| [SECURITY_GUIDE.md](SECURITY_GUIDE.md) | **NOUVEAU** Guide complet de sécurité GitHub | 🔥 Avancé |
+| [../SECURITY.md](../SECURITY.md) | **NOUVEAU** Politique de sécurité officielle | 📚 Référence |
+
+### �📊 Suivi et Évolution
 
 | Document | Contenu | Niveau |
 |----------|---------|---------|

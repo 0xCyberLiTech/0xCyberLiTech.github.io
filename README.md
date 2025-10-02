@@ -142,17 +142,25 @@ Le portfolio utilise l'API publique GitHub (pas de token requis).
 
 ## 🔒 Sécurité
 
-### Protection XSS v2.0
+### Protection XSS v2.1
 - **Échappement HTML** : Tous les inputs utilisateurs via `utilEscapeHTML()`
 - **Validation GitHub API** : Vérification type/format des données reçues
 - **Sanitisation DOM** : Nettoyage automatique du contenu injecté
 - **Tests Sécurité** : Validation complète contre injections malveillantes
 
+### Analyse Automatique (NOUVEAU)
+- 🛡️ **CodeQL Analysis** : Scan de sécurité JavaScript hebdomadaire
+- 🤖 **Dependabot** : Surveillance automatique des vulnérabilités
+- 🔍 **Secret Scanning** : Détection de tokens/clés exposées accidentellement
+- 📋 **Security Policy** : Processus de signalement des vulnérabilités
+
 ### Conformité
 - ✅ **OWASP Guidelines** respectées
-- ✅ **CSP Ready** (Content Security Policy compatible)
+- ✅ **GitHub Security** niveau entreprise
 - ✅ **XSS Prevention** niveau A+
-- ✅ **Data Validation** robuste
+- ✅ **Zero Cost** configuration optimisée
+
+> 📖 **Guide complet** : [docs/SECURITY_GUIDE.md](docs/SECURITY_GUIDE.md)
 
 ---
 
