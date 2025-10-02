@@ -70,7 +70,7 @@ Guide central vers toute la documentation technique du projet après optimisatio
 | Document | Contenu | Niveau |
 |----------|---------|---------|
 | [../CHANGELOG.md](../CHANGELOG.md) | **NOUVEAU** Historique complet des versions | 📚 Référence |
-| [UPDATE_REPORT_v2.1.md](UPDATE_REPORT_v2.1.md) | **NOUVEAU** Rapport de mise à jour Octobre 2025 | 📚 Référence |
+| [../CHANGELOG.md](../CHANGELOG.md) | **ACTUEL** Historique complet des versions et évolutions | 📚 Référence |
 
 ### 📦 Modules et Composants
 
