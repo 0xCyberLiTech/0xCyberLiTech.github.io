@@ -2,12 +2,13 @@
 
 🔧 **Utilitaires JavaScript partagés et sécurité**
 
-## 🛡️ Sécurité v2.1 (2 Octobre 2025)
-- ✅ **utilEscapeHTML** : Fonction de sécurité XSS utilisée dans tout le projet
+## 🛡️ Sécurité v2.1 (3 Octobre 2025)
+- ✅ **utilEscapeHTML** : Fonction de sécurité XSS utilisée dans tout le projet  
 - ✅ **Factorisation Parfaite** : Centralisée et réutilisée (script.js, inject-partials.js)
 - ✅ **Protection Complète** : Échappement de tous les inputs utilisateurs
+- ⚡ **Performance Optimisée** : Utilisée avec les nouveaux systèmes de cache DOM
 - ✅ **CodeQL Integration** : Analyse automatique des vulnérabilités de sécurité
-- ✅ **Dependabot Protection** : Surveillance continue des dépendances
+- ✅ **Dependabot Protection** : Surveillance continue des dépendances  
 - ✅ **Zero Cost Security** : Configuration optimisée pour comptes GitHub gratuits
 - ✅ **Validation** : Tests de sécurité automatisés passés avec succès
 - 📚 **Documentation** : Guide complet de sécurité (80+ pages) et README vérifié

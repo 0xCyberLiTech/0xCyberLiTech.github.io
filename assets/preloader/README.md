@@ -1,4 +1,11 @@
-# assets/preloader v2.1
+# as## 🎨 Optimisations v2.1 (3 Octobre 2025)
+- ⚡ **PreloaderCache** : Cache DOM centralisé pour optimiser l'accès aux éléments
+- 🧹 **Code Factorization** : Élimination des `getElementById()` répétés
+- ✅ **Performance** : Canvas optimisé, animations fluides 60fps constantes
+- ✅ **Compatibilité** : Fallback graceful, responsive design multi-plateforme
+- ✅ **Code Clean** : Architecture modulaire, zéro dépendance externe
+- 🛡️ **Security Ready** : Compatible avec la configuration de sécurité v2.1
+- 🔍 **CodeQL Compliant** : Code analysé et sécurisé automatiquementloader v2.1
 
 ⚡ **Système de préchargement ultra-moderne avec animations canvas**
 

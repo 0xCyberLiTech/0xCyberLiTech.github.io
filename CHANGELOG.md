@@ -7,6 +7,22 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ---
 
+## [v2.1.1] - 2025-10-03
+
+### 🧹 **Optimisations de Factorisation**
+- 🗑️ **Fichier supprimé** : `animations.css` (orphelin non utilisé)
+- ⚡ **DOM Cache étendu** : PreloaderCache, PartialsCache ajoutés
+- 🎨 **CSS harmonisé** : Imports standardisés dans index.html et portfolio.html
+- 🔧 **getElementById() optimisés** : Centralisés dans les systèmes de cache
+- 📚 **Documentation corrigée** : Schémas d'arborescence mis à jour
+
+### 🔧 **Corrections Structure**
+- ✅ **Arborescence README** : Suppression animations.css, ajout des caches DOM
+- ✅ **ARCHITECTURE.md** : Structure optimisée et duplications supprimées
+- ✅ **Métriques performance** : Ajout des nouvelles optimisations CSS et DOM
+
+---
+
 ## [v2.1] - 2025-10-01
 
 ### ✨ Ajouté

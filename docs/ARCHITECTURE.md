@@ -38,12 +38,11 @@ Le portfolio utilise une **architecture modulaire frontend-only** basée sur des
 │   │
 │   ├── 💼 Module Portfolio
 │   ├── portfolio/
-│   │   ├── script.js           # Logique métier principale (DOM cache)
-│   │   ├── tronNumbersBg.js    # Effet visuel Tron
-│   │   ├── style.css           # Styles du portfolio
-│   │   ├── variables.css       # Variables CSS complètes (8 nouvelles)
-│   │   ├── animations.css      # Animations réutilisables
-│   │   └── _keyframes-group.css # Keyframes spécialisées
+│   │   ├── script.js           # Logique métier + DOMCache optimisé
+│   │   ├── tronNumbersBg.js    # Effet visuel Tron interactif
+│   │   ├── style.css           # Styles portfolio (imports supprimés)
+│   │   ├── variables.css       # Variables CSS centralisées
+│   │   └── _keyframes-group.css # Toutes animations centralisées
 │   │
 │   ├── ⚡ Module Préchargeur
 │   ├── preloader/
@@ -51,12 +50,8 @@ Le portfolio utilise une **architecture modulaire frontend-only** basée sur des
 │   │   └── preloader-ultramodern.css # Styles du préchargeur
 │   │
 │   └── 🛠️ Utilitaires sécurisés
-│   └── utils/
-│       └── utils.js            # Fonctions utilitaires (XSS protection)
-│   │
-│   └── 🛠️ Utilitaires
-│   └── utils/
-│       └── utils.js            # Fonctions utilitaires globales
+│       └── utils/
+│           └── utils.js        # utilEscapeHTML + protection XSS
 │
 └── 📚 Documentation
     └── docs/                   # Documentation technique
@@ -77,7 +72,21 @@ graph TD
     G --> H[Application Prête]
 ```
 
-### 2. Architecture des Modules
+### 2. Optimisations de Factorisation v2.1
+
+**Fichiers supprimés** :
+- ~~`animations.css`~~ → Fusionné dans `_keyframes-group.css`
+
+**DOM Cache centralisé** :
+- `DOMCache` (portfolio/script.js)
+- `PreloaderCache` (preloader/preloaderUltramodern.js)  
+- `PartialsCache` (partials/inject-partials.js)
+
+**CSS optimisé** :
+- Imports CSS harmonisés dans les 2 HTML
+- Animations centralisées (suppression des doublons)
+
+### 3. Architecture des Modules
 
 #### Module Préchargeur
 ```javascript

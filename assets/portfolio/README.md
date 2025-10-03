@@ -21,6 +21,13 @@ Ce module gère l'affichage dynamique des repositories GitHub, l'interface utili
 - ⚡ **Optimisations performance** : Cache DOM et factorisation parfaite
 - 🧹 **Code Clean** : Zéro code mort, architecture DRY
 
+**Fichiers du module** :
+- `script.js` - Contrôleur principal + DOMCache
+- `style.css` - Styles optimisés (imports supprimés)
+- `variables.css` - Variables CSS centralisées
+- `_keyframes-group.css` - Animations CSS centralisées
+- `tronNumbersBg.js` - Fond 3D Tron interactif
+
 **Dépendances** :
 - `../utils/utils.js` (utilEscapeHTML)
 - GitHub API (https://api.github.com/users/0xCyberLiTech/repos)
@@ -41,12 +48,13 @@ Ce module gère l'affichage dynamique des repositories GitHub, l'interface utili
 - 🔍 **Monitoring** : Tableau de bord sécurité avec métriques temps réel
 
 **État Final v2.1** : Code base sécurisé niveau entreprise, zéro coût
-- 🔧 **Code Factorization** : Élimination complète des `getElementById()` répétés
-- 🧹 **Dead Code Removal** : Suppression totale du code mort et orphelin
+- 🔧 **Code Factorization** : DOMCache centralisé, élimination des `getElementById()` répétés
+- 🧹 **Dead Code Removal** : Suppression `animations.css` (orphelin), doublons CSS
 - 🎯 **Optimized DOM Access** : Réduction de 80% des accès DOM répétitifs
 - 🔒 **XSS Protection** : Sécurisation renforcée avec `utilEscapeHTML()` factorisé
+- 🎨 **CSS Harmonized** : Imports CSS standardisés, animations centralisées
 - 🛡️ **Enterprise Security** : Configuration sécurité GitHub niveau professionnel
-- 📚 **Documentation v2.1** : Documentation complète mise à jour (2 Oct 2025)
+- 📚 **Documentation v2.1** : Documentation mise à jour (3 Oct 2025)
 
 **Usage** :
 ```javascript

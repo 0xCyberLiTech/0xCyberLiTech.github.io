@@ -89,6 +89,8 @@
 | **Vulnérabilités XSS** | 3 | 0 | ✅ -100% |
 | **Temps Recherche** | ~50ms | ~15ms | ✅ -70% |
 | **Taille Bundle** | ~45KB | ~32KB | ✅ -29% |
+| **Fichiers CSS** | 6 fichiers | 4 fichiers | ✅ -33% |
+| **DOM Cache** | Manuel | Centralisé | ✅ +Performance |
 
 ---
 
@@ -96,25 +98,26 @@
 
 ```
 0xCyberLiTech.github.io/
-├── index.html                 # Page d'accueil
-├── portfolio.html             # Portfolio principal
+├── index.html                 # Page d'accueil avec préloader
+├── portfolio.html             # Portfolio direct (sans préloader)
 ├── assets/
 │   ├── logo/                  # Assets visuels
+│   │   └── logo.png           # Logo principal
 │   ├── portfolio/             # 🎯 Module portfolio (Core)
-│   │   ├── script.js          # Contrôleur principal optimisé
-│   │   ├── style.css          # Styles portfolio 
+│   │   ├── script.js          # Contrôleur principal + DOM Cache
+│   │   ├── style.css          # Styles portfolio optimisés
 │   │   ├── variables.css      # Variables CSS centralisées
-│   │   ├── animations.css     # Animations avancées
-│   │   └── tronNumbersBg.js   # Fond 3D Tron
+│   │   ├── _keyframes-group.css # Animations centralisées
+│   │   └── tronNumbersBg.js   # Fond 3D Tron interactif
 │   ├── partials/              # 🧩 Composants réutilisables
 │   │   ├── header.html        # En-tête navigation
 │   │   ├── footer.html        # Pied de page
-│   │   └── inject-partials.js # Système injection v2.0
+│   │   └── inject-partials.js # Système injection + Cache DOM
 │   ├── preloader/             # ⚡ Système préchargement
 │   │   ├── preloader-ultramodern.css
-│   │   └── preloaderUltramodern.js
+│   │   └── preloaderUltramodern.js # + PreloaderCache
 │   └── utils/                 # 🔧 Utilitaires sécurité
-│       └── utils.js           # Fonction utilEscapeHTML
+│       └── utils.js           # utilEscapeHTML + sécurité XSS
 └── docs/                      # 📚 Documentation technique
     ├── README.md              # Index documentation
     ├── ARCHITECTURE.md        # Architecture détaillée

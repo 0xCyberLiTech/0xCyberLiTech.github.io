@@ -164,11 +164,11 @@ header.top-banner {
 main {
     max-width: 900px;
     margin: 0 auto;
-    padding: 24px 12px 48px 12px;
+    padding: 1.5rem 0.75rem 3rem 0.75rem;
 }
 
 section#projets {
-    margin-bottom: 32px;
+    margin-bottom: 2rem;
 }
 
 #projets-list-title {
@@ -182,9 +182,9 @@ section#projets {
 
 #projects-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 20px;
-    margin-top: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+    margin-top: 1.5rem;
     padding: 0 8px;
 }
 
@@ -314,6 +314,42 @@ section#projets {
         top: 4px;
         right: 6px;
         gap: 4px;
+    }
+}
+
+/* Très petits mobiles (iPhone SE, Galaxy Fold, etc.) */
+@media (max-width: 360px) {
+    main {
+        padding: 6px 0.8vw 10px 0.8vw;
+    }
+    
+    #search-section {
+        padding: 1.5vh 2vw;
+    }
+    
+    #search-input {
+        font-size: 0.95rem;
+        padding: 10px 35px 10px 12px;
+    }
+    
+    .project-tile {
+        min-height: 140px;
+    }
+    
+    .project-tile-content {
+        padding: 10px 4px 6px 4px;
+        font-size: 0.9em;
+    }
+    
+    .badge-container, .tron-badge-container {
+        top: 3px;
+        right: 4px;
+        gap: 3px;
+    }
+    
+    .project-tile-title {
+        font-size: 1.05em;
+        margin-bottom: 6px;
     }
 }
 
@@ -755,6 +791,14 @@ footer#site-footer {
         padding: 0.6em 0 0.6em 0;
         background: linear-gradient(90deg, rgba(16,24,32,0.98) 80%, rgba(0,255,240,0.07) 100%);
         border-top-width: 1px;
+    }
+}
+
+@media (max-width: 360px) {
+    footer#site-footer {
+        font-size: 0.88em;
+        padding: 0.5em 0;
+        text-align: center;
     }
 }
 
