@@ -17,12 +17,26 @@ const PARTIALS_CONFIG = {
 };
 
 /**
+ * Cache DOM pour optimiser l'accès aux éléments
+ */
+const PartialsCache = {
+    elements: new Map(),
+    
+    getElement(id) {
+        if (!this.elements.has(id)) {
+            this.elements.set(id, document.getElementById(id));
+        }
+        return this.elements.get(id);
+    }
+};
+
+/**
  * Charge un partiel HTML et l'injecte dans l'élément cible
  * @param {string} id - ID de l'élément cible
  * @param {string} url - URL du partiel à charger
  */
 function loadPartial(id, url) {
-    const element = document.getElementById(id);
+    const element = PartialsCache.getElement(id);
     if (!element) {
         console.warn(`Élément avec ID "${id}" non trouvé`);
         return;
@@ -49,7 +63,7 @@ function loadPartial(id, url) {
  */
 function initPartials() {
     Object.entries(PARTIALS_CONFIG).forEach(([name, config]) => {
-        if (document.getElementById(config.id)) {
+        if (PartialsCache.getElement(config.id)) {
             loadPartial(config.id, config.url);
         }
     });

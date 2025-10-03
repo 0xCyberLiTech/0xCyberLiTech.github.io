@@ -1,9 +1,23 @@
 // Preloader sans grille de fond
 // (Le canvas peut être utilisé pour d'autres effets si besoin, mais la grille est supprimée)
 
+// Cache DOM pour optimiser l'accès aux éléments
+const PreloaderCache = {
+    progressBar: null,
+    statusText: null,
+    
+    init() {
+        this.progressBar = document.getElementById('preloader-progress-bar');
+        this.statusText = document.getElementById('preloader-status-text');
+    }
+};
+
+// Initialisation du cache
+PreloaderCache.init();
+
 // Animation de la barre de progression du preloader
-const progressBar = document.getElementById('preloader-progress-bar');
-const statusText = document.getElementById('preloader-status-text');
+const progressBar = PreloaderCache.progressBar;
+const statusText = PreloaderCache.statusText;
 if (progressBar) {
 	let progress = 0;
 	const steps = [
