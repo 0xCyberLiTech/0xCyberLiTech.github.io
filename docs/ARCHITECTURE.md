@@ -2,7 +2,7 @@
 
 Ce document décrit l'architecture technique détaillée du portfolio **optimisé v2.1**.
 
-**Dernière mise à jour** : 1er octobre 2025 - Documentation actualisée
+**Dernière mise à jour** : 4 octobre 2025 - Documentation actualisée
 
 ## 🏗️ Vue d'Ensemble de l'Architecture
 

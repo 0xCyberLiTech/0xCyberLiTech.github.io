@@ -2,7 +2,7 @@
 
 📡 Documentation technique des APIs utilisées et de l'architecture de données du portfolio.
 
-**Dernière mise à jour** : 1er octobre 2025
+**Dernière mise à jour** : 4 octobre 2025
 
 ## 🌐 APIs Externes
 

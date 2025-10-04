@@ -2,7 +2,7 @@
 
 🧩 **Composants HTML partagés et système d'injection dynamique**
 
-## 🔄 Changements v2.1 (3 Octobre 2025)
+## 🔄 Changements v2.1 (4 Octobre 2025)
 - 📚 **DOCUMENTATION** : Mise à jour complète de la documentation
 - ⚡ **PERFORMANCE** : Ajout du PartialsCache pour optimiser l'accès DOM
 - 🧹 **FACTORISATION** : Élimination des `getElementById()` répétés

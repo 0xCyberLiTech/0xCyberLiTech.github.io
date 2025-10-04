@@ -1,8 +1,14 @@
 # 📚 Index de Documentation - Portfolio 0xCyberLiTech v2.1
 
-Guide central vers toute la documentation technique du projet après optimisation complète.
+Guide c### 📊 Suivi et Évolution
 
-**Dernière mise à jour** : 2 octobre 2025
+| Document | Contenu | Niveau |
+|----------|---------|---------|
+| [../CHANGELOG.md](../CHANGELOG.md) | **ACTUEL** Historique complet des versions et évolutions | 📚 Référence |ment | Contenu | Niveau |
+|----------|---------|--------|
+| [../CHANGELOG.md](../CHANGELOG.md) | **ACTUEL** Historique complet des versions et évolutions | 📚 Référence |al vers toute la documentation technique du projet après optimisation complète.
+
+**Dernière mise à jour** : 4 octobre 2025
 
 ## 🚀 Démarrage Rapide
 
@@ -227,8 +233,8 @@ doctoc README.md --github
 
 ```bash
 # La documentation suit le versioning du projet
-# Version actuelle : 1.2.0 (28 septembre 2025)
-# Dernière mise à jour : 28 septembre 2025
+# Version actuelle : 2.1 (4 octobre 2025)
+# Dernière mise à jour : 4 octobre 2025
 
 # Chaque document majeur doit avoir :
 # - Section changelog

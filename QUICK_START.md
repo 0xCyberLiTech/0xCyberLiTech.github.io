@@ -77,4 +77,4 @@ open https://github.com/0xCyberLiTech/0xCyberLiTech.github.io/security
 
 ---
 
-*🚀 Dernière mise à jour : 2 octobre 2025*
+*🚀 Dernière mise à jour : 4 octobre 2025*

@@ -2,7 +2,7 @@
 
 🔧 **Utilitaires JavaScript partagés et sécurité**
 
-## 🛡️ Sécurité v2.1 (3 Octobre 2025)
+## 🛡️ Sécurité v2.1 (4 Octobre 2025)
 - ✅ **utilEscapeHTML** : Fonction de sécurité XSS utilisée dans tout le projet  
 - ✅ **Factorisation Parfaite** : Centralisée et réutilisée (script.js, inject-partials.js)
 - ✅ **Protection Complète** : Échappement de tous les inputs utilisateurs

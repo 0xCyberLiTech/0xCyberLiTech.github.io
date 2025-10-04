@@ -2,7 +2,7 @@
 
 📦 Guide complet pour déployer et maintenir le portfolio sur GitHub Pages et autres plateformes.
 
-**Dernière mise à jour** : 1er octobre 2025
+**Dernière mise à jour** : 4 octobre 2025
 
 ## 🎯 Vue d'Ensemble
 

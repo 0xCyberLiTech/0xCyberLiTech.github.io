@@ -2,7 +2,7 @@
 
 Merci de votre intérêt pour contribuer au portfolio 0xCyberLiTech ! Ce document vous guide à travers le processus de contribution.
 
-**Dernière mise à jour** : 1er octobre 2025
+**Dernière mise à jour** : 4 octobre 2025
 
 ## 🤝 Comment Contribuer
 
