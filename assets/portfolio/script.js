@@ -1,3 +1,21 @@
+// Ajuste dynamiquement la hauteur des descriptions pour la symétrie
+function uniformizeProjectDescriptions() {
+    const descs = document.querySelectorAll('.project-tile-content .project-description');
+    let maxHeight = 0;
+    descs.forEach(d => {
+        d.style.height = 'auto';
+        const h = d.offsetHeight;
+        if (h > maxHeight) maxHeight = h;
+    });
+    descs.forEach(d => {
+        d.style.height = maxHeight + 'px';
+    });
+}
+
+// Appel après le rendu des projets
+window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(uniformizeProjectDescriptions, 400);
+});
 /**
  * script.js — Portfolio principal
  *
@@ -131,17 +149,20 @@ function renderPromptTile({safeName, safeDesc, safeUrl, safeBranch, isNew, daysE
             <span class="btn green"></span>
             <span class="terminal-bar-title">kali@root:~$</span>
         </div>
-        <div class="project-tile-content">
-            <div class="terminal-prompt tron-terminal">
-                <div class="tron-prompt-line1"><span class="prompt-user tron-prompt-user">◢◤ <span class="tron-username">0xCyberLiTech</span></span></div>
-                <div class="tron-prompt-line2"><span class="tron-at">@</span> <span class="tron-host">TRON-CORE</span></div>
-                <div class="tron-prompt-line3"><span class="tron-path">[~/grid/${safeName}]</span></div>
-                <span class="prompt-command tron-prompt-command">◢◤ <span class="tron-cmd">$</span> <span class="tron-cmdline">ls -la</span></span>
-            </div>
-            <h3><a href="${safeUrl}/blob/${safeBranch}/README.md" style="color:inherit;text-decoration:none;">${safeName}</a></h3>
-            <p class="terminal-output project-description">${safeDesc}</p>
-            <div class="infos" style="display:flex;align-items:center;gap:0.7em;justify-content:space-between;">
-                ${isNew ? `<span class="badge-new tron-glow">NEW</span><span class="days-left tron-glow" style="font-size:0.98em;color:#00fff0;opacity:0.92;">${30 - daysElapsed}j restantes</span>` : ''}
+        <div class="project-tile-content" style="display:flex;align-items:center;gap:18px;">
+            <img src="assets/icons/shield-cyber.svg" alt="Cyber Shield" style="width:40px;height:40px;flex-shrink:0;filter:drop-shadow(0 0 8px #00fff0cc);margin-right:8px;">
+            <div style="flex:1;">
+                <div class="terminal-prompt tron-terminal">
+                    <div class="tron-prompt-line1"><span class="prompt-user tron-prompt-user">◢◤ <span class="tron-username">0xCyberLiTech</span></span></div>
+                    <div class="tron-prompt-line2"><span class="tron-at">@</span> <span class="tron-host">TRON-CORE</span></div>
+                    <div class="tron-prompt-line3"><span class="tron-path">[~/grid/${safeName}]</span></div>
+                    <span class="prompt-command tron-prompt-command">◢◤ <span class="tron-cmd">$</span> <span class="tron-cmdline">ls -la</span></span>
+                </div>
+                <h3><a href="${safeUrl}/blob/${safeBranch}/README.md" style="color:inherit;text-decoration:none;">${safeName}</a></h3>
+                <p class="terminal-output project-description">${safeDesc}</p>
+                <div class="infos" style="display:flex;align-items:center;gap:0.7em;justify-content:space-between;">
+                    ${isNew ? `<span class="badge-new tron-glow">NEW</span><span class="days-left tron-glow" style="font-size:0.98em;color:#00fff0;opacity:0.92;">${30 - daysElapsed}j restantes</span>` : ''}
+                </div>
             </div>
         </div>
     `;

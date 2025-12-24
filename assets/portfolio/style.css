@@ -1,3 +1,186 @@
+.project-tile-content .project-description::-webkit-scrollbar {
+    width: 8px;
+    background: #101820;
+    border-radius: 8px;
+}
+.project-tile-content .project-description::-webkit-scrollbar-thumb {
+    background: linear-gradient(120deg, #00fff0 40%, #181f2a 100%);
+    border-radius: 8px;
+    box-shadow: 0 0 8px #00fff0cc;
+}
+.project-tile-content .project-description::-webkit-scrollbar-thumb:hover {
+    background: #00fff0;
+}
+.project-tile-content .project-description {
+    scrollbar-width: thin;
+    scrollbar-color: #00fff0 #101820;
+}
+.project-tile-content {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    height: 100%;
+}
+    background: #181f2a;
+    min-height: 180px;
+    max-height: 180px;
+    height: 180px;
+    display: block;
+    line-height: 1.5;
+    margin-bottom: 0.5em;
+    word-break: break-word;
+    border-radius: 8px;
+    padding: 0 12px;
+    overflow: visible;
+}
+/* ========== ANIMATIONS D'APPARITION ========== */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 1s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+
+.slide-in-left {
+    opacity: 0;
+    transform: translateX(-40px);
+    animation: slideInLeft 0.8s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+
+.zoom-in {
+    opacity: 0;
+    transform: scale(0.8);
+    animation: zoomIn 0.7s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+/* ========== POPUP RGPD ========== */
+#rgpd-popup {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #101820;
+    box-shadow: 0 0 120px 40px #00fff033 inset, 0 0 80px 10px #00fff055;
+    backdrop-filter: blur(2px);
+    animation: fadeInUp 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+#rgpd-popup > div {
+    background: #101820;
+    max-width: 400px;
+    margin: 10vh auto;
+    padding: 2em 1.5em;
+    border-radius: 10px;
+    box-shadow: 0 4px 32px #00fff033;
+    position: relative;
+    color: #eafcff;
+    font-family: 'Share Tech Mono', monospace;
+    border: 1px solid #00fff0;
+    text-align: center;
+}
+#rgpd-popup h2 {
+    margin-top: 0;
+    color: #00fff0;
+    font-size: 1.25em;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-shadow: none;
+}
+#rgpd-popup p {
+    color: #eafcff;
+    font-size: 1em;
+    margin-bottom: 1.5em;
+    line-height: 1.6;
+    text-shadow: none;
+}
+#close-rgpd {
+    background: transparent;
+    color: #00fff0;
+    border: 1px solid #00fff0;
+    border-radius: 6px;
+    padding: 0.6em 1.5em;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1em;
+    cursor: pointer;
+    box-shadow: none;
+    transition: all 0.2s cubic-bezier(0.4,0,0.2,1);
+    font-weight: 500;
+}
+#close-rgpd:hover {
+    background: #00fff0;
+    color: #101820;
+    border: 1px solid #00fff0;
+    box-shadow: 0 0 8px #00fff055;
+    transform: scale(1.05);
+}
+/* ========== LIEN RGPD FOOTER ========== */
+#site-footer #rgpd-link {
+    color: #00fff0;
+    background: linear-gradient(90deg, #101820 60%, #00fff0 100%);
+    padding: 4px 14px;
+    border-radius: 6px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1rem;
+    text-decoration: none;
+    box-shadow: 0 0 8px #00fff055;
+    transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+    border: 1px solid #00fff0;
+    margin-left: 8px;
+}
+#site-footer #rgpd-link:hover {
+    background: linear-gradient(90deg, #00fff0 60%, #101820 100%);
+    color: #101820;
+    box-shadow: 0 0 16px #00fff0cc;
+    border-color: #00fff0;
+    transform: scale(1.08);
+}
 /* Réserve la place du header injecté dynamiquement pour éviter le saut visuel */
 #header {
     min-height: 60px;

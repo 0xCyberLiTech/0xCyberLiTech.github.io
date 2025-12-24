@@ -15,7 +15,7 @@
   <div id="header"></div>
     <main>
       <!-- MOTEUR DE RECHERCHE -->
-      <section id="search-section" style="padding: 2vh 5vw; max-width: 900px; margin: 0 auto;">
+      <section id="search-section" class="fade-in-up" style="padding: 2vh 5vw; max-width: 900px; margin: 0 auto;">
         <div class="search-container" style="position: relative; margin-bottom: 2rem;">
           <div class="search-input-wrapper" style="position: relative;">
             <input 
@@ -34,8 +34,17 @@
         </div>
       </section>
       
-      <section id="projets" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; padding-top: 1vh;">
-        <div id="projects-list"></div>
+      <section id="projets" class="fade-in-up" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; padding-top: 1vh;">
+        <div id="projects-list">
+          <!-- Exemple d'intégration d'icône cyber/Tron -->
+          <div class="project-card fade-in-up" style="display:flex;align-items:center;gap:18px;padding:18px 28px;background:#181f2a;border-radius:12px;box-shadow:0 2px 16px #00fff033;margin-bottom:24px;">
+            <img src="assets/icons/shield-cyber.svg" alt="Cyber Shield" style="width:48px;height:48px;flex-shrink:0;filter:drop-shadow(0 0 8px #00fff0cc);">
+            <div>
+              <h3 style="margin:0 0 6px 0;color:#00fff0;font-family:'Share Tech Mono',monospace;">Projet Sécurité</h3>
+              <p style="margin:0;color:#eafcff;">Détection d’intrusion, analyse de logs, monitoring avancé.</p>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
   <div id="footer"></div>
