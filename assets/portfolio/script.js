@@ -150,7 +150,7 @@ function renderPromptTile({safeName, safeDesc, safeUrl, safeBranch, isNew, daysE
             <span class="terminal-bar-title">kali@root:~$</span>
         </div>
         <div class="project-tile-content" style="display:flex;align-items:center;gap:18px;">
-            <img src="assets/icons/shield-cyber.svg" alt="Cyber Shield" style="width:40px;height:40px;flex-shrink:0;filter:drop-shadow(0 0 8px #00fff0cc);margin-right:8px;">
+            <img src="assets/icons/shield-cyber.svg" alt="Cyber Shield" class="logo-dcyber-animated" style="width:40px;height:40px;flex-shrink:0;margin-right:8px;">
             <div style="flex:1;">
                 <div class="terminal-prompt tron-terminal">
                     <div class="tron-prompt-line1"><span class="prompt-user tron-prompt-user">◢◤ <span class="tron-username">0xCyberLiTech</span></span></div>

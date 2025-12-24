@@ -1,3 +1,46 @@
+/* Animation logo dcyber dans les tuiles */
+
+.logo-dcyber-animated {
+    filter: drop-shadow(0 0 7px #00fff7);
+    border-radius: 50%;
+    animation: pulse-dcyber 2.2s infinite;
+    transition: transform 0.3s;
+    will-change: filter, transform;
+}
+
+@keyframes pulse-dcyber {
+    0% {
+        filter: drop-shadow(0 0 7px #00fff7);
+        transform: scale(1) rotate(0deg);
+    }
+    50% {
+        filter: drop-shadow(0 0 16px #00fff7);
+        transform: scale(1.04) rotate(-2deg);
+    }
+    100% {
+        filter: drop-shadow(0 0 7px #00fff7);
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+@keyframes pulse-dcyber {
+    0% {
+        filter: drop-shadow(0 0 10px #00fff7);
+        transform: scale(1);
+    }
+    50% {
+        filter: drop-shadow(0 0 30px #00fff7);
+        transform: scale(1.08);
+    }
+    100% {
+        filter: drop-shadow(0 0 10px #00fff7);
+        transform: scale(1);
+    }
+}
+
+.logo-dcyber-animated:hover {
+    transform: rotate(-8deg) scale(1.1);
+}
 .project-tile-content .project-description::-webkit-scrollbar {
     width: 8px;
     background: #101820;
