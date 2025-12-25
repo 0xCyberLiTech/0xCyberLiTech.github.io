@@ -70,10 +70,8 @@ const DOMCache = {
 function renderRepos(repos) {
     if (!DOMCache.projectsList) return;
     
-    // ⚠️ Toujours utiliser utilEscapeHTML pour toute donnée dynamique injectée dans le DOM !
     DOMCache.projectsList.innerHTML = '';
     if (!repos || repos.length === 0) {
-        // ⚠️ Toujours utiliser utilEscapeHTML pour toute donnée dynamique injectée dans le DOM !
         DOMCache.projectsList.innerHTML = '<div style="color:#00fff0;text-align:center;margin:2em auto;">Aucun dépôt public trouvé.</div>';
         return;
     }
@@ -93,7 +91,6 @@ function renderRepos(repos) {
         const safeUrl = utilEscapeHTML(repo.html_url);
         const safeBranch = utilEscapeHTML(repo.default_branch || 'main');
         
-        // ⚠️ Toujours utiliser utilEscapeHTML pour toute donnée dynamique injectée dans le DOM !
         tile.innerHTML = renderPromptTile({safeName, safeDesc, safeUrl, safeBranch, isNew, daysElapsed});
         DOMCache.projectsList.appendChild(tile);
     });
@@ -208,7 +205,6 @@ function updateSearchInfo(totalResults, filteredResults, searchTerm) {
         } else {
             // Résultats trouvés : message dans la zone info
             const safeTerm = utilEscapeHTML(term);
-            // ⚠️ Toujours utiliser utilEscapeHTML pour toute donnée dynamique injectée dans le DOM !
             DOMCache.infoElement.innerHTML = `${filteredResults} résultat${filteredResults > 1 ? 's' : ''} pour "<span style="color: var(--tron-orange);">${safeTerm}</span>"`;
             DOMCache.infoElement.style.color = 'var(--tron-cyan)';
             DOMCache.infoElement.style.textAlign = 'center';

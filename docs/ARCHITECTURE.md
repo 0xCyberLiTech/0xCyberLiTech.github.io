@@ -2,7 +2,7 @@
 
 Ce document décrit l'architecture technique détaillée du portfolio **optimisé v2.1**.
 
-**Dernière mise à jour** : 25 décembre 2025 - Documentation actualisée
+**Dernière mise à jour** : 4 octobre 2025 - Documentation actualisée
 
 ## 🏗️ Vue d'Ensemble de l'Architecture
 
@@ -208,17 +208,45 @@ https://api.github.com/users/0xCyberLiTech/repos
 
 ## 🔒 Sécurité
 
-### Sécurité renforcée v2.1
+### Protection XSS
 
-- **Protection XSS** : Toutes les données dynamiques injectées dans le DOM sont échappées via `utilEscapeHTML()`.
-- **Sanitization HTML** : Les partiels HTML sont nettoyés (balises <script> et attributs on* supprimés) avant injection.
-- **Content Security Policy (CSP)** : Balise CSP stricte dans les pages principales (`default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none';`).
-- **En-têtes de sécurité** : X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy.
-- **Validation stricte des données** : Toutes les réponses de l’API GitHub sont validées côté client (champs obligatoires, format, URLs, dates).
-- **Tests automatisés** : Dossier `tests/` avec Jest pour valider l’échappement XSS et la robustesse des fonctions critiques.
-- **Audit de dépendances** : Pas de dépendances JS externes non maîtrisées, surveillance automatique via Dependabot et CodeQL.
-- **Secret Scanning** : Détection automatique des secrets exposés.
-- **Documentation sécurité** : Voir aussi `SECURITY.md`, `SECURITE_AUTO_DOC.md`, `RAPPORT_AUDIT_SECURITE.md`.
+Toutes les données dynamiques sont échappées via `utilEscapeHTML()` :
+
+```javascript
+function utilEscapeHTML(str) {
+    return String(str).replace(/[&<>"]/g, c => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;'
+    }[c]));
+}
+```
+
+### Content Security Policy (CSP)
+
+Recommandations pour renforcer la sécurité :
+
+```html
+<meta http-equiv="Content-Security-Policy" 
+      content="default-src 'self'; 
+               script-src 'self' 'unsafe-inline';
+               style-src 'self' 'unsafe-inline';
+               img-src 'self' data:;
+               connect-src 'self' https://api.github.com;">
+```
+
+### Validation des Données
+
+```javascript
+// Validation côté client
+function validateRepoData(repo) {
+    return repo && 
+           typeof repo.name === 'string' &&
+           typeof repo.html_url === 'string' &&
+           repo.html_url.startsWith('https://github.com/');
+}
+```
 
 ## ⚡ Performance
 

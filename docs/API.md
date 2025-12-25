@@ -2,7 +2,7 @@
 
 📡 Documentation technique des APIs utilisées et de l'architecture de données du portfolio.
 
-**Dernière mise à jour** : 25 décembre 2025
+**Dernière mise à jour** : 4 octobre 2025
 
 ## 🌐 APIs Externes
 
@@ -336,35 +336,51 @@ class RateLimiter {
 
 ## 🔒 Sécurité des APIs
 
-### Sécurité API et protections récentes
-
-- **Validation stricte des données** : Toutes les réponses de l’API GitHub sont validées côté client (champs obligatoires, format, URLs, dates).
-- **Protection XSS** : Toutes les données issues des APIs sont échappées via `utilEscapeHTML` avant toute injection dans le DOM.
-- **Sanitisation HTML** : Les partiels HTML sont nettoyés (balises <script> et attributs on* supprimés) avant injection.
-- **Content Security Policy (CSP)** : Balise CSP stricte dans les pages principales, limitant les sources de scripts, styles, images et désactivant les objets/frames.
-- **En-têtes de sécurité** : X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy.
-- **Tests automatisés** : Des tests unitaires et d’intégration valident la robustesse des traitements API et la résistance aux injections.
-- **Audit régulier** : Surveillance automatique via Dependabot, CodeQL, secret scanning.
-
-#### Exemple de validation de repository
+### Validation des Données
 ```javascript
+/**
+ * Valide la structure d'un repository GitHub
+ * @param {Object} repo - Repository à valider
+ * @returns {boolean} True si valide
+ */
 function validateRepository(repo) {
-  const requiredFields = ['name', 'html_url', 'updated_at'];
-  for (const field of requiredFields) {
-    if (!(field in repo) || repo[field] === null) return false;
-  }
-  if (!repo.html_url.startsWith('https://github.com/')) return false;
-  if (isNaN(Date.parse(repo.updated_at))) return false;
-  return true;
+    const requiredFields = ['name', 'html_url', 'updated_at'];
+    
+    // Vérifier les champs obligatoires
+    for (const field of requiredFields) {
+        if (!(field in repo) || repo[field] === null) {
+            console.warn(`Repository invalide: champ '${field}' manquant`);
+            return false;
+        }
+    }
+    
+    // Valider les URLs
+    if (!repo.html_url.startsWith('https://github.com/')) {
+        console.warn('URL de repository invalide:', repo.html_url);
+        return false;
+    }
+    
+    // Valider les dates
+    if (isNaN(Date.parse(repo.updated_at))) {
+        console.warn('Date updated_at invalide:', repo.updated_at);
+        return false;
+    }
+    
+    return true;
 }
 ```
 
-#### Exemple de CSP appliquée
-```html
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none';">
+### Content Security Policy
+```javascript
+// Headers CSP recommandés pour les APIs
+const cspDirectives = {
+    'default-src': "'self'",
+    'connect-src': "'self' https://api.github.com",
+    'img-src': "'self' data: https://avatars.githubusercontent.com",
+    'script-src': "'self' 'unsafe-inline'",
+    'style-src': "'self' 'unsafe-inline'"
+};
 ```
-
-> Pour plus de détails sur la sécurité, voir aussi SECURITY.md et docs/SECURITE_AUTO_DOC.md.
 
 ## 📈 Monitoring et Analytics
 

@@ -2,7 +2,7 @@
 
 📦 Guide complet pour déployer et maintenir le portfolio sur GitHub Pages et autres plateformes.
 
-**Dernière mise à jour** : 25 décembre 2025
+**Dernière mise à jour** : 4 octobre 2025
 
 ## 🎯 Vue d'Ensemble
 
@@ -353,15 +353,22 @@ export class PerformanceTracker {
 
 ## 🔒 Sécurité
 
-### Sécurité renforcée v2.1
+### Headers de Sécurité
 
-- **Content Security Policy (CSP)** : Balise CSP stricte dans les pages principales (`default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none';`).
-- **En-têtes de sécurité** : X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy.
-- **Sanitization HTML** : Les partiels HTML sont nettoyés (balises <script> et attributs on* supprimés) avant injection.
-- **Tests automatisés** : Dossier `tests/` avec Jest pour valider l’échappement XSS et la robustesse des fonctions critiques.
-- **Audit de dépendances** : Pas de dépendances JS externes non maîtrisées, surveillance automatique via Dependabot et CodeQL.
-- **Secret Scanning** : Détection automatique des secrets exposés.
-- **Documentation sécurité** : Voir aussi `SECURITY.md`, `docs/SECURITE_AUTO_DOC.md`, `docs/RAPPORT_AUDIT_SECURITE.md`.
+#### Configuration via Meta Tags
+```html
+<!-- Dans index.html -->
+<meta http-equiv="Content-Security-Policy" 
+      content="default-src 'self'; 
+               script-src 'self' 'unsafe-inline';
+               style-src 'self' 'unsafe-inline';
+               img-src 'self' data:;
+               connect-src 'self' https://api.github.com;">
+
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+```
 
 #### Validation de Déploiement Sécurisé
 ```bash
