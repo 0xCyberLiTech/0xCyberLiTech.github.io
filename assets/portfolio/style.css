@@ -298,13 +298,19 @@
 }
 
 #search-results-info {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 0.95rem;
-    padding: 5px 0;
-    transition: all 0.3s ease;
-    color: #00fff0 !important; /* Cyan vif pour visibilité maximale */
-    opacity: 1 !important; /* Opacité complète */
-    text-shadow: 0 0 5px rgba(0, 255, 240, 0.3); /* Léger glow pour contraste */
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 0.95rem;
+        padding: 5px 0;
+        transition: all 0.3s ease;
+        color: #00fff0 !important; /* Cyan vif pour visibilité maximale */
+        opacity: 1 !important; /* Opacité complète */
+        text-shadow: 0 0 5px rgba(0, 255, 240, 0.3); /* Léger glow pour contraste */
+}
+
+@media (max-width: 600px) {
+    #search-results-info {
+        margin-top: 4px;
+    }
 }
 
 /* Animation d'apparition pour les résultats */
