@@ -70,18 +70,4 @@ function initPartials() {
 }
 
 // Auto-initialisation
-document.addEventListener('DOMContentLoaded', function() {
-    initPartials();
-    // Gestion du popup RGPD
-    document.addEventListener('click', function(e) {
-        if (e.target && e.target.id === 'rgpd-link') {
-            e.preventDefault();
-            var popup = document.getElementById('rgpd-popup');
-            if (popup) popup.style.display = 'block';
-        }
-        if (e.target && e.target.id === 'close-rgpd') {
-            var popup = document.getElementById('rgpd-popup');
-            if (popup) popup.style.display = 'none';
-        }
-    });
-});
+document.addEventListener('DOMContentLoaded', initPartials);

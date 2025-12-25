@@ -1,58 +1,3 @@
-// Ajuste dynamiquement la hauteur des descriptions pour la symétrie
-function uniformizeProjectDescriptions() {
-    const descs = document.querySelectorAll('.project-tile-content .project-description');
-    let maxHeight = 0;
-    // On utilise scrollHeight pour prendre en compte tout le contenu, même s'il y a du wrapping
-    descs.forEach(d => {
-        d.style.height = 'auto';
-        const h = d.scrollHeight;
-        if (h > maxHeight) maxHeight = h;
-    });
-    descs.forEach(d => {
-        d.style.height = maxHeight + 'px';
-    });
-}
-
-// Appel après le rendu des projets
-function attachRgpdEvents() {
-    const rgpdLink = document.getElementById('rgpd-link');
-    const rgpdModal = document.getElementById('rgpd-modal');
-    const rgpdCloseBtn = document.getElementById('rgpd-close-btn');
-    if (rgpdLink && rgpdModal && rgpdCloseBtn) {
-        rgpdLink.addEventListener('click', function (e) {
-            e.preventDefault();
-            rgpdModal.classList.remove('rgpd-modal-hidden');
-            rgpdModal.classList.add('rgpd-modal');
-        });
-        rgpdCloseBtn.addEventListener('click', function () {
-            rgpdModal.classList.remove('rgpd-modal');
-            rgpdModal.classList.add('rgpd-modal-hidden');
-        });
-        rgpdModal.addEventListener('click', function (e) {
-            if (e.target === rgpdModal) {
-                rgpdModal.classList.remove('rgpd-modal');
-                rgpdModal.classList.add('rgpd-modal-hidden');
-            }
-        });
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape') {
-                rgpdModal.classList.remove('rgpd-modal');
-                rgpdModal.classList.add('rgpd-modal-hidden');
-            }
-        });
-    }
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-    setTimeout(uniformizeProjectDescriptions, 400);
-    attachRgpdEvents();
-});
-
-// Si le footer est injecté dynamiquement, écouter l'événement d'injection ou observer le DOM
-const observer = new MutationObserver(() => {
-    attachRgpdEvents();
-});
-observer.observe(document.body, { childList: true, subtree: true });
 /**
  * script.js — Portfolio principal
  *
@@ -128,30 +73,27 @@ function renderRepos(repos) {
     DOMCache.projectsList.innerHTML = '';
     if (!repos || repos.length === 0) {
         DOMCache.projectsList.innerHTML = '<div style="color:#00fff0;text-align:center;margin:2em auto;">Aucun dépôt public trouvé.</div>';
-        uniformizeProjectDescriptions();
         return;
     }
-
+    
     repos.forEach(repo => {
         const lastUpdate = new Date(repo.updated_at);
         const now = new Date();
         const daysElapsed = Math.floor((now - lastUpdate) / (1000 * 60 * 60 * 24));
         const isNew = daysElapsed <= 30;
-
+        
         const tile = document.createElement('div');
         tile.className = 'project-tile';
         if (isNew) tile.setAttribute('data-new', 'true');
-
+        
         const safeName = utilEscapeHTML(repo.name);
         const safeDesc = utilEscapeHTML(repo.description || 'Aucune description disponible.');
         const safeUrl = utilEscapeHTML(repo.html_url);
         const safeBranch = utilEscapeHTML(repo.default_branch || 'main');
-
+        
         tile.innerHTML = renderPromptTile({safeName, safeDesc, safeUrl, safeBranch, isNew, daysElapsed});
         DOMCache.projectsList.appendChild(tile);
     });
-    // Réapplique l'uniformisation après chaque rendu
-    setTimeout(uniformizeProjectDescriptions, 0);
 }
 
 /**
@@ -189,20 +131,17 @@ function renderPromptTile({safeName, safeDesc, safeUrl, safeBranch, isNew, daysE
             <span class="btn green"></span>
             <span class="terminal-bar-title">kali@root:~$</span>
         </div>
-        <div class="project-tile-content" style="display:flex;align-items:center;gap:18px;">
-            <img src="assets/icons/shield-cyber.svg" alt="Cyber Shield" class="logo-dcyber-animated" style="width:40px;height:40px;flex-shrink:0;margin-right:8px;">
-            <div style="flex:1;">
-                <div class="terminal-prompt tron-terminal">
-                    <div class="tron-prompt-line1"><span class="prompt-user tron-prompt-user">◢◤ <span class="tron-username">0xCyberLiTech</span></span></div>
-                    <div class="tron-prompt-line2"><span class="tron-at">@</span> <span class="tron-host">TRON-CORE</span></div>
-                    <div class="tron-prompt-line3"><span class="tron-path">[~/grid/${safeName}]</span></div>
-                    <span class="prompt-command tron-prompt-command">◢◤ <span class="tron-cmd">$</span> <span class="tron-cmdline">ls -la</span></span>
-                </div>
-                <h3><a href="${safeUrl}/blob/${safeBranch}/README.md" style="color:inherit;text-decoration:none;">${safeName}</a></h3>
-                <p class="terminal-output project-description">${safeDesc}</p>
-                <div class="infos" style="display:flex;align-items:center;gap:0.7em;justify-content:space-between;">
-                    ${isNew ? `<span class="badge-new tron-glow">NEW</span><span class="days-left tron-glow" style="font-size:0.98em;color:#00fff0;opacity:0.92;">${30 - daysElapsed}j restantes</span>` : ''}
-                </div>
+        <div class="project-tile-content">
+            <div class="terminal-prompt tron-terminal">
+                <div class="tron-prompt-line1"><span class="prompt-user tron-prompt-user">◢◤ <span class="tron-username">0xCyberLiTech</span></span></div>
+                <div class="tron-prompt-line2"><span class="tron-at">@</span> <span class="tron-host">TRON-CORE</span></div>
+                <div class="tron-prompt-line3"><span class="tron-path">[~/grid/${safeName}]</span></div>
+                <span class="prompt-command tron-prompt-command">◢◤ <span class="tron-cmd">$</span> <span class="tron-cmdline">ls -la</span></span>
+            </div>
+            <h3><a href="${safeUrl}/blob/${safeBranch}/README.md" style="color:inherit;text-decoration:none;">${safeName}</a></h3>
+            <p class="terminal-output project-description">${safeDesc}</p>
+            <div class="infos" style="display:flex;align-items:center;gap:0.7em;justify-content:space-between;">
+                ${isNew ? `<span class="badge-new tron-glow">NEW</span><span class="days-left tron-glow" style="font-size:0.98em;color:#00fff0;opacity:0.92;">${30 - daysElapsed}j restantes</span>` : ''}
             </div>
         </div>
     `;
