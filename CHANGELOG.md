@@ -1,3 +1,26 @@
+#
+## [v2.1.2] - 2025-12-25
+
+### ✨ Améliorations UI/UX
+- 🔍 **Champ de recherche modernisé** :
+	- Ajout d'une loupe SVG centrée et agrandie
+	- Arrondi accentué du champ
+	- Effet néon permanent et au focus
+	- Responsive et accessibilité améliorés
+- 🎨 **Footer RGPD** :
+	- Footer cyber/Tron responsive
+	- Lien RGPD avec popup accessible et design harmonisé
+
+### 🧹 Nettoyage & Refactoring
+- 🧹 **Vérification code mort/doublons** :
+	- Audit complet, suppression des styles et fonctions inutilisés
+	- Suppression des styles inline sur le champ de recherche
+	- Factorisation CSS/HTML pour garantir la cohérence
+- 🛡️ **Structure vérifiée** :
+	- Aucun fichier orphelin ni doublon détecté dans le portfolio
+	- Documentation et changelog à jour
+
+---
 # 📋 Changelog - Portfolio 0xCyberLiTech
 
 Toutes les modifications notables de ce projet seront documentées dans ce fichier.

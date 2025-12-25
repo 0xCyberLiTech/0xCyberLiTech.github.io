@@ -1,3 +1,24 @@
+// Gestion du popup RGPD
+document.addEventListener('DOMContentLoaded', () => {
+    const rgpdLink = document.getElementById('rgpd-link');
+    const rgpdPopup = document.getElementById('rgpd-popup');
+    const rgpdClose = document.getElementById('rgpd-close');
+    if (rgpdLink && rgpdPopup && rgpdClose) {
+        rgpdLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            rgpdPopup.style.display = 'flex';
+        });
+        rgpdClose.addEventListener('click', () => {
+            rgpdPopup.style.display = 'none';
+        });
+        rgpdPopup.addEventListener('click', (e) => {
+            if (e.target === rgpdPopup) rgpdPopup.style.display = 'none';
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') rgpdPopup.style.display = 'none';
+        });
+    }
+});
 /**
  * script.js — Portfolio principal
  *
@@ -69,32 +90,68 @@ const DOMCache = {
  */
 function renderRepos(repos) {
     if (!DOMCache.projectsList) return;
-    
+
     DOMCache.projectsList.innerHTML = '';
     if (!repos || repos.length === 0) {
         DOMCache.projectsList.innerHTML = '<div style="color:#00fff0;text-align:center;margin:2em auto;">Aucun dépôt public trouvé.</div>';
         return;
     }
-    
+
     repos.forEach(repo => {
         const lastUpdate = new Date(repo.updated_at);
         const now = new Date();
         const daysElapsed = Math.floor((now - lastUpdate) / (1000 * 60 * 60 * 24));
         const isNew = daysElapsed <= 30;
-        
+
         const tile = document.createElement('div');
         tile.className = 'project-tile';
         if (isNew) tile.setAttribute('data-new', 'true');
-        
+
         const safeName = utilEscapeHTML(repo.name);
         const safeDesc = utilEscapeHTML(repo.description || 'Aucune description disponible.');
         const safeUrl = utilEscapeHTML(repo.html_url);
         const safeBranch = utilEscapeHTML(repo.default_branch || 'main');
-        
+
         tile.innerHTML = renderPromptTile({safeName, safeDesc, safeUrl, safeBranch, isNew, daysElapsed});
         DOMCache.projectsList.appendChild(tile);
     });
+    setUniformDescriptionHeight();
 }
+
+// Harmonise la hauteur de toutes les tuiles sur la plus grande pour une parfaite symétrie
+function setUniformDescriptionHeight() {
+    // Réinitialise toute hauteur inline sur les descriptions et les zones infos
+    document.querySelectorAll('.project-description').forEach(el => {
+        el.style.height = '';
+    });
+    document.querySelectorAll('.project-tile .infos').forEach(el => {
+        el.style.height = '';
+    });
+    // Timeout pour attendre le rendu complet (notamment polices ou images)
+    setTimeout(() => {
+        // Harmonisation des descriptions
+        let maxDesc = 0;
+        document.querySelectorAll('.project-description').forEach(el => {
+            maxDesc = Math.max(maxDesc, el.offsetHeight);
+        });
+        document.querySelectorAll('.project-description').forEach(el => {
+            el.style.height = maxDesc + 'px';
+        });
+        // Harmonisation des zones infos (badges)
+        let maxInfos = 0;
+        document.querySelectorAll('.project-tile .infos').forEach(el => {
+            maxInfos = Math.max(maxInfos, el.offsetHeight);
+        });
+        document.querySelectorAll('.project-tile .infos').forEach(el => {
+            el.style.height = maxInfos + 'px';
+        });
+    }, 30);
+}
+
+// Réapplique la hauteur uniforme lors du redimensionnement de la fenêtre
+window.addEventListener('resize', () => {
+    setUniformDescriptionHeight();
+});
 
 /**
  * Génère le HTML d'une tuile projet façon terminal avec thème Tron/Cyberpunk.

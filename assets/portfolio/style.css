@@ -1,3 +1,168 @@
+.search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+    width: 20px;
+    color: #00fff0;
+    pointer-events: none;
+    user-select: none;
+    z-index: 2;
+}
+    #search-section {
+        animation: fadeInUp 0.8s ease-out;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2vh 0;
+        margin: 0 auto;
+    }
+        margin-top: 16px;
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.search-box {
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+    min-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.search-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+}
+.search-icon svg {
+    width: 22px;
+    height: 22px;
+    display: block;
+    fill: #00fff0;
+    color: #00fff0;
+    filter: drop-shadow(0 0 6px #00fff0cc);
+}
+#search-input:focus {
+    box-shadow: 0 0 20px 3px #00fff0cc, 0 0 8px #00fff088;
+    border-color: var(--tron-orange, #ff9800) !important;
+}
+@media screen and (max-width: 600px) {
+    .cyber-footer {
+        font-size: 0.92em;
+        padding: 12px 0 6px 0;
+    }
+    .footer-content {
+        flex-direction: column;
+        gap: 0.5em;
+        align-items: stretch;
+    }
+    .footer-link, .footer-sep {
+        font-size: 1em;
+    }
+    .rgpd-popup-content {
+        padding: 18px 8px 12px 8px;
+        font-size: 0.98em;
+        max-width: 95vw;
+    }
+}
+/* ===== FOOTER CYBER ===== */
+.cyber-footer {
+    width: 100%;
+    background: linear-gradient(90deg, #101a1c 0%, #14181a 100%);
+    border-top: 2px solid #00fff0;
+    color: #00fff0;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1em;
+    padding: 18px 0 8px 0;
+    margin-top: 40px;
+    box-shadow: 0 -2px 24px #00fff033;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+}
+.footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2em;
+    flex-wrap: wrap;
+}
+.footer-link {
+    color: #00fff0;
+    text-decoration: underline dotted;
+    transition: color 0.2s;
+    cursor: pointer;
+}
+.footer-link:hover {
+    color: var(--tron-orange, #ff9800);
+    text-shadow: 0 0 8px #ff9800;
+}
+.footer-sep {
+    color: #00fff0aa;
+    font-size: 1.1em;
+}
+.rgpd-popup {
+    position: fixed;
+    left: 0; right: 0; top: 0; bottom: 0;
+    background: rgba(10,20,30,0.85);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s;
+}
+.rgpd-popup-content {
+    background: #101a1c;
+    border: 2px solid #00fff0;
+    border-radius: 10px;
+    box-shadow: 0 0 32px #00fff033, 0 2px 16px #000a;
+    padding: 32px 28px 22px 28px;
+    max-width: 420px;
+    color: #00fff0;
+    text-align: left;
+    position: relative;
+    font-size: 1.05em;
+}
+.rgpd-popup-content h2 {
+    color: var(--tron-orange, #ff9800);
+    margin-top: 0;
+    font-size: 1.2em;
+}
+.rgpd-popup-content a {
+    color: #00fff0;
+    text-decoration: underline;
+}
+.rgpd-close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    background: none;
+    border: none;
+    color: #00fff0;
+    font-size: 1.3em;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.rgpd-close:hover {
+    color: var(--tron-orange, #ff9800);
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
 /* Réserve la place du header injecté dynamiquement pour éviter le saut visuel */
 #header {
     min-height: 60px;
@@ -7,32 +172,35 @@
 
 /* ========== MOTEUR DE RECHERCHE ========== */
 
-#search-section {
-    animation: fadeInUp 0.8s ease-out;
-}
-
-.search-container {
-    position: relative;
-    z-index: 10;
-}
-
-.search-input-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
 
 #search-input {
     font-family: 'Share Tech Mono', monospace;
     outline: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     color: #00fff0 !important; /* Cyan vif pour le texte saisi */
+    background: #0a181c !important;
+    border: 2.5px solid var(--tron-cyan, #00fff0) !important;
+    border-radius: 32px;
+    box-shadow: 0 0 32px 4px #00fff0cc, 0 0 12px #00fff088;
+    padding-left: 44px !important;
+    width: 100%;
+    min-width: 0;
+    height: 50px;
+    font-size: 1.1rem;
+}
+.search-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    pointer-events: none;
+    user-select: none;
 }
 
 #search-input:focus {
-    transform: scale(1.02);
-    box-shadow: 0 0 25px rgba(0, 255, 240, 0.5) !important;
-    border-color: var(--tron-orange) !important;
+    transform: scale(1.03);
+    box-shadow: 0 0 48px 8px #00fff0ee, 0 0 16px #00fff099;
+    border-color: var(--tron-orange, #ff9800) !important;
     color: #00fff0 !important; /* Maintenir le cyan au focus */
 }
 
