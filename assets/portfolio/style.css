@@ -252,130 +252,25 @@
 #search-input {
     font-family: 'Share Tech Mono', monospace;
     outline: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    color: #00fff0 !important; /* Cyan vif pour le texte saisi */
-    background: #0a181c !important;
-    border: 2.5px solid var(--tron-cyan, #00fff0) !important;
-    border-radius: 32px;
-    box-shadow: 0 0 32px 4px #00fff0cc, 0 0 12px #00fff088;
-    padding-left: 44px !important;
-    width: 100%;
-    min-width: 0;
-    height: 50px;
-    font-size: 1.1rem;
-}
-.search-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    pointer-events: none;
-    user-select: none;
-}
-
-#search-input:focus {
-    transform: scale(1.03);
-    box-shadow: 0 0 48px 8px #00fff0ee, 0 0 16px #00fff099;
-    border-color: var(--tron-orange, #ff9800) !important;
-    color: #00fff0 !important; /* Maintenir le cyan au focus */
-}
-
-#search-input::placeholder {
-    color: rgba(0, 255, 240, 0.6);
-    font-style: italic;
-}
-
-#search-clear {
-    transition: all 0.3s ease;
-    padding: 5px;
-    border-radius: 4px;
-}
-
-#search-clear:hover {
-    background: rgba(255, 102, 0, 0.1);
-    color: var(--tron-orange);
-    transform: scale(1.1);
-}
-
-#search-results-info {
-        font-family: 'Share Tech Mono', monospace;
-        font-size: 0.95rem;
-        padding: 5px 0;
-        transition: all 0.3s ease;
-        color: #00fff0 !important; /* Cyan vif pour visibilité maximale */
-        opacity: 1 !important; /* Opacité complète */
-        text-shadow: 0 0 5px rgba(0, 255, 240, 0.3); /* Léger glow pour contraste */
-}
-
-@media (max-width: 600px) {
-    #search-results-info {
-        margin-top: 4px;
+    @media screen and (max-width: 480px) {
+        /* ...existing code... */
+        #projects-list {
+            grid-template-columns: 1fr;
+            gap: 12px;
+            padding: 0 2vw;
+        }
+        .project-tile {
+            min-height: 240px;
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .project-tile-content {
+            padding: 30px 8px 12px 8px;
+        }
+        /* ...existing code... */
     }
-    #search-section {
-        margin-top: 40px !important;
-    }
-}
-
-/* Animation d'apparition pour les résultats */
-#projects-list {
-    animation: searchResults 0.4s ease-out;
-}
-
-@keyframes searchResults {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Responsive pour mobile */
-@media (max-width: 768px) {
-    #search-section {
-        padding: 2vh 3vw;
-    }
-    
-    #search-input {
-        font-size: 1rem;
-        padding: 12px 40px 12px 15px;
-    }
-    
-    #search-clear {
-        right: 10px;
-        font-size: 1.1rem;
-    }
-}
-
-/* ========== FIN MOTEUR DE RECHERCHE ========== */
-
-body {
-    background: #101820 !important;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-.terminal-bar {
-    display: flex;
-    align-items: center;
-    background: #00fff0cc !important;
-    padding: 6px 12px;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
 }
 
     .terminal-bar-title {
