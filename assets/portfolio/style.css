@@ -132,16 +132,34 @@
     animation: fadeIn 0.3s;
 }
 .rgpd-popup-content {
-    background: #101a1c;
+    background: linear-gradient(120deg, #101a1c 60%, #0a181c 100%);
     border: 2px solid #00fff0;
-    border-radius: 10px;
-    box-shadow: 0 0 32px #00fff033, 0 2px 16px #000a;
+    border-radius: 12px;
+    box-shadow: 0 0 32px #00fff088, 0 2px 16px #000a;
     padding: 32px 28px 22px 28px;
-    max-width: 420px;
+    max-width: 480px;
     color: #00fff0;
-    text-align: left;
+    text-align: center;
     position: relative;
-    font-size: 1.05em;
+    font-size: 1.08em;
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 0.01em;
+}
+.rgpd-popup-content h2 {
+    color: var(--tron-orange, #ff9800);
+    margin-top: 0;
+    font-size: 1.25em;
+    text-shadow: 0 0 8px #ff9800cc;
+    letter-spacing: 0.03em;
+    text-align: center;
+}
+.rgpd-popup-content p {
+    color: #00fff0;
+    text-shadow: 0 0 6px #00fff055;
+    font-size: 1.08em;
+    margin-bottom: 0.5em;
+    line-height: 1.5;
+    text-align: center;
 }
 .rgpd-popup-content h2 {
     color: var(--tron-orange, #ff9800);
