@@ -60,6 +60,8 @@
         box-sizing: border-box;
         margin: 0 !important;
         padding: 0 !important;
+        display: flex !important;
+        justify-content: center !important;
     }
     .search-box {
         width: 100% !important;
