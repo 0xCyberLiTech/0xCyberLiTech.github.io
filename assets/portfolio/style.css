@@ -311,6 +311,9 @@
     #search-results-info {
         margin-top: 4px;
     }
+    #search-section {
+        margin-top: 40px !important;
+    }
 }
 
 /* Animation d'apparition pour les résultats */
