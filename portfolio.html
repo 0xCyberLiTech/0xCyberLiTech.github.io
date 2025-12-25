@@ -15,22 +15,25 @@
   <div id="header"></div>
     <main>
       <!-- MOTEUR DE RECHERCHE -->
-      <section id="search-section" class="fade-in-up" style="padding: 2vh 5vw; max-width: 900px; margin: 0 auto;">
-        <div class="search-container" style="position: relative; margin-bottom: 2rem;">
-          <div class="search-input-wrapper" style="position: relative;">
-            <input 
-              type="text" 
-              id="search-input" 
-              placeholder="Rechercher dans les repositories (min. 3 caractères)..." 
-              style="width: 100%; padding: 15px 50px 15px 20px; font-size: 1.1rem; border: 2px solid var(--tron-cyan); border-radius: var(--border-radius); background: rgba(10, 10, 10, 0.9); box-shadow: var(--tron-shadow); transition: var(--transition-main); color: var(--tron-cyan);"
-            >
-            <button 
-              id="search-clear" 
-              style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--tron-orange); font-size: 1.2rem; cursor: pointer; opacity: 0; transition: opacity 0.3s ease;"
-              title="Effacer la recherche"
-            >✕</button>
-          </div>
-          <div id="search-results-info" style="margin-top: 10px; color: var(--tron-cyan); opacity: 0.8; font-size: 0.95rem; text-align: center;"></div>
+      <section id="search-section" class="fade-in-up">
+        <div class="search-container search-sym">
+          <form id="search-form" autocomplete="off">
+            <div class="search-input-wrapper search-sym">
+              <span class="search-icon-sym">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00fff0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              </span>
+              <input 
+                type="text" 
+                id="search-input" 
+                placeholder="Rechercher un repository..."
+                aria-label="Recherche dans les repositories"
+                maxlength="64"
+                autocomplete="off"
+              >
+              <button id="search-clear" type="button" title="Effacer la recherche">✕</button>
+            </div>
+          </form>
+          <!-- search-results-info supprimé pour un design épuré -->
         </div>
       </section>
       
