@@ -4,9 +4,16 @@
 
 Ce document explique la configuration complète de sécurité mise en place pour le portfolio 0xCyberLiTech, optimisée pour un **coût zéro** tout en maintenant une protection de niveau entreprise.
 
+**Mises à jour récentes (déc. 2025) :**
+- Ajout d'une Content Security Policy (CSP) stricte dans les pages principales
+- Ajout d'en-têtes de sécurité (X-Frame-Options, Referrer-Policy, etc.)
+- Sanitization automatique des partiels HTML injectés
+- Tests automatisés (Jest) pour la fonction utilEscapeHTML
+- Documentation sécurité enrichie (SECURITE_AUTO_DOC.md, RAPPORT_AUDIT_SECURITE.md)
+
 ## 🎯 Objectifs de Sécurité
 
-- **Protection XSS** : Sécurisation contre les attaques Cross-Site Scripting
+- **Protection XSS** : Sécurisation contre les attaques Cross-Site Scripting (échappement systématique, sanitization HTML)
 - **Analyse de Code** : Détection automatique des vulnérabilités JavaScript
 - **Surveillance des Dépendances** : Monitoring des packages et actions GitHub
 - **Détection de Secrets** : Prévention de l'exposition accidentelle de clés/tokens
@@ -21,6 +28,8 @@ Ce document explique la configuration complète de sécurité mise en place pour
 | Fonctionnalité | Statut | Coût | Description |
 |----------------|--------|------|-------------|
 | **CodeQL Analysis** | ✅ Actif | 0€ | Analyse de sécurité JavaScript/HTML |
+| **Content Security Policy** | ✅ Actif | 0€ | Blocage scripts/styles externes, JS/CSS inline interdit |
+| **En-têtes de sécurité** | ✅ Actif | 0€ | X-Frame-Options, Referrer-Policy, etc. |
 | **Dependabot Alerts** | ✅ Actif | 0€ | Alertes de vulnérabilités |
 | **Dependabot Security Updates** | ✅ Actif | 0€ | Corrections automatiques |
 | **Secret Scanning** | ✅ Actif | 0€ | Détection de secrets exposés |
@@ -36,6 +45,8 @@ Ce document explique la configuration complète de sécurité mise en place pour
 └── codeql/
     └── codeql-config.yml       # Configuration CodeQL personnalisée
 SECURITY.md                     # Politique de sécurité
+SECURITE_AUTO_DOC.md            # Documentation sécurité automatisée
+RAPPORT_AUDIT_SECURITE.md       # Rapport d'audit sécurité
 ```
 
 ---
@@ -57,22 +68,10 @@ on:
   pull_request:
     branches: [ "main" ]
     paths:
-      - '**.js'
-      - '**.html'
-      - '.github/workflows/codeql.yml'
-  # Pas d'analyse programmée = 0 minute consommée automatiquement
-
-jobs:
   analyze:
     name: Analyze JavaScript/HTML
     runs-on: ubuntu-latest
-    timeout-minutes: 360
-    permissions:
-      actions: read
-      contents: read
-      security-events: write
 
-    strategy:
       fail-fast: false
       matrix:
         language: [ 'javascript' ]
@@ -96,13 +95,11 @@ jobs:
         category: "/language:${{ matrix.language }}"
 ```
 
-### 🎯 Optimisations Coût Zéro
-
+      docs/SECURITE_AUTO_DOC.md            # Documentation sécurité automatisée
+      docs/RAPPORT_AUDIT_SECURITE.md       # Rapport d'audit sécurité
 1. **Pas d'analyse programmée** : Suppression du `schedule:` pour éviter les exécutions automatiques
 2. **Filtres de chemins** : Analyse uniquement des fichiers `.js` et `.html`
 3. **Déclenchement minimal** : Seulement sur modification du code (push/PR)
-
-### 📊 Consommation Estimée
 
 - **Minutes/mois** : 0-20 minutes (seulement lors de modifications)
 - **Pourcentage quota** : <1% des 2000 minutes gratuites
@@ -167,6 +164,7 @@ Document complet définissant :
 - Délais de réponse (48h accusé, 7j évaluation, 14j correction)
 - Types de vulnérabilités acceptées (XSS, injection, CSRF, etc.)
 - Reconnaissance des chercheurs en sécurité
+- Historique des évolutions de la politique
 
 ---
 
@@ -388,7 +386,7 @@ GitHub Settings → Notifications → Security alerts
 
 #### Mensuelle
 - [ ] Réviser la configuration des workflows
-- [ ] Mettre à jour la documentation sécurité
+- [ ] Mettre à jour la documentation sécurité (README, SECURITY.md, SECURITE_AUTO_DOC.md)
 - [ ] Audit complet des permissions et accès
 
 #### Trimestrielle
@@ -486,6 +484,12 @@ git push origin --force --all
 
 ## 📝 Changelog de la Configuration
 
+### Version 2.0 (25 décembre 2025)
+- ✅ Ajout CSP stricte et en-têtes de sécurité dans les pages HTML
+- ✅ Sanitization automatique des partiels HTML
+- ✅ Tests automatisés (Jest) pour utilEscapeHTML
+- ✅ Documentation sécurité enrichie (SECURITE_AUTO_DOC.md, RAPPORT_AUDIT_SECURITE.md)
+
 ### Version 1.0 (2 octobre 2025)
 - ✅ Configuration initiale CodeQL
 - ✅ Mise en place Dependabot
@@ -497,10 +501,9 @@ git push origin --force --all
 - 🔄 Intégration webhooks pour notifications Slack/Teams
 - 📊 Dashboard de métriques de sécurité personnalisé
 - 🤖 Automatisation complète des corrections mineures
-- 🔒 Configuration CSP (Content Security Policy) avancée
 
 ---
 
-*📅 Dernière mise à jour : 4 octobre 2025*  
+*📅 Dernière mise à jour : 25 décembre 2025*  
 *👤 Maintenu par : 0xCyberLiTech*  
-*🔄 Version : 1.0*
+*🔄 Version : 2.0*

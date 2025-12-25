@@ -1,14 +1,8 @@
 # 📚 Index de Documentation - Portfolio 0xCyberLiTech v2.1
 
-Guide c### 📊 Suivi et Évolution
+Index central vers toute la documentation technique du projet après optimisation complète.
 
-| Document | Contenu | Niveau |
-|----------|---------|---------|
-| [../CHANGELOG.md](../CHANGELOG.md) | **ACTUEL** Historique complet des versions et évolutions | 📚 Référence |ment | Contenu | Niveau |
-|----------|---------|--------|
-| [../CHANGELOG.md](../CHANGELOG.md) | **ACTUEL** Historique complet des versions et évolutions | 📚 Référence |al vers toute la documentation technique du projet après optimisation complète.
-
-**Dernière mise à jour** : 4 octobre 2025
+**Dernière mise à jour** : 25 décembre 2025
 
 ## 🚀 Démarrage Rapide
 
@@ -19,9 +13,13 @@ Guide c### 📊 Suivi et Évolution
 | **Configurer la sécurité** | [SECURITY_GUIDE.md](SECURITY_GUIDE.md) | 15 min |
 | **Déployer** | [DEPLOYMENT.md](DEPLOYMENT.md) | 10 min |
 | **Développer** | [ARCHITECTURE.md](ARCHITECTURE.md) + modules | 30 min |
-| **Contribuer** | [../CONTRIBUTING.md](../CONTRIBUTING.md) | 10 min |
+| **Contribuer** | [CONTRIBUTING.md](CONTRIBUTING.md) | 10 min |
 
 ### 🛡️ Sécurité (Priorité v2.1)
+- **CSP & En-têtes de sécurité** : Ajout d'une Content Security Policy stricte et d'en-têtes de sécurité dans les pages principales
+- **Sanitization HTML** : Nettoyage automatique des partiels HTML injectés
+- **Tests automatisés** : Dossier tests/ et Jest pour la fonction utilEscapeHTML
+- **Documentation sécurité enrichie** : [SECURITE_AUTO_DOC.md](SECURITE_AUTO_DOC.md), [RAPPORT_AUDIT_SECURITE.md](RAPPORT_AUDIT_SECURITE.md)
 - **🔍 Scan Manuel** : [SECURITY_GUIDE.md § Scan Manuel](SECURITY_GUIDE.md#-scan-manuel---procédure-complète)
 - **⚙️ Configuration** : [SECURITY_GUIDE.md § Configuration](SECURITY_GUIDE.md#-configuration-actuelle)
 - **🚨 Urgence** : [SECURITY_GUIDE.md § Procédures d'urgence](SECURITY_GUIDE.md#-procédures-durgence)
@@ -68,15 +66,17 @@ Guide c### 📊 Suivi et Évolution
 
 | Document | Contenu | Niveau |
 |----------|---------|---------|
-| [SECURITY_GUIDE.md](SECURITY_GUIDE.md) | **NOUVEAU** Guide complet de sécurité GitHub | 🔥 Avancé |
-| [../SECURITY.md](../SECURITY.md) | **NOUVEAU** Politique de sécurité officielle | 📚 Référence |
+| [SECURITY_GUIDE.md](SECURITY_GUIDE.md) | Guide complet de sécurité GitHub (CSP, en-têtes, scans, procédures) | 🔥 Avancé |
+| [../SECURITY.md](../SECURITY.md) | Politique de sécurité officielle | 📚 Référence |
+| [SECURITE_AUTO_DOC.md](SECURITE_AUTO_DOC.md) | Documentation sécurité automatisée | 📚 Référence |
+| [RAPPORT_AUDIT_SECURITE.md](RAPPORT_AUDIT_SECURITE.md) | Rapport d’audit sécurité détaillé | 📚 Référence |
 
 ### �📊 Suivi et Évolution
 
 | Document | Contenu | Niveau |
 |----------|---------|---------|
-| [../CHANGELOG.md](../CHANGELOG.md) | **NOUVEAU** Historique complet des versions | 📚 Référence |
-| [../CHANGELOG.md](../CHANGELOG.md) | **ACTUEL** Historique complet des versions et évolutions | 📚 Référence |
+| [CHANGELOG.md](CHANGELOG.md) | **NOUVEAU** Historique complet des versions | 📚 Référence |
+| [CHANGELOG.md](CHANGELOG.md) | **ACTUEL** Historique complet des versions et évolutions | 📚 Référence |
 
 ### 📦 Modules et Composants
 
@@ -121,7 +121,7 @@ graph LR
 1. [README.md](../README.md) - Vue d'ensemble
 2. [ARCHITECTURE.md](ARCHITECTURE.md) - Comprendre la structure
 3. Documentation des modules spécifiques
-4. [CONTRIBUTING.md](../CONTRIBUTING.md) - Standards de développement
+4. [CONTRIBUTING.md](CONTRIBUTING.md) - Standards de développement
 
 ### 🚀 Pour le Déploiement
 
@@ -149,7 +149,7 @@ graph LR
 
 **Parcours recommandé :**
 1. [README.md](../README.md) - Contexte du projet
-2. [CONTRIBUTING.md](../CONTRIBUTING.md) - Processus et standards
+2. [CONTRIBUTING.md](CONTRIBUTING.md) - Processus et standards
 3. [ARCHITECTURE.md](ARCHITECTURE.md) - Architecture technique
 4. Documentation du module à modifier
 
@@ -175,7 +175,7 @@ graph LR
 | **Responsive Design** | [Architecture](ARCHITECTURE.md), tous les modules |
 | **Performance** | [Architecture](ARCHITECTURE.md), [API](API.md), [Deployment](DEPLOYMENT.md) |
 | **Accessibilité** | [Partials](../assets/partials/README.md), [Architecture](ARCHITECTURE.md) |
-| **Testing** | [Contributing](../CONTRIBUTING.md), tous les modules |
+| **Testing** | [Contributing](CONTRIBUTING.md), tous les modules |
 
 ## 📊 Niveaux de Documentation
 
@@ -184,7 +184,7 @@ graph LR
 - [LICENSE](../LICENSE) - Conditions d'utilisation
 
 ### 🟡 Intermédiaire  
-- [CONTRIBUTING.md](../CONTRIBUTING.md) - Contribution au projet
+- [CONTRIBUTING.md](CONTRIBUTING.md) - Contribution au projet
 - [DEPLOYMENT.md](DEPLOYMENT.md) - Déploiement sur différentes plateformes
 - Documentation des modules individuels
 

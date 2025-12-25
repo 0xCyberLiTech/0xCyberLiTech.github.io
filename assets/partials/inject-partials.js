@@ -1,4 +1,16 @@
 /**
+ * Nettoie le HTML pour supprimer les balises <script> et les attributs on* (onerror, onclick, etc.)
+ * @param {string} html - Le HTML à nettoyer
+ * @returns {string} - HTML nettoyé, plus sûr pour l'injection
+ */
+function sanitizeHTML(html) {
+    // Supprime toutes les balises <script>...</script>
+    let clean = html.replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, '');
+    // Supprime tous les attributs on*="..."
+    clean = clean.replace(/ on[a-z]+\s*=\s*(["']).*?\1/gi, '');
+    return clean;
+}
+/**
  * inject-partials.js — Système d'injection de partiels HTML
  *
  * Responsabilités :
@@ -50,7 +62,8 @@ function loadPartial(id, url) {
             return response.text();
         })
         .then(html => {
-            element.innerHTML = html;
+            // Nettoyage XSS avant injection
+            element.innerHTML = sanitizeHTML(html);
         })
         .catch(error => {
             console.error(`Erreur lors du chargement du partiel "${id}":`, error);

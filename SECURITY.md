@@ -64,7 +64,7 @@ Seule la version la plus récente du portfolio est supportée avec des mises à 
 ## 🏆 Reconnaissance
 
 Les chercheurs en sécurité qui signalent des vulnérabilités valides seront crédités dans :
-- Le fichier CHANGELOG.md
+- Le fichier docs/CHANGELOG.md
 - La section "Contributors" du README
 - Les notes de release GitHub
 
@@ -92,3 +92,13 @@ Les chercheurs en sécurité qui signalent des vulnérabilités valides seront c
 - **Portfolio** : https://0xcyberlitech.github.io
 - **Repository** : https://github.com/0xCyberLiTech/0xCyberLiTech.github.io
 - **Security Team** : security@0xcyberlitech.dev
+
+---
+
+## 🕒 Historique des mises à jour
+
+Chaque évolution des pratiques, outils ou procédures de sécurité doit être consignée ici ou dans le fichier docs/CHANGELOG.md associé.
+
+- **[25/12/2025]** Ajout de la section Historique des mises à jour et rappel de la mise à jour continue du présent fichier.
+
+> Pensez à mettre à jour ce fichier à chaque modification : activation/désactivation d’outils, changement de procédure, évolution des contacts, amélioration des protections, etc.

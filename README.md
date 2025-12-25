@@ -6,7 +6,7 @@
 [![Security](https://img.shields.io/badge/Security-Enterprise_Level-success)](docs/SECURITY_GUIDE.md)
 [![CodeQL](https://img.shields.io/badge/CodeQL-Enabled-blue)](.github/workflows/codeql.yml)
 [![Last Commit](https://img.shields.io/github/last-commit/0xCyberLiTech/0xCyberLiTech.github.io)](https://github.com/0xCyberLiTech/0xCyberLiTech.github.io/commits/main)
-[![Updated](https://img.shields.io/badge/Updated-Oct_2_2025-success)](CHANGELOG.md)
+[![Updated](https://img.shields.io/badge/Updated-Oct_2_2025-success)](docs/CHANGELOG.md)
 
 **Portfolio cybersécurité ultra-optimisé** avec intégration GitHub API, thème Tron/Cyberpunk, et architecture moderne.
 
@@ -155,25 +155,24 @@ Le portfolio utilise l'API publique GitHub (pas de token requis).
 
 ## 🔒 Sécurité
 
-### Protection XSS v2.1
-- **Échappement HTML** : Tous les inputs utilisateurs via `utilEscapeHTML()`
-- **Validation GitHub API** : Vérification type/format des données reçues
-- **Sanitisation DOM** : Nettoyage automatique du contenu injecté
-- **Tests Sécurité** : Validation complète contre injections malveillantes
+### Sécurité v2.1 — Protections en place
+- **Protection XSS** : Toutes les données dynamiques injectées dans le DOM sont échappées via `utilEscapeHTML()`.
+- **Sanitisation des partiels** : Suppression automatique des balises `<script>` et attributs on* dans les contenus HTML injectés.
+- **Content Security Policy (CSP)** : Balise CSP stricte dans `index.html` et `portfolio.html` (blocage scripts/styles/images externes, JS/CSS inline interdit, objets et frames désactivés).
+- **En-têtes de sécurité** : X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy ajoutés dans le `<head>`.
+- **Tests automatisés** : Dossier `tests/` avec tests unitaires (Jest) pour valider l’échappement XSS et la robustesse des fonctions critiques.
+- **Audit de dépendances** : Pas de dépendances JS externes non maîtrisées, surveillance automatique via Dependabot et CodeQL.
+- **Secret Scanning** : Détection automatique des secrets exposés.
+- **SECURITY.md** : Politique de sécurité officielle, procédure de signalement, historique des évolutions.
+- **Documentation sécurité** : Voir aussi `docs/SECURITE_AUTO_DOC.md` pour le détail des protections et recommandations à jour.
 
-### Analyse Automatique (NOUVEAU)
-- 🛡️ **CodeQL Analysis** : Scan de sécurité JavaScript hebdomadaire
-- 🤖 **Dependabot** : Surveillance automatique des vulnérabilités
-- 🔍 **Secret Scanning** : Détection de tokens/clés exposées accidentellement
-- 📋 **Security Policy** : Processus de signalement des vulnérabilités
+### À surveiller / à mettre en place
+- Forcer le HTTPS sur GitHub Pages (Settings > Pages > Enforce HTTPS)
+- Vérifier régulièrement les alertes de sécurité GitHub
+- Ajouter d’autres tests automatisés (DOM, sanitization, etc.)
+- Mettre à jour la documentation sécurité à chaque évolution
 
-### Conformité
-- ✅ **OWASP Guidelines** respectées
-- ✅ **GitHub Security** niveau entreprise
-- ✅ **XSS Prevention** niveau A+
-- ✅ **Zero Cost** configuration optimisée
-
-> 📖 **Guide complet** : [docs/SECURITY_GUIDE.md](docs/SECURITY_GUIDE.md)
+> 📖 **Guide complet** : [docs/SECURITY_GUIDE.md](docs/SECURITY_GUIDE.md) — [Documentation sécurité automatisée](docs/SECURITE_AUTO_DOC.md)
 
 ---
 
@@ -217,14 +216,14 @@ Le portfolio utilise l'API publique GitHub (pas de token requis).
 ### 🔍 Références Techniques
 - 📡 **[API](docs/API.md)** - Documentation des APIs internes/externes
 - 🧪 **[Testing](docs/TESTING.md)** - Guide de tests et validation
-- 📝 **[Changelog](CHANGELOG.md)** - Historique des versions
+- 📝 **[Changelog](docs/CHANGELOG.md)** - Historique des versions
 - 🔒 **[Security Policy](SECURITY.md)** - Politique de sécurité officielle
 
 ---
 
 ## 🤝 Contribution
 
-Voir [CONTRIBUTING.md](CONTRIBUTING.md) pour les guidelines détaillées.
+Voir [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) pour les guidelines détaillées.
 
 ### Standards v2.1
 - **Code Style** : ES6+, Architecture modulaire, TypeScript ready
