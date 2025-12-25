@@ -62,13 +62,12 @@
         padding: 0 !important;
     }
     .search-box {
-        max-width: 100% !important;
+        max-width: 90vw !important;
         min-width: 0 !important;
         width: 100% !important;
         box-sizing: border-box;
         margin: 0 auto !important;
-        padding-left: 5vw !important;
-        padding-right: 5vw !important;
+        padding: 0 !important;
     }
     .search-input-wrapper {
         width: 100%;
