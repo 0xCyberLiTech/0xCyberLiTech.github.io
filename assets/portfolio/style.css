@@ -64,8 +64,8 @@
         justify-content: center !important;
     }
     .search-box {
-        width: 100% !important;
-        max-width: 400px !important;
+        width: 50% !important;
+        max-width: 200px !important;
         min-width: 0 !important;
         box-sizing: border-box;
         margin: 0 auto !important;
