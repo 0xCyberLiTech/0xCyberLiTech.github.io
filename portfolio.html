@@ -15,24 +15,22 @@
   <div id="header"></div>
     <main>
       <!-- MOTEUR DE RECHERCHE -->
-      <section id="search-section">
-        <div class="search-container">
-          <div class="search-box">
-            <div class="search-input-wrapper">
-              <input 
-                type="text" 
-                id="search-input" 
-                placeholder="Recherche..."
-                autocomplete="off"
-              >
-              <button 
-                id="search-clear" 
-                style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--tron-orange); font-size: 1.2rem; cursor: pointer; opacity: 0; transition: opacity 0.3s ease;"
-                title="Effacer la recherche"
-              >✕</button>
-            </div>
-            <div id="search-results-info" style="margin-top: 10px; color: var(--tron-cyan); opacity: 0.8; font-size: 0.95rem; text-align: center;"></div>
+      <section id="search-section" style="padding: 2vh 5vw; max-width: 900px; margin: 0 auto;">
+        <div class="search-container" style="position: relative; margin-bottom: 2rem;">
+          <div class="search-input-wrapper" style="position: relative;">
+            <input 
+              type="text" 
+              id="search-input" 
+              placeholder="Rechercher dans les repositories (min. 3 caractères)..." 
+              style="width: 100%; padding: 15px 50px 15px 20px; font-size: 1.1rem; border: 2px solid var(--tron-cyan); border-radius: var(--border-radius); background: rgba(10, 10, 10, 0.9); box-shadow: var(--tron-shadow); transition: var(--transition-main); color: var(--tron-cyan);"
+            >
+            <button 
+              id="search-clear" 
+              style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--tron-orange); font-size: 1.2rem; cursor: pointer; opacity: 0; transition: opacity 0.3s ease;"
+              title="Effacer la recherche"
+            >✕</button>
           </div>
+          <div id="search-results-info" style="margin-top: 10px; color: var(--tron-cyan); opacity: 0.8; font-size: 0.95rem; text-align: center;"></div>
         </div>
       </section>
       
@@ -40,20 +38,7 @@
         <div id="projects-list"></div>
       </section>
     </main>
-  <footer id="site-footer" class="cyber-footer">
-    <div class="footer-content">
-      <span>© 2025 0xCyberLiTech</span>
-      <span class="footer-sep">|</span>
-      <a href="#" id="rgpd-link" class="footer-link">Mentions RGPD</a>
-    </div>
-    <div id="rgpd-popup" class="rgpd-popup" style="display:none;">
-      <div class="rgpd-popup-content">
-        <button class="rgpd-close" id="rgpd-close" title="Fermer">✕</button>
-        <h2>Mentions RGPD</h2>
-        <p>Ce site ne collecte aucune donnée personnelle sans votre consentement. Les cookies utilisés sont strictement nécessaires au fonctionnement du site.</p>
-      </div>
-    </div>
-  </footer>
+  <div id="footer"></div>
   </div>
   <script type="module" src="assets/portfolio/script.js"></script>
   <script src="assets/portfolio/tronNumbersBg.js"></script>
