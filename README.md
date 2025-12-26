@@ -26,7 +26,7 @@ Voir le fichier `LICENSE`.
 - [x] Utilisation d’ARIA là où nécessaire
 - [x] Tests sur lecteurs d’écran (NVDA, VoiceOver)
 - [ ] Audit Lighthouse Accessibilité ≥ 90%
-![Build Status](https://img.shields.io/github/actions/workflow/status/0xCyberLiTech/0xCyberLiTech.github.io/deploy.yml?branch=main)
+![Build Status](https://img.shields.io/github/actions/workflow/status/0xCyberLiTech/0xCyberLiTech.github.io/test-js.yml?branch=main)
 
 - 🌐 [Voir la démo en ligne](https://0xCyberLiTech.github.io)
 
