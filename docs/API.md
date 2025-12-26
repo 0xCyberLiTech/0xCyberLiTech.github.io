@@ -1,4 +1,12 @@
+
 # API Documentation - Portfolio 0xCyberLiTech v2.1
+
+## Sommaire
+- [APIs Externes](#-apis-externes)
+    - [GitHub API v3](#github-api-v3)
+- [API Interne du Portfolio](#-api-interne-du-portfolio)
+    - [Module PortfolioManager](#module-portfoliomanager)
+- [Gestion des Erreurs](#gestion-des-erreurs)
 
 📡 Documentation technique des APIs utilisées et de l'architecture de données du portfolio.
 

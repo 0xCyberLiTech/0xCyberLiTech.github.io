@@ -1,4 +1,13 @@
+
 # Architecture du Portfolio 0xCyberLiTech
+
+## Sommaire
+- [Vue d'Ensemble de l'Architecture](#-vue-densemble-de-larchitecture)
+- [Structure des Fichiers Optimisée](#-structure-des-fichiers-optimisee)
+- [Cycle de Vie de l'Application](#1-cycle-de-vie-de-lapplication)
+- [Optimisations de Factorisation](#2-optimisations-de-factorisation-v21)
+- [Architecture des Modules](#3-architecture-des-modules)
+- [Intégrations et APIs](#-integrations-et-apis)
 
 Ce document décrit l'architecture technique détaillée du portfolio **optimisé v2.1**.
 
