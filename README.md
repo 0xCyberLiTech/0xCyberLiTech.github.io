@@ -14,3 +14,14 @@ Merci de consulter le fichier `docs/CONTRIBUTING.md`.
 
 ## Licence
 Voir le fichier `LICENSE`.
+![Build Status](https://img.shields.io/github/actions/workflow/status/0xCyberLiTech/0xCyberLiTech.github.io/deploy.yml?branch=main)
+
+- 🌐 [Voir la démo en ligne](https://0xCyberLiTech.github.io)
+
+## Fonctionnalités principales
+- Affichage dynamique des dépôts GitHub
+- Portfolio interactif et responsive
+- Sécurisation XSS côté client (JS)
+- Préchargement ultramoderne
+- Documentation technique complète
+- Accessibilité et performance optimisées
