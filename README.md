@@ -14,6 +14,18 @@ Merci de consulter le fichier `docs/CONTRIBUTING.md`.
 
 ## Licence
 Voir le fichier `LICENSE`.
+  
+## Checklist d’accessibilité
+
+- [x] Structure HTML sémantique (header, main, footer)
+- [x] Contrastes couleurs respectés (WCAG AA)
+- [x] Navigation clavier complète
+- [x] Textes alternatifs pour les images
+- [x] Titres de page et sections explicites
+- [x] Focus visible et accessible
+- [x] Utilisation d’ARIA là où nécessaire
+- [x] Tests sur lecteurs d’écran (NVDA, VoiceOver)
+- [ ] Audit Lighthouse Accessibilité ≥ 90%
 ![Build Status](https://img.shields.io/github/actions/workflow/status/0xCyberLiTech/0xCyberLiTech.github.io/deploy.yml?branch=main)
 
 - 🌐 [Voir la démo en ligne](https://0xCyberLiTech.github.io)
