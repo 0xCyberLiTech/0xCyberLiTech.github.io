@@ -1,0 +1,10 @@
+{
+  "name": "0xcyberlitech-portfolio-tests",
+  "type": "module",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0"
+  }
+}
