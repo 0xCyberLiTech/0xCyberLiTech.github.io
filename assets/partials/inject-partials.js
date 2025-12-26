@@ -50,6 +50,9 @@ function loadPartial(id, url) {
             return response.text();
         })
         .then(html => {
+            // AVERTISSEMENT SÉCURITÉ :
+            // Si la source des partiels devient externe ou provient d'un utilisateur,
+            // il est impératif d'échapper le contenu ou d'utiliser textContent pour éviter toute faille XSS !
             element.innerHTML = html;
         })
         .catch(error => {
