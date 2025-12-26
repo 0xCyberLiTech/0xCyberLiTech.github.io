@@ -1,5 +1,17 @@
 # Politique de Sécurité - Portfolio 0xCyberLiTech
 
+## 🔄 Politique de mise à jour de sécurité
+
+Les dépendances et outils utilisés dans ce projet sont vérifiés régulièrement. Voici la politique appliquée :
+
+- **Vérification mensuelle** des dépendances (npm, scripts, outils externes)
+- **Mise à jour immédiate** en cas de faille critique détectée
+- **Utilisation du secret scanning** GitHub pour détecter toute fuite accidentelle
+- **Suivi des alertes de sécurité** GitHub et application des correctifs recommandés
+- **Documentation** de chaque mise à jour de sécurité dans le CHANGELOG
+
+Pour toute suggestion ou signalement, ouvrez une issue ou contactez l’équipe de maintenance.
+
 ## 🛡️ Versions Supportées
 
 Seule la version la plus récente du portfolio est supportée avec des mises à jour de sécurité.
