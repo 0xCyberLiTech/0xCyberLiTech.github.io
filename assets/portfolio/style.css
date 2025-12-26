@@ -1,3 +1,117 @@
+/* ========== MODALE RGPD ========== */
+.rgpd-modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0; width: 100vw; height: 100vh;
+    background: rgba(16,24,32,0.88);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+}
+.rgpd-modal[aria-hidden="true"] { display: none; }
+.rgpd-modal-content {
+    background: #181c24;
+    border: 2px solid var(--tron-blue);
+    border-radius: 12px;
+    box-shadow: 0 0 24px #00fff055;
+    color: #00fff0;
+    font-family: 'Share Tech Mono', monospace;
+    padding: 2em 1.5em 1.5em 1.5em;
+    max-width: 95vw;
+    width: 370px;
+    position: relative;
+    text-align: center;
+}
+.rgpd-close {
+    position: absolute;
+    top: 12px; right: 16px;
+    background: none;
+    border: none;
+    color: var(--tron-orange);
+    font-size: 2em;
+    cursor: pointer;
+    transition: color 0.18s;
+}
+.rgpd-close:hover, .rgpd-close:focus {
+    color: #fff;
+}
+@media (max-width: 600px) {
+    .rgpd-modal-content {
+        width: 98vw;
+        padding: 1.2em 0.5em 1em 0.5em;
+    }
+}
+/* ========== FIN MODALE RGPD ========== */
+/* ========== FOOTER ========== */
+#site-footer {
+    width: 100%;
+    background: #181c24;
+    border-top: 2px solid var(--tron-blue);
+    box-shadow: 0 -2px 16px #00fff033;
+    color: #00fff0;
+    font-family: 'Share Tech Mono', monospace;
+    padding: 1.2em 0 0.7em 0;
+    margin-top: 2.5em;
+    letter-spacing: 0.02em;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.2em;
+    flex-wrap: wrap;
+}
+
+.footer-brand {
+    font-weight: bold;
+    font-size: 1.05em;
+    color: #00fff0;
+    text-shadow: 0 0 8px #00fff0cc;
+}
+
+.footer-links {
+    display: flex;
+    gap: 1.2em;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: #00fff0;
+    text-decoration: none;
+    font-size: 1em;
+    transition: color 0.18s, text-shadow 0.18s;
+    text-shadow: 0 0 6px #00fff088;
+    padding: 2px 0;
+    border-bottom: 1.5px solid transparent;
+}
+
+.footer-links a:hover, .footer-links a:focus {
+    color: var(--tron-orange);
+    text-shadow: 0 0 10px var(--tron-orange), 0 0 2px var(--tron-orange);
+    border-bottom: 1.5px solid var(--tron-orange);
+}
+
+@media (max-width: 600px) {
+    .footer-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.7em;
+        padding: 0 0.7em;
+    }
+    .footer-links {
+        gap: 0.8em;
+        font-size: 0.98em;
+    }
+    .footer-brand {
+        font-size: 0.98em;
+    }
+}
+/* ========== FIN FOOTER ========== */
 /* Réserve la place du header injecté dynamiquement pour éviter le saut visuel */
 #header {
     min-height: 60px;

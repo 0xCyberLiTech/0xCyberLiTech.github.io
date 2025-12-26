@@ -1,3 +1,42 @@
+
+// Fonction d'initialisation de la modale RGPD
+function initRGPDModal() {
+    const rgpdLink = document.getElementById('rgpd-link');
+    const rgpdModal = document.getElementById('rgpd-modal');
+    const rgpdClose = document.getElementById('rgpd-close');
+    if (rgpdLink && rgpdModal && rgpdClose) {
+        rgpdLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            rgpdModal.style.display = 'flex';
+            rgpdModal.setAttribute('aria-hidden', 'false');
+            rgpdModal.focus();
+        });
+        rgpdClose.addEventListener('click', () => {
+            rgpdModal.style.display = 'none';
+            rgpdModal.setAttribute('aria-hidden', 'true');
+            rgpdLink.focus();
+        });
+        // Fermer avec Échap
+        rgpdModal.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                rgpdModal.style.display = 'none';
+                rgpdModal.setAttribute('aria-hidden', 'true');
+                rgpdLink.focus();
+            }
+        });
+    }
+}
+
+// Appel de l'initialisation RGPD après injection du footer
+document.addEventListener('DOMContentLoaded', () => {
+    // Si le footer est injecté dynamiquement, attendre qu'il soit présent
+    const checkFooter = setInterval(() => {
+        if (document.getElementById('rgpd-link') && document.getElementById('rgpd-modal')) {
+            clearInterval(checkFooter);
+            initRGPDModal();
+        }
+    }, 100);
+});
 /**
  * script.js — Portfolio principal
  *
