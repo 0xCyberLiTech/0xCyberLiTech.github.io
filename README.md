@@ -18,9 +18,10 @@ Voir le fichier `LICENSE`.
 ## Confidentialité
 Consultez la [politique de confidentialité](PRIVACY.md) pour plus d’informations sur la gestion des données et la vie privée.
   
+
 ## Checklist d’accessibilité
 
-- [x] Structure HTML sémantique (header, main, footer)
+- [x] Structure HTML sémantique (`<header>`, `<main>`, `<footer>`)
 - [x] Contrastes couleurs respectés (WCAG AA)
 - [x] Navigation clavier complète
 - [x] Textes alternatifs pour les images
@@ -29,9 +30,12 @@ Consultez la [politique de confidentialité](PRIVACY.md) pour plus d’informati
 - [x] Utilisation d’ARIA là où nécessaire
 - [x] Tests sur lecteurs d’écran (NVDA, VoiceOver)
 - [ ] Audit Lighthouse Accessibilité ≥ 90%
+
+---
+
 ![Build Status](https://img.shields.io/github/actions/workflow/status/0xCyberLiTech/0xCyberLiTech.github.io/test-js.yml?branch=main)
 
-- 🌐 [Voir la démo en ligne](https://0xCyberLiTech.github.io)
+🌐 [Voir la démo en ligne](https://0xCyberLiTech.github.io)
 
 ## Fonctionnalités principales
 - Affichage dynamique des dépôts GitHub
