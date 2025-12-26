@@ -14,6 +14,9 @@ Merci de consulter le fichier `docs/CONTRIBUTING.md`.
 
 ## Licence
 Voir le fichier `LICENSE`.
+
+## Confidentialité
+Consultez la [politique de confidentialité](PRIVACY.md) pour plus d’informations sur la gestion des données et la vie privée.
   
 ## Checklist d’accessibilité
 
