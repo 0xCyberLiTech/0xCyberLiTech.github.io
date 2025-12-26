@@ -1,0 +1,19 @@
+name: Vérification de sécurité des dépendances
+
+on:
+  schedule:
+    - cron: '0 6 * * 1' # Chaque lundi à 6h UTC
+  workflow_dispatch:
+
+jobs:
+  dependabot:
+    name: Détection de vulnérabilités (GitHub Advisory)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Vérification des vulnérabilités
+        uses: github/ghas-composite-actions/dependency-review-action@v3
+        with:
+          fail-on-severity: high
+          allow-licenses: MIT, Apache-2.0, BSD-3-Clause, BSD-2-Clause, ISC, CC0-1.0
+      - name: Affichage du rapport
+        run: echo "Vérification de sécurité terminée. Consultez l'onglet Security > Dependabot Alerts sur GitHub."
