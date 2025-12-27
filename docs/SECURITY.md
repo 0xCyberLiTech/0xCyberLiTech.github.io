@@ -1,106 +1,48 @@
-# Politique de Sécurité - Portfolio 0xCyberLiTech
+# 🔒 Politique de sécurité
 
-## 🔄 Politique de mise à jour de sécurité
+> **Version :** 2.1 — **Dernière mise à jour :** 27 décembre 2025  
+> Ce document présente les principes et mesures de sécurité appliqués au projet.
 
-Les dépendances et outils utilisés dans ce projet sont vérifiés régulièrement. Voici la politique appliquée :
+---
 
-- **Vérification mensuelle** des dépendances (npm, scripts, outils externes)
-- **Mise à jour immédiate** en cas de faille critique détectée
-- **Utilisation du secret scanning** GitHub pour détecter toute fuite accidentelle
-- **Suivi des alertes de sécurité** GitHub et application des correctifs recommandés
-- **Documentation** de chaque mise à jour de sécurité dans le CHANGELOG
+## 📑 Sommaire
+- [Principes de sécurité](#principes-de-sécurité)
+- [Gestion des vulnérabilités](#gestion-des-vulnérabilités)
+- [Bonnes pratiques de développement](#bonnes-pratiques-de-développement)
+- [Ressources utiles](#ressources-utiles)
 
-Pour toute suggestion ou signalement, ouvrez une issue ou contactez l’équipe de maintenance.
+---
 
-## 🛡️ Versions Supportées
+## 🛡️ Principes de sécurité
 
-Seule la version la plus récente du portfolio est supportée avec des mises à jour de sécurité.
+- Pas de données sensibles stockées côté client
+- Utilisation de `utilEscapeHTML` pour éviter les XSS
+- Séparation stricte des modules et du DOM
 
-| Version | Supportée          |
-| ------- | ------------------ |
-| 2.1.x   | ✅ Oui             |
-| 2.0.x   | ❌ Non             |
-| < 2.0   | ❌ Non             |
+---
 
-## 🚨 Signaler une Vulnérabilité
+## 🐞 Gestion des vulnérabilités
 
-### Types de Vulnérabilités Acceptées
+- Suivi des dépendances via npm audit
+- Correction rapide des failles signalées
+- Documentation des correctifs dans le changelog
 
-- **XSS (Cross-Site Scripting)** : Particulièrement important car nous utilisons l'API GitHub
-- **Injection de Code** : JavaScript injection, DOM-based attacks
-- **CSRF** : Cross-Site Request Forgery
-- **Exposition de Données** : Leaks d'informations sensibles
-- **Déni de Service** : DoS via JavaScript ou CSS
+---
 
-### Types NON Acceptés
+## 🧑‍💻 Bonnes pratiques de développement
 
-- **Problèmes de configuration** : GitHub Pages settings, DNS
-- **Issues UI/UX** : Bugs visuels sans impact sécuritaire
-- **Performance** : Problèmes de vitesse (sauf DoS)
+- Ne jamais exposer de secrets dans le code
+- Toujours valider les entrées utilisateur
+- Utiliser des outils d’analyse statique (ESLint, etc.)
 
-### Comment Signaler
+---
 
-1. **GitHub Security Advisories** (Recommandé)
-   - Allez sur l'onglet "Security" du repository
-   - Cliquez "Report a vulnerability" 
-   - Remplissez le formulaire détaillé
+## 📚 Ressources utiles
 
-2. **Email Direct** (Si GitHub indisponible)
-   - Envoyez à : security@0xcyberlitech.dev
-   - Sujet : `[SECURITY] Portfolio Vulnerability Report`
+- [SECURITY_GUIDE.md](SECURITY_GUIDE.md) — Guide détaillé
+- [README.md](README.md) — Sommaire de la documentation
+- [ARCHITECTURE.md](ARCHITECTURE.md) — Vue d’ensemble technique
 
-### Informations à Inclure
+---
 
-- **Description détaillée** de la vulnérabilité
-- **Étapes de reproduction** 
-- **Impact potentiel**
-- **Preuves de concept** (screenshots, code)
-- **Suggestions de correction** (optionnel)
-
-### Délais de Réponse
-
-- **Accusé de réception** : 48 heures
-- **Évaluation initiale** : 7 jours
-- **Correction critique** : 14 jours
-- **Correction standard** : 30 jours
-
-### Processus de Correction
-
-1. **Triage** : Évaluation de la criticité
-2. **Investigation** : Analyse approfondie 
-3. **Développement** : Création du correctif
-4. **Testing** : Vérification de la correction
-5. **Déploiement** : Mise en production
-6. **Communication** : Notification aux utilisateurs
-
-## 🏆 Reconnaissance
-
-Les chercheurs en sécurité qui signalent des vulnérabilités valides seront crédités dans :
-- Le fichier CHANGELOG.md
-- La section "Contributors" du README
-- Les notes de release GitHub
-
-## 📋 Bonnes Pratiques Implémentées
-
-### Protection XSS
-- ✅ Utilisation systématique de `utilEscapeHTML()`
-- ✅ Validation des données d'entrée API GitHub
-- ✅ CSP (Content Security Policy) recommandée
-
-### Sécurité des Dépendances  
-- ✅ Dependabot activé
-- ✅ CodeQL analysis hebdomadaire
-- ✅ Secret scanning activé
-- ✅ Monitoring automatique des vulnérabilités
-
-### Architecture Sécurisée
-- ✅ Modules ES6 isolés
-- ✅ Validation des URLs GitHub
-- ✅ Gestion d'erreur robuste
-- ✅ Pas de `eval()` ou `innerHTML` unsafe
-
-## 📞 Contact
-
-- **Portfolio** : https://0xcyberlitech.github.io
-- **Repository** : https://github.com/0xCyberLiTech/0xCyberLiTech.github.io
-- **Security Team** : security@0xcyberlitech.dev
+**Auteur :** 0xCyberLiTech — 2025

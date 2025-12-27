@@ -2,9 +2,11 @@
   "name": "0xcyberlitech-portfolio-tests",
   "type": "module",
   "scripts": {
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "build": "node build/build.cjs"
   },
   "devDependencies": {
-    "jest": "^29.0.0"
+    "jest": "^29.0.0",
+    "esbuild": "^0.19.0"
   }
 }

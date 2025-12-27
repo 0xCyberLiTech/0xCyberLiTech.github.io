@@ -1,16 +1,36 @@
-# Documentation technique du portfolio 0xCyberLiTech
+# 📚 Documentation technique du portfolio 0xCyberLiTech
 
-Bienvenue dans le dossier `docs/` ! Vous trouverez ici toute la documentation technique et les guides pour contribuer, déployer et sécuriser le projet.
+Bienvenue dans le dossier `docs/` ! Retrouvez ici toute la documentation technique, les guides pratiques et les procédures pour contribuer, déployer, sécuriser et maintenir le projet.
 
-## Sommaire
-- [API.md](API.md) : Documentation des APIs utilisées
-- [ARCHITECTURE.md](ARCHITECTURE.md) : Architecture technique du projet
-- [SECURITY.md](SECURITY.md) : Politique de sécurité et bonnes pratiques
-- [CONTRIBUTING.md](CONTRIBUTING.md) : Guide de contribution
-- [DEPLOYMENT.md](DEPLOYMENT.md) : Procédures de déploiement
-- [QUICK_START.md](QUICK_START.md) : Démarrage rapide
-- [TESTING.md](TESTING.md) : Stratégie de tests
-- [SECURITY_GUIDE.md](SECURITY_GUIDE.md) : Guide avancé de sécurité
-- [CHANGELOG.md](CHANGELOG.md) : Historique des évolutions
+---
 
-Pour toute question, consultez le README principal à la racine ou ouvrez une issue sur GitHub.
+## 🗂️ Sommaire général
+
+### 🚀 Démarrage & Vue d’ensemble
+- [Démarrage rapide](QUICK_START.md)
+- [Architecture technique](ARCHITECTURE.md)
+- [Documentation des APIs](API.md)
+
+### 🛠️ Développement & Contribution
+- [Guide de contribution](CONTRIBUTING.md)
+- [Stratégie de tests](TESTING.md)
+- [Minification automatique](MINIFICATION.md)
+
+### 🔒 Sécurité
+- [Politique de sécurité](SECURITY.md)
+- [Guide avancé de sécurité](SECURITY_GUIDE.md)
+
+### 🚚 Déploiement & Maintenance
+- [Procédures de déploiement](DEPLOYMENT.md)
+- [Historique des évolutions](../CHANGELOG.md)
+
+---
+
+## ℹ️ Conseils d’utilisation
+- Utilisez ce sommaire pour naviguer rapidement entre les différents aspects du projet.
+- Chaque document possède son propre sommaire interne pour une navigation fine.
+- Pour toute question, consultez ce README ou ouvrez une issue sur GitHub.
+
+---
+
+**Auteur :** 0xCyberLiTech — 2025

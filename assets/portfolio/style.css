@@ -44,16 +44,26 @@
 }
 /* ========== FIN MODALE RGPD ========== */
 /* ========== FOOTER ========== */
+
 #site-footer {
     width: 100%;
-    background: #181c24;
+    background: linear-gradient(90deg, #181c24 60%, rgba(0,255,240,0.10) 100%);
     border-top: 2px solid var(--tron-blue);
-    box-shadow: 0 -2px 16px #00fff033;
+    box-shadow: 0 -2px 24px #00fff055;
     color: #00fff0;
     font-family: 'Share Tech Mono', monospace;
     padding: 1.2em 0 0.7em 0;
     margin-top: 2.5em;
     letter-spacing: 0.02em;
+    position: relative;
+    overflow: hidden;
+    z-index: 10;
+    animation: footerBgMove 12s linear infinite alternate;
+}
+
+@keyframes footerBgMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 100vw 0; }
 }
 
 .footer-content {
@@ -65,35 +75,103 @@
     margin: 0 auto;
     padding: 0 1.2em;
     flex-wrap: wrap;
+    gap: 1.2em;
 }
 
 .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.7em;
     font-weight: bold;
-    font-size: 1.05em;
+    font-size: 1.08em;
     color: #00fff0;
     text-shadow: 0 0 8px #00fff0cc;
+}
+
+.footer-logo-glow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 0 16px 4px #00fff088, 0 0 32px 8px #00fff022;
+    background: rgba(0,255,240,0.07);
+    padding: 2px;
+    animation: logoGlow 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes logoGlow {
+    0% { box-shadow: 0 0 12px 2px #00fff055, 0 0 24px 4px #00fff011; }
+    100% { box-shadow: 0 0 24px 8px #00fff0cc, 0 0 48px 16px #00fff044; }
+}
+
+.footer-logo {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #101820;
 }
 
 .footer-links {
     display: flex;
     gap: 1.2em;
     flex-wrap: wrap;
+    align-items: center;
 }
 
 .footer-links a {
     color: #00fff0;
     text-decoration: none;
     font-size: 1em;
-    transition: color 0.18s, text-shadow 0.18s;
+    display: flex;
+    align-items: center;
+    gap: 0.35em;
+    transition: color 0.18s, text-shadow 0.18s, border-bottom 0.18s;
     text-shadow: 0 0 6px #00fff088;
     padding: 2px 0;
     border-bottom: 1.5px solid transparent;
+    position: relative;
 }
 
 .footer-links a:hover, .footer-links a:focus {
     color: var(--tron-orange);
-    text-shadow: 0 0 10px var(--tron-orange), 0 0 2px var(--tron-orange);
+    text-shadow: 0 0 12px var(--tron-orange), 0 0 2px var(--tron-orange);
     border-bottom: 1.5px solid var(--tron-orange);
+    background: linear-gradient(90deg, rgba(255,136,0,0.08) 0%, rgba(0,255,240,0.05) 100%);
+    border-radius: 4px;
+}
+
+.footer-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 2px;
+    filter: drop-shadow(0 0 4px #00fff0cc);
+    transition: filter 0.2s;
+}
+
+.footer-links a:hover .footer-icon, .footer-links a:focus .footer-icon {
+    filter: drop-shadow(0 0 8px var(--tron-orange));
+}
+
+.footer-link-label {
+    font-size: 1em;
+    letter-spacing: 0.01em;
+}
+/* Zone de remerciement */
+.footer-thanks {
+    width: 100%;
+    text-align: center;
+    color: #00fff0bb;
+    font-size: 0.98em;
+    margin-top: 0.7em;
+    letter-spacing: 0.04em;
+    text-shadow: 0 0 8px #00fff044;
+    animation: thanksGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes thanksGlow {
+    0% { text-shadow: 0 0 8px #00fff044; }
+    100% { text-shadow: 0 0 16px #ff880044, 0 0 4px #00fff0cc; }
 }
 
 @media (max-width: 600px) {
@@ -109,6 +187,9 @@
     }
     .footer-brand {
         font-size: 0.98em;
+    }
+    .footer-thanks {
+        font-size: 0.93em;
     }
 }
 /* ========== FIN FOOTER ========== */
