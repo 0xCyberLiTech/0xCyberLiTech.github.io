@@ -522,6 +522,134 @@
 
     .repo-link:hover { color: var(--cyan); }
 
+    /* ── NAV HEADER ────────────────────────────── */
+    .nav-main {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 2rem;
+      background: rgba(8,12,16,0.92);
+      border-bottom: 1px solid rgba(0,255,240,0.08);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-brand {
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      color: var(--cyan);
+    }
+
+    .nav-brand-prefix { color: var(--orange); }
+    .nav-brand-name   { color: var(--cyan); text-shadow: 0 0 12px rgba(0,255,240,0.4); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.6rem;
+    }
+
+    .nav-link {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      color: rgba(0,255,240,0.55);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover { color: var(--cyan); }
+    .nav-link.orange { color: rgba(255,136,0,0.6); }
+    .nav-link.orange:hover { color: var(--orange); }
+    .nav-link-ext::after { content: ''; }
+
+    @media (max-width: 600px) {
+      .nav-links { gap: 0.9rem; }
+      .nav-link { font-size: 0.62rem; }
+    }
+
+    /* Compensation fixed nav */
+    #hero { padding-top: 5rem; }
+
+    /* ── FOOTER ─────────────────────────────────── */
+    .footer-main {
+      border-top: 1px solid rgba(0,255,240,0.08);
+      padding: 1.4rem 2rem;
+      margin-top: 2rem;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .footer-left, .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.65rem;
+      color: rgba(0,255,240,0.35);
+      letter-spacing: 0.08em;
+    }
+
+    .footer-logo-img { opacity: 0.5; border-radius: 50%; }
+    .footer-name { color: var(--cyan); }
+    .footer-sep { opacity: 0.3; }
+
+    .footer-link {
+      color: rgba(0,255,240,0.4);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-link:hover { color: var(--cyan); }
+
+    /* RGPD modal */
+    .rgpd-modal {
+      position: fixed; inset: 0; z-index: 9000;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.75);
+    }
+
+    .rgpd-modal-content {
+      background: #0d1117;
+      border: 1px solid rgba(0,255,240,0.2);
+      padding: 2rem;
+      max-width: 520px;
+      width: 90%;
+      font-size: 0.78rem;
+      color: rgba(0,255,240,0.7);
+      line-height: 1.8;
+      position: relative;
+    }
+
+    .rgpd-modal-content h2 { color: var(--cyan); margin-bottom: 1rem; font-size: 0.95rem; }
+
+    .rgpd-close {
+      position: absolute; top: 0.8rem; right: 1rem;
+      background: none; border: none;
+      color: var(--orange); font-size: 1.2rem; cursor: pointer;
+    }
+
+    /* ── SCROLL REVEAL ──────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     /* ── ANIMATIONS ────────────────────────────── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
@@ -574,7 +702,7 @@
     </section>
 
     <!-- ══ FEATURED PROJECTS ══════════════════════ -->
-    <section id="featured">
+    <section id="featured" class="reveal">
       <div class="section-label">// projets phares</div>
       <h2 class="section-title">$ cat ~/projects/featured.json</h2>
       <div class="section-sep"></div>
@@ -672,7 +800,7 @@
     </section>
 
     <!-- ══ SKILLS ═════════════════════════════════ -->
-    <section id="skills" style="border-top: 1px solid rgba(0,255,240,0.06);">
+    <section id="skills" class="reveal" style="border-top: 1px solid rgba(0,255,240,0.06);">
       <div class="section-label">// compétences</div>
       <h2 class="section-title">$ cat ~/skills/stack.txt</h2>
       <div class="section-sep"></div>
@@ -748,7 +876,7 @@
     </section>
 
     <!-- ══ GITHUB REPOS ═══════════════════════════ -->
-    <section id="repos-section">
+    <section id="repos-section" class="reveal">
       <div class="section-label">// repositories publics</div>
       <h2 class="section-title">$ ls -la ~/repositories/public</h2>
       <div class="section-sep"></div>
@@ -768,6 +896,18 @@
   <script>if (window.startTronNumbersBG) window.startTronNumbersBG();</script>
   <script type="module" src="assets/portfolio/script.js"></script>
   <script src="assets/partials/inject-partials.js"></script>
+  <script>
+    // Scroll reveal
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          revealObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  </script>
 
 </body>
 </html>
