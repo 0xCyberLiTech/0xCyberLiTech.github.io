@@ -3,50 +3,687 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Portfolio | 0xCyberLiTech</title>
-  <meta name="description" content="Portfolio cybersécurité, scripts, projets, et tutoriels par 0xCyberLiTech. Thème cyber/Tron, responsive, sécurisé.">
+  <title>0xCyberLiTech — Cybersécurité & IA</title>
+  <meta name="description" content="Portfolio de 0xCyberLiTech — Assistant cybersécurité, passionné Linux & IA. Projets : SOC Dashboard, JARVIS AI, infrastructure SecOps.">
   <link rel="icon" type="image/png" href="assets/logo/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap">
   <link rel="stylesheet" href="assets/portfolio/variables.css">
   <link rel="stylesheet" href="assets/portfolio/_keyframes-group.css">
   <link rel="stylesheet" href="assets/portfolio/style.min.css">
+  <style>
+    :root {
+      --cyan:   #00fff0;
+      --orange: #ff8800;
+      --blue:   #00aaff;
+      --green:  #00ff88;
+      --bg:     #080c10;
+      --bg2:    #0d1117;
+      --muted:  rgba(0,255,240,0.35);
+      --mono:   'Share Tech Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--cyan);
+      font-family: var(--mono);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── SCAN LINE overlay ─────────────────────── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,255,240,0.015) 2px,
+        rgba(0,255,240,0.015) 4px
+      );
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ── HERO ──────────────────────────────────── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 50% 50%, rgba(0,255,240,0.04) 0%, transparent 70%),
+        radial-gradient(ellipse 30% 30% at 80% 20%, rgba(0,170,255,0.05) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-bracket {
+      font-size: clamp(0.6rem, 1.5vw, 0.75rem);
+      color: var(--muted);
+      letter-spacing: 0.3em;
+      margin-bottom: 1.2rem;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 6vw, 4.5rem);
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      color: var(--cyan);
+      text-shadow: 0 0 30px rgba(0,255,240,0.6), 0 0 60px rgba(0,255,240,0.2);
+      animation: fadeUp 0.9s ease both;
+      line-height: 1.1;
+    }
+
+    .hero-title span { color: var(--orange); text-shadow: 0 0 20px rgba(255,136,0,0.5); }
+
+    .hero-sub {
+      margin-top: 1rem;
+      font-size: clamp(0.85rem, 2vw, 1.1rem);
+      color: rgba(0,255,240,0.7);
+      letter-spacing: 0.15em;
+      animation: fadeUp 1s ease both;
+    }
+
+    .hero-divider {
+      width: 200px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+      margin: 1.8rem auto;
+      animation: fadeUp 1.1s ease both;
+    }
+
+    .hero-bio {
+      max-width: 620px;
+      font-size: clamp(0.78rem, 1.8vw, 0.92rem);
+      color: rgba(0,255,240,0.6);
+      line-height: 1.85;
+      animation: fadeUp 1.2s ease both;
+    }
+
+    .hero-bio strong { color: var(--cyan); }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+      animation: fadeUp 1.3s ease both;
+    }
+
+    .btn-cyber {
+      padding: 0.65rem 1.5rem;
+      border: 1px solid var(--cyan);
+      background: rgba(0,255,240,0.05);
+      color: var(--cyan);
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    }
+
+    .btn-cyber:hover {
+      background: rgba(0,255,240,0.12);
+      box-shadow: 0 0 20px rgba(0,255,240,0.3);
+      color: #fff;
+    }
+
+    .btn-cyber.orange {
+      border-color: var(--orange);
+      color: var(--orange);
+      background: rgba(255,136,0,0.05);
+    }
+
+    .btn-cyber.orange:hover {
+      background: rgba(255,136,0,0.12);
+      box-shadow: 0 0 20px rgba(255,136,0,0.3);
+      color: #fff;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      animation: pulse 2s ease infinite;
+    }
+
+    /* ── SECTIONS ──────────────────────────────── */
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .section-label {
+      font-size: 0.65rem;
+      color: var(--orange);
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      color: var(--cyan);
+      text-shadow: 0 0 15px rgba(0,255,240,0.4);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    .section-sep {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan), transparent);
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── FEATURED PROJECTS ─────────────────────── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      border: 1px solid rgba(0,255,240,0.15);
+      background: rgba(0,255,240,0.02);
+      padding: 1.8rem;
+      position: relative;
+      transition: all 0.3s;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--cyan);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .project-card:hover {
+      border-color: rgba(0,255,240,0.4);
+      background: rgba(0,255,240,0.04);
+      box-shadow: 0 0 30px rgba(0,255,240,0.08);
+      transform: translateY(-2px);
+    }
+
+    .project-card:hover::before { opacity: 1; }
+
+    .project-card.featured::before { background: var(--orange); opacity: 1; }
+    .project-card.featured { border-color: rgba(255,136,0,0.25); }
+    .project-card.featured:hover { border-color: rgba(255,136,0,0.5); box-shadow: 0 0 30px rgba(255,136,0,0.08); }
+
+    .card-badge {
+      display: inline-block;
+      font-size: 0.58rem;
+      padding: 0.2rem 0.6rem;
+      border: 1px solid;
+      letter-spacing: 0.15em;
+      margin-bottom: 1rem;
+    }
+
+    .card-badge.private { border-color: rgba(255,136,0,0.5); color: var(--orange); }
+    .card-badge.public  { border-color: rgba(0,255,136,0.5); color: var(--green); }
+    .card-badge.live    { border-color: rgba(0,255,136,0.5); color: var(--green); animation: pulse 2s ease infinite; }
+
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      color: var(--cyan);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.6rem;
+    }
+
+    .project-card.featured .card-title { color: var(--orange); }
+
+    .card-desc {
+      font-size: 0.78rem;
+      color: rgba(0,255,240,0.55);
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .tag {
+      font-size: 0.6rem;
+      padding: 0.18rem 0.5rem;
+      background: rgba(0,170,255,0.08);
+      border: 1px solid rgba(0,170,255,0.2);
+      color: var(--blue);
+      letter-spacing: 0.08em;
+    }
+
+    .tag.ai   { background: rgba(0,255,136,0.06); border-color: rgba(0,255,136,0.2); color: var(--green); }
+
+    .card-link {
+      font-size: 0.7rem;
+      color: var(--cyan);
+      text-decoration: none;
+      letter-spacing: 0.12em;
+      border-bottom: 1px solid rgba(0,255,240,0.3);
+      padding-bottom: 1px;
+      transition: all 0.2s;
+    }
+
+    .card-link:hover { color: #fff; border-color: #fff; }
+
+    /* ── STATS ─────────────────────────────────── */
+    .card-stats {
+      display: flex;
+      gap: 1.2rem;
+      margin-bottom: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .stat-val {
+      font-size: 1.1rem;
+      color: var(--cyan);
+      text-shadow: 0 0 10px rgba(0,255,240,0.4);
+    }
+
+    .project-card.featured .stat-val { color: var(--orange); }
+
+    .stat-lbl {
+      font-size: 0.55rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── SKILLS ────────────────────────────────── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-group {
+      border: 1px solid rgba(0,255,240,0.1);
+      background: rgba(0,255,240,0.02);
+      padding: 1.4rem;
+    }
+
+    .skill-group-title {
+      font-size: 0.7rem;
+      color: var(--orange);
+      letter-spacing: 0.2em;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .skill-pill {
+      font-size: 0.62rem;
+      padding: 0.25rem 0.6rem;
+      background: rgba(0,255,240,0.05);
+      border: 1px solid rgba(0,255,240,0.15);
+      color: rgba(0,255,240,0.75);
+      letter-spacing: 0.05em;
+      transition: all 0.2s;
+    }
+
+    .skill-pill:hover {
+      background: rgba(0,255,240,0.1);
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+
+    .skill-pill.hot {
+      border-color: rgba(0,255,136,0.3);
+      color: var(--green);
+      background: rgba(0,255,136,0.05);
+    }
+
+    /* ── GITHUB REPOS ──────────────────────────── */
+    #repos-section {
+      border-top: 1px solid rgba(0,255,240,0.08);
+    }
+
+    .search-wrap {
+      position: relative;
+      max-width: 600px;
+      margin-bottom: 2rem;
+    }
+
+    #search-input {
+      width: 100%;
+      padding: 0.75rem 2.5rem 0.75rem 1rem;
+      background: rgba(0,255,240,0.03);
+      border: 1px solid rgba(0,255,240,0.25);
+      color: var(--cyan);
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    #search-input:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 20px rgba(0,255,240,0.1);
+    }
+
+    #search-input::placeholder { color: var(--muted); }
+
+    #search-clear {
+      position: absolute;
+      right: 0.8rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--orange);
+      font-size: 1rem;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    #search-results-info {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 0.4rem;
+    }
+
+    #projects-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    /* ── ANIMATIONS ────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.4; }
+    }
+
+    /* ── RESPONSIVE ────────────────────────────── */
+    @media (max-width: 600px) {
+      section { padding: 3rem 1.2rem; }
+      .hero-cta { gap: 0.6rem; }
+      .btn-cyber { font-size: 0.72rem; padding: 0.5rem 1rem; }
+    }
+  </style>
 </head>
 <body>
+
   <div id="portfolio-root">
-  <div id="header"></div>
-    <main>
-      <!-- MOTEUR DE RECHERCHE -->
-      <section id="search-section" style="padding: 2vh 5vw; max-width: 900px; margin: 0 auto;">
-        <div class="search-container" style="position: relative; margin-bottom: 2rem;">
-          <div class="search-input-wrapper" style="position: relative;">
-            <input 
-              type="text" 
-              id="search-input" 
-              placeholder="Rechercher dans les repositories (min. 3 caractères)..." 
-              style="width: 100%; padding: 15px 50px 15px 20px; font-size: 1.1rem; border: 2px solid var(--tron-cyan); border-radius: var(--border-radius); background: rgba(10, 10, 10, 0.9); box-shadow: var(--tron-shadow); transition: var(--transition-main); color: var(--tron-cyan);"
-            >
-            <button 
-              id="search-clear" 
-              style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--tron-orange); font-size: 1.2rem; cursor: pointer; opacity: 0; transition: opacity 0.3s ease;"
-              title="Effacer la recherche"
-            >✕</button>
+    <div id="header"></div>
+
+    <!-- ══ HERO ══════════════════════════════════ -->
+    <section id="hero">
+      <div class="hero-bracket">[ INITIALISATION COMPLÈTE — ACCÈS AUTORISÉ ]</div>
+      <h1 class="hero-title">0x<span>Cyber</span>LiTech</h1>
+      <p class="hero-sub">ASSISTANT CYBERSÉCURITÉ &nbsp;·&nbsp; LINUX &nbsp;·&nbsp; IA</p>
+      <div class="hero-divider"></div>
+      <p class="hero-bio">
+        Passionné par la <strong>cybersécurité défensive</strong>, l'<strong>infrastructure Linux</strong>
+        et l'<strong>intelligence artificielle appliquée</strong>.<br>
+        Je conçois et exploite des systèmes de surveillance, de détection et de réponse aux incidents,
+        en intégrant des <strong>LLMs locaux</strong> pour automatiser l'analyse de menaces.<br>
+        Le croisement <strong>SecOps × IA</strong> est au cœur de mes projets.
+      </p>
+      <div class="hero-cta">
+        <a class="btn-cyber" href="https://github.com/0xcyberlitech/" target="_blank" rel="noopener">
+          ◈ GitHub
+        </a>
+        <a class="btn-cyber orange" href="https://0xcyberlitech.com/" target="_blank" rel="noopener">
+          ⬡ Site web
+        </a>
+        <a class="btn-cyber" href="#featured">
+          ↓ Projets
+        </a>
+      </div>
+      <div class="hero-scroll">▼ &nbsp; SCROLL &nbsp; ▼</div>
+    </section>
+
+    <!-- ══ FEATURED PROJECTS ══════════════════════ -->
+    <section id="featured">
+      <div class="section-label">// projets phares</div>
+      <h2 class="section-title">$ cat ~/projects/featured.json</h2>
+      <div class="section-sep"></div>
+
+      <div class="projects-grid">
+
+        <!-- JARVIS -->
+        <div class="project-card featured">
+          <span class="card-badge private">⬡ PROJET PRIVÉ</span>
+          <span class="card-icon">⬡</span>
+          <h3 class="card-title">JARVIS — Assistant IA Local</h3>
+          <p class="card-desc">
+            Assistant IA personnel inspiré d'Iron Man. Interface web holographique
+            avec streaming LLM, synthèse vocale multi-moteur, reconnaissance vocale,
+            rack DSP audio et intégration SOC complète.
+            Les décisions de sécurité sont prises en temps réel par le LLM local.
+          </p>
+          <div class="card-stats">
+            <div class="stat"><span class="stat-val">4+</span><span class="stat-lbl">MOTEURS LLM</span></div>
+            <div class="stat"><span class="stat-val">5</span><span class="stat-lbl">MOTEURS TTS</span></div>
+            <div class="stat"><span class="stat-val">~3000</span><span class="stat-lbl">LIGNES PY</span></div>
+            <div class="stat"><span class="stat-val">~17K</span><span class="stat-lbl">LIGNES UI</span></div>
           </div>
-          <div id="search-results-info" style="margin-top: 10px; color: var(--tron-cyan); opacity: 0.8; font-size: 0.95rem; text-align: center;"></div>
+          <div class="card-tags">
+            <span class="tag ai">Ollama</span>
+            <span class="tag ai">phi4:14b</span>
+            <span class="tag ai">Groq</span>
+            <span class="tag ai">edge-tts</span>
+            <span class="tag ai">faster-whisper</span>
+            <span class="tag">Python</span>
+            <span class="tag">Flask</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">DSP Audio</span>
+            <span class="tag">RTX 5080</span>
+          </div>
         </div>
-      </section>
-      
-      <section id="projets" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; padding-top: 1vh;">
-        <div id="projects-list"></div>
-      </section>
-    </main>
-  <div id="footer"></div>
+
+        <!-- SOC DASHBOARD -->
+        <div class="project-card">
+          <span class="card-badge private">⬡ PROJET PRIVÉ</span>
+          <span class="card-icon">◈</span>
+          <h3 class="card-title">SOC Dashboard</h3>
+          <p class="card-desc">
+            Dashboard de monitoring sécurité temps réel sur infrastructure nginx + CrowdSec.
+            Visualise la kill chain, honeypot, GeoIP, fail2ban, CVE sync NVD,
+            threat intelligence. Intègre JARVIS pour l'analyse narrative des menaces
+            et les actions proactives automatisées.
+          </p>
+          <div class="card-stats">
+            <div class="stat"><span class="stat-val">28</span><span class="stat-lbl">TUILES</span></div>
+            <div class="stat"><span class="stat-val">60s</span><span class="stat-lbl">REFRESH</span></div>
+            <div class="stat"><span class="stat-val">v3.40</span><span class="stat-lbl">VERSION</span></div>
+          </div>
+          <div class="card-tags">
+            <span class="tag">CrowdSec</span>
+            <span class="tag">fail2ban</span>
+            <span class="tag">nginx</span>
+            <span class="tag">Python</span>
+            <span class="tag">GeoIP2</span>
+            <span class="tag">Kill Chain</span>
+            <span class="tag ai">LLM Analysis</span>
+            <span class="tag">JavaScript</span>
+          </div>
+        </div>
+
+        <!-- SITE CLT / CVE -->
+        <div class="project-card">
+          <span class="card-badge live">● LIVE</span>
+          <span class="card-icon">⚡</span>
+          <h3 class="card-title">0xCyberLiTech.com — CVE Auto-Feed</h3>
+          <p class="card-desc">
+            Site de veille cybersécurité avec flux CVE automatisé depuis NVD/NIST.
+            21 mois de données, tri par sévérité CVSS, export CSV, filtres temporels.
+            Threat intelligence, kill chain, OpenVAS, Proxmox — 150+ articles.
+          </p>
+          <div class="card-stats">
+            <div class="stat"><span class="stat-val">21</span><span class="stat-lbl">MOIS CVE</span></div>
+            <div class="stat"><span class="stat-val">150+</span><span class="stat-lbl">ARTICLES</span></div>
+            <div class="stat"><span class="stat-val">24h</span><span class="stat-lbl">DÉLAI NVD</span></div>
+          </div>
+          <div class="card-tags">
+            <span class="tag">NVD/NIST API</span>
+            <span class="tag">CVSS</span>
+            <span class="tag">Python</span>
+            <span class="tag">Cron</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">nginx</span>
+          </div>
+          <a class="card-link" href="https://0xcyberlitech.com/cve.html" target="_blank" rel="noopener">
+            → Voir les CVE en direct
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══ SKILLS ═════════════════════════════════ -->
+    <section id="skills" style="border-top: 1px solid rgba(0,255,240,0.06);">
+      <div class="section-label">// compétences</div>
+      <h2 class="section-title">$ cat ~/skills/stack.txt</h2>
+      <div class="section-sep"></div>
+
+      <div class="skills-grid">
+        <div class="skill-group">
+          <div class="skill-group-title">◈ Cybersécurité</div>
+          <div class="skill-list">
+            <span class="skill-pill">CrowdSec</span>
+            <span class="skill-pill">fail2ban</span>
+            <span class="skill-pill">ModSecurity</span>
+            <span class="skill-pill">UFW / nftables</span>
+            <span class="skill-pill">nginx WAF</span>
+            <span class="skill-pill">GeoIP2</span>
+            <span class="skill-pill">Kill Chain</span>
+            <span class="skill-pill">Threat Intel</span>
+            <span class="skill-pill">CVE / CVSS</span>
+            <span class="skill-pill">OpenVAS</span>
+            <span class="skill-pill">SSL/TLS</span>
+            <span class="skill-pill">Audit sécu</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-title">⬡ IA & LLM</div>
+          <div class="skill-list">
+            <span class="skill-pill hot">Ollama</span>
+            <span class="skill-pill hot">phi4 · qwen2.5</span>
+            <span class="skill-pill hot">Groq API</span>
+            <span class="skill-pill hot">OpenRouter</span>
+            <span class="skill-pill hot">LLM Streaming</span>
+            <span class="skill-pill hot">Tool Calling</span>
+            <span class="skill-pill hot">RAG</span>
+            <span class="skill-pill hot">edge-tts</span>
+            <span class="skill-pill hot">faster-whisper</span>
+            <span class="skill-pill hot">Kokoro TTS</span>
+            <span class="skill-pill hot">DSP Audio</span>
+            <span class="skill-pill hot">RTX 5080</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-title">⚙ Infrastructure</div>
+          <div class="skill-list">
+            <span class="skill-pill">Proxmox VE 9</span>
+            <span class="skill-pill">Linux Debian</span>
+            <span class="skill-pill">Apache</span>
+            <span class="skill-pill">nginx</span>
+            <span class="skill-pill">SSH / SCP</span>
+            <span class="skill-pill">Certbot</span>
+            <span class="skill-pill">Docker</span>
+            <span class="skill-pill">Cron / systemd</span>
+            <span class="skill-pill">VM management</span>
+            <span class="skill-pill">Backup rotation</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-title">{ } Développement</div>
+          <div class="skill-list">
+            <span class="skill-pill hot">Python 3.11</span>
+            <span class="skill-pill hot">Flask</span>
+            <span class="skill-pill">JavaScript ES6+</span>
+            <span class="skill-pill">HTML / CSS</span>
+            <span class="skill-pill">PHP 8.4</span>
+            <span class="skill-pill">Bash / PowerShell</span>
+            <span class="skill-pill">REST API</span>
+            <span class="skill-pill">SSE Streaming</span>
+            <span class="skill-pill">Git / GitHub</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ GITHUB REPOS ═══════════════════════════ -->
+    <section id="repos-section">
+      <div class="section-label">// repositories publics</div>
+      <h2 class="section-title">$ ls -la ~/repositories/public</h2>
+      <div class="section-sep"></div>
+
+      <div class="search-wrap">
+        <input type="text" id="search-input" placeholder="Rechercher (min. 3 caractères)... [Ctrl+K]">
+        <button id="search-clear" title="Effacer">✕</button>
+      </div>
+      <div id="search-results-info"></div>
+      <div id="projects-list"></div>
+    </section>
+
+    <div id="footer"></div>
   </div>
-  <script type="module" src="assets/portfolio/script.min.js"></script>
+
   <script src="assets/portfolio/tronNumbersBg.js"></script>
-  <script>
-    if (window.startTronNumbersBG) {
-      window.startTronNumbersBG();
-    }
-  </script>
+  <script>if (window.startTronNumbersBG) window.startTronNumbersBG();</script>
+  <script type="module" src="assets/portfolio/script.js"></script>
   <script src="assets/partials/inject-partials.js"></script>
+
 </body>
 </html>
