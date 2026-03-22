@@ -9,8 +9,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap">
   <link rel="stylesheet" href="assets/portfolio/variables.css">
-  <link rel="stylesheet" href="assets/portfolio/_keyframes-group.css">
-  <link rel="stylesheet" href="assets/portfolio/style.min.css">
   <style>
     :root {
       --cyan:   #00fff0;
@@ -205,9 +203,12 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 1.5rem;
+      align-items: stretch;
     }
 
     .project-card {
+      display: flex;
+      flex-direction: column;
       border: 1px solid rgba(0,255,240,0.15);
       background: rgba(0,255,240,0.02);
       padding: 1.8rem;
@@ -273,6 +274,7 @@
       color: rgba(0,255,240,0.55);
       line-height: 1.8;
       margin-bottom: 1.2rem;
+      flex: 1;
     }
 
     .card-tags {
@@ -445,6 +447,8 @@
       position: relative;
       transition: all 0.25s;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
     .project-tile::before {

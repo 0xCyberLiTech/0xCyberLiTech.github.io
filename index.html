@@ -9,8 +9,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap">
   <link rel="stylesheet" href="assets/portfolio/variables.css">
-  <link rel="stylesheet" href="assets/portfolio/_keyframes-group.css">
-  <link rel="stylesheet" href="assets/portfolio/style.min.css">
   <style>
     :root {
       --cyan:   #00fff0;
@@ -455,6 +453,260 @@
       100% { top: 105%; }
     }
 
+    /* ── REPO TILES — override style.min.css ────── */
+    .project-tile {
+      border: 1px solid rgba(0,255,240,0.12) !important;
+      background: rgba(0,255,240,0.02) !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      position: relative !important;
+      overflow: hidden !important;
+      display: flex !important;
+      flex-direction: column !important;
+      min-height: unset !important;
+      transition: all 0.25s !important;
+      cursor: default !important;
+      text-shadow: none !important;
+      margin-top: 0 !important;
+      isolation: auto !important;
+    }
+
+    .project-tile::before {
+      content: '' !important;
+      position: absolute !important;
+      top: 0; left: 0 !important;
+      width: 2px !important;
+      height: 100% !important;
+      background: var(--cyan) !important;
+      opacity: 0 !important;
+      transition: opacity 0.25s !important;
+    }
+
+    .project-tile::after {
+      display: none !important;
+    }
+
+    .project-tile:hover {
+      border-color: rgba(0,255,240,0.35) !important;
+      background: rgba(0,255,240,0.04) !important;
+      box-shadow: 0 0 20px rgba(0,255,240,0.06) !important;
+      transform: translateY(-1px) !important;
+      filter: none !important;
+    }
+
+    .project-tile:hover::before { opacity: 1 !important; }
+
+    .repo-card-inner { padding: 1.2rem 1.4rem; }
+
+    .repo-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.8rem;
+    }
+
+    .repo-branch {
+      font-size: 0.6rem;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+    }
+
+    .repo-badge-new {
+      font-size: 0.55rem;
+      padding: 0.15rem 0.5rem;
+      border: 1px solid rgba(0,255,136,0.4);
+      color: var(--green);
+      letter-spacing: 0.1em;
+      animation: pulse 2s ease infinite;
+    }
+
+    .repo-name {
+      font-size: 0.88rem !important;
+      color: var(--cyan) !important;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.6rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-shadow: none !important;
+    }
+
+    .repo-name a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .repo-name a:hover { color: #fff; }
+
+    .repo-desc {
+      font-size: 0.7rem;
+      color: rgba(0,255,240,0.45);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .repo-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+
+    .repo-date {
+      font-size: 0.6rem;
+      color: rgba(0,255,240,0.25);
+      letter-spacing: 0.06em;
+    }
+
+    .repo-link {
+      font-size: 0.65rem;
+      color: rgba(0,255,240,0.5);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      border-bottom: 1px solid rgba(0,255,240,0.2);
+      padding-bottom: 1px;
+      transition: all 0.2s;
+    }
+
+    .repo-link:hover {
+      color: var(--cyan);
+      border-color: var(--cyan);
+    }
+
+    /* ── NAV HEADER ────────────────────────────── */
+    .nav-main {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 2rem;
+      background: rgba(8,12,16,0.92);
+      border-bottom: 1px solid rgba(0,255,240,0.08);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-brand {
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      color: var(--cyan);
+    }
+
+    .nav-brand-prefix { color: var(--orange); }
+    .nav-brand-name   { color: var(--cyan); text-shadow: 0 0 12px rgba(0,255,240,0.4); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.6rem;
+    }
+
+    .nav-link {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      color: rgba(0,255,240,0.55);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover { color: var(--cyan); }
+    .nav-link.orange { color: rgba(255,136,0,0.6); }
+    .nav-link.orange:hover { color: var(--orange); }
+    .nav-link-ext::after { content: ''; }
+
+    @media (max-width: 600px) {
+      .nav-links { gap: 0.9rem; }
+      .nav-link { font-size: 0.62rem; }
+    }
+
+    /* Compensation fixed nav */
+    #hero { padding-top: 5rem; }
+
+    /* ── FOOTER ─────────────────────────────────── */
+    .footer-main {
+      border-top: 1px solid rgba(0,255,240,0.08);
+      padding: 1.4rem 2rem;
+      margin-top: 2rem;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .footer-left, .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.65rem;
+      color: rgba(0,255,240,0.35);
+      letter-spacing: 0.08em;
+    }
+
+    .footer-logo-img { opacity: 0.5; border-radius: 50%; }
+    .footer-name { color: var(--cyan); }
+    .footer-sep { opacity: 0.3; }
+
+    .footer-link {
+      color: rgba(0,255,240,0.4);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-link:hover { color: var(--cyan); }
+
+    /* ── RGPD MODAL (new design) ─────────────────── */
+    .rgpd-modal {
+      position: fixed; inset: 0; z-index: 9000;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.75);
+    }
+
+    .rgpd-modal-content {
+      background: #0d1117;
+      border: 1px solid rgba(0,255,240,0.2);
+      padding: 2rem;
+      max-width: 520px;
+      width: 90%;
+      font-size: 0.78rem;
+      color: rgba(0,255,240,0.7);
+      line-height: 1.8;
+      position: relative;
+    }
+
+    .rgpd-modal-content h2 { color: var(--cyan); margin-bottom: 1rem; font-size: 0.95rem; }
+
+    .rgpd-close {
+      position: absolute; top: 0.8rem; right: 1rem;
+      background: none; border: none;
+      color: var(--orange); font-size: 1.2rem; cursor: pointer;
+    }
+
+    /* ── SCROLL REVEAL ──────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     /* ── RESPONSIVE ────────────────────────────── */
     @media (max-width: 600px) {
       section { padding: 3rem 1.2rem; }
@@ -522,7 +774,7 @@
     </section>
 
     <!-- ══ FEATURED PROJECTS ══════════════════════ -->
-    <section id="featured">
+    <section id="featured" class="reveal">
       <div class="section-label">// projets phares</div>
       <h2 class="section-title">$ cat ~/projects/featured.json</h2>
       <div class="section-sep"></div>
@@ -620,7 +872,7 @@
     </section>
 
     <!-- ══ SKILLS ═════════════════════════════════ -->
-    <section id="skills" style="border-top: 1px solid rgba(0,255,240,0.06);">
+    <section id="skills" class="reveal" style="border-top: 1px solid rgba(0,255,240,0.06);">
       <div class="section-label">// compétences</div>
       <h2 class="section-title">$ cat ~/skills/stack.txt</h2>
       <div class="section-sep"></div>
@@ -696,7 +948,7 @@
     </section>
 
     <!-- ══ GITHUB REPOS ═══════════════════════════ -->
-    <section id="repos-section">
+    <section id="repos-section" class="reveal">
       <div class="section-label">// repositories publics</div>
       <h2 class="section-title">$ ls -la ~/repositories/public</h2>
       <div class="section-sep"></div>
@@ -734,6 +986,18 @@
   <script>if (window.startTronNumbersBG) window.startTronNumbersBG();</script>
   <script type="module" src="assets/portfolio/script.js"></script>
   <script src="assets/partials/inject-partials.js"></script>
+  <script>
+    // Scroll reveal
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          revealObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  </script>
 
 </body>
 </html>

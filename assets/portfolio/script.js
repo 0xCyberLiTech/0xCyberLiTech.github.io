@@ -223,7 +223,7 @@ function searchRepos(repos, searchTerm) {
  * @since 1.2.0
  * @author 0xCyberLiTech
  */
-function updateSearchInfo(totalResults, filteredResults, searchTerm) {
+function updateSearchInfo(_totalResults, filteredResults, searchTerm) {
     if (!DOMCache.infoElement || !DOMCache.searchInput) return;
     
     if (!searchTerm || searchTerm.trim() === '') {
@@ -238,8 +238,8 @@ function updateSearchInfo(totalResults, filteredResults, searchTerm) {
         } else {
             // Résultats trouvés : message dans la zone info
             const safeTerm = utilEscapeHTML(term);
-            DOMCache.infoElement.innerHTML = `${filteredResults} résultat${filteredResults > 1 ? 's' : ''} pour "<span style="color: var(--tron-orange);">${safeTerm}</span>"`;
-            DOMCache.infoElement.style.color = 'var(--tron-cyan)';
+            DOMCache.infoElement.innerHTML = `${filteredResults} résultat${filteredResults > 1 ? 's' : ''} pour "<span style="color: var(--orange);">${safeTerm}</span>"`;
+            DOMCache.infoElement.style.color = 'var(--cyan)';
             DOMCache.infoElement.style.textAlign = 'center';
         }
     }
@@ -263,7 +263,7 @@ function showErrorInField(inputElement, errorMessage) {
     
     // Afficher le message d'erreur dans le champ
     inputElement.value = errorMessage;
-    inputElement.style.color = 'var(--tron-orange)';
+    inputElement.style.color = 'var(--orange)';
     inputElement.readOnly = true; // Empêcher la modification pendant l'affichage
     
     // Masquer le bouton clear pendant l'affichage du message
