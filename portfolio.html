@@ -438,6 +438,90 @@
       gap: 1rem;
     }
 
+    /* ── REPO TILES ────────────────────────────── */
+    .project-tile {
+      border: 1px solid rgba(0,255,240,0.12);
+      background: rgba(0,255,240,0.02);
+      position: relative;
+      transition: all 0.25s;
+      overflow: hidden;
+    }
+
+    .project-tile::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 2px;
+      height: 100%;
+      background: var(--cyan);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .project-tile:hover {
+      border-color: rgba(0,255,240,0.35);
+      background: rgba(0,255,240,0.04);
+      box-shadow: 0 0 20px rgba(0,255,240,0.06);
+      transform: translateY(-1px);
+    }
+
+    .project-tile:hover::before { opacity: 1; }
+
+    .repo-card-inner { padding: 1.2rem 1.4rem; }
+
+    .repo-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.8rem;
+    }
+
+    .repo-branch {
+      font-size: 0.6rem;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+    }
+
+    .repo-badge-new {
+      font-size: 0.55rem;
+      padding: 0.15rem 0.5rem;
+      border: 1px solid rgba(0,255,136,0.4);
+      color: var(--green);
+      letter-spacing: 0.1em;
+      animation: pulse 2s ease infinite;
+    }
+
+    .repo-name {
+      font-size: 0.88rem;
+      color: var(--cyan);
+      letter-spacing: 0.06em;
+      margin-bottom: 0.6rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .repo-desc {
+      font-size: 0.7rem;
+      color: rgba(0,255,240,0.45);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .repo-link {
+      font-size: 0.65rem;
+      color: rgba(0,255,240,0.5);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      transition: color 0.2s;
+    }
+
+    .repo-link:hover { color: var(--cyan); }
+
     /* ── ANIMATIONS ────────────────────────────── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }

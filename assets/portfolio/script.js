@@ -164,24 +164,14 @@ function renderRepos(repos) {
  */
 function renderPromptTile({safeName, safeDesc, safeUrl, safeBranch, isNew, daysElapsed}) {
     return `
-        <div class="terminal-bar">
-            <span class="btn red"></span>
-            <span class="btn yellow"></span>
-            <span class="btn green"></span>
-            <span class="terminal-bar-title">kali@root:~$</span>
-        </div>
-        <div class="project-tile-content">
-            <div class="terminal-prompt tron-terminal">
-                <div class="tron-prompt-line1"><span class="prompt-user tron-prompt-user">◢◤ <span class="tron-username">0xCyberLiTech</span></span></div>
-                <div class="tron-prompt-line2"><span class="tron-at">@</span> <span class="tron-host">TRON-CORE</span></div>
-                <div class="tron-prompt-line3"><span class="tron-path">[~/grid/${safeName}]</span></div>
-                <span class="prompt-command tron-prompt-command">◢◤ <span class="tron-cmd">$</span> <span class="tron-cmdline">ls -la</span></span>
+        <div class="repo-card-inner">
+            <div class="repo-top">
+                <span class="repo-branch">◈ ${safeBranch}</span>
+                ${isNew ? `<span class="repo-badge-new">NEW · ${30 - daysElapsed}j</span>` : ''}
             </div>
-            <h3><a href="${safeUrl}/blob/${safeBranch}/README.md" style="color:inherit;text-decoration:none;">${safeName}</a></h3>
-            <p class="terminal-output project-description">${safeDesc}</p>
-            <div class="infos" style="display:flex;align-items:center;gap:0.7em;justify-content:space-between;">
-                ${isNew ? `<span class="badge-new tron-glow">NEW</span><span class="days-left tron-glow" style="font-size:0.98em;color:#00fff0;opacity:0.92;">${30 - daysElapsed}j restantes</span>` : ''}
-            </div>
+            <h3 class="repo-name">${safeName}</h3>
+            <p class="repo-desc">${safeDesc}</p>
+            <a class="repo-link" href="${safeUrl}" target="_blank" rel="noopener">→ Voir sur GitHub</a>
         </div>
     `;
 }
