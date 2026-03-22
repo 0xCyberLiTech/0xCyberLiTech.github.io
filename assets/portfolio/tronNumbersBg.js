@@ -28,7 +28,7 @@ window.startTronNumbersBG = function tronGrid3DPlusBG(){
 
 	// Transition douce d'apparition
 	setTimeout(() => {
-		canvas.style.opacity = '0.38';
+		canvas.style.opacity = '0.30';
 	}, 80);
 
 	let ctx, w, h, t = 0;
