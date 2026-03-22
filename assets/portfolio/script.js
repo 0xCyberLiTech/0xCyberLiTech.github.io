@@ -127,7 +127,8 @@ function renderRepos(repos) {
         
         const safeName = utilEscapeHTML(repo.name);
         const safeDesc = utilEscapeHTML(repo.description || 'Aucune description disponible.');
-        const safeUrl = utilEscapeHTML(repo.html_url);
+        const rawUrl = repo.html_url || '';
+        const safeUrl = /^https?:\/\//i.test(rawUrl) ? utilEscapeHTML(rawUrl) : '#';
         const safeBranch = utilEscapeHTML(repo.default_branch || 'main');
         
         tile.innerHTML = renderPromptTile({safeName, safeDesc, safeUrl, safeBranch, isNew, daysElapsed, updatedAt: repo.updated_at});
@@ -230,14 +231,13 @@ function updateSearchInfo(_totalResults, filteredResults, searchTerm) {
         // État initial : pas de message d'info
         DOMCache.infoElement.textContent = '';
     } else {
-        const term = utilEscapeHTML(searchTerm);
+        const safeTerm = utilEscapeHTML(searchTerm);
         if (filteredResults === 0) {
             // Aucun résultat : afficher temporairement dans le champ
-            showErrorInField(DOMCache.searchInput, `Aucun résultat pour "${searchTerm}"`); 
+            showErrorInField(DOMCache.searchInput, `Aucun résultat pour "${searchTerm}"`);
             DOMCache.infoElement.textContent = ''; // Pas de message sous le champ
         } else {
             // Résultats trouvés : message dans la zone info
-            const safeTerm = utilEscapeHTML(term);
             DOMCache.infoElement.innerHTML = `${filteredResults} résultat${filteredResults > 1 ? 's' : ''} pour "<span style="color: var(--orange);">${safeTerm}</span>"`;
             DOMCache.infoElement.style.color = 'var(--cyan)';
             DOMCache.infoElement.style.textAlign = 'center';
