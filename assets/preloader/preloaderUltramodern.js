@@ -52,7 +52,8 @@ if (progressBar) {
 			setTimeout(() => {
 				fadeOverlay.style.opacity = '1';
 				setTimeout(() => {
-					window.location.href = "portfolio.html";
+					if (fadeOverlay.parentNode) fadeOverlay.parentNode.removeChild(fadeOverlay);
+					window.dispatchEvent(new Event('preloader:done'));
 				}, 520);
 			}, 100);
 		}
