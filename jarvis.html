@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JARVIS — Documentation technique | 0xCyberLiTech</title>
+  <meta name="description" content="Documentation technique de JARVIS — Assistant IA local Iron Man : architecture LLM, TTS, DSP, SOC integration.">
+  <link rel="icon" type="image/png" href="assets/logo/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap">
+  <style>
+    :root {
+      --cyan:   #00fff0;
+      --orange: #ff8800;
+      --blue:   #00aaff;
+      --green:  #00ff88;
+      --red:    #ff4455;
+      --bg:     #080c10;
+      --bg2:    #0d1117;
+      --muted:  rgba(0,255,240,0.35);
+      --mono:   'Share Tech Mono', monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--cyan); font-family: var(--mono); overflow-x: hidden; }
+
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,240,0.012) 2px, rgba(0,255,240,0.012) 4px);
+      pointer-events: none; z-index: 9999;
+    }
+
+    /* NAV */
+    .nav-main {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.9rem 2rem;
+      background: rgba(8,12,16,0.92);
+      border-bottom: 1px solid rgba(0,255,240,0.08);
+      backdrop-filter: blur(12px);
+    }
+    .nav-brand { font-size: 1rem; letter-spacing: 0.08em; text-decoration: none; color: var(--cyan); }
+    .nav-brand-prefix { color: var(--orange); }
+    .nav-back { font-size: 0.7rem; color: rgba(0,255,240,0.5); text-decoration: none; letter-spacing: 0.1em; transition: color 0.2s; }
+    .nav-back:hover { color: var(--cyan); }
+
+    /* HERO */
+    .doc-hero {
+      padding: 8rem 2rem 4rem;
+      max-width: 900px; margin: 0 auto; text-align: center;
+    }
+    .doc-label { font-size: 0.62rem; color: var(--orange); letter-spacing: 0.4em; margin-bottom: 0.8rem; }
+    .doc-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--orange);
+      text-shadow: 0 0 30px rgba(255,136,0,0.5), 0 0 60px rgba(255,136,0,0.2);
+      letter-spacing: 0.08em; margin-bottom: 0.8rem;
+    }
+    .doc-sub { font-size: 0.85rem; color: rgba(0,255,240,0.55); letter-spacing: 0.12em; margin-bottom: 1.5rem; }
+    .doc-badges { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; }
+    .badge {
+      font-size: 0.6rem; padding: 0.25rem 0.7rem;
+      border: 1px solid; letter-spacing: 0.1em;
+    }
+    .badge.orange { border-color: rgba(255,136,0,0.4); color: var(--orange); }
+    .badge.green  { border-color: rgba(0,255,136,0.4); color: var(--green); }
+    .badge.blue   { border-color: rgba(0,170,255,0.4); color: var(--blue); }
+    .badge.cyan   { border-color: rgba(0,255,240,0.4); color: var(--cyan); }
+
+    /* SECTIONS */
+    .doc-section { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
+    .doc-section + .doc-section { border-top: 1px solid rgba(0,255,240,0.06); }
+    .sec-label { font-size: 0.6rem; color: var(--orange); letter-spacing: 0.35em; margin-bottom: 0.4rem; }
+    .sec-title { font-size: clamp(1rem, 2.5vw, 1.4rem); color: var(--cyan); text-shadow: 0 0 12px rgba(0,255,240,0.3); margin-bottom: 0.4rem; }
+    .sec-sep { width: 40px; height: 2px; background: linear-gradient(90deg, var(--orange), transparent); margin-bottom: 2rem; }
+    .sec-desc { font-size: 0.78rem; color: rgba(0,255,240,0.55); line-height: 1.9; margin-bottom: 1.8rem; }
+
+    /* ARCHITECTURE DIAGRAM */
+    .arch-diagram {
+      background: rgba(0,255,240,0.02);
+      border: 1px solid rgba(0,255,240,0.1);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      overflow-x: auto;
+    }
+
+    .arch-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      align-items: center;
+    }
+
+    .arch-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+    }
+
+    .arch-box {
+      padding: 0.6rem 1rem;
+      border: 1px solid;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-align: center;
+      min-width: 120px;
+      white-space: nowrap;
+    }
+    .arch-box.cyan   { border-color: rgba(0,255,240,0.4); color: var(--cyan); background: rgba(0,255,240,0.04); }
+    .arch-box.orange { border-color: rgba(255,136,0,0.4); color: var(--orange); background: rgba(255,136,0,0.04); }
+    .arch-box.green  { border-color: rgba(0,255,136,0.4); color: var(--green); background: rgba(0,255,136,0.04); }
+    .arch-box.blue   { border-color: rgba(0,170,255,0.4); color: var(--blue); background: rgba(0,170,255,0.04); }
+    .arch-box.red    { border-color: rgba(255,68,85,0.4); color: var(--red); background: rgba(255,68,85,0.04); }
+    .arch-box.muted  { border-color: rgba(0,255,240,0.15); color: rgba(0,255,240,0.4); background: transparent; }
+
+    .arch-arrow-v {
+      width: 1px; height: 20px;
+      background: rgba(0,255,240,0.3);
+      position: relative; margin: 0 auto;
+    }
+    .arch-arrow-v::after {
+      content: '▼'; position: absolute; bottom: -10px; left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.5rem; color: rgba(0,255,240,0.4);
+    }
+
+    .arch-arrow-h { font-size: 0.7rem; color: rgba(0,255,240,0.3); }
+
+    /* STACK GRID */
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .stack-card {
+      border: 1px solid rgba(0,255,240,0.1);
+      background: rgba(0,255,240,0.02);
+      padding: 1.2rem;
+      transition: all 0.2s;
+    }
+    .stack-card:hover { border-color: rgba(0,255,240,0.25); background: rgba(0,255,240,0.04); }
+    .stack-card.orange { border-left: 2px solid var(--orange); }
+    .stack-card.green  { border-left: 2px solid var(--green); }
+    .stack-card.blue   { border-left: 2px solid var(--blue); }
+    .stack-card.cyan   { border-left: 2px solid var(--cyan); }
+    .stack-card.red    { border-left: 2px solid var(--red); }
+
+    .stack-title { font-size: 0.72rem; color: var(--cyan); letter-spacing: 0.1em; margin-bottom: 0.8rem; }
+    .stack-card.orange .stack-title { color: var(--orange); }
+    .stack-card.green  .stack-title { color: var(--green); }
+    .stack-card.blue   .stack-title { color: var(--blue); }
+    .stack-card.red    .stack-title { color: var(--red); }
+
+    .stack-items { display: flex; flex-direction: column; gap: 0.35rem; }
+    .stack-item { font-size: 0.65rem; color: rgba(0,255,240,0.55); line-height: 1.6; }
+    .stack-item strong { color: rgba(0,255,240,0.85); }
+
+    /* ROUTES TABLE */
+    .routes-table { width: 100%; border-collapse: collapse; font-size: 0.68rem; }
+    .routes-table th {
+      text-align: left; padding: 0.5rem 0.8rem;
+      border-bottom: 1px solid rgba(0,255,240,0.15);
+      color: var(--orange); letter-spacing: 0.1em; font-weight: normal;
+    }
+    .routes-table td {
+      padding: 0.5rem 0.8rem;
+      border-bottom: 1px solid rgba(0,255,240,0.05);
+      color: rgba(0,255,240,0.6);
+      vertical-align: top;
+    }
+    .routes-table tr:hover td { color: rgba(0,255,240,0.85); background: rgba(0,255,240,0.02); }
+    .route-method { color: var(--green); }
+    .route-path   { color: var(--cyan); }
+
+    /* TABS OVERVIEW */
+    .tabs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.6rem;
+    }
+    .tab-item {
+      border: 1px solid rgba(0,255,240,0.1);
+      padding: 0.8rem 1rem;
+      font-size: 0.65rem;
+    }
+    .tab-name { color: var(--cyan); letter-spacing: 0.08em; margin-bottom: 0.3rem; }
+    .tab-desc { color: rgba(0,255,240,0.4); line-height: 1.6; }
+
+    /* SECURITY SECTION */
+    .sec-items { display: flex; flex-direction: column; gap: 0.6rem; }
+    .sec-item { display: flex; gap: 1rem; align-items: flex-start; font-size: 0.7rem; }
+    .sec-ok   { color: var(--green); flex-shrink: 0; }
+    .sec-text { color: rgba(0,255,240,0.6); line-height: 1.7; }
+    .sec-text strong { color: var(--cyan); }
+
+    /* FOOTER */
+    .doc-footer {
+      border-top: 1px solid rgba(0,255,240,0.08);
+      padding: 1.5rem 2rem;
+      max-width: 900px; margin: 2rem auto 0;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.62rem; color: rgba(0,255,240,0.3); letter-spacing: 0.08em;
+    }
+    .doc-footer a { color: rgba(0,255,240,0.4); text-decoration: none; }
+    .doc-footer a:hover { color: var(--cyan); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .doc-hero { animation: fadeUp 0.8s ease both; }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 600px) {
+      .doc-section { padding: 2rem 1.2rem; }
+      .arch-box { min-width: 80px; font-size: 0.58rem; padding: 0.4rem 0.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav-main">
+    <a class="nav-brand" href="/portfolio.html">
+      <span class="nav-brand-prefix">0x</span>CyberLiTech
+    </a>
+    <a class="nav-back" href="/portfolio.html">← Retour au portfolio</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="doc-hero">
+    <div class="doc-label">// projet phare — privé</div>
+    <h1 class="doc-title">JARVIS</h1>
+    <p class="doc-sub">ASSISTANT IA LOCAL &nbsp;·&nbsp; ARCHITECTURE IRON MAN &nbsp;·&nbsp; INTÉGRATION SOC</p>
+    <div class="doc-badges">
+      <span class="badge orange">Python 3.11 · Flask</span>
+      <span class="badge green">Ollama · phi4:14b</span>
+      <span class="badge blue">edge-tts · Whisper</span>
+      <span class="badge cyan">RTX 5080 · CUDA 12</span>
+      <span class="badge orange">~3000 lignes PY · ~17K lignes UI</span>
+    </div>
+  </div>
+
+  <!-- ARCHITECTURE -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// architecture générale</div>
+    <h2 class="sec-title">$ cat architecture.json</h2>
+    <div class="sec-sep"></div>
+    <p class="sec-desc">
+      JARVIS est un serveur Flask local exposant une interface web holographique.
+      Il orchestre plusieurs moteurs IA en local et en cloud, avec un pipeline audio complet
+      (STT → LLM → DSP → TTS) et une intégration bidirectionnelle avec le dashboard SOC.
+    </p>
+
+    <div class="arch-diagram">
+      <div class="arch-flow">
+
+        <div class="arch-row">
+          <div class="arch-box blue">🎙 Microphone</div>
+          <div class="arch-arrow-h">──</div>
+          <div class="arch-box cyan">STT — faster-whisper<br><span style="font-size:0.55rem;opacity:0.6">modèle small · FR</span></div>
+          <div class="arch-arrow-h">──▶</div>
+          <div class="arch-box orange" style="min-width:160px;">⬡ JARVIS CORE<br><span style="font-size:0.55rem;opacity:0.6">Flask · Python 3.11</span></div>
+          <div class="arch-arrow-h">◀──</div>
+          <div class="arch-box blue">⌨ Chat UI<br><span style="font-size:0.55rem;opacity:0.6">Interface web</span></div>
+        </div>
+
+        <div style="display:flex;justify-content:center;margin:0.3rem 0;">
+          <div style="width:1px;height:24px;background:rgba(255,136,0,0.4);position:relative;margin:0 auto;">
+            <span style="position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);font-size:0.5rem;color:rgba(255,136,0,0.5);">▼</span>
+          </div>
+        </div>
+
+        <div class="arch-row" style="gap:0.4rem;">
+          <div class="arch-box green" style="min-width:130px;">Ollama local<br><span style="font-size:0.55rem;opacity:0.6">phi4:14b · qwen2.5<br>mistral · gemma3</span></div>
+          <div class="arch-arrow-h" style="color:rgba(255,136,0,0.4);">◀──▶</div>
+          <div class="arch-box orange" style="min-width:100px;">LLM<br>ROUTER</div>
+          <div class="arch-arrow-h" style="color:rgba(255,136,0,0.4);">◀──▶</div>
+          <div class="arch-box blue" style="min-width:130px;">Cloud LLM<br><span style="font-size:0.55rem;opacity:0.6">Groq · OpenRouter<br>fallback auto</span></div>
+        </div>
+
+        <div style="display:flex;justify-content:center;margin:0.3rem 0;">
+          <div style="width:1px;height:24px;background:rgba(0,255,240,0.3);position:relative;margin:0 auto;">
+            <span style="position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);font-size:0.5rem;color:rgba(0,255,240,0.4);">▼</span>
+          </div>
+        </div>
+
+        <div class="arch-row" style="gap:0.4rem;">
+          <div class="arch-box cyan" style="min-width:140px;">DSP AUDIO RACK<br><span style="font-size:0.55rem;opacity:0.6">EQ 5 bandes · Compresseur<br>Haas stéréo · DeepFilterNet</span></div>
+          <div class="arch-arrow-h">──▶</div>
+          <div class="arch-box green" style="min-width:150px;">TTS ENGINE<br><span style="font-size:0.55rem;opacity:0.6">edge-tts (défaut)<br>Piper · Kokoro · SAPI5</span></div>
+          <div class="arch-arrow-h">──▶</div>
+          <div class="arch-box blue">🔊 Audio</div>
+        </div>
+
+        <div style="display:flex;justify-content:center;margin:0.3rem 0;">
+          <div style="width:1px;height:24px;background:rgba(0,255,136,0.3);position:relative;margin:0 auto;">
+            <span style="position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);font-size:0.5rem;color:rgba(0,255,136,0.4);">▼</span>
+          </div>
+        </div>
+
+        <div class="arch-row" style="gap:0.4rem;">
+          <div class="arch-box red" style="min-width:130px;">🛡 Tool Calling<br><span style="font-size:0.55rem;opacity:0.6">Blocklist LLM<br>garde-fou niv. 1 & 2</span></div>
+          <div class="arch-arrow-h">──▶</div>
+          <div class="arch-box orange" style="min-width:150px;">◈ SOC INTEGRATION<br><span style="font-size:0.55rem;opacity:0.6">ban-ip · unban-ip<br>restart-service</span></div>
+          <div class="arch-arrow-h">──▶</div>
+          <div class="arch-box cyan" style="min-width:120px;">CrowdSec<br><span style="font-size:0.55rem;opacity:0.6">Reverse Proxy VM</span></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- STACK -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// stack technique</div>
+    <h2 class="sec-title">$ cat stack.txt</h2>
+    <div class="sec-sep"></div>
+
+    <div class="stack-grid">
+
+      <div class="stack-card orange">
+        <div class="stack-title">⬡ MOTEUR LLM</div>
+        <div class="stack-items">
+          <div class="stack-item"><strong>Ollama local</strong> — phi4:14b (défaut), qwen2.5, mistral, gemma3</div>
+          <div class="stack-item"><strong>Groq Cloud</strong> — fallback API OpenAI-compatible</div>
+          <div class="stack-item"><strong>OpenRouter</strong> — accès multi-modèles cloud</div>
+          <div class="stack-item"><strong>Streaming SSE</strong> — réponses token par token</div>
+          <div class="stack-item"><strong>Paramètres persistés</strong> — temperature, top_p, num_ctx, num_predict</div>
+          <div class="stack-item"><strong>Préréglages</strong> — RAPIDE / ÉQUILIBRÉ / QUALITÉ</div>
+        </div>
+      </div>
+
+      <div class="stack-card green">
+        <div class="stack-title">🔊 PIPELINE TTS</div>
+        <div class="stack-items">
+          <div class="stack-item"><strong>edge-tts</strong> — fr-CA-AntoineNeural (défaut), streaming audio</div>
+          <div class="stack-item"><strong>Piper</strong> — synthèse vocale hors-ligne</div>
+          <div class="stack-item"><strong>Kokoro</strong> — moteur TTS alternatif</div>
+          <div class="stack-item"><strong>SAPI5 / pyttsx3</strong> — TTS natif Windows</div>
+          <div class="stack-item"><strong>TTS Lock</strong> — threading.Lock anti-doublon vocal</div>
+          <div class="stack-item"><strong>Voice Lab</strong> — comparateur A/B, présets EQ</div>
+        </div>
+      </div>
+
+      <div class="stack-card blue">
+        <div class="stack-title">🎙 STT — RECONNAISSANCE VOCALE</div>
+        <div class="stack-items">
+          <div class="stack-item"><strong>faster-whisper</strong> — modèle "small", langue FR</div>
+          <div class="stack-item"><strong>Traitement local</strong> — aucune donnée envoyée vers le cloud</div>
+          <div class="stack-item"><strong>Activation</strong> — bouton micro dans l'interface Chat</div>
+        </div>
+      </div>
+
+      <div class="stack-card cyan">
+        <div class="stack-title">🎛 DSP AUDIO RACK</div>
+        <div class="stack-items">
+          <div class="stack-item"><strong>EQ biquad 5 bandes</strong> — traitement fréquentiel précis</div>
+          <div class="stack-item"><strong>Compresseur dynamique</strong> — contrôle de la dynamique vocale</div>
+          <div class="stack-item"><strong>Haas stéréo</strong> — spatialisation du son</div>
+          <div class="stack-item"><strong>DeepFilterNet</strong> — débruitage IA temps réel</div>
+          <div class="stack-item"><strong>VU-mètres LCD</strong> — niveaux dB L/R temps réel</div>
+          <div class="stack-item"><strong>Mémoires M1–M10</strong> — sauvegarde/rappel présets</div>
+        </div>
+      </div>
+
+      <div class="stack-card red">
+        <div class="stack-title">🛡 TOOL CALLING & GARDE-FOU</div>
+        <div class="stack-items">
+          <div class="stack-item"><strong>Blocklist niveau 1</strong> — noms d'outils interdits par le LLM</div>
+          <div class="stack-item"><strong>Blocklist niveau 2</strong> — arguments interdits dans les appels</div>
+          <div class="stack-item"><strong>Journal</strong> — chaque tentative bloquée est loggée</div>
+          <div class="stack-item"><strong>Route /api/security</strong> — exposition dans le SOC dashboard</div>
+        </div>
+      </div>
+
+      <div class="stack-card orange">
+        <div class="stack-title">📊 MONITORING SYSTÈME</div>
+        <div class="stack-items">
+          <div class="stack-item"><strong>GPU RTX 5080</strong> — P-state, PCIe gen/width, VRAM, watts, throttle</div>
+          <div class="stack-item"><strong>pynvml</strong> — stats NVIDIA temps réel</div>
+          <div class="stack-item"><strong>CPU / RAM</strong> — charge système locale</div>
+          <div class="stack-item"><strong>Terminal intégré</strong> — cmd/PowerShell avec historique</div>
+          <div class="stack-item"><strong>Explorateur fichiers</strong> — analyse IA de code</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ONGLETS UI -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// interface holographique</div>
+    <h2 class="sec-title">$ ls ~/tabs/</h2>
+    <div class="sec-sep"></div>
+    <p class="sec-desc">Interface web holographique v3.2 — ~17 000 lignes HTML/CSS/JS. Thème cyberpunk Iron Man avec preloader typewriter, scan lines et effets lumineux.</p>
+
+    <div class="tabs-grid">
+      <div class="tab-item">
+        <div class="tab-name">◈ Chat IA</div>
+        <div class="tab-desc">Conversation LLM streaming, TTS auto, STT microphone, tool calling, recherche DDG</div>
+      </div>
+      <div class="tab-item">
+        <div class="tab-name">⚙ Settings</div>
+        <div class="tab-desc">Paramètres LLM (temp/top_p/num_ctx), profils prompt, provider IA, préréglages latence</div>
+      </div>
+      <div class="tab-item">
+        <div class="tab-name">🎛 DSP Audio</div>
+        <div class="tab-desc">AI Audio Rack — EQ 5 bandes, compresseur, Haas stéréo, analyseur spectral, moteur TTS</div>
+      </div>
+      <div class="tab-item">
+        <div class="tab-name">🎵 Audio Editor</div>
+        <div class="tab-desc">Éditeur audio IA — waveform L/R, transport, EQ, fade in/out, débruitage, export</div>
+      </div>
+      <div class="tab-item">
+        <div class="tab-name">🔬 Voice Lab</div>
+        <div class="tab-desc">Synthèse vocale — moteur TTS, paramètres, EQ, présets, comparateur A/B</div>
+      </div>
+      <div class="tab-item">
+        <div class="tab-name">📊 Monitor</div>
+        <div class="tab-desc">Stats temps réel CPU/RAM/GPU RTX 5080 — P-state, PCIe, throttle, bandwidth, watts</div>
+      </div>
+      <div class="tab-item">
+        <div class="tab-name">💻 Terminal</div>
+        <div class="tab-desc">Shell intégré cmd/PowerShell, historique de navigation, taille police ajustable</div>
+      </div>
+      <div class="tab-item">
+        <div class="tab-name">📁 Fichiers</div>
+        <div class="tab-desc">Explorateur lecteurs, breadcrumb, éditeur de code, bouton "◈ JARVIS" analyse IA</div>
+      </div>
+      <div class="tab-item">
+        <div class="tab-name">⏱ Tâches</div>
+        <div class="tab-desc">Tâches automatisées avec scheduling et exécution planifiée</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTEGRATION SOC -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// intégration soc dashboard</div>
+    <h2 class="sec-title">$ cat soc-integration.md</h2>
+    <div class="sec-sep"></div>
+    <p class="sec-desc">
+      JARVIS s'intègre dans le SOC Dashboard en tant que moteur d'analyse IA.
+      Il expose des routes REST qui permettent au dashboard de déclencher des analyses LLM
+      et d'exécuter des actions de sécurité via CrowdSec sur le reverse proxy.
+      JARVIS est <strong style="color:var(--cyan)">optionnel</strong> — le SOC reste 100% fonctionnel sans lui.
+    </p>
+
+    <table class="routes-table">
+      <thead>
+        <tr>
+          <th>Méthode</th>
+          <th>Route</th>
+          <th>Usage SOC</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="route-method">GET</td><td class="route-path">/api/gpu</td><td>Stats GPU → tuile RTX 5080 dans le dashboard</td></tr>
+        <tr><td class="route-method">POST</td><td class="route-path">/api/chat</td><td>Analyse LLM des données SOC (auto-engine 60s)</td></tr>
+        <tr><td class="route-method">GET</td><td class="route-path">/api/tts</td><td>Lecture vocale des alertes SOC (edge-tts)</td></tr>
+        <tr><td class="route-method">GET</td><td class="route-path">/api/security</td><td>Journal blocklist LLM → tuile GARDE-FOU</td></tr>
+        <tr><td class="route-method">POST</td><td class="route-path">/api/soc/ban-ip</td><td>Ban IP via CrowdSec sur le reverse proxy</td></tr>
+        <tr><td class="route-method">POST</td><td class="route-path">/api/soc/unban-ip</td><td>Lève un ban CrowdSec</td></tr>
+        <tr><td class="route-method">POST</td><td class="route-path">/api/soc/restart-service</td><td>Redémarre un service autorisé</td></tr>
+        <tr><td class="route-method">GET</td><td class="route-path">/api/soc/actions</td><td>Journal des actions proactives → tuile SOC</td></tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top:1.5rem;">
+      <div class="sec-label" style="margin-bottom:0.8rem;">// triggers auto-engine (déclenché chaque 60s)</div>
+      <div class="stack-grid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr));">
+        <div class="stack-card orange"><div class="stack-title">⚡ Activité anormale</div><div class="stack-item">+15 événements vs dernier check</div></div>
+        <div class="stack-card red"><div class="stack-title">⚠ Alerte CPU</div><div class="stack-item">CPU Windows &gt; 90%</div></div>
+        <div class="stack-card red"><div class="stack-title">⚠ Alerte IPs</div><div class="stack-item">IPs bannies &gt; 100</div></div>
+        <div class="stack-card red"><div class="stack-title">⚠ Erreurs serveur</div><div class="stack-item">Erreurs 5xx &gt; 5%</div></div>
+        <div class="stack-card cyan"><div class="stack-title">📋 Résumé quotidien</div><div class="stack-item">Chaque jour à 08h00</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECURITE -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// sécurité — audit 2026-03-22</div>
+    <h2 class="sec-title">$ cat audit-results.txt</h2>
+    <div class="sec-sep"></div>
+
+    <div class="sec-items">
+      <div class="sec-item">
+        <span class="sec-ok">✅</span>
+        <span class="sec-text"><strong>XSS corrigé</strong> — fonction _esc() ajoutée dans jarvis.html. Messages utilisateur sanitisés avant injection innerHTML. Appels tool calling également échappés.</span>
+      </div>
+      <div class="sec-item">
+        <span class="sec-ok">✅</span>
+        <span class="sec-text"><strong>Threading lock</strong> — _CONFIG_LOCK = threading.Lock() protège load/save config provider et lecture prompt système contre accès concurrents.</span>
+      </div>
+      <div class="sec-item">
+        <span class="sec-ok">✅</span>
+        <span class="sec-text"><strong>TTS Lock</strong> — threading.Lock anti-doublon vocal. _TTS_LOCK.acquire(blocking=False) dans speak() empêche chevauchement audio. Alertes SOC fusionnées.</span>
+      </div>
+      <div class="sec-item">
+        <span class="sec-ok">✅</span>
+        <span class="sec-text"><strong>Garde-fou LLM</strong> — blocklist deux niveaux (noms d'outils + arguments). Chaque tentative bloquée est journalisée et visible dans le SOC dashboard.</span>
+      </div>
+      <div class="sec-item">
+        <span class="sec-ok">✅</span>
+        <span class="sec-text"><strong>Traitement local</strong> — STT faster-whisper et LLM Ollama fonctionnent entièrement en local. Aucune donnée vocale ou conversationnelle envoyée vers le cloud sauf activation explicite Groq/OpenRouter.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <span>0xCyberLiTech · JARVIS · Documentation technique · 2026</span>
+    <a href="/portfolio.html">← Portfolio</a>
+  </div>
+
+  <script>
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.06 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
+
+</body>
+</html>

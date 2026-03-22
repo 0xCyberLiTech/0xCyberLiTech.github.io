@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SOC Dashboard — Documentation technique | 0xCyberLiTech</title>
+  <meta name="description" content="Documentation technique du SOC Dashboard — monitoring sécurité temps réel, CrowdSec, fail2ban, kill chain, JARVIS integration.">
+  <link rel="icon" type="image/png" href="assets/logo/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap">
+  <style>
+    :root {
+      --cyan:   #00fff0;
+      --orange: #ff8800;
+      --blue:   #00aaff;
+      --green:  #00ff88;
+      --red:    #ff4455;
+      --bg:     #080c10;
+      --bg2:    #0d1117;
+      --muted:  rgba(0,255,240,0.35);
+      --mono:   'Share Tech Mono', monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--cyan); font-family: var(--mono); overflow-x: hidden; }
+
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,240,0.012) 2px, rgba(0,255,240,0.012) 4px);
+      pointer-events: none; z-index: 9999;
+    }
+
+    /* NAV */
+    .nav-main {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.9rem 2rem;
+      background: rgba(8,12,16,0.92);
+      border-bottom: 1px solid rgba(0,255,240,0.08);
+      backdrop-filter: blur(12px);
+    }
+    .nav-brand { font-size: 1rem; letter-spacing: 0.08em; text-decoration: none; color: var(--cyan); }
+    .nav-brand-prefix { color: var(--orange); }
+    .nav-back { font-size: 0.7rem; color: rgba(0,255,240,0.5); text-decoration: none; letter-spacing: 0.1em; transition: color 0.2s; }
+    .nav-back:hover { color: var(--cyan); }
+
+    /* HERO */
+    .doc-hero {
+      padding: 8rem 2rem 4rem;
+      max-width: 960px; margin: 0 auto; text-align: center;
+    }
+    .doc-label { font-size: 0.62rem; color: var(--orange); letter-spacing: 0.4em; margin-bottom: 0.8rem; }
+    .doc-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--cyan);
+      text-shadow: 0 0 30px rgba(0,255,240,0.5), 0 0 60px rgba(0,255,240,0.2);
+      letter-spacing: 0.08em; margin-bottom: 0.8rem;
+    }
+    .doc-sub { font-size: 0.85rem; color: rgba(0,255,240,0.55); letter-spacing: 0.12em; margin-bottom: 1.5rem; }
+    .doc-badges { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; }
+    .badge { font-size: 0.6rem; padding: 0.25rem 0.7rem; border: 1px solid; letter-spacing: 0.1em; }
+    .badge.orange { border-color: rgba(255,136,0,0.4); color: var(--orange); }
+    .badge.green  { border-color: rgba(0,255,136,0.4); color: var(--green); }
+    .badge.blue   { border-color: rgba(0,170,255,0.4); color: var(--blue); }
+    .badge.cyan   { border-color: rgba(0,255,240,0.4); color: var(--cyan); }
+    .badge.red    { border-color: rgba(255,68,85,0.4); color: var(--red); }
+
+    /* SECTIONS */
+    .doc-section { max-width: 960px; margin: 0 auto; padding: 3rem 2rem; }
+    .doc-section + .doc-section { border-top: 1px solid rgba(0,255,240,0.06); }
+    .sec-label { font-size: 0.6rem; color: var(--orange); letter-spacing: 0.35em; margin-bottom: 0.4rem; }
+    .sec-title { font-size: clamp(1rem, 2.5vw, 1.4rem); color: var(--cyan); text-shadow: 0 0 12px rgba(0,255,240,0.3); margin-bottom: 0.4rem; }
+    .sec-sep { width: 40px; height: 2px; background: linear-gradient(90deg, var(--cyan), transparent); margin-bottom: 2rem; }
+    .sec-desc { font-size: 0.78rem; color: rgba(0,255,240,0.55); line-height: 1.9; margin-bottom: 1.8rem; }
+
+    /* ARCH DIAGRAM */
+    .arch-diagram {
+      background: rgba(0,255,240,0.02);
+      border: 1px solid rgba(0,255,240,0.1);
+      padding: 2rem; margin-bottom: 2rem; overflow-x: auto;
+    }
+    .arch-flow { display: flex; flex-direction: column; gap: 0; align-items: center; }
+    .arch-row { display: flex; align-items: center; justify-content: center; gap: 0.5rem; width: 100%; flex-wrap: wrap; }
+    .arch-box {
+      padding: 0.6rem 1rem; border: 1px solid;
+      font-size: 0.65rem; letter-spacing: 0.07em;
+      text-align: center; min-width: 110px; white-space: nowrap;
+    }
+    .arch-box.cyan   { border-color: rgba(0,255,240,0.4); color: var(--cyan); background: rgba(0,255,240,0.04); }
+    .arch-box.orange { border-color: rgba(255,136,0,0.4); color: var(--orange); background: rgba(255,136,0,0.04); }
+    .arch-box.green  { border-color: rgba(0,255,136,0.4); color: var(--green); background: rgba(0,255,136,0.04); }
+    .arch-box.blue   { border-color: rgba(0,170,255,0.4); color: var(--blue); background: rgba(0,170,255,0.04); }
+    .arch-box.red    { border-color: rgba(255,68,85,0.4); color: var(--red); background: rgba(255,68,85,0.04); }
+    .arch-arrow-h { font-size: 0.7rem; color: rgba(0,255,240,0.3); }
+    .arch-arrow-v-wrap { display:flex;justify-content:center;margin:0.3rem 0; }
+    .arch-arrow-v {
+      width:1px;height:22px;background:rgba(0,255,240,0.3);position:relative;
+    }
+    .arch-arrow-v::after {
+      content:'▼';position:absolute;bottom:-9px;left:50%;transform:translateX(-50%);
+      font-size:0.5rem;color:rgba(0,255,240,0.4);
+    }
+
+    /* PIPELINE */
+    .pipeline {
+      display: flex; align-items: stretch; gap: 0;
+      overflow-x: auto; padding-bottom: 0.5rem;
+    }
+    .pipe-step {
+      display: flex; flex-direction: column;
+      border: 1px solid rgba(0,255,240,0.15);
+      background: rgba(0,255,240,0.02);
+      padding: 0.8rem 1rem; min-width: 140px;
+      position: relative;
+    }
+    .pipe-step + .pipe-step { border-left: none; }
+    .pipe-step::after {
+      content: '▶';
+      position: absolute; right: -0.6rem; top: 50%; transform: translateY(-50%);
+      font-size: 0.5rem; color: rgba(0,255,240,0.3);
+      z-index: 1;
+    }
+    .pipe-step:last-child::after { display: none; }
+    .pipe-num { font-size: 0.55rem; color: var(--orange); margin-bottom: 0.3rem; }
+    .pipe-name { font-size: 0.68rem; color: var(--cyan); margin-bottom: 0.3rem; }
+    .pipe-tech { font-size: 0.58rem; color: rgba(0,255,240,0.4); line-height: 1.5; }
+
+    /* TILES GRID */
+    .tiles-section-label {
+      font-size: 0.62rem; color: var(--orange); letter-spacing: 0.2em;
+      padding: 0.5rem 0.8rem;
+      border-bottom: 1px solid rgba(255,136,0,0.15);
+      margin-bottom: 0.8rem; margin-top: 1.5rem;
+    }
+    .tiles-section-label:first-child { margin-top: 0; }
+    .tiles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 0.5rem; margin-bottom: 0.5rem;
+    }
+    .tile-item {
+      border: 1px solid rgba(0,255,240,0.1);
+      padding: 0.7rem 0.9rem; font-size: 0.65rem;
+    }
+    .tile-name { color: var(--cyan); margin-bottom: 0.2rem; }
+    .tile-desc { color: rgba(0,255,240,0.4); font-size: 0.6rem; line-height: 1.5; }
+    .tile-badge {
+      display: inline-block; font-size: 0.5rem; padding: 0.1rem 0.4rem;
+      border: 1px solid; letter-spacing: 0.08em; margin-bottom: 0.3rem;
+    }
+    .tile-badge.live  { border-color: rgba(0,255,136,0.4); color: var(--green); }
+    .tile-badge.wide  { border-color: rgba(0,170,255,0.3); color: var(--blue); }
+    .tile-badge.ai    { border-color: rgba(255,136,0,0.3); color: var(--orange); }
+
+    /* SOURCES TABLE */
+    .data-table { width: 100%; border-collapse: collapse; font-size: 0.68rem; }
+    .data-table th {
+      text-align: left; padding: 0.5rem 0.8rem;
+      border-bottom: 1px solid rgba(0,255,240,0.15);
+      color: var(--orange); letter-spacing: 0.1em; font-weight: normal;
+    }
+    .data-table td {
+      padding: 0.5rem 0.8rem;
+      border-bottom: 1px solid rgba(0,255,240,0.05);
+      color: rgba(0,255,240,0.6); vertical-align: top;
+    }
+    .data-table tr:hover td { color: rgba(0,255,240,0.85); background: rgba(0,255,240,0.02); }
+    .data-hl { color: var(--cyan); }
+
+    /* STATS ROW */
+    .stats-row {
+      display: flex; gap: 1.5rem; flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .stat-box {
+      border: 1px solid rgba(0,255,240,0.12);
+      padding: 1rem 1.5rem; text-align: center; flex: 1; min-width: 120px;
+    }
+    .stat-val { font-size: 1.8rem; color: var(--cyan); text-shadow: 0 0 15px rgba(0,255,240,0.4); }
+    .stat-lbl { font-size: 0.55rem; color: var(--muted); letter-spacing: 0.12em; margin-top: 0.3rem; }
+
+    /* FOOTER */
+    .doc-footer {
+      border-top: 1px solid rgba(0,255,240,0.08);
+      padding: 1.5rem 2rem;
+      max-width: 960px; margin: 2rem auto 0;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.62rem; color: rgba(0,255,240,0.3); letter-spacing: 0.08em;
+    }
+    .doc-footer a { color: rgba(0,255,240,0.4); text-decoration: none; }
+    .doc-footer a:hover { color: var(--cyan); }
+
+    @keyframes fadeUp { from { opacity:0;transform:translateY(16px); } to { opacity:1;transform:none; } }
+    .doc-hero { animation: fadeUp 0.8s ease both; }
+    .reveal { opacity:0;transform:translateY(20px);transition:opacity 0.5s ease,transform 0.5s ease; }
+    .reveal.visible { opacity:1;transform:none; }
+
+    @media (max-width: 600px) {
+      .doc-section { padding: 2rem 1.2rem; }
+      .pipeline { flex-direction: column; }
+      .pipe-step::after { display:none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav-main">
+    <a class="nav-brand" href="/portfolio.html">
+      <span class="nav-brand-prefix">0x</span>CyberLiTech
+    </a>
+    <a class="nav-back" href="/portfolio.html">← Retour au portfolio</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="doc-hero">
+    <div class="doc-label">// projet phare — privé</div>
+    <h1 class="doc-title">SOC Dashboard</h1>
+    <p class="doc-sub">MONITORING SÉCURITÉ TEMPS RÉEL &nbsp;·&nbsp; KILL CHAIN &nbsp;·&nbsp; IA INTÉGRÉE</p>
+    <div class="doc-badges">
+      <span class="badge cyan">28 tuiles en production</span>
+      <span class="badge green">Refresh 60s</span>
+      <span class="badge orange">CrowdSec · fail2ban</span>
+      <span class="badge blue">nginx · GeoIP2 · CVE NVD</span>
+      <span class="badge cyan">v3.40 · Python · JavaScript</span>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="doc-section reveal">
+    <div class="stats-row">
+      <div class="stat-box"><div class="stat-val">28</div><div class="stat-lbl">TUILES EN PROD</div></div>
+      <div class="stat-box"><div class="stat-val">60s</div><div class="stat-lbl">CYCLE REFRESH</div></div>
+      <div class="stat-box"><div class="stat-val">21</div><div class="stat-lbl">MOIS CVE INDEXÉS</div></div>
+      <div class="stat-box"><div class="stat-val">3×</div><div class="stat-lbl">SYNC CVE / JOUR</div></div>
+      <div class="stat-box"><div class="stat-val">4</div><div class="stat-lbl">SOURCES JSON</div></div>
+    </div>
+  </div>
+
+  <!-- ARCHITECTURE -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// pipeline de données</div>
+    <h2 class="sec-title">$ cat pipeline.json</h2>
+    <div class="sec-sep"></div>
+    <p class="sec-desc">
+      Le dashboard SOC est un fichier HTML unique (~35 000 lignes) qui consomme des fichiers JSON
+      générés côté serveur. Le pipeline collecte les données de plusieurs sources
+      (logs nginx, CrowdSec, fail2ban, système, CVE, Windows, Proxmox) et les centralise
+      dans un JSON de monitoring actualisé toutes les 60 secondes.
+    </p>
+
+    <div class="arch-diagram">
+      <div class="arch-flow">
+
+        <div class="arch-row">
+          <div class="arch-box cyan">nginx access.log<br><span style="font-size:0.55rem;opacity:0.6">requêtes · erreurs · volumes</span></div>
+          <div class="arch-box orange">CrowdSec<br><span style="font-size:0.55rem;opacity:0.6">décisions · bans actifs</span></div>
+          <div class="arch-box green">fail2ban<br><span style="font-size:0.55rem;opacity:0.6">jails · IPs bannies</span></div>
+          <div class="arch-box blue">Système<br><span style="font-size:0.55rem;opacity:0.6">CPU · RAM · disque · réseau</span></div>
+        </div>
+
+        <div class="arch-arrow-v-wrap"><div class="arch-arrow-v"></div></div>
+
+        <div class="arch-row">
+          <div class="arch-box orange" style="min-width:200px;">monitoring_gen.py<br><span style="font-size:0.55rem;opacity:0.6">agrégation · normalisation · cron 60s</span></div>
+        </div>
+
+        <div class="arch-arrow-v-wrap"><div class="arch-arrow-v"></div></div>
+
+        <div class="arch-row">
+          <div class="arch-box cyan">monitoring.json</div>
+          <div class="arch-box blue">windows-disk.json<br><span style="font-size:0.55rem;opacity:0.6">machine locale → VM</span></div>
+          <div class="arch-box green">proto-live.json<br><span style="font-size:0.55rem;opacity:0.6">protocoles 15s</span></div>
+        </div>
+
+        <div class="arch-arrow-v-wrap"><div class="arch-arrow-v"></div></div>
+
+        <div class="arch-row">
+          <div class="arch-box cyan" style="min-width:220px;">◈ SOC DASHBOARD<br><span style="font-size:0.55rem;opacity:0.6">monitoring-index.html · fetch JSON 60s<br>28 tuiles · Kill Chain · GeoIP</span></div>
+        </div>
+
+        <div class="arch-arrow-v-wrap"><div class="arch-arrow-v" style="background:rgba(255,136,0,0.4);"></div></div>
+
+        <div class="arch-row">
+          <div class="arch-box orange">⬡ JARVIS IA<br><span style="font-size:0.55rem;opacity:0.6">analyse LLM · TTS alertes<br>ban-ip · restart-service</span></div>
+          <div class="arch-arrow-h">──▶</div>
+          <div class="arch-box red">CrowdSec<br><span style="font-size:0.55rem;opacity:0.6">actions proactives</span></div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="sec-label" style="margin-bottom:1rem;">// sources complémentaires</div>
+    <div class="pipeline">
+      <div class="pipe-step">
+        <div class="pipe-num">01</div>
+        <div class="pipe-name">CVE NVD</div>
+        <div class="pipe-tech">API NVD/NIST<br>3x/jour via cron<br>21 mois indexés</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">02</div>
+        <div class="pipe-name">GeoIP2</div>
+        <div class="pipe-tech">Géolocalisation IPs<br>Cartographie monde<br>Arcs d'attaque</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">03</div>
+        <div class="pipe-name">Threat Intel</div>
+        <div class="pipe-tech">Flux menaces externes<br>threat-fetch.sh<br>Synchronisation auto</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">04</div>
+        <div class="pipe-name">Proxmox</div>
+        <div class="pipe-tech">CPU/RAM nœud<br>VMs actives<br>État stockage</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">05</div>
+        <div class="pipe-name">Windows</div>
+        <div class="pipe-tech">windows-disk-report.ps1<br>Disques · GPU · CPU<br>Sauvegardes VMs</div>
+      </div>
+      <div class="pipe-step" style="border-right:1px solid rgba(0,255,240,0.15);">
+        <div class="pipe-num">06</div>
+        <div class="pipe-name">SSL</div>
+        <div class="pipe-tech">Certificats TLS<br>Jours restants<br>Statut par domaine</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TUILES -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// inventaire des 28 tuiles</div>
+    <h2 class="sec-title">$ cat tiles-inventory.json</h2>
+    <div class="sec-sep"></div>
+
+    <div class="tiles-section-label">▶ HERO — MENACES EN COURS</div>
+    <div class="tiles-grid">
+      <div class="tile-item"><span class="tile-badge wide">WIDE</span><span class="tile-badge live">LIVE</span><div class="tile-name">CYBER KILL CHAIN</div><div class="tile-desc">Canvas animé, liste IPs actives, phases d'attaque en cours</div></div>
+      <div class="tile-item"><span class="tile-badge wide">WIDE</span><div class="tile-name">GEOIP — CARTOGRAPHIE 24H</div><div class="tile-desc">Carte monde canvas, arcs d'attaque géolocalisés</div></div>
+    </div>
+
+    <div class="tiles-section-label">▶ MENACES & PROTECTION</div>
+    <div class="tiles-grid">
+      <div class="tile-item"><div class="tile-name">NIVEAU DE MENACE GLOBAL</div><div class="tile-desc">Threat score coloré selon sévérité</div></div>
+      <div class="tile-item"><div class="tile-name">SERVICES</div><div class="tile-desc">Services UP/DOWN sur le reverse proxy</div></div>
+      <div class="tile-item"><div class="tile-name">THREAT INTEL SYNC</div><div class="tile-desc">Flux menaces externes synchronisés</div></div>
+      <div class="tile-item"><div class="tile-name">FAIL2BAN — JAILS</div><div class="tile-desc">Jails actives, IPs bannies · modal détail</div></div>
+      <div class="tile-item"><div class="tile-name">CROWDSEC</div><div class="tile-desc">Analyse comportementale, décisions actives</div></div>
+      <div class="tile-item"><div class="tile-name">CVE SYNC</div><div class="tile-desc">Dernière MAJ NVD, 21 mois indexés</div></div>
+    </div>
+
+    <div class="tiles-section-label">▶ TRAFIC & ACTIVITÉ</div>
+    <div class="tiles-grid">
+      <div class="tile-item"><span class="tile-badge wide">WIDE</span><div class="tile-name">ACTIVITÉ TEMPS RÉEL</div><div class="tile-desc">Graphique requêtes/heure en barres</div></div>
+      <div class="tile-item"><div class="tile-name">ACTIVITÉ & ATTAQUES 24H</div><div class="tile-desc">Heatmap canvas 24h</div></div>
+      <div class="tile-item"><div class="tile-name">PROTOCOLES ACTIFS</div><div class="tile-desc">Donut + légende protocoles réseau</div></div>
+      <div class="tile-item"><div class="tile-name">TOP PAGES 24H</div><div class="tile-desc">Tableau des pages les plus visitées</div></div>
+      <div class="tile-item"><div class="tile-name">TRAFIC 24H</div><div class="tile-desc">Stats globales 2xx · 4xx · 5xx · volume</div></div>
+      <div class="tile-item"><span class="tile-badge live">LIVE</span><div class="tile-name">FLUX LIVE</div><div class="tile-desc">Barres protocoles fenêtre 5 minutes</div></div>
+      <div class="tile-item"><div class="tile-name">BANDE PASSANTE nginx</div><div class="tile-desc">Sparklines RX/TX sur 24h</div></div>
+      <div class="tile-item"><div class="tile-name">SYSTÈME — SERVEUR</div><div class="tile-desc">CPU ring, RAM, disque /var/www</div></div>
+      <div class="tile-item"><div class="tile-name">RÉSEAU — SERVEUR</div><div class="tile-desc">Interfaces réseau RX/TX</div></div>
+    </div>
+
+    <div class="tiles-section-label">▶ INFRASTRUCTURE</div>
+    <div class="tiles-grid">
+      <div class="tile-item"><div class="tile-name">PROXMOX — NŒUD</div><div class="tile-desc">CPU/RAM/stockage hyperviseur</div></div>
+      <div class="tile-item"><div class="tile-name">PROXMOX — VMs</div><div class="tile-desc">Machines virtuelles actives/total</div></div>
+      <div class="tile-item"><div class="tile-name">WINDOWS — RESSOURCES</div><div class="tile-desc">CPU/RAM/disques machine locale · modal</div></div>
+      <div class="tile-item"><div class="tile-name">WINDOWS — SAUVEGARDES</div><div class="tile-desc">Quota D:, dernières backups par VM · modal</div></div>
+      <div class="tile-item"><span class="tile-badge ai">IA</span><div class="tile-name">GPU RTX 5080</div><div class="tile-desc">Stats GPU injectées dynamiquement par JARVIS</div></div>
+      <div class="tile-item"><div class="tile-name">CRONS — INFRASTRUCTURE</div><div class="tile-desc">Tâches planifiées Windows</div></div>
+      <div class="tile-item"><span class="tile-badge ai">IA</span><div class="tile-name">JARVIS — INTELLIGENCE</div><div class="tile-desc">Statut ONLINE/OFFLINE, modèle LLM, compteurs session</div></div>
+      <div class="tile-item"><span class="tile-badge ai">IA</span><div class="tile-name">BLOCKLIST LLM GARDE-FOU</div><div class="tile-desc">Journal tentatives tool calling bloquées</div></div>
+      <div class="tile-item"><span class="tile-badge ai">IA</span><div class="tile-name">OPÉRATIONS PROACTIVES</div><div class="tile-desc">Journal actions JARVIS : ban-ip, restart-service</div></div>
+      <div class="tile-item"><div class="tile-name">SSL</div><div class="tile-desc">Certificats TLS, jours restants par domaine</div></div>
+      <div class="tile-item"><div class="tile-name">CONNECTIVITÉ SSH</div><div class="tile-desc">Statut UP/DOWN + uptime des 4 hôtes</div></div>
+    </div>
+  </div>
+
+  <!-- SOURCES DONNÉES -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// sources de données</div>
+    <h2 class="sec-title">$ cat data-sources.json</h2>
+    <div class="sec-sep"></div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Fichier JSON</th>
+          <th>Générateur</th>
+          <th>Fréquence</th>
+          <th>Contenu principal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="data-hl">monitoring.json</td>
+          <td>monitoring_gen.py</td>
+          <td>60s (cron)</td>
+          <td>nginx logs, CrowdSec, fail2ban, système, réseau, Proxmox, SSL, CVE, GeoIP</td>
+        </tr>
+        <tr>
+          <td class="data-hl">windows-disk.json</td>
+          <td>windows-disk-report.ps1</td>
+          <td>Chaque backup</td>
+          <td>Disques Windows, GPU RTX, CPU, RAM, liste sauvegardes VMs</td>
+        </tr>
+        <tr>
+          <td class="data-hl">proto-live.json</td>
+          <td>proto-live.py</td>
+          <td>15s</td>
+          <td>Répartition protocoles réseau en temps réel</td>
+        </tr>
+        <tr>
+          <td class="data-hl">world.json</td>
+          <td>Statique</td>
+          <td>—</td>
+          <td>GeoJSON frontières mondiales pour cartographie d'attaques</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SECURITE -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// sécurité — audit 2026-03-22</div>
+    <h2 class="sec-title">$ cat audit-results.txt</h2>
+    <div class="sec-sep"></div>
+
+    <div style="display:flex;flex-direction:column;gap:0.6rem;">
+      <div style="display:flex;gap:1rem;font-size:0.7rem;">
+        <span style="color:var(--green);flex-shrink:0;">✅</span>
+        <span style="color:rgba(0,255,240,0.6);line-height:1.7;"><strong style="color:var(--cyan)">Anti-freeze</strong> — If-Modified-Since (304 si fichier inchangé = 0 parsing DOM) + requestIdleCallback (render pendant créneau idle navigateur). Polling proto-live.json également idle-schedulé.</span>
+      </div>
+      <div style="display:flex;gap:1rem;font-size:0.7rem;">
+        <span style="color:var(--green);flex-shrink:0;">✅</span>
+        <span style="color:rgba(0,255,240,0.6);line-height:1.7;"><strong style="color:var(--cyan)">Accès LAN uniquement</strong> — Le dashboard SOC est exposé exclusivement sur le réseau local. Aucune exposition internet directe. Accessible via le reverse proxy authentifié.</span>
+      </div>
+      <div style="display:flex;gap:1rem;font-size:0.7rem;">
+        <span style="color:var(--green);flex-shrink:0;">✅</span>
+        <span style="color:rgba(0,255,240,0.6);line-height:1.7;"><strong style="color:var(--cyan)">Intégration JARVIS optionnelle</strong> — Le SOC reste 100% fonctionnel sans JARVIS. Les actions proactives (ban-ip, restart-service) nécessitent une confirmation LLM avant exécution.</span>
+      </div>
+      <div style="display:flex;gap:1rem;font-size:0.7rem;">
+        <span style="color:var(--green);flex-shrink:0;">✅</span>
+        <span style="color:rgba(0,255,240,0.6);line-height:1.7;"><strong style="color:var(--cyan)">Serveur durci</strong> — ModSecurity WAF activé, CrowdSec analyse comportementale, fail2ban jails SSH/HTTP, PasswordAuthentication désactivé, headers sécurité Apache/nginx.</span>
+      </div>
+      <div style="display:flex;gap:1rem;font-size:0.7rem;">
+        <span style="color:var(--green);flex-shrink:0;">✅</span>
+        <span style="color:rgba(0,255,240,0.6);line-height:1.7;"><strong style="color:var(--cyan)">Rapports automatiques</strong> — soc-daily-report.py génère un rapport quotidien. Alertes email configurables. Snapshots UFW horodatés pour historique de la posture sécurité.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <span>0xCyberLiTech · SOC Dashboard · Documentation technique · 2026</span>
+    <a href="/portfolio.html">← Portfolio</a>
+  </div>
+
+  <script>
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.06 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
+
+</body>
+</html>

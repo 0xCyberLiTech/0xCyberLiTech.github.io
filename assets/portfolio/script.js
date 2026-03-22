@@ -130,7 +130,7 @@ function renderRepos(repos) {
         const safeUrl = utilEscapeHTML(repo.html_url);
         const safeBranch = utilEscapeHTML(repo.default_branch || 'main');
         
-        tile.innerHTML = renderPromptTile({safeName, safeDesc, safeUrl, safeBranch, isNew, daysElapsed});
+        tile.innerHTML = renderPromptTile({safeName, safeDesc, safeUrl, safeBranch, isNew, daysElapsed, updatedAt: repo.updated_at});
         DOMCache.projectsList.appendChild(tile);
     });
 }
@@ -162,16 +162,20 @@ function renderRepos(repos) {
  * @since 1.0.0
  * @author 0xCyberLiTech
  */
-function renderPromptTile({safeName, safeDesc, safeUrl, safeBranch, isNew, daysElapsed}) {
+function renderPromptTile({safeName, safeDesc, safeUrl, safeBranch, isNew, daysElapsed, updatedAt}) {
+    const dateStr = updatedAt ? new Date(updatedAt).toLocaleDateString('fr-FR', {day:'2-digit', month:'2-digit', year:'numeric'}) : '';
     return `
         <div class="repo-card-inner">
             <div class="repo-top">
                 <span class="repo-branch">◈ ${safeBranch}</span>
                 ${isNew ? `<span class="repo-badge-new">NEW · ${30 - daysElapsed}j</span>` : ''}
             </div>
-            <h3 class="repo-name">${safeName}</h3>
+            <h3 class="repo-name"><a href="${safeUrl}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">${safeName}</a></h3>
             <p class="repo-desc">${safeDesc}</p>
-            <a class="repo-link" href="${safeUrl}" target="_blank" rel="noopener">→ Voir sur GitHub</a>
+            <div class="repo-footer">
+                ${dateStr ? `<span class="repo-date">↺ ${dateStr}</span>` : ''}
+                <a class="repo-link" href="${safeUrl}" target="_blank" rel="noopener">→ GitHub</a>
+            </div>
         </div>
     `;
 }
