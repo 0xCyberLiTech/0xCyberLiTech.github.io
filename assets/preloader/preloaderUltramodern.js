@@ -21,11 +21,11 @@ const statusText = PreloaderCache.statusText;
 if (progressBar) {
 	let progress = 0;
 	const steps = [
-		{ pct: 15, txt: "Chargement des modules..." },
-		{ pct: 35, txt: "Connexion à GitHub..." },
-		{ pct: 60, txt: "Récupération des dépôts..." },
-		{ pct: 85, txt: "Préparation de l'interface..." },
-		{ pct: 100, txt: "Portfolio prêt !" }
+		{ pct: 15, txt: "INITIALISATION SYSTÈME..." },
+		{ pct: 35, txt: "CHARGEMENT DES MODULES IA..." },
+		{ pct: 55, txt: "CONNEXION GITHUB..." },
+		{ pct: 80, txt: "RÉCUPÉRATION DES DÉPÔTS..." },
+		{ pct: 100, txt: "ACCÈS AUTORISÉ ✓" }
 	];
 	let step = 0;
 	function animateProgress() {
