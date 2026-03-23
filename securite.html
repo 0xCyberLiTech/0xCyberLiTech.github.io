@@ -667,7 +667,7 @@ AllowAgentForwarding no
     });
 
     // SCROLL NAV
-    (function(){
+    document.addEventListener('DOMContentLoaded', function(){
       const sections = Array.from(document.querySelectorAll('.doc-section'));
       const btnUp   = document.getElementById('scroll-up');
       const btnDown = document.getElementById('scroll-down');
@@ -685,7 +685,7 @@ AllowAgentForwarding no
       btnDown.addEventListener('click', () => { const i=currentIdx(); if(i<sections.length-1) window.scrollTo({top: sections[i+1].offsetTop - 20, behavior:'smooth'}); });
       window.addEventListener('scroll', updateBtns, {passive:true});
       updateBtns();
-    })();
+    });
   </script>
 
   <div class="scroll-nav">
