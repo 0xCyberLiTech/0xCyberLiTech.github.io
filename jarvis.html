@@ -216,6 +216,23 @@
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
     .reveal.visible { opacity: 1; transform: none; }
 
+    /* SCROLL NAV */
+    .scroll-nav { position:fixed; right:1.4rem; bottom:2rem; display:flex; flex-direction:column; gap:0.5rem; z-index:200; }
+    .scroll-nav-btn {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: rgba(0,10,20,0.85);
+      border: 1px solid rgba(0,255,240,0.25);
+      color: rgba(0,255,240,0.6);
+      font-size: 1rem; line-height: 1;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 0 12px rgba(0,255,240,0.08);
+      transition: background 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s, opacity 0.2s;
+      opacity: 0.5;
+    }
+    .scroll-nav-btn:hover { background: rgba(0,255,240,0.08); border-color: rgba(0,255,240,0.6); color: var(--cyan); box-shadow: 0 0 18px rgba(0,255,240,0.2); opacity: 1; }
+    .scroll-nav-btn:disabled { opacity: 0.12; cursor: default; pointer-events: none; }
+
     /* ── ANIMATIONS DIAGRAMME ────────────────────────── */
     @keyframes glowOrange {
       0%, 100% { box-shadow: 0 0 6px rgba(255,136,0,0.25); }
@@ -758,7 +775,33 @@ POST /api/soc/restart-service <span class="cm">→ redémarrer un service</span>
         });
       });
     });
+
+    // SCROLL NAV
+    (function(){
+      const sections = Array.from(document.querySelectorAll('.doc-section'));
+      const btnUp   = document.getElementById('scroll-up');
+      const btnDown = document.getElementById('scroll-down');
+      function currentIdx() {
+        let best = 0, bestD = Infinity;
+        sections.forEach((s,i) => { const d = Math.abs(s.getBoundingClientRect().top); if(d < bestD){ bestD=d; best=i; } });
+        return best;
+      }
+      function updateBtns() {
+        const i = currentIdx();
+        btnUp.disabled   = i === 0;
+        btnDown.disabled = i === sections.length - 1;
+      }
+      btnUp.addEventListener('click',   () => { const i=currentIdx(); if(i>0) sections[i-1].scrollIntoView({behavior:'smooth'}); });
+      btnDown.addEventListener('click', () => { const i=currentIdx(); if(i<sections.length-1) sections[i+1].scrollIntoView({behavior:'smooth'}); });
+      window.addEventListener('scroll', updateBtns, {passive:true});
+      updateBtns();
+    })();
   </script>
+
+  <div class="scroll-nav">
+    <button class="scroll-nav-btn" id="scroll-up"   title="Section précédente">&#8963;</button>
+    <button class="scroll-nav-btn" id="scroll-down" title="Section suivante">&#8964;</button>
+  </div>
 
 </body>
 </html>
