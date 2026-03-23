@@ -174,7 +174,7 @@
     }
     .stat-box {
       border: 1px solid rgba(0,255,240,0.12);
-      padding: 1rem 1.5rem; text-align: center; flex: 1; min-width: 120px;
+      padding: 1rem 1.5rem; text-align: center; flex: 1; min-width: 110px;
     }
     .stat-val { font-size: 1.8rem; color: var(--cyan); text-shadow: 0 0 15px rgba(0,255,240,0.4); }
     .stat-lbl { font-size: 0.55rem; color: var(--muted); letter-spacing: 0.12em; margin-top: 0.3rem; }
@@ -189,6 +189,99 @@
     }
     .doc-footer a { color: rgba(0,255,240,0.4); text-decoration: none; }
     .doc-footer a:hover { color: var(--cyan); }
+
+    /* TIMELINE */
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .timeline-item { display: flex; gap: 1.5rem; padding: 0.8rem 0; border-bottom: 1px solid rgba(0,255,240,0.06); }
+    .timeline-num { font-size: 1.2rem; color: var(--orange); opacity: 0.5; flex-shrink: 0; width: 2rem; }
+    .timeline-body {}
+    .timeline-title { font-size: 0.75rem; color: var(--cyan); margin-bottom: 0.25rem; }
+    .timeline-desc { font-size: 0.65rem; color: rgba(0,255,240,0.45); line-height: 1.7; }
+
+    /* CODE BLOCK */
+    .code-block {
+      background: rgba(0,255,240,0.02);
+      border: 1px solid rgba(0,255,240,0.1);
+      border-left: 3px solid rgba(255,136,0,0.5);
+      padding: 1.2rem 1.5rem;
+      margin-bottom: 1.5rem;
+      overflow-x: auto;
+      position: relative;
+    }
+    .code-block pre, .code-pre {
+      font-family: var(--mono); font-size: 0.65rem;
+      color: rgba(0,255,240,0.75); line-height: 1.7;
+      white-space: pre; margin: 0;
+    }
+    .code-block .cm, .code-pre .cm  { color: rgba(0,255,240,0.35); }
+    .code-block .kw  { color: var(--orange); }
+    .code-block .st  { color: var(--green); }
+    .code-block .hl  { color: var(--cyan); }
+    .code-block-title {
+      font-size: 0.6rem; color: var(--orange); letter-spacing: 0.2em;
+      margin-bottom: 0.8rem;
+    }
+
+    /* COPY BUTTON */
+    .copy-btn {
+      position: absolute; top: 0.6rem; right: 0.6rem;
+      background: rgba(0,255,240,0.05);
+      border: 1px solid rgba(0,255,240,0.2);
+      color: rgba(0,255,240,0.45);
+      font-family: var(--mono); font-size: 0.52rem; letter-spacing: 0.1em;
+      padding: 0.2rem 0.55rem; cursor: pointer; transition: all 0.2s;
+    }
+    .copy-btn:hover { background: rgba(0,255,240,0.1); color: var(--cyan); border-color: var(--cyan); }
+    .copy-btn.copied { color: var(--green); border-color: var(--green); background: rgba(0,255,0,0.05); }
+
+    /* KILL CHAIN STAGES */
+    .kc-stages {
+      display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.5rem;
+    }
+    .kc-stage {
+      flex: 1 1 150px;
+      border: 1px solid rgba(0,255,240,0.12);
+      padding: 0.9rem 1rem;
+      position: relative;
+    }
+    .kc-stage-num { font-size: 0.5rem; color: var(--orange); letter-spacing: 0.15em; margin-bottom: 0.3rem; }
+    .kc-stage-name { font-size: 0.72rem; color: var(--cyan); margin-bottom: 0.4rem; }
+    .kc-stage-signals { font-size: 0.58rem; color: rgba(0,255,240,0.4); line-height: 1.6; }
+    .kc-stage-score { font-size: 0.6rem; color: var(--orange); margin-top: 0.4rem; }
+    .kc-stage-arrow {
+      position: absolute; right: -0.9rem; top: 50%; transform: translateY(-50%);
+      font-size: 0.7rem; color: rgba(0,255,240,0.2); z-index: 1;
+    }
+
+    /* THRESHOLD LEVELS */
+    .level-nominal { color: var(--green); }
+    .level-modere  { color: var(--orange); }
+    .level-eleve   { color: #ffaa00; }
+    .level-critique { color: var(--red); }
+
+    /* SUBSECTION */
+    .sub-title {
+      font-size: 0.78rem; color: var(--cyan); letter-spacing: 0.12em;
+      margin: 2rem 0 0.8rem; border-left: 2px solid rgba(0,255,240,0.2);
+      padding-left: 0.8rem;
+    }
+
+    /* CHECKLIST */
+    .checklist { display: flex; flex-direction: column; gap: 0.6rem; }
+    .checklist-item { display: flex; gap: 1rem; font-size: 0.7rem; }
+    .checklist-icon { color: var(--green); flex-shrink: 0; }
+    .checklist-text { color: rgba(0,255,240,0.6); line-height: 1.7; }
+    .checklist-text strong { color: var(--cyan); }
+
+    /* KEYBOARD SHORTCUTS */
+    .kbd {
+      display: inline-block;
+      background: rgba(0,255,240,0.07);
+      border: 1px solid rgba(0,255,240,0.2);
+      padding: 0.1rem 0.4rem;
+      font-size: 0.6rem;
+      color: var(--cyan);
+    }
 
     @keyframes fadeUp { from { opacity:0;transform:translateY(16px); } to { opacity:1;transform:none; } }
     .doc-hero { animation: fadeUp 0.8s ease both; }
@@ -207,6 +300,13 @@
       .data-table { font-size: 0.58rem; }
       .data-table th, .data-table td { padding: 0.35rem 0.5rem; }
       .doc-footer { flex-direction: column; gap: 0.4rem; }
+      .kc-stages { flex-direction: column; }
+      .kc-stage-arrow { display: none; }
+      .stats-row { gap: 0.7rem; }
+      .stat-box { min-width: 90px; padding: 0.7rem 0.8rem; }
+      .stat-val { font-size: 1.4rem; }
+      .timeline-item { gap: 0.8rem; }
+      .timeline-num { width: 1.5rem; font-size: 1rem; }
     }
 
     @media (max-width: 480px) {
@@ -228,7 +328,7 @@
 
   <!-- HERO -->
   <div class="doc-hero">
-    <div class="doc-label">// projet phare — privé</div>
+    <div class="doc-label">// projet phare — homelab</div>
     <h1 class="doc-title">SOC Dashboard</h1>
     <p class="doc-sub">MONITORING SÉCURITÉ TEMPS RÉEL &nbsp;·&nbsp; KILL CHAIN &nbsp;·&nbsp; IA INTÉGRÉE</p>
     <div class="doc-badges">
@@ -237,6 +337,19 @@
       <span class="badge orange">CrowdSec · fail2ban</span>
       <span class="badge blue">nginx · GeoIP2 · CVE NVD</span>
       <span class="badge cyan">v3.40 · Python · JavaScript</span>
+      <span class="badge red">LAN uniquement — solution locale</span>
+    </div>
+  </div>
+
+  <!-- PÉRIMÈTRE -->
+  <div class="doc-section reveal">
+    <div style="border-left: 3px solid rgba(255,136,0,0.5); padding: 0.8rem 1.2rem; background: rgba(255,136,0,0.03); font-size: 0.72rem; color: rgba(0,255,240,0.6); line-height: 1.8;">
+      <span style="color:var(--orange); letter-spacing:0.1em;">◉ PÉRIMÈTRE —</span>
+      Solution homelab déployée sur réseau local (LAN). Le dashboard SOC, le reverse proxy et l'assistant IA
+      fonctionnent exclusivement dans un environnement privé et maîtrisé.
+      Cette documentation présente la <strong style="color:var(--cyan)">méthodologie</strong> et les
+      <strong style="color:var(--cyan)">briques techniques</strong> mises en œuvre — sans exposer de données
+      de configuration ni de topologie réseau réelle.
     </div>
   </div>
 
@@ -247,7 +360,81 @@
       <div class="stat-box"><div class="stat-val">60s</div><div class="stat-lbl">CYCLE REFRESH</div></div>
       <div class="stat-box"><div class="stat-val">21</div><div class="stat-lbl">MOIS CVE INDEXÉS</div></div>
       <div class="stat-box"><div class="stat-val">3×</div><div class="stat-lbl">SYNC CVE / JOUR</div></div>
+      <div class="stat-box"><div class="stat-val">8</div><div class="stat-lbl">CRONS ACTIFS</div></div>
+      <div class="stat-box"><div class="stat-val">182</div><div class="stat-lbl">RÈGLES APPSEC WAF</div></div>
       <div class="stat-box"><div class="stat-val">4</div><div class="stat-lbl">SOURCES JSON</div></div>
+    </div>
+  </div>
+
+  <!-- TIMELINE CONSTRUCTION -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// chronologie de construction</div>
+    <h2 class="sec-title">$ git log --oneline --reverse</h2>
+    <div class="sec-sep"></div>
+    <p class="sec-desc">
+      Le SOC Dashboard est le résultat d'une construction itérative sur plusieurs mois.
+      Chaque étape apporte une couche supplémentaire de visibilité, de détection ou d'automatisation.
+    </p>
+
+    <div class="arch-diagram">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-num">1</div>
+          <div class="timeline-body">
+            <div class="timeline-title">REVERSE PROXY nginx + SSL</div>
+            <div class="timeline-desc">Mise en place du reverse proxy nginx avec terminaison TLS (certbot Let's Encrypt). Vhosts séparés par domaine. Headers de sécurité : X-Frame-Options, X-Content-Type-Options, HSTS, Referrer-Policy. Configuration access_log JSON pour parsing structuré.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-num">2</div>
+          <div class="timeline-body">
+            <div class="timeline-title">CROWDSEC WAF + BOUNCER NFTABLES</div>
+            <div class="timeline-desc">Installation CrowdSec avec bouncer nftables pour blocage kernel-space. Scénarios communautaires activés. AppSec collection nginx (182 règles WAF niveau applicatif). Exposition API locale pour requêtes programmatiques depuis monitoring_gen.py.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-num">3</div>
+          <div class="timeline-body">
+            <div class="timeline-title">monitoring_gen.py — COLLECTE LOGS nginx</div>
+            <div class="timeline-desc">Script Python de collecte et agrégation. Parse les access.log + access.log.1 pour couverture cross-midnight. Interroge CrowdSec API, fail2ban socket, stats système. Génère monitoring.json toutes les 60 secondes via cron.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-num">4</div>
+          <div class="timeline-body">
+            <div class="timeline-title">DASHBOARD HTML v1 — PREMIÈRES TUILES SYSTÈME</div>
+            <div class="timeline-desc">Premier dashboard HTML consommant monitoring.json. Tuiles CPU, RAM, disque, réseau. Fetch polling toutes les 60s. Architecture fichier unique sans dépendance externe — déployable par simple scp.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-num">5</div>
+          <div class="timeline-body">
+            <div class="timeline-title">CYBER KILL CHAIN + GEOIP CARTOGRAPHIE CANVAS</div>
+            <div class="timeline-desc">Classification des menaces en 5 stages (Recon, Scan, Exploit, Brute, Delivery) avec scoring normalisé 0-100. Cartographie monde canvas avec arcs d'attaque géolocalisés via MaxMind GeoIP2. Heatmap 24h canvas.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-num">6</div>
+          <div class="timeline-body">
+            <div class="timeline-title">CVE NVD — 21 MOIS D'HISTORIQUE INDEXÉS</div>
+            <div class="timeline-desc">Intégration de l'API NVD/NIST. Synchronisation 3 fois par jour via cron-cve-fetch.sh. Index local ~21 mois de CVE. Moteur de corrélation entre CVE récentes et signatures CrowdSec détectées en production.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-num">7</div>
+          <div class="timeline-body">
+            <div class="timeline-title">INTÉGRATION JARVIS IA — AUTO-ENGINE, TTS, ACTIONS PROACTIVES</div>
+            <div class="timeline-desc">Connexion au moteur IA JARVIS (Flask localhost). Auto-engine surveille les deltas de trafic et déclenche des analyses LLM. Alertes vocales TTS si niveau ÉLEVÉ ou CRITIQUE. Routes SOC : ban-ip, unban-ip, restart-service via CrowdSec cscli.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-num">8</div>
+          <div class="timeline-body">
+            <div class="timeline-title">RAPPORT SOC QUOTIDIEN + ALERTES EMAIL + SNAPSHOTS UFW</div>
+            <div class="timeline-desc">soc-daily-report.py génère un rapport complet chaque matin à 08h00 UTC : trafic 24h, CrowdSec, Kill Chain, top attaquants, état services, SSL, système. Snapshots UFW horodatés pour historique posture sécurité. Déclenchement manuel depuis le dashboard via raccourci [E].</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -296,7 +483,7 @@
         <div class="arch-arrow-v-wrap"><div class="arch-arrow-v" style="background:rgba(255,136,0,0.4);"></div></div>
 
         <div class="arch-row">
-          <div class="arch-box orange">⬡ JARVIS IA<br><span style="font-size:0.55rem;opacity:0.6">analyse LLM · TTS alertes<br>ban-ip · restart-service</span></div>
+          <div class="arch-box orange">JARVIS IA<br><span style="font-size:0.55rem;opacity:0.6">analyse LLM · TTS alertes<br>ban-ip · restart-service</span></div>
           <div class="arch-arrow-h">──▶</div>
           <div class="arch-box red">CrowdSec<br><span style="font-size:0.55rem;opacity:0.6">actions proactives</span></div>
         </div>
@@ -339,6 +526,310 @@
     </div>
   </div>
 
+  <!-- CYBER KILL CHAIN -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// classification des menaces</div>
+    <h2 class="sec-title">$ cat kill-chain.json</h2>
+    <div class="sec-sep"></div>
+    <p class="sec-desc">
+      Chaque requête entrante est analysée et classifiée selon une adaptation de la Cyber Kill Chain de Lockheed Martin.
+      Le score global est normalisé de 0 à 100 et détermine le niveau de menace affiché dans le dashboard.
+      La classification est effectuée par monitoring_gen.py à chaque cycle et intégrée dans monitoring.json.
+    </p>
+
+    <div class="kc-stages">
+      <div class="kc-stage" style="border-top:2px solid rgba(0,170,255,0.4);">
+        <div class="kc-stage-arrow">▶</div>
+        <div class="kc-stage-num">STAGE 1</div>
+        <div class="kc-stage-name" style="color:var(--blue);">RECON</div>
+        <div class="kc-stage-signals">robots.txt<br>.env probe<br>/.git access<br>sitemap.xml<br>UA crawler</div>
+        <div class="kc-stage-score">+5 pts / signal</div>
+      </div>
+      <div class="kc-stage" style="border-top:2px solid rgba(0,255,136,0.4);">
+        <div class="kc-stage-arrow">▶</div>
+        <div class="kc-stage-num">STAGE 2</div>
+        <div class="kc-stage-name" style="color:var(--green);">SCAN</div>
+        <div class="kc-stage-signals">/wp-admin<br>/cgi-bin<br>/.php inexistant<br>masscan UA<br>path enum</div>
+        <div class="kc-stage-score">+10 pts / signal</div>
+      </div>
+      <div class="kc-stage" style="border-top:2px solid rgba(255,136,0,0.6);">
+        <div class="kc-stage-arrow">▶</div>
+        <div class="kc-stage-num">STAGE 3</div>
+        <div class="kc-stage-name" style="color:var(--orange);">EXPLOIT</div>
+        <div class="kc-stage-signals">CVE paths<br>path traversal<br>RCE probes<br>.env upload<br>xmlrpc abuse</div>
+        <div class="kc-stage-score">+20 pts / signal</div>
+      </div>
+      <div class="kc-stage" style="border-top:2px solid rgba(255,170,0,0.6);">
+        <div class="kc-stage-arrow">▶</div>
+        <div class="kc-stage-num">STAGE 4</div>
+        <div class="kc-stage-name" style="color:#ffaa00;">BRUTE</div>
+        <div class="kc-stage-signals">401 répétés<br>même IP<br>Auth flooding<br>Login probing<br>>= 5 / cycle</div>
+        <div class="kc-stage-score">+15 pts / signal</div>
+      </div>
+      <div class="kc-stage" style="border-top:2px solid rgba(255,68,85,0.5);">
+        <div class="kc-stage-num">STAGE 5</div>
+        <div class="kc-stage-name" style="color:var(--red);">DELIVERY</div>
+        <div class="kc-stage-signals">POST suspects<br>SQLi patterns<br>XSS payloads<br>LFI/RFI<br>shell upload</div>
+        <div class="kc-stage-score">+25 pts / signal</div>
+      </div>
+    </div>
+
+    <div class="sec-label" style="margin-bottom:1rem;">// seuils de score normalisé (0-100)</div>
+    <div class="arch-diagram" style="padding:1.2rem 2rem;">
+      <div class="arch-flow">
+        <div class="arch-row" style="gap:1rem;justify-content:flex-start;flex-wrap:wrap;">
+          <div class="arch-box green" style="min-width:160px;">SCORE 0 – 30<br><span style="font-size:0.55rem;opacity:0.8;">NOMINAL</span></div>
+          <div class="arch-arrow-h">──▶</div>
+          <div class="arch-box" style="border-color:rgba(255,136,0,0.4);color:var(--orange);background:rgba(255,136,0,0.04);min-width:160px;">SCORE 30 – 60<br><span style="font-size:0.55rem;opacity:0.8;">MODÉRÉ</span></div>
+          <div class="arch-arrow-h">──▶</div>
+          <div class="arch-box" style="border-color:rgba(255,170,0,0.5);color:#ffaa00;background:rgba(255,170,0,0.04);min-width:160px;">SCORE 60 – 80<br><span style="font-size:0.55rem;opacity:0.8;">ÉLEVÉ</span></div>
+          <div class="arch-arrow-h">──▶</div>
+          <div class="arch-box red" style="min-width:160px;">SCORE 80 – 100<br><span style="font-size:0.55rem;opacity:0.8;">CRITIQUE</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-label" style="margin-bottom:1rem;">// logique de détection — extrait</div>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Stage</th>
+          <th>Signaux détectés</th>
+          <th>Score ajouté</th>
+          <th>Action CrowdSec</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="data-hl level-blue" style="color:var(--blue);">RECON</td>
+          <td>robots.txt, .env probe, /.git, sitemap, crawler UA</td>
+          <td>+5 par signal</td>
+          <td>Tag comportemental, surveillance accrue</td>
+        </tr>
+        <tr>
+          <td class="data-hl level-green" style="color:var(--green);">SCAN</td>
+          <td>/wp-admin, /cgi-bin, /.php inexistant, masscan UA</td>
+          <td>+10 par signal</td>
+          <td>Scénario http-probing déclenché</td>
+        </tr>
+        <tr>
+          <td class="data-hl level-eleve" style="color:var(--orange);">EXPLOIT</td>
+          <td>CVE paths (traversal, RCE), .env upload, xmlrpc</td>
+          <td>+20 par signal</td>
+          <td>Ban immédiat via bouncer nftables</td>
+        </tr>
+        <tr>
+          <td class="data-hl" style="color:#ffaa00;">BRUTE</td>
+          <td>401 répétés >= 5 sur même IP en un cycle</td>
+          <td>+15 par IP</td>
+          <td>Jail fail2ban http-auth activée</td>
+        </tr>
+        <tr>
+          <td class="data-hl level-critique" style="color:var(--red);">DELIVERY</td>
+          <td>POST payload suspect, SQLi, XSS, LFI/RFI patterns</td>
+          <td>+25 par signal</td>
+          <td>Ban immédiat + alerte JARVIS TTS</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- MOTEUR DE COLLECTE -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// moteur de collecte — monitoring_gen.py</div>
+    <h2 class="sec-title">$ python3 monitoring_gen.py --explain</h2>
+    <div class="sec-sep"></div>
+    <p class="sec-desc">
+      monitoring_gen.py est le coeur du pipeline. Ce script Python (~73 000 lignes commentées) collecte,
+      normalise et agrège les données de toutes les sources en un seul fichier monitoring.json.
+      Il est déclenché toutes les 5 minutes par cron via monitoring.sh (wrapper de lancement).
+    </p>
+
+    <div class="sub-title">// sources parsées</div>
+    <div class="pipeline" style="margin-bottom:1.5rem;">
+      <div class="pipe-step">
+        <div class="pipe-num">SRC 01</div>
+        <div class="pipe-name">Logs nginx</div>
+        <div class="pipe-tech">access.log + access.log.1<br>Couverture 24h cross-midnight<br>Regex structuré JSON</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">SRC 02</div>
+        <div class="pipe-name">CrowdSec API</div>
+        <div class="pipe-tech">API locale port 8080<br>Décisions actives<br>Scénarios déclenchés</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">SRC 03</div>
+        <div class="pipe-name">fail2ban</div>
+        <div class="pipe-tech">Socket Unix local<br>Jails actives<br>Compteur IPs/jail</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">SRC 04</div>
+        <div class="pipe-name">Proxmox API</div>
+        <div class="pipe-tech">REST API v2<br>CPU/RAM nœud<br>VMs status</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">SRC 05</div>
+        <div class="pipe-name">SSL openssl</div>
+        <div class="pipe-tech">s_client -connect<br>Parsing not_after<br>Alerte si &lt; 7j</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">SRC 06</div>
+        <div class="pipe-name">SSH check</div>
+        <div class="pipe-tech">socket connect<br>Hôtes UP/DOWN<br>Uptime via ssh</div>
+      </div>
+      <div class="pipe-step" style="border-right:1px solid rgba(0,255,240,0.15);">
+        <div class="pipe-num">SRC 07</div>
+        <div class="pipe-name">Honeypot</div>
+        <div class="pipe-tech">URLs pièges vhosts<br>Détection accès<br>Tag EXPLOIT auto</div>
+      </div>
+    </div>
+
+    <div class="sub-title">// extrait Python — structure générique</div>
+    <div class="code-block">
+      <div class="code-block-title">monitoring_gen.py — structure générique</div>
+      <pre><span class="cm"># monitoring_gen.py — structure générique</span>
+<span class="kw">import</span> json, re, subprocess
+<span class="kw">from</span> datetime <span class="kw">import</span> datetime, timedelta
+<span class="kw">from</span> pathlib <span class="kw">import</span> Path
+
+<span class="hl">LOG_FILES</span>    = [<span class="st">'/var/log/nginx/access.log'</span>, <span class="st">'/var/log/nginx/access.log.1'</span>]
+<span class="hl">OUTPUT</span>       = Path(<span class="st">'/var/www/monitoring/monitoring.json'</span>)
+<span class="hl">HONEYPOT_PATHS</span> = [<span class="st">'/wp-admin'</span>, <span class="st">'/wp-login.php'</span>, <span class="st">'/.env'</span>, <span class="st">'/cgi-bin/'</span>, <span class="st">'/xmlrpc.php'</span>]
+
+<span class="hl">LOG_RE</span> = re.compile(
+    <span class="st">r'(?P&lt;ip&gt;\S+) \S+ \S+ \[(?P&lt;time&gt;[^\]]+)\] '</span>
+    <span class="st">r'"(?P&lt;method&gt;\S+) (?P&lt;path&gt;\S+)[^"]*" (?P&lt;status&gt;\d{3}) (?P&lt;size&gt;\d+)'</span>
+)
+
+<span class="kw">def</span> <span class="hl">classify_kill_chain</span>(entries):
+    chain = {<span class="st">"recon"</span>: set(), <span class="st">"scan"</span>: set(), <span class="st">"exploit"</span>: set(), <span class="st">"brute"</span>: set()}
+    status_count = {}
+    <span class="kw">for</span> e <span class="kw">in</span> entries:
+        ip, path, status = e[<span class="st">'ip'</span>], e[<span class="st">'path'</span>].lower(), int(e[<span class="st">'status'</span>])
+        status_count.setdefault(ip, {}).setdefault(status, <span class="hl">0</span>)
+        status_count[ip][status] += <span class="hl">1</span>
+        <span class="kw">if</span> any(x <span class="kw">in</span> path <span class="kw">for</span> x <span class="kw">in</span> [<span class="st">'.env'</span>, <span class="st">'robots.txt'</span>, <span class="st">'/.git'</span>, <span class="st">'sitemap'</span>]):
+            chain[<span class="st">'recon'</span>].add(ip)
+        <span class="kw">if</span> any(x <span class="kw">in</span> path <span class="kw">for</span> x <span class="kw">in</span> [<span class="st">'/wp-admin'</span>, <span class="st">'/cgi-bin'</span>, <span class="st">'/.php'</span>, <span class="st">'xmlrpc'</span>]):
+            chain[<span class="st">'exploit'</span>].add(ip)
+    <span class="cm"># Brute force = 401 répétés sur même IP</span>
+    <span class="kw">for</span> ip, counts <span class="kw">in</span> status_count.items():
+        <span class="kw">if</span> counts.get(<span class="hl">401</span>, <span class="hl">0</span>) >= <span class="hl">5</span>:
+            chain[<span class="st">'brute'</span>].add(ip)
+    <span class="kw">return</span> {k: list(v) <span class="kw">for</span> k, v <span class="kw">in</span> chain.items()}
+
+<span class="kw">def</span> <span class="hl">check_ssl_expiry</span>(domain):
+    result = subprocess.run(
+        [<span class="st">'openssl'</span>, <span class="st">'s_client'</span>, <span class="st">'-connect'</span>, <span class="st">f'{domain}:443'</span>, <span class="st">'-servername'</span>, domain],
+        capture_output=<span class="hl">True</span>, text=<span class="hl">True</span>, timeout=<span class="hl">5</span>, input=<span class="st">''</span>
+    )
+    <span class="cm"># parse not_after date — retourne nb jours restants</span>
+    ...</pre>
+    </div>
+
+    <div class="sub-title">// crons actifs — srv-ngix</div>
+    <div class="code-block">
+      <div class="code-block-title">crontab -l (root@[MONITORING_SERVER])</div>
+      <pre><span class="cm"># Monitoring JSON — toutes les 5 minutes</span>
+<span class="hl">*/5 * * * *</span> /opt/scripts/monitoring.sh &gt;&gt; /var/log/monitoring.log 2&gt;&amp;1
+
+<span class="cm"># Synchronisation CVE NVD — 3x par jour</span>
+<span class="hl">0 6,13,21 * * *</span> /opt/scripts/cron-cve-fetch.sh &gt;&gt; /var/log/cve-fetch.log 2&gt;&amp;1
+
+<span class="cm"># Rapport SOC quotidien — 08h00 UTC</span>
+<span class="hl">0 8 * * *</span> /opt/scripts/soc-daily-report.py &gt;&gt; /var/log/soc-report.log 2&gt;&amp;1
+
+<span class="cm"># Mise à jour GeoIP MaxMind — quotidien 03h00</span>
+<span class="hl">0 3 * * *</span> /usr/bin/geoipupdate &gt;&gt; /var/log/geoipupdate.log 2&gt;&amp;1
+
+<span class="cm"># Snapshot UFW — état pare-feu horodaté (toutes les 6h)</span>
+<span class="hl">0 */6 * * *</span> /opt/scripts/ufw-snapshot.sh &gt;&gt; /var/log/ufw-snapshot.log 2&gt;&amp;1
+
+<span class="cm"># Threat Intel — flux menaces externes</span>
+<span class="hl">0 3 * * *</span> /opt/scripts/threat-fetch.sh &gt;&gt; /var/log/threat-fetch.log 2&gt;&amp;1
+
+<span class="cm"># Proto-live — analyse protocoles réseau temps réel</span>
+<span class="hl">*/1 * * * *</span> /opt/scripts/proto-live.py &gt;&gt; /var/log/proto-live.log 2&gt;&amp;1
+
+<span class="cm"># Nettoyage logs rotatifs — hebdomadaire</span>
+<span class="hl">0 2 * * 0</span> /opt/scripts/log-rotate-clean.sh &gt;&gt; /var/log/log-clean.log 2&gt;&amp;1</pre>
+    </div>
+  </div>
+
+  <!-- ANTI-FREEZE -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// performance — anti-freeze 60s</div>
+    <h2 class="sec-title">$ cat performance.md</h2>
+    <div class="sec-sep"></div>
+    <p class="sec-desc">
+      Le dashboard rafraichit ses données toutes les 60 secondes. Sur des sessions longues (plusieurs heures),
+      un rendu DOM naif provoquerait des freezes perceptibles. Deux mécanismes sont combinés pour garantir
+      une expérience fluide en permanence, même sur machine peu puissante.
+    </p>
+
+    <table class="data-table" style="margin-bottom:2rem;">
+      <thead>
+        <tr>
+          <th>Mécanisme</th>
+          <th>Implémentation</th>
+          <th>Effet</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="data-hl">If-Modified-Since</td>
+          <td>Header HTTP + _lastModified stocké en mémoire</td>
+          <td>304 si fichier inchangé → 0 parsing, 0 DOM update</td>
+        </tr>
+        <tr>
+          <td class="data-hl">requestIdleCallback</td>
+          <td>render(data) différé dans callback idle</td>
+          <td>Exécution pendant créneau idle navigateur — 0 clipping</td>
+        </tr>
+        <tr>
+          <td class="data-hl">_lastGenAt</td>
+          <td>Comparaison timestamp JSON côté client</td>
+          <td>Double vérification applicative — ignorer si identique</td>
+        </tr>
+        <tr>
+          <td class="data-hl">Polling proto-live</td>
+          <td>Aussi idle-schedulé (cycle 15s)</td>
+          <td>Même protection pour le flux protocoles réseau</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="code-block">
+      <div class="code-block-title">fetch JSON avec If-Modified-Since — dashboard SOC (extrait)</div>
+      <pre><span class="cm">// fetch JSON avec If-Modified-Since — dashboard SOC</span>
+<span class="kw">let</span> <span class="hl">_lastModified</span> = <span class="kw">null</span>;
+
+<span class="kw">async function</span> <span class="hl">fetchMonitoring</span>() {
+  <span class="kw">const</span> headers = {};
+  <span class="kw">if</span> (_lastModified) headers[<span class="st">'If-Modified-Since'</span>] = _lastModified;
+
+  <span class="kw">const</span> res = <span class="kw">await</span> fetch(<span class="st">'/monitoring.json'</span>, { headers });
+
+  <span class="cm">// 304 = fichier inchangé — rien à re-parser ni à re-rendre</span>
+  <span class="kw">if</span> (res.status === <span class="hl">304</span>) <span class="kw">return</span>;
+
+  _lastModified = res.headers.get(<span class="st">'Last-Modified'</span>);
+  <span class="kw">const</span> data = <span class="kw">await</span> res.json();
+
+  <span class="cm">// Différer le rendu pendant un créneau idle du navigateur</span>
+  <span class="kw">if</span> (<span class="st">'requestIdleCallback'</span> <span class="kw">in</span> window) {
+    requestIdleCallback(() =&gt; render(data), { timeout: <span class="hl">2000</span> });
+  } <span class="kw">else</span> {
+    setTimeout(() =&gt; render(data), <span class="hl">0</span>);   <span class="cm">// fallback navigateurs anciens</span>
+  }
+}
+
+<span class="cm">// Refresh toutes les 60s</span>
+setInterval(fetchMonitoring, <span class="hl">60_000</span>);
+fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
+    </div>
+  </div>
+
   <!-- TUILES -->
   <div class="doc-section reveal">
     <div class="sec-label">// inventaire des 28 tuiles</div>
@@ -347,46 +838,46 @@
 
     <div class="tiles-section-label">▶ HERO — MENACES EN COURS</div>
     <div class="tiles-grid">
-      <div class="tile-item"><span class="tile-badge wide">WIDE</span><span class="tile-badge live">LIVE</span><div class="tile-name">CYBER KILL CHAIN</div><div class="tile-desc">Canvas animé, liste IPs actives, phases d'attaque en cours</div></div>
-      <div class="tile-item"><span class="tile-badge wide">WIDE</span><div class="tile-name">GEOIP — CARTOGRAPHIE 24H</div><div class="tile-desc">Carte monde canvas, arcs d'attaque géolocalisés</div></div>
+      <div class="tile-item"><span class="tile-badge wide">WIDE</span><span class="tile-badge live">LIVE</span><div class="tile-name">CYBER KILL CHAIN</div><div class="tile-desc">Canvas animé, liste IPs actives, phases d'attaque en cours, score global normalisé</div></div>
+      <div class="tile-item"><span class="tile-badge wide">WIDE</span><div class="tile-name">GEOIP — CARTOGRAPHIE 24H</div><div class="tile-desc">Carte monde canvas, arcs d'attaque géolocalisés par pays source</div></div>
     </div>
 
     <div class="tiles-section-label">▶ MENACES & PROTECTION</div>
     <div class="tiles-grid">
-      <div class="tile-item"><div class="tile-name">NIVEAU DE MENACE GLOBAL</div><div class="tile-desc">Threat score coloré selon sévérité</div></div>
-      <div class="tile-item"><div class="tile-name">SERVICES</div><div class="tile-desc">Services UP/DOWN sur le reverse proxy</div></div>
-      <div class="tile-item"><div class="tile-name">THREAT INTEL SYNC</div><div class="tile-desc">Flux menaces externes synchronisés</div></div>
-      <div class="tile-item"><div class="tile-name">FAIL2BAN — JAILS</div><div class="tile-desc">Jails actives, IPs bannies · modal détail</div></div>
-      <div class="tile-item"><div class="tile-name">CROWDSEC</div><div class="tile-desc">Analyse comportementale, décisions actives</div></div>
-      <div class="tile-item"><div class="tile-name">CVE SYNC</div><div class="tile-desc">Dernière MAJ NVD, 21 mois indexés</div></div>
+      <div class="tile-item"><div class="tile-name">NIVEAU DE MENACE GLOBAL</div><div class="tile-desc">Score 0-100 coloré selon sévérité : NOMINAL / MODÉRÉ / ÉLEVÉ / CRITIQUE</div></div>
+      <div class="tile-item"><div class="tile-name">SERVICES</div><div class="tile-desc">Services UP/DOWN sur le reverse proxy — nginx, crowdsec, fail2ban, ssh</div></div>
+      <div class="tile-item"><div class="tile-name">THREAT INTEL SYNC</div><div class="tile-desc">Flux menaces externes synchronisés — dernière mise à jour, nb entrées</div></div>
+      <div class="tile-item"><div class="tile-name">FAIL2BAN — JAILS</div><div class="tile-desc">Jails actives, IPs bannies — modal détail avec liste par jail</div></div>
+      <div class="tile-item"><div class="tile-name">CROWDSEC</div><div class="tile-desc">Analyse comportementale, décisions actives, scénarios en cours</div></div>
+      <div class="tile-item"><div class="tile-name">CVE SYNC</div><div class="tile-desc">Dernière MAJ NVD, 21 mois indexés, CVE critiques récentes</div></div>
     </div>
 
     <div class="tiles-section-label">▶ TRAFIC & ACTIVITÉ</div>
     <div class="tiles-grid">
-      <div class="tile-item"><span class="tile-badge wide">WIDE</span><div class="tile-name">ACTIVITÉ TEMPS RÉEL</div><div class="tile-desc">Graphique requêtes/heure en barres</div></div>
-      <div class="tile-item"><div class="tile-name">ACTIVITÉ & ATTAQUES 24H</div><div class="tile-desc">Heatmap canvas 24h</div></div>
-      <div class="tile-item"><div class="tile-name">PROTOCOLES ACTIFS</div><div class="tile-desc">Donut + légende protocoles réseau</div></div>
-      <div class="tile-item"><div class="tile-name">TOP PAGES 24H</div><div class="tile-desc">Tableau des pages les plus visitées</div></div>
-      <div class="tile-item"><div class="tile-name">TRAFIC 24H</div><div class="tile-desc">Stats globales 2xx · 4xx · 5xx · volume</div></div>
-      <div class="tile-item"><span class="tile-badge live">LIVE</span><div class="tile-name">FLUX LIVE</div><div class="tile-desc">Barres protocoles fenêtre 5 minutes</div></div>
-      <div class="tile-item"><div class="tile-name">BANDE PASSANTE nginx</div><div class="tile-desc">Sparklines RX/TX sur 24h</div></div>
-      <div class="tile-item"><div class="tile-name">SYSTÈME — SERVEUR</div><div class="tile-desc">CPU ring, RAM, disque /var/www</div></div>
-      <div class="tile-item"><div class="tile-name">RÉSEAU — SERVEUR</div><div class="tile-desc">Interfaces réseau RX/TX</div></div>
+      <div class="tile-item"><span class="tile-badge wide">WIDE</span><div class="tile-name">ACTIVITÉ TEMPS RÉEL</div><div class="tile-desc">Graphique barres requêtes/heure — 24 barres glissantes, légende 2xx/4xx/5xx</div></div>
+      <div class="tile-item"><div class="tile-name">ACTIVITÉ & ATTAQUES 24H</div><div class="tile-desc">Heatmap canvas 24h — densité des requêtes par heure et par type</div></div>
+      <div class="tile-item"><div class="tile-name">PROTOCOLES ACTIFS</div><div class="tile-desc">Donut canvas + légende — répartition HTTP/HTTPS/SSH/DNS/autres</div></div>
+      <div class="tile-item"><div class="tile-name">TOP PAGES 24H</div><div class="tile-desc">Tableau des pages les plus requêtées avec compteur et statut</div></div>
+      <div class="tile-item"><div class="tile-name">TRAFIC 24H</div><div class="tile-desc">Stats globales : total, 2xx, 4xx, 5xx, volume bytes, taux d'erreur</div></div>
+      <div class="tile-item"><span class="tile-badge live">LIVE</span><div class="tile-name">FLUX LIVE</div><div class="tile-desc">Barres protocoles fenêtre 5 minutes — source proto-live.json 15s</div></div>
+      <div class="tile-item"><div class="tile-name">BANDE PASSANTE nginx</div><div class="tile-desc">Sparklines RX/TX sur 24h — pic/moyen/actuel en Mo/s</div></div>
+      <div class="tile-item"><div class="tile-name">SYSTÈME — SERVEUR</div><div class="tile-desc">CPU ring animé, RAM barre, disque /var/www — seuils colorés</div></div>
+      <div class="tile-item"><div class="tile-name">RÉSEAU — SERVEUR</div><div class="tile-desc">Interfaces réseau RX/TX — graphique sparkline par interface</div></div>
     </div>
 
     <div class="tiles-section-label">▶ INFRASTRUCTURE</div>
     <div class="tiles-grid">
-      <div class="tile-item"><div class="tile-name">PROXMOX — NŒUD</div><div class="tile-desc">CPU/RAM/stockage hyperviseur</div></div>
-      <div class="tile-item"><div class="tile-name">PROXMOX — VMs</div><div class="tile-desc">Machines virtuelles actives/total</div></div>
-      <div class="tile-item"><div class="tile-name">WINDOWS — RESSOURCES</div><div class="tile-desc">CPU/RAM/disques machine locale · modal</div></div>
-      <div class="tile-item"><div class="tile-name">WINDOWS — SAUVEGARDES</div><div class="tile-desc">Quota D:, dernières backups par VM · modal</div></div>
-      <div class="tile-item"><span class="tile-badge ai">IA</span><div class="tile-name">GPU RTX 5080</div><div class="tile-desc">Stats GPU injectées dynamiquement par JARVIS</div></div>
-      <div class="tile-item"><div class="tile-name">CRONS — INFRASTRUCTURE</div><div class="tile-desc">Tâches planifiées Windows</div></div>
-      <div class="tile-item"><span class="tile-badge ai">IA</span><div class="tile-name">JARVIS — INTELLIGENCE</div><div class="tile-desc">Statut ONLINE/OFFLINE, modèle LLM, compteurs session</div></div>
-      <div class="tile-item"><span class="tile-badge ai">IA</span><div class="tile-name">BLOCKLIST LLM GARDE-FOU</div><div class="tile-desc">Journal tentatives tool calling bloquées</div></div>
-      <div class="tile-item"><span class="tile-badge ai">IA</span><div class="tile-name">OPÉRATIONS PROACTIVES</div><div class="tile-desc">Journal actions JARVIS : ban-ip, restart-service</div></div>
-      <div class="tile-item"><div class="tile-name">SSL</div><div class="tile-desc">Certificats TLS, jours restants par domaine</div></div>
-      <div class="tile-item"><div class="tile-name">CONNECTIVITÉ SSH</div><div class="tile-desc">Statut UP/DOWN + uptime des 4 hôtes</div></div>
+      <div class="tile-item"><div class="tile-name">PROXMOX — NŒUD</div><div class="tile-desc">CPU/RAM/stockage hyperviseur — températures, uptime, version PVE</div></div>
+      <div class="tile-item"><div class="tile-name">PROXMOX — VMs</div><div class="tile-desc">Machines virtuelles actives/total — mémoire allouée, CPU vcores</div></div>
+      <div class="tile-item"><div class="tile-name">WINDOWS — RESSOURCES</div><div class="tile-desc">CPU/RAM/disques machine locale — modal détail avec historique</div></div>
+      <div class="tile-item"><div class="tile-name">WINDOWS — SAUVEGARDES</div><div class="tile-desc">Quota D:, dernières backups par VM — date, taille, statut rotation</div></div>
+      <div class="tile-item"><span class="tile-badge ai">IA</span><div class="tile-name">GPU RTX 5080</div><div class="tile-desc">Stats GPU injectées dynamiquement par JARVIS : VRAM, temp, charge</div></div>
+      <div class="tile-item"><div class="tile-name">CRONS — INFRASTRUCTURE</div><div class="tile-desc">Tâches planifiées Windows et Linux — statut dernière exécution</div></div>
+      <div class="tile-item"><span class="tile-badge ai">IA</span><div class="tile-name">JARVIS — INTELLIGENCE</div><div class="tile-desc">Statut ONLINE/OFFLINE, modèle LLM actif, compteurs session, uptime</div></div>
+      <div class="tile-item"><span class="tile-badge ai">IA</span><div class="tile-name">BLOCKLIST LLM GARDE-FOU</div><div class="tile-desc">Journal tentatives tool calling bloquées — sécurité actions JARVIS</div></div>
+      <div class="tile-item"><span class="tile-badge ai">IA</span><div class="tile-name">OPÉRATIONS PROACTIVES</div><div class="tile-desc">Journal actions JARVIS : ban-ip, restart-service — timestamp + résultat</div></div>
+      <div class="tile-item"><div class="tile-name">SSL</div><div class="tile-desc">Certificats TLS, jours restants par domaine — alerte si &lt; 7 jours</div></div>
+      <div class="tile-item"><div class="tile-name">CONNECTIVITÉ SSH</div><div class="tile-desc">Statut UP/DOWN + uptime des 4 hôtes surveillés</div></div>
     </div>
   </div>
 
@@ -410,56 +901,395 @@
           <td class="data-hl">monitoring.json</td>
           <td>monitoring_gen.py</td>
           <td>60s (cron)</td>
-          <td>nginx logs, CrowdSec, fail2ban, système, réseau, Proxmox, SSL, CVE, GeoIP</td>
+          <td>nginx logs, CrowdSec, fail2ban, système, réseau, Proxmox, SSL, CVE, GeoIP, Kill Chain</td>
         </tr>
         <tr>
           <td class="data-hl">windows-disk.json</td>
           <td>windows-disk-report.ps1</td>
           <td>Chaque backup</td>
-          <td>Disques Windows, GPU RTX, CPU, RAM, liste sauvegardes VMs</td>
+          <td>Disques Windows, GPU RTX, CPU, RAM, liste sauvegardes VMs avec tailles</td>
         </tr>
         <tr>
           <td class="data-hl">proto-live.json</td>
           <td>proto-live.py</td>
           <td>15s</td>
-          <td>Répartition protocoles réseau en temps réel</td>
+          <td>Répartition protocoles réseau en temps réel — fenêtre glissante 5 minutes</td>
         </tr>
         <tr>
           <td class="data-hl">world.json</td>
-          <td>Statique</td>
+          <td>Statique (MaxMind)</td>
           <td>—</td>
-          <td>GeoJSON frontières mondiales pour cartographie d'attaques</td>
+          <td>GeoJSON frontières mondiales pour cartographie canvas des origines d'attaque</td>
         </tr>
       </tbody>
     </table>
   </div>
 
-  <!-- SECURITE -->
+  <!-- JARVIS AUTO-ENGINE -->
   <div class="doc-section reveal">
-    <div class="sec-label">// sécurité — audit 2026-03-22</div>
-    <h2 class="sec-title">$ cat audit-results.txt</h2>
+    <div class="sec-label">// intégration IA — auto-engine</div>
+    <h2 class="sec-title">$ cat jarvis-integration.json</h2>
+    <div class="sec-sep"></div>
+    <p class="sec-desc">
+      JARVIS (assistant IA local Flask) est intégré au dashboard SOC via un auto-engine qui surveille
+      les deltas de trafic et les métriques système. Quand un seuil critique est dépassé, JARVIS est
+      automatiquement sollicité pour une analyse narrative LLM et une alerte vocale TTS.
+    </p>
+
+    <div class="sub-title">// triggers auto-engine</div>
+    <table class="data-table" style="margin-bottom:2rem;">
+      <thead>
+        <tr>
+          <th>Trigger</th>
+          <th>Condition de déclenchement</th>
+          <th>Badge tuile</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="data-hl">Activité anormale</td>
+          <td>+15 événements vs dernier check JSON</td>
+          <td style="color:var(--blue);">Analyse auto</td>
+          <td>Analyse LLM narrative + affichage résultat</td>
+        </tr>
+        <tr>
+          <td class="data-hl">Alerte CPU</td>
+          <td>CPU serveur > 90%</td>
+          <td style="color:var(--red);">Alerte critique</td>
+          <td>TTS + analyse LLM processus</td>
+        </tr>
+        <tr>
+          <td class="data-hl">Alerte IPs</td>
+          <td>Bans actifs CrowdSec > 100</td>
+          <td style="color:var(--red);">Alerte critique</td>
+          <td>TTS + analyse LLM menaces</td>
+        </tr>
+        <tr>
+          <td class="data-hl">Erreurs HTTP</td>
+          <td>5xx > 5% du trafic total 24h</td>
+          <td style="color:var(--red);">Alerte critique</td>
+          <td>TTS + analyse LLM services</td>
+        </tr>
+        <tr>
+          <td class="data-hl">Résumé quotidien</td>
+          <td>Chaque jour à 08h00 (heure locale)</td>
+          <td style="color:var(--orange);">Résumé du jour</td>
+          <td>Email rapport + TTS briefing matinal</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="sub-title">// routes JARVIS utilisées par le SOC</div>
+    <table class="data-table" style="margin-bottom:2rem;">
+      <thead>
+        <tr>
+          <th>Route</th>
+          <th>Méthode</th>
+          <th>Usage SOC</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="data-hl">/api/gpu</td>
+          <td>GET</td>
+          <td>Statut JARVIS + modèle LLM actif + stats GPU RTX</td>
+        </tr>
+        <tr>
+          <td class="data-hl">/api/chat</td>
+          <td>POST</td>
+          <td>Analyse LLM des données SOC — retourne synthèse narrative</td>
+        </tr>
+        <tr>
+          <td class="data-hl">/api/tts</td>
+          <td>GET</td>
+          <td>Lecture vocale des alertes via edge-tts fr-CA-AntoineNeural</td>
+        </tr>
+        <tr>
+          <td class="data-hl">/api/security</td>
+          <td>GET</td>
+          <td>Journal blocklist LLM — tentatives tool calling bloquées</td>
+        </tr>
+        <tr>
+          <td class="data-hl">/api/soc/ban-ip</td>
+          <td>POST</td>
+          <td>Ban IP via cscli decisions add — confirmation LLM requise</td>
+        </tr>
+        <tr>
+          <td class="data-hl">/api/soc/unban-ip</td>
+          <td>POST</td>
+          <td>Lève le ban CrowdSec pour une IP — traçabilité dans journal</td>
+        </tr>
+        <tr>
+          <td class="data-hl">/api/soc/restart-service</td>
+          <td>POST</td>
+          <td>Redémarre un service autorisé — liste blanche configurable</td>
+        </tr>
+        <tr>
+          <td class="data-hl">/api/soc/actions</td>
+          <td>GET</td>
+          <td>Journal opérations proactives — horodatage + résultat</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="sub-title">// prompt SOC type envoyé à JARVIS</div>
+    <div class="code-block">
+      <div class="code-block-title">prompt-soc.txt — analyse automatique</div>
+      <pre><span class="hl">Contexte :</span> SOC Dashboard — analyse de sécurité automatique
+<span class="hl">Données disponibles :</span> trafic nginx 24h, décisions CrowdSec, jails fail2ban,
+                      Kill Chain actif, top IPs, scores protocoles
+
+<span class="hl">Analyse la situation sécurité actuelle :</span>
+- Y a-t-il des menaces actives à traiter en priorité ?
+- Quels scénarios CrowdSec dominent ?
+- Y a-t-il des anomalies dans le trafic HTTP ?
+- Recommande des actions concrètes si nécessaire.
+
+<span class="hl">Format :</span> 3-5 lignes concises, niveau [NOMINAL/MODÉRÉ/ÉLEVÉ/CRITIQUE],
+         action si requise.</pre>
+    </div>
+  </div>
+
+  <!-- ALERTES -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// système d'alertes</div>
+    <h2 class="sec-title">$ cat alert-thresholds.json</h2>
     <div class="sec-sep"></div>
 
-    <div style="display:flex;flex-direction:column;gap:0.6rem;">
-      <div style="display:flex;gap:1rem;font-size:0.7rem;">
-        <span style="color:var(--green);flex-shrink:0;">✅</span>
-        <span style="color:rgba(0,255,240,0.6);line-height:1.7;"><strong style="color:var(--cyan)">Anti-freeze</strong> — If-Modified-Since (304 si fichier inchangé = 0 parsing DOM) + requestIdleCallback (render pendant créneau idle navigateur). Polling proto-live.json également idle-schedulé.</span>
+    <div class="sub-title">// seuils de déclenchement</div>
+    <table class="data-table" style="margin-bottom:2rem;">
+      <thead>
+        <tr>
+          <th>Indicateur</th>
+          <th>Seuil</th>
+          <th>Niveau</th>
+          <th>Action automatique</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="data-hl">CPU serveur</td>
+          <td>> 90%</td>
+          <td class="level-critique">CRITIQUE</td>
+          <td>Analyse JARVIS + alerte TTS</td>
+        </tr>
+        <tr>
+          <td class="data-hl">IPs bannies actives</td>
+          <td>> 100 décisions CrowdSec</td>
+          <td class="level-critique">CRITIQUE</td>
+          <td>Analyse JARVIS + alerte TTS</td>
+        </tr>
+        <tr>
+          <td class="data-hl">Erreurs 5xx</td>
+          <td>> 5% du trafic 24h</td>
+          <td class="level-critique">CRITIQUE</td>
+          <td>Analyse JARVIS + alerte TTS</td>
+        </tr>
+        <tr>
+          <td class="data-hl">SSL expiration</td>
+          <td>&lt; 7 jours restants</td>
+          <td class="level-critique" style="color:var(--red);">ROUGE</td>
+          <td>certbot renew --force-renewal</td>
+        </tr>
+        <tr>
+          <td class="data-hl">Disque /var/www</td>
+          <td>> 85% utilisation</td>
+          <td class="level-critique" style="color:var(--red);">ROUGE</td>
+          <td>Nettoyage logs rotatifs automatique</td>
+        </tr>
+        <tr>
+          <td class="data-hl">RAM serveur</td>
+          <td>> 85%</td>
+          <td class="level-eleve">ORANGE</td>
+          <td>Surveillance accrue, analyse processus</td>
+        </tr>
+        <tr>
+          <td class="data-hl">Top IP 24h</td>
+          <td>> 500 requêtes / IP</td>
+          <td class="level-eleve">SUSPICION</td>
+          <td>Analyse GoAccess + éventuel ban manuel</td>
+        </tr>
+        <tr>
+          <td class="data-hl">AppSec WAF port</td>
+          <td>Port 7422 non répondant</td>
+          <td class="level-critique" style="color:var(--red);">ROUGE</td>
+          <td>systemctl restart crowdsec</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="sub-title">// rapport quotidien — soc-daily-report.py</div>
+    <div class="checklist">
+      <div class="checklist-item">
+        <span class="checklist-icon">▶</span>
+        <span class="checklist-text">Envoyé chaque matin à <strong>08h00 UTC</strong> par soc-daily-report.py via cron</span>
       </div>
-      <div style="display:flex;gap:1rem;font-size:0.7rem;">
-        <span style="color:var(--green);flex-shrink:0;">✅</span>
-        <span style="color:rgba(0,255,240,0.6);line-height:1.7;"><strong style="color:var(--cyan)">Accès LAN uniquement</strong> — Le dashboard SOC est exposé exclusivement sur le réseau local. Aucune exposition internet directe. Accessible via le reverse proxy authentifié.</span>
+      <div class="checklist-item">
+        <span class="checklist-icon">▶</span>
+        <span class="checklist-text">Contenu : <strong>trafic 24h</strong> · protocoles · CrowdSec bans · fail2ban jails · Kill Chain · top 10 attaquants · état services · SSL · système · sauvegardes</span>
       </div>
-      <div style="display:flex;gap:1rem;font-size:0.7rem;">
-        <span style="color:var(--green);flex-shrink:0;">✅</span>
-        <span style="color:rgba(0,255,240,0.6);line-height:1.7;"><strong style="color:var(--cyan)">Intégration JARVIS optionnelle</strong> — Le SOC reste 100% fonctionnel sans JARVIS. Les actions proactives (ban-ip, restart-service) nécessitent une confirmation LLM avant exécution.</span>
+      <div class="checklist-item">
+        <span class="checklist-icon">▶</span>
+        <span class="checklist-text">Déclenchement manuel possible via bouton <strong>RAPPORT</strong> dans le header dashboard (cooldown 60s entre deux envois)</span>
       </div>
-      <div style="display:flex;gap:1rem;font-size:0.7rem;">
-        <span style="color:var(--green);flex-shrink:0;">✅</span>
-        <span style="color:rgba(0,255,240,0.6);line-height:1.7;"><strong style="color:var(--cyan)">Serveur durci</strong> — ModSecurity WAF activé, CrowdSec analyse comportementale, fail2ban jails SSH/HTTP, PasswordAuthentication désactivé, headers sécurité Apache/nginx.</span>
+      <div class="checklist-item">
+        <span class="checklist-icon">▶</span>
+        <span class="checklist-text">Raccourci clavier <kbd class="kbd">[E]</kbd> pour envoi rapide depuis le dashboard</span>
       </div>
-      <div style="display:flex;gap:1rem;font-size:0.7rem;">
-        <span style="color:var(--green);flex-shrink:0;">✅</span>
-        <span style="color:rgba(0,255,240,0.6);line-height:1.7;"><strong style="color:var(--cyan)">Rapports automatiques</strong> — soc-daily-report.py génère un rapport quotidien. Alertes email configurables. Snapshots UFW horodatés pour historique de la posture sécurité.</span>
+    </div>
+
+    <div class="sub-title" style="margin-top:2rem;">// raccourcis clavier</div>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Touche</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><kbd class="kbd">[F]</kbd></td>
+          <td style="color:rgba(0,255,240,0.6);">Ouvre le modal Firewall Matrix — règles nftables actives</td>
+        </tr>
+        <tr>
+          <td><kbd class="kbd">[T]</kbd></td>
+          <td style="color:rgba(0,255,240,0.6);">Ouvre le modal Analyse Trafic — vue détaillée par heure</td>
+        </tr>
+        <tr>
+          <td><kbd class="kbd">[E]</kbd></td>
+          <td style="color:rgba(0,255,240,0.6);">Envoie le rapport SOC par email (cooldown 60s)</td>
+        </tr>
+        <tr>
+          <td><kbd class="kbd">[R]</kbd></td>
+          <td style="color:rgba(0,255,240,0.6);">Force un refresh JSON immédiat (contourne les 60s)</td>
+        </tr>
+        <tr>
+          <td><kbd class="kbd">[Z]</kbd></td>
+          <td style="color:rgba(0,255,240,0.6);">Active le mode projection plein écran (salle de guerre)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SÉCURITÉ -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// périmètre & défense en profondeur</div>
+    <h2 class="sec-title">$ cat defense-layers.txt</h2>
+    <div class="sec-sep"></div>
+    <p class="sec-desc">
+      Cette solution est conçue pour un environnement <strong style="color:var(--orange)">homelab — réseau local uniquement</strong>.
+      Le dashboard SOC n'est pas exposé sur internet. L'ensemble de la stack (reverse proxy, WAF, dashboard, IA locale)
+      fonctionne dans un périmètre LAN maîtrisé. Cette architecture sert de laboratoire pour
+      maîtriser les outils de défense en conditions réelles avant tout déploiement en environnement exposé.
+    </p>
+
+    <div class="sub-title">// CrowdSec — scénarios détectés en production</div>
+    <table class="data-table" style="margin-bottom:2rem;">
+      <thead>
+        <tr>
+          <th>Scénario</th>
+          <th>Type d'attaque</th>
+          <th>Fréquence observée</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="data-hl">http-cve-2021-41773</td>
+          <td>Apache path traversal (CVE)</td>
+          <td>Très fréquent — scans automatisés en continu</td>
+        </tr>
+        <tr>
+          <td class="data-hl">http-cve-2021-42013</td>
+          <td>RCE Apache (CVE)</td>
+          <td>Vagues périodiques de scans massifs</td>
+        </tr>
+        <tr>
+          <td class="data-hl">http-bad-user-agent</td>
+          <td>User-Agent malveillant connu</td>
+          <td>Continu — plusieurs centaines / jour</td>
+        </tr>
+        <tr>
+          <td class="data-hl">http-probing</td>
+          <td>Enumération de paths non existants</td>
+          <td>Continu — scans automatisés botnets</td>
+        </tr>
+        <tr>
+          <td class="data-hl">http-admin-interface-probing</td>
+          <td>Scan /admin /phpmyadmin /wp-admin</td>
+          <td>Continu — plusieurs par heure</td>
+        </tr>
+        <tr>
+          <td class="data-hl">http-wordpress-scan</td>
+          <td>Scan plugins/themes WordPress</td>
+          <td>Fréquent — même sur serveurs sans WP</td>
+        </tr>
+        <tr>
+          <td class="data-hl">http-sensitive-files</td>
+          <td>.env, backup.zip, .git, .DS_Store</td>
+          <td>Fréquent — outils OSINT automatisés</td>
+        </tr>
+        <tr>
+          <td class="data-hl">http-open-proxy</td>
+          <td>Tentative de proxy ouvert CONNECT</td>
+          <td>Occasionnel — botnets recherchant relais</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="sec-label" style="margin-bottom:0.5rem;">// origines géographiques typiques des attaques</div>
+    <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:2rem;">
+      <span class="badge cyan">DE</span>
+      <span class="badge cyan">US</span>
+      <span class="badge cyan">RU</span>
+      <span class="badge cyan">SG</span>
+      <span class="badge cyan">RO</span>
+      <span class="badge cyan">KR</span>
+      <span class="badge cyan">TW</span>
+      <span class="badge cyan">BG</span>
+      <span class="badge cyan">FR</span>
+      <span class="badge orange">sources publiques — données GeoIP2 MaxMind</span>
+    </div>
+
+    <div class="sub-title">// honeypot — URLs pièges intégrées aux vhosts</div>
+    <p class="sec-desc" style="margin-bottom:1rem;">
+      Des URLs pièges sont configurées dans les vhosts nginx. Elles ne retournent aucun contenu légitime.
+      Tout accès déclenche un tag immédiat dans les logs et une classification EXPLOIT par monitoring_gen.py,
+      suivie d'un ban automatique CrowdSec.
+    </p>
+    <div class="arch-diagram" style="padding:1.2rem 1.5rem;margin-bottom:1.5rem;">
+      <div style="display:flex;gap:2rem;flex-wrap:wrap;align-items:flex-start;">
+        <div style="flex:1;min-width:200px;">
+          <div class="code-block-title" style="margin-bottom:0.6rem;">// paths pièges (exemples génériques)</div>
+          <div style="font-size:0.65rem;color:rgba(0,255,240,0.55);line-height:2;">
+            /wp-admin<br>
+            /wp-login.php<br>
+            /.env<br>
+            /cgi-bin/test.cgi<br>
+            /xmlrpc.php<br>
+            /backup.zip<br>
+            /.git/config<br>
+            /phpmyadmin<br>
+            /admin/login
+          </div>
+        </div>
+        <div style="flex:1;min-width:200px;">
+          <div class="code-block-title" style="margin-bottom:0.6rem;">// stats typiques 24h</div>
+          <div style="display:flex;flex-direction:column;gap:0.5rem;margin-top:0.3rem;">
+            <div class="stat-box" style="text-align:left;padding:0.5rem 0.8rem;min-width:unset;">
+              <span class="stat-val" style="font-size:1.2rem;">50-100</span>
+              <span class="stat-lbl" style="display:block;">HITS HONEYPOT / 24H</span>
+            </div>
+            <div class="stat-box" style="text-align:left;padding:0.5rem 0.8rem;min-width:unset;">
+              <span class="stat-val" style="font-size:1.2rem;">15-25</span>
+              <span class="stat-lbl" style="display:block;">IPS UNIQUES PIÉGÉES</span>
+            </div>
+            <div class="stat-box" style="text-align:left;padding:0.5rem 0.8rem;min-width:unset;">
+              <span class="stat-val" style="font-size:1.2rem;color:var(--green);">100%</span>
+              <span class="stat-lbl" style="display:block;">BLOQUÉES AVANT nginx</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -471,10 +1301,30 @@
   </div>
 
   <script>
+    // SCROLL REVEAL
     const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+      });
     }, { threshold: 0.06 });
     document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // COPY BUTTONS
+    document.querySelectorAll('.code-block').forEach(block => {
+      const btn = document.createElement('button');
+      btn.className = 'copy-btn';
+      btn.textContent = '⎘ copier';
+      block.appendChild(btn);
+      btn.addEventListener('click', () => {
+        const target = block.querySelector('pre') || block.querySelector('.code-pre');
+        const text = target ? target.innerText : '';
+        navigator.clipboard.writeText(text).then(() => {
+          btn.textContent = '✓ copié';
+          btn.classList.add('copied');
+          setTimeout(() => { btn.textContent = '⎘ copier'; btn.classList.remove('copied'); }, 2000);
+        });
+      });
+    });
   </script>
 
 </body>

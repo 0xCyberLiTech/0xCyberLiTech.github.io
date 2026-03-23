@@ -579,36 +579,6 @@
     </div>
   </div>
 
-  <!-- SECURITE -->
-  <div class="doc-section reveal">
-    <div class="sec-label">// sécurité — audit 2026-03-22</div>
-    <h2 class="sec-title">$ cat audit-results.txt</h2>
-    <div class="sec-sep"></div>
-
-    <div class="sec-items">
-      <div class="sec-item">
-        <span class="sec-ok">✅</span>
-        <span class="sec-text"><strong>XSS corrigé</strong> — fonction _esc() ajoutée dans jarvis.html. Messages utilisateur sanitisés avant injection innerHTML. Appels tool calling également échappés.</span>
-      </div>
-      <div class="sec-item">
-        <span class="sec-ok">✅</span>
-        <span class="sec-text"><strong>Threading lock</strong> — _CONFIG_LOCK = threading.Lock() protège load/save config provider et lecture prompt système contre accès concurrents.</span>
-      </div>
-      <div class="sec-item">
-        <span class="sec-ok">✅</span>
-        <span class="sec-text"><strong>TTS Lock</strong> — threading.Lock anti-doublon vocal. _TTS_LOCK.acquire(blocking=False) dans speak() empêche chevauchement audio. Alertes SOC fusionnées.</span>
-      </div>
-      <div class="sec-item">
-        <span class="sec-ok">✅</span>
-        <span class="sec-text"><strong>Garde-fou LLM</strong> — blocklist deux niveaux (noms d'outils + arguments). Chaque tentative bloquée est journalisée et visible dans le SOC dashboard.</span>
-      </div>
-      <div class="sec-item">
-        <span class="sec-ok">✅</span>
-        <span class="sec-text"><strong>Traitement local</strong> — STT faster-whisper et LLM Ollama fonctionnent entièrement en local. Aucune donnée vocale ou conversationnelle envoyée vers le cloud sauf activation explicite Groq/OpenRouter.</span>
-      </div>
-    </div>
-  </div>
-
   <!-- DÉPLOIEMENT -->
   <div class="doc-section reveal">
     <div class="sec-label">// déploiement — méthode de mise en production</div>
