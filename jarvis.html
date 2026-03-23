@@ -263,9 +263,44 @@
       margin-bottom: 0.8rem;
     }
 
+    /* PIPELINE DÉPLOIEMENT */
+    .pipeline {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    .pipe-step {
+      display: flex; flex-direction: column;
+      border: 1px solid rgba(0,255,240,0.15);
+      background: rgba(0,255,240,0.02);
+      padding: 0.8rem 1rem; min-width: 140px; flex: 1 1 140px;
+    }
+    .pipe-num  { font-size: 0.55rem; color: var(--orange); margin-bottom: 0.3rem; }
+    .pipe-name { font-size: 0.68rem; color: var(--cyan); margin-bottom: 0.3rem; }
+    .pipe-tech { font-size: 0.58rem; color: rgba(0,255,240,0.4); line-height: 1.5; }
+
+    /* SCROLLBAR THÉMÉ */
+    ::-webkit-scrollbar { height: 4px; width: 4px; background: transparent; }
+    ::-webkit-scrollbar-track { background: rgba(0,255,240,0.03); }
+    ::-webkit-scrollbar-thumb { background: rgba(0,255,240,0.15); border-radius: 2px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(0,255,240,0.35); }
+    * { scrollbar-width: thin; scrollbar-color: rgba(0,255,240,0.15) transparent; }
+
     @media (max-width: 600px) {
       .doc-section { padding: 2rem 1.2rem; }
-      .arch-box { min-width: 80px; font-size: 0.58rem; padding: 0.4rem 0.6rem; }
+      .doc-hero { padding: 6rem 1.2rem 3rem; }
+      .arch-box { min-width: 80px; font-size: 0.58rem; padding: 0.4rem 0.6rem; white-space: normal; }
+      .arch-row { flex-wrap: wrap; gap: 0.4rem; }
+      .code-block { padding: 0.8rem 1rem; }
+      .code-block pre { font-size: 0.58rem; }
+      .routes-table { font-size: 0.58rem; }
+      .routes-table th, .routes-table td { padding: 0.35rem 0.5rem; }
+      .doc-footer { flex-direction: column; gap: 0.4rem; }
+    }
+
+    @media (max-width: 480px) {
+      .nav-back { display: none; }
+      .nav-brand { font-size: 0.85rem; }
+      .nav-main { padding: 0.7rem 1.2rem; }
     }
   </style>
 </head>
@@ -599,7 +634,7 @@
         <div class="pipe-name">Lancement</div>
         <div class="pipe-tech">python jarvis.py<br>→ localhost:5000<br>navigateur</div>
       </div>
-      <div class="pipe-step" style="border-right:1px solid rgba(0,255,240,0.15);">
+      <div class="pipe-step">
         <div class="pipe-num">06</div>
         <div class="pipe-name">Intégration SOC</div>
         <div class="pipe-tech">URL JARVIS dans<br>SOC dashboard<br>Routes /api/soc/*</div>

@@ -719,9 +719,29 @@
 
     /* ── RESPONSIVE ────────────────────────────── */
     @media (max-width: 600px) {
-      section { padding: 3rem 1.2rem; }
+      section { padding: 2.5rem 1.2rem; }
+      #hero { padding: 5rem 1.2rem 3rem; }
       .hero-cta { gap: 0.6rem; }
       .btn-cyber { font-size: 0.72rem; padding: 0.5rem 1rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      #projects-list { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 480px) {
+      .nav-links { gap: 0.6rem; }
+      .nav-link { font-size: 0.58rem; letter-spacing: 0.06em; }
+      .nav-brand { font-size: 0.85rem; }
+      .footer-left, .footer-right { flex-direction: column; gap: 0.3rem; }
+    }
+
+    @media (max-width: 400px) {
+      .card-stats { flex-wrap: wrap; gap: 0.8rem; }
+    }
+
+    @media (max-width: 380px) {
+      .projects-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
