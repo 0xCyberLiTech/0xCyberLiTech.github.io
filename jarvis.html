@@ -216,6 +216,53 @@
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
     .reveal.visible { opacity: 1; transform: none; }
 
+    /* ── ANIMATIONS DIAGRAMME ────────────────────────── */
+    @keyframes glowOrange {
+      0%, 100% { box-shadow: 0 0 6px rgba(255,136,0,0.25); }
+      50%       { box-shadow: 0 0 22px rgba(255,136,0,0.55), 0 0 40px rgba(255,136,0,0.2); }
+    }
+    @keyframes glowCyan {
+      0%, 100% { box-shadow: 0 0 4px rgba(0,255,240,0.15); }
+      50%       { box-shadow: 0 0 16px rgba(0,255,240,0.4), 0 0 30px rgba(0,255,240,0.15); }
+    }
+    @keyframes flowArrow {
+      0%, 100% { opacity: 0.25; }
+      50%       { opacity: 0.8; }
+    }
+    @keyframes flowArrowFast {
+      0%   { opacity: 0.1; transform: scaleX(0.8); }
+      50%  { opacity: 0.9; transform: scaleX(1.05); }
+      100% { opacity: 0.1; transform: scaleX(0.8); }
+    }
+    .arch-box.orange { animation: glowOrange 3s ease-in-out infinite; }
+    .arch-box.cyan   { animation: glowCyan 3.5s ease-in-out infinite; }
+    .arch-box.green  { animation: glowCyan 4s ease-in-out infinite; }
+    .arch-arrow-h    { animation: flowArrow 2s ease-in-out infinite; display: inline-block; }
+    .arch-arrow-v    { animation: flowArrow 2s ease-in-out infinite; }
+
+    /* Code blocks */
+    .code-block {
+      background: rgba(0,255,240,0.02);
+      border: 1px solid rgba(0,255,240,0.1);
+      border-left: 3px solid rgba(255,136,0,0.5);
+      padding: 1.2rem 1.5rem;
+      margin-bottom: 1.5rem;
+      overflow-x: auto;
+    }
+    .code-block pre {
+      font-family: var(--mono); font-size: 0.65rem;
+      color: rgba(0,255,240,0.75); line-height: 1.7;
+      white-space: pre; margin: 0;
+    }
+    .code-block .cm  { color: rgba(0,255,240,0.35); }
+    .code-block .kw  { color: var(--orange); }
+    .code-block .st  { color: var(--green); }
+    .code-block .hl  { color: var(--cyan); }
+    .code-block-title {
+      font-size: 0.6rem; color: var(--orange); letter-spacing: 0.2em;
+      margin-bottom: 0.8rem;
+    }
+
     @media (max-width: 600px) {
       .doc-section { padding: 2rem 1.2rem; }
       .arch-box { min-width: 80px; font-size: 0.58rem; padding: 0.4rem 0.6rem; }
@@ -512,6 +559,157 @@
         <span class="sec-text"><strong>Traitement local</strong> — STT faster-whisper et LLM Ollama fonctionnent entièrement en local. Aucune donnée vocale ou conversationnelle envoyée vers le cloud sauf activation explicite Groq/OpenRouter.</span>
       </div>
     </div>
+  </div>
+
+  <!-- DÉPLOIEMENT -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// déploiement — méthode de mise en production</div>
+    <h2 class="sec-title">$ cat deploy.md</h2>
+    <div class="sec-sep"></div>
+    <p class="sec-desc">
+      Déploiement local sur machine Windows avec GPU NVIDIA. Python 3.11, Ollama,
+      edge-tts et faster-whisper forment la colonne vertébrale. La configuration
+      se fait via fichiers JSON — aucune variable d'environnement système requise.
+    </p>
+
+    <!-- PIPELINE DÉPLOIEMENT -->
+    <div class="pipeline" style="margin-bottom:2rem;">
+      <div class="pipe-step">
+        <div class="pipe-num">01</div>
+        <div class="pipe-name">Prérequis</div>
+        <div class="pipe-tech">Python 3.11+<br>NVIDIA GPU (CUDA 12)<br>Ollama installé</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">02</div>
+        <div class="pipe-name">Dépendances</div>
+        <div class="pipe-tech">pip install<br>flask edge-tts<br>faster-whisper pynvml</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">03</div>
+        <div class="pipe-name">Modèles LLM</div>
+        <div class="pipe-tech">ollama pull [model]<br>Détection auto<br>au démarrage</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">04</div>
+        <div class="pipe-name">Config JSON</div>
+        <div class="pipe-tech">providers.json<br>llm_params.json<br>dsp_params.json</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">05</div>
+        <div class="pipe-name">Lancement</div>
+        <div class="pipe-tech">python jarvis.py<br>→ localhost:5000<br>navigateur</div>
+      </div>
+      <div class="pipe-step" style="border-right:1px solid rgba(0,255,240,0.15);">
+        <div class="pipe-num">06</div>
+        <div class="pipe-name">Intégration SOC</div>
+        <div class="pipe-tech">URL JARVIS dans<br>SOC dashboard<br>Routes /api/soc/*</div>
+      </div>
+    </div>
+
+    <!-- STRUCTURE PROJET -->
+    <div class="code-block">
+      <div class="code-block-title">// structure du projet</div>
+      <pre><span class="hl">scripts/</span>
+<span class="cm">├──</span> <span class="kw">jarvis.py</span>              <span class="cm"># Serveur Flask principal (~3 000 lignes)</span>
+<span class="cm">├──</span> templates/
+<span class="cm">│   └──</span> <span class="kw">jarvis.html</span>        <span class="cm"># Interface UI holographique (~17 000 lignes)</span>
+<span class="cm">├──</span> <span class="st">jarvis_providers.json</span>  <span class="cm"># Providers LLM + clés API (non versionné)</span>
+<span class="cm">├──</span> <span class="st">jarvis_llm_params.json</span> <span class="cm"># Paramètres LLM : temp, top_p, num_ctx, num_predict</span>
+<span class="cm">└──</span> <span class="st">jarvis_dsp_params.json</span> <span class="cm"># Paramètres DSP + moteur TTS actif</span></pre>
+    </div>
+
+    <!-- INSTALL DEPS -->
+    <div class="code-block">
+      <div class="code-block-title">// installation des dépendances</div>
+      <pre><span class="cm"># Dépendances principales</span>
+pip install flask flask-cors requests psutil
+
+<span class="cm"># TTS — synthèse vocale</span>
+pip install edge-tts pyttsx3
+
+<span class="cm"># STT — reconnaissance vocale</span>
+pip install faster-whisper
+
+<span class="cm"># GPU monitoring (NVIDIA)</span>
+pip install pynvml
+
+<span class="cm"># Optionnel — Piper TTS hors-ligne</span>
+<span class="cm"># Télécharger le binaire depuis github.com/rhasspy/piper</span></pre>
+    </div>
+
+    <!-- CONFIG PROVIDERS -->
+    <div class="code-block">
+      <div class="code-block-title">// jarvis_providers.json — template (remplacer les [PLACEHOLDERS])</div>
+      <pre>{
+  <span class="st">"active_provider"</span>: <span class="kw">"ollama"</span>,
+  <span class="st">"providers"</span>: {
+    <span class="st">"ollama"</span>: {
+      <span class="st">"base_url"</span>: <span class="kw">"http://localhost:11434"</span>,
+      <span class="st">"model"</span>: <span class="kw">"[MODEL_NAME]"</span>       <span class="cm">// ex: phi4:14b</span>
+    },
+    <span class="st">"groq"</span>: {
+      <span class="st">"api_key"</span>: <span class="kw">"[GROQ_API_KEY]"</span>,
+      <span class="st">"model"</span>: <span class="kw">"[GROQ_MODEL]"</span>        <span class="cm">// ex: llama-3.3-70b-versatile</span>
+    },
+    <span class="st">"openrouter"</span>: {
+      <span class="st">"api_key"</span>: <span class="kw">"[OPENROUTER_API_KEY]"</span>,
+      <span class="st">"model"</span>: <span class="kw">"[OPENROUTER_MODEL]"</span>  <span class="cm">// ex: anthropic/claude-3.5-sonnet</span>
+    }
+  }
+}</pre>
+    </div>
+
+    <!-- CONFIG LLM PARAMS -->
+    <div class="code-block">
+      <div class="code-block-title">// jarvis_llm_params.json — paramètres LLM</div>
+      <pre>{
+  <span class="st">"temperature"</span>:  <span class="kw">0.7</span>,   <span class="cm">// créativité (0.1 précis → 1.0 créatif)</span>
+  <span class="st">"top_p"</span>:        <span class="kw">0.9</span>,   <span class="cm">// nucleus sampling</span>
+  <span class="st">"num_ctx"</span>:      <span class="kw">8192</span>,  <span class="cm">// taille contexte (tokens)</span>
+  <span class="st">"num_predict"</span>:  <span class="kw">512</span>,   <span class="cm">// longueur max réponse</span>
+  <span class="st">"preset"</span>:       <span class="kw">"ÉQUILIBRÉ"</span>  <span class="cm">// RAPIDE | ÉQUILIBRÉ | QUALITÉ</span>
+}</pre>
+    </div>
+
+    <!-- LANCEMENT -->
+    <div class="code-block">
+      <div class="code-block-title">// lancement & arrêt</div>
+      <pre><span class="cm"># Installer les modèles Ollama avant de démarrer</span>
+ollama pull [MODEL_NAME]
+ollama list   <span class="cm"># vérifier les modèles disponibles</span>
+
+<span class="cm"># Lancer JARVIS</span>
+cd scripts/
+python jarvis.py
+<span class="cm"># → Serveur Flask démarré sur http://localhost:5000</span>
+<span class="cm"># → Ouvrir le navigateur sur http://localhost:5000</span>
+
+<span class="cm"># Arrêt propre (Windows)</span>
+<span class="cm"># stop_jarvis.bat  ou  Ctrl+C dans le terminal</span>
+
+<span class="cm"># Vérifier que le port est libre avant relance</span>
+netstat -ano | findstr :5000</pre>
+    </div>
+
+    <!-- INTEGRATION SOC DEPLOY -->
+    <div class="code-block">
+      <div class="code-block-title">// intégration SOC — configuration côté dashboard</div>
+      <pre><span class="cm"># Dans le SOC Dashboard (monitoring-index.html)</span>
+<span class="cm"># Renseigner l'URL JARVIS dans les paramètres du dashboard :</span>
+<span class="kw">JARVIS_URL</span> = <span class="st">"http://[JARVIS_HOST]:5000"</span>
+
+<span class="cm"># Routes exposées par JARVIS pour le SOC :</span>
+GET  /api/gpu              <span class="cm">→ stats GPU temps réel</span>
+POST /api/chat             <span class="cm">→ analyse LLM narrative</span>
+GET  /api/tts              <span class="cm">→ lecture vocale alerte</span>
+GET  /api/security         <span class="cm">→ journal garde-fou LLM</span>
+POST /api/soc/ban-ip       <span class="cm">→ ban via CrowdSec</span>
+POST /api/soc/unban-ip     <span class="cm">→ lever un ban</span>
+POST /api/soc/restart-service <span class="cm">→ redémarrer un service</span>
+
+<span class="cm"># JARVIS est optionnel — le SOC fonctionne sans lui</span></pre>
+    </div>
+
   </div>
 
   <!-- FOOTER -->

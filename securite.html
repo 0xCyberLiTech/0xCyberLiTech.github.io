@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Briques de Sécurité — Stack Défense | 0xCyberLiTech</title>
+  <meta name="description" content="Documentation technique — stack défense en profondeur : fail2ban, CrowdSec, UFW, GeoIP2, SSH hardening, rotation des clés.">
+  <link rel="icon" type="image/png" href="assets/logo/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap">
+  <style>
+    :root {
+      --cyan:   #00fff0;
+      --orange: #ff8800;
+      --blue:   #00aaff;
+      --green:  #00ff88;
+      --red:    #ff4455;
+      --bg:     #080c10;
+      --bg2:    #0d1117;
+      --muted:  rgba(0,255,240,0.35);
+      --mono:   'Share Tech Mono', monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--cyan); font-family: var(--mono); overflow-x: hidden; }
+
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,240,0.012) 2px, rgba(0,255,240,0.012) 4px);
+      pointer-events: none; z-index: 9999;
+    }
+
+    /* NAV */
+    .nav-main {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.9rem 2rem;
+      background: rgba(8,12,16,0.92);
+      border-bottom: 1px solid rgba(0,255,240,0.08);
+      backdrop-filter: blur(12px);
+    }
+    .nav-brand { font-size: 1rem; letter-spacing: 0.08em; text-decoration: none; color: var(--cyan); }
+    .nav-brand-prefix { color: var(--orange); }
+    .nav-back { font-size: 0.7rem; color: rgba(0,255,240,0.5); text-decoration: none; letter-spacing: 0.1em; transition: color 0.2s; }
+    .nav-back:hover { color: var(--cyan); }
+
+    /* HERO */
+    .doc-hero {
+      padding: 8rem 2rem 4rem;
+      max-width: 960px; margin: 0 auto; text-align: center;
+    }
+    .doc-label { font-size: 0.62rem; color: var(--orange); letter-spacing: 0.4em; margin-bottom: 0.8rem; }
+    .doc-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--green);
+      text-shadow: 0 0 30px rgba(0,255,136,0.5), 0 0 60px rgba(0,255,136,0.2);
+      letter-spacing: 0.08em; margin-bottom: 0.8rem;
+    }
+    .doc-sub { font-size: 0.85rem; color: rgba(0,255,240,0.55); letter-spacing: 0.12em; margin-bottom: 1.5rem; }
+    .doc-badges { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; }
+    .badge { font-size: 0.6rem; padding: 0.25rem 0.7rem; border: 1px solid; letter-spacing: 0.1em; }
+    .badge.orange { border-color: rgba(255,136,0,0.4); color: var(--orange); }
+    .badge.green  { border-color: rgba(0,255,136,0.4); color: var(--green); }
+    .badge.blue   { border-color: rgba(0,170,255,0.4); color: var(--blue); }
+    .badge.cyan   { border-color: rgba(0,255,240,0.4); color: var(--cyan); }
+    .badge.red    { border-color: rgba(255,68,85,0.4); color: var(--red); }
+
+    /* SECTIONS */
+    .doc-section { max-width: 960px; margin: 0 auto; padding: 3rem 2rem; }
+    .doc-section + .doc-section { border-top: 1px solid rgba(0,255,240,0.06); }
+    .sec-label { font-size: 0.6rem; color: var(--orange); letter-spacing: 0.35em; margin-bottom: 0.4rem; }
+    .sec-title { font-size: clamp(1rem, 2.5vw, 1.4rem); color: var(--cyan); text-shadow: 0 0 12px rgba(0,255,240,0.3); margin-bottom: 0.4rem; }
+    .sec-sep { width: 40px; height: 2px; background: linear-gradient(90deg, var(--green), transparent); margin-bottom: 2rem; }
+    .sec-desc { font-size: 0.78rem; color: rgba(0,255,240,0.55); line-height: 1.9; margin-bottom: 1.8rem; }
+
+    /* ARCH DIAGRAM */
+    .arch-diagram {
+      background: rgba(0,255,240,0.02);
+      border: 1px solid rgba(0,255,240,0.1);
+      padding: 2rem; margin-bottom: 2rem; overflow-x: auto;
+    }
+    .arch-flow { display: flex; flex-direction: column; gap: 0; align-items: center; }
+    .arch-row { display: flex; align-items: center; justify-content: center; gap: 0.5rem; width: 100%; flex-wrap: wrap; }
+    .arch-box {
+      padding: 0.6rem 1rem; border: 1px solid;
+      font-size: 0.65rem; letter-spacing: 0.07em;
+      text-align: center; min-width: 110px; white-space: nowrap;
+    }
+    .arch-box.cyan   { border-color: rgba(0,255,240,0.4); color: var(--cyan); background: rgba(0,255,240,0.04); }
+    .arch-box.orange { border-color: rgba(255,136,0,0.4); color: var(--orange); background: rgba(255,136,0,0.04); }
+    .arch-box.green  { border-color: rgba(0,255,136,0.4); color: var(--green); background: rgba(0,255,136,0.04); }
+    .arch-box.blue   { border-color: rgba(0,170,255,0.4); color: var(--blue); background: rgba(0,170,255,0.04); }
+    .arch-box.red    { border-color: rgba(255,68,85,0.4); color: var(--red); background: rgba(255,68,85,0.04); }
+    .arch-arrow-h { font-size: 0.7rem; color: rgba(0,255,240,0.3); }
+    .arch-arrow-v-wrap { display:flex;justify-content:center;margin:0.3rem 0; }
+    .arch-arrow-v {
+      width:1px;height:22px;background:rgba(0,255,240,0.3);position:relative;
+    }
+    .arch-arrow-v::after {
+      content:'▼';position:absolute;bottom:-9px;left:50%;transform:translateX(-50%);
+      font-size:0.5rem;color:rgba(0,255,240,0.4);
+    }
+
+    /* LAYER LABEL inside arch-box */
+    .layer-num { font-size: 0.5rem; color: rgba(0,255,240,0.35); display: block; margin-bottom: 0.2rem; }
+
+    /* CODE BLOCK */
+    .code-block {
+      background: rgba(0,255,240,0.02);
+      border: 1px solid rgba(0,255,240,0.1);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      overflow-x: auto;
+    }
+    .code-block-title {
+      font-size: 0.6rem; color: var(--orange); letter-spacing: 0.2em;
+      margin-bottom: 1rem;
+    }
+    .code-pre {
+      white-space: pre;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: rgba(0,255,240,0.7);
+      line-height: 1.7;
+    }
+    .code-pre .cm { color: rgba(0,255,240,0.35); }
+
+    /* DUAL BOX ROW */
+    .dual-box-row {
+      display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;
+    }
+    .dual-box {
+      flex: 1; min-width: 200px;
+      border: 1px solid; padding: 1rem 1.2rem;
+      font-size: 0.65rem; line-height: 1.7;
+    }
+    .dual-box.orange { border-color: rgba(255,136,0,0.3); }
+    .dual-box.cyan   { border-color: rgba(0,255,240,0.2); }
+    .dual-box-title { font-size: 0.68rem; margin-bottom: 0.5rem; }
+    .dual-box-title.orange { color: var(--orange); }
+    .dual-box-title.cyan   { color: var(--cyan); }
+    .dual-box-desc { color: rgba(0,255,240,0.5); }
+
+    /* PIPELINE */
+    .pipeline {
+      display: flex; align-items: stretch; gap: 0;
+      overflow-x: auto; padding-bottom: 0.5rem;
+    }
+    .pipe-step {
+      display: flex; flex-direction: column;
+      border: 1px solid rgba(0,255,240,0.15);
+      background: rgba(0,255,240,0.02);
+      padding: 0.8rem 1rem; min-width: 140px;
+      position: relative;
+    }
+    .pipe-step + .pipe-step { border-left: none; }
+    .pipe-step::after {
+      content: '▶';
+      position: absolute; right: -0.6rem; top: 50%; transform: translateY(-50%);
+      font-size: 0.5rem; color: rgba(0,255,240,0.3);
+      z-index: 1;
+    }
+    .pipe-step:last-child::after { display: none; }
+    .pipe-num { font-size: 0.55rem; color: var(--orange); margin-bottom: 0.3rem; }
+    .pipe-name { font-size: 0.68rem; color: var(--cyan); margin-bottom: 0.3rem; }
+    .pipe-tech { font-size: 0.58rem; color: rgba(0,255,240,0.4); line-height: 1.5; }
+
+    /* SOURCES TABLE */
+    .data-table { width: 100%; border-collapse: collapse; font-size: 0.68rem; }
+    .data-table th {
+      text-align: left; padding: 0.5rem 0.8rem;
+      border-bottom: 1px solid rgba(0,255,240,0.15);
+      color: var(--orange); letter-spacing: 0.1em; font-weight: normal;
+    }
+    .data-table td {
+      padding: 0.5rem 0.8rem;
+      border-bottom: 1px solid rgba(0,255,240,0.05);
+      color: rgba(0,255,240,0.6); vertical-align: top;
+    }
+    .data-table tr:hover td { color: rgba(0,255,240,0.85); background: rgba(0,255,240,0.02); }
+    .data-hl { color: var(--cyan); }
+
+    /* STATS ROW */
+    .stats-row {
+      display: flex; gap: 1.5rem; flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .stat-box {
+      border: 1px solid rgba(0,255,136,0.12);
+      padding: 1rem 1.5rem; text-align: center; flex: 1; min-width: 120px;
+    }
+    .stat-val { font-size: 1.8rem; color: var(--green); text-shadow: 0 0 15px rgba(0,255,136,0.4); }
+    .stat-lbl { font-size: 0.55rem; color: var(--muted); letter-spacing: 0.12em; margin-top: 0.3rem; }
+
+    /* FOOTER */
+    .doc-footer {
+      border-top: 1px solid rgba(0,255,240,0.08);
+      padding: 1.5rem 2rem;
+      max-width: 960px; margin: 2rem auto 0;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.62rem; color: rgba(0,255,240,0.3); letter-spacing: 0.08em;
+      flex-wrap: wrap; gap: 0.6rem;
+    }
+    .doc-footer a { color: rgba(0,255,240,0.4); text-decoration: none; }
+    .doc-footer a:hover { color: var(--cyan); }
+    .doc-footer-links { display: flex; gap: 1.5rem; }
+
+    @keyframes fadeUp { from { opacity:0;transform:translateY(16px); } to { opacity:1;transform:none; } }
+    .doc-hero { animation: fadeUp 0.8s ease both; }
+    .reveal { opacity:0;transform:translateY(20px);transition:opacity 0.5s ease,transform 0.5s ease; }
+    .reveal.visible { opacity:1;transform:none; }
+
+    @keyframes glowCyan {
+      0%, 100% { box-shadow: 0 0 4px rgba(0,255,240,0.15); }
+      50%       { box-shadow: 0 0 18px rgba(0,255,240,0.45), 0 0 35px rgba(0,255,240,0.15); }
+    }
+    @keyframes glowOrange {
+      0%, 100% { box-shadow: 0 0 6px rgba(255,136,0,0.2); }
+      50%       { box-shadow: 0 0 20px rgba(255,136,0,0.5), 0 0 38px rgba(255,136,0,0.2); }
+    }
+    @keyframes glowGreen {
+      0%, 100% { box-shadow: 0 0 4px rgba(0,255,136,0.15); }
+      50%       { box-shadow: 0 0 16px rgba(0,255,136,0.4), 0 0 30px rgba(0,255,136,0.15); }
+    }
+    @keyframes glowRed {
+      0%, 100% { box-shadow: 0 0 4px rgba(255,68,85,0.15); }
+      50%       { box-shadow: 0 0 16px rgba(255,68,85,0.4), 0 0 30px rgba(255,68,85,0.15); }
+    }
+    @keyframes flowArrow {
+      0%, 100% { opacity: 0.2; }
+      50%       { opacity: 0.9; }
+    }
+    .arch-box.orange { animation: glowOrange 3s ease-in-out infinite; }
+    .arch-box.cyan   { animation: glowCyan 3.5s ease-in-out infinite; }
+    .arch-box.green  { animation: glowGreen 4s ease-in-out infinite; }
+    .arch-box.red    { animation: glowRed 2.5s ease-in-out infinite; }
+    .arch-arrow-h    { animation: flowArrow 2s ease-in-out infinite; display: inline-block; }
+    .arch-arrow-v    { animation: flowArrow 2.2s ease-in-out infinite; }
+    .pipe-step:hover { background: rgba(0,255,240,0.04); border-color: rgba(0,255,240,0.3); }
+    .pipe-step:hover .pipe-name { color: var(--orange); }
+
+    @media (max-width: 600px) {
+      .doc-section { padding: 2rem 1.2rem; }
+      .pipeline { flex-direction: column; }
+      .pipe-step::after { display:none; }
+      .dual-box-row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav-main">
+    <a class="nav-brand" href="portfolio.html">
+      <span class="nav-brand-prefix">0x</span>CyberLiTech
+    </a>
+    <a class="nav-back" href="portfolio.html">← Retour au portfolio</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="doc-hero">
+    <div class="doc-label">// infrastructure — défense en profondeur</div>
+    <h1 class="doc-title">BRIQUES DE SÉCURITÉ</h1>
+    <p class="doc-sub">DÉFENSE EN PROFONDEUR &nbsp;·&nbsp; FAIL2BAN &nbsp;·&nbsp; CROWDSEC &nbsp;·&nbsp; UFW &nbsp;·&nbsp; GEOIP2 &nbsp;·&nbsp; SSH</p>
+    <div class="doc-badges">
+      <span class="badge green">6 couches de défense</span>
+      <span class="badge orange">fail2ban · CrowdSec</span>
+      <span class="badge blue">UFW firewall</span>
+      <span class="badge cyan">GeoIP2 · SSH hardened</span>
+      <span class="badge green">Rotation des clés</span>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="doc-section reveal">
+    <div class="stats-row">
+      <div class="stat-box"><div class="stat-val">6</div><div class="stat-lbl">COUCHES DE DÉFENSE</div></div>
+      <div class="stat-box"><div class="stat-val">3</div><div class="stat-lbl">SERVEURS PROTÉGÉS</div></div>
+      <div class="stat-box"><div class="stat-val">0</div><div class="stat-lbl">EXPOSITION SSH WAN</div></div>
+      <div class="stat-box"><div class="stat-val">LAN</div><div class="stat-lbl">UNIQUEMENT ACCÈS SSH</div></div>
+    </div>
+  </div>
+
+  <!-- SECTION 1 : DÉFENSE EN PROFONDEUR -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// défense en profondeur — modèle en couches</div>
+    <h2 class="sec-title">$ cat defense-in-depth.json</h2>
+    <div class="sec-sep"></div>
+    <p class="sec-desc">
+      Chaque couche intercepte une catégorie de menaces différente. Une attaque doit traverser
+      toutes les couches pour atteindre l'application. Modèle inspiré du principe de moindre
+      privilège et de la segmentation réseau.
+    </p>
+
+    <div class="arch-diagram">
+      <div class="arch-flow">
+
+        <div class="arch-row">
+          <div class="arch-box red" style="min-width:320px;">
+            <span class="layer-num">COUCHE 1 — RÉSEAU</span>
+            UFW Firewall — ports autorisés uniquement
+          </div>
+        </div>
+
+        <div class="arch-arrow-v-wrap"><div class="arch-arrow-v"></div></div>
+
+        <div class="arch-row">
+          <div class="arch-box orange" style="min-width:320px;">
+            <span class="layer-num">COUCHE 2 — TRANSPORT</span>
+            SSL/TLS — TLSv1.2 + TLSv1.3 · HSTS · dhparam
+          </div>
+        </div>
+
+        <div class="arch-arrow-v-wrap"><div class="arch-arrow-v"></div></div>
+
+        <div class="arch-row">
+          <div class="arch-box blue" style="min-width:320px;">
+            <span class="layer-num">COUCHE 3 — GÉOGRAPHIQUE</span>
+            GeoIP2 — restriction pays · whitelist IP fixe
+          </div>
+        </div>
+
+        <div class="arch-arrow-v-wrap"><div class="arch-arrow-v"></div></div>
+
+        <div class="arch-row">
+          <div class="arch-box orange" style="min-width:320px;">
+            <span class="layer-num">COUCHE 4 — COMPORTEMENTALE</span>
+            CrowdSec — analyse patterns · ban automatique
+          </div>
+        </div>
+
+        <div class="arch-arrow-v-wrap"><div class="arch-arrow-v"></div></div>
+
+        <div class="arch-row">
+          <div class="arch-box cyan" style="min-width:320px;">
+            <span class="layer-num">COUCHE 5 — APPLICATIVE</span>
+            nginx Headers · Rate Limiting · WAF AppSec
+          </div>
+        </div>
+
+        <div class="arch-arrow-v-wrap"><div class="arch-arrow-v"></div></div>
+
+        <div class="arch-row">
+          <div class="arch-box green" style="min-width:320px;">
+            <span class="layer-num">COUCHE 6 — ACCÈS ADMIN</span>
+            SSH — ed25519 · port non standard · fail2ban
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 : CHRONOLOGIE -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// démarche chronologique — ordre de mise en place</div>
+    <h2 class="sec-title">$ cat chronologie-securite.txt</h2>
+    <div class="sec-sep"></div>
+    <p class="sec-desc">
+      L'ordre d'implémentation est important. On sécurise d'abord les accès admin (SSH), puis le
+      périmètre réseau, puis on empile les couches applicatives.
+    </p>
+
+    <div class="pipeline">
+      <div class="pipe-step">
+        <div class="pipe-num">01</div>
+        <div class="pipe-name">SSH Hardening</div>
+        <div class="pipe-tech">port non standard<br>clé ed25519 seule<br>PasswordAuth no<br>MaxAuthTries 4</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">02</div>
+        <div class="pipe-name">UFW Firewall</div>
+        <div class="pipe-tech">deny all par défaut<br>ouverture ports explicites<br>80/443/SSH/8080 LAN</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">03</div>
+        <div class="pipe-name">fail2ban</div>
+        <div class="pipe-tech">jails SSH + HTTP<br>LAN whitelisté<br>bantime/findtime<br>maxretry configurés</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">04</div>
+        <div class="pipe-name">SSL/TLS</div>
+        <div class="pipe-tech">certbot --nginx<br>renouvellement auto<br>options-ssl-nginx.conf</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">05</div>
+        <div class="pipe-name">Security Headers</div>
+        <div class="pipe-tech">snippet nginx<br>HSTS preload<br>CSP stricte<br>X-Frame DENY</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">06</div>
+        <div class="pipe-name">Rate Limiting</div>
+        <div class="pipe-tech">zones nginx<br>whitelist LAN<br>burst nodelay</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">07</div>
+        <div class="pipe-name">GeoIP2</div>
+        <div class="pipe-tech">module nginx<br>base MaxMind<br>restriction géo<br>whitelist admin</div>
+      </div>
+      <div class="pipe-step" style="border-right:1px solid rgba(0,255,240,0.15);">
+        <div class="pipe-num">08</div>
+        <div class="pipe-name">CrowdSec</div>
+        <div class="pipe-tech">collections nginx<br>collections linux<br>bouncer firewall<br>AppSec WAF 7422</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 : UFW -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// UFW — règles type</div>
+    <h2 class="sec-title">$ cat ufw-rules.txt</h2>
+    <div class="sec-sep"></div>
+    <p class="sec-desc">
+      Politique par défaut : tout bloquer en entrée, tout autoriser en sortie. Ouverture explicite
+      des services nécessaires uniquement. Le réseau local est traité différemment (SSH LAN uniquement).
+    </p>
+
+    <div class="code-block">
+      <div class="code-block-title">// UFW — POLITIQUE DENY ALL + OUVERTURES EXPLICITES</div>
+      <div class="code-pre"><span class="cm"># Politique par défaut</span>
+ufw default deny incoming
+ufw default allow outgoing
+
+<span class="cm"># Services publics</span>
+ufw allow 80/tcp comment 'HTTP'
+ufw allow 443/tcp comment 'HTTPS'
+
+<span class="cm"># SSH — LAN uniquement (jamais exposé sur internet)</span>
+ufw allow in to [NGINX_IP] port [SSH_PORT] proto tcp \
+  from [LAN_SUBNET] comment 'SSH LAN only'
+
+<span class="cm"># Monitoring interne — LAN uniquement</span>
+ufw allow in to [NGINX_IP] port 8080 proto tcp \
+  from [LAN_SUBNET] comment 'Monitoring LAN'
+
+<span class="cm"># Règles sortantes explicites (backends)</span>
+ufw allow out to [BACKEND_IP_A] port 80
+ufw allow out to [BACKEND_IP_B] port 80
+
+<span class="cm"># Activer</span>
+ufw enable && ufw status numbered</div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 : FAIL2BAN -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// fail2ban — configuration type</div>
+    <h2 class="sec-title">$ cat fail2ban-config.txt</h2>
+    <div class="sec-sep"></div>
+    <p class="sec-desc">
+      fail2ban surveille les logs et bannit les IPs après N échecs dans une fenêtre de temps.
+      Le réseau local est systématiquement whitelisté pour éviter l'auto-blocage lors des rotations
+      de clés ou des tests.
+    </p>
+
+    <div class="code-block">
+      <div class="code-block-title">// /ETC/FAIL2BAN/JAIL.LOCAL</div>
+      <div class="code-pre"><span class="cm"># /etc/fail2ban/jail.local</span>
+[DEFAULT]
+ignoreip  = 127.0.0.1/8 ::1 [LAN_SUBNET]
+bantime   = 1h
+findtime  = 10m
+maxretry  = 3
+banaction = nftables
+
+[sshd]
+enabled     = true
+port        = [SSH_PORT]
+backend     = systemd
+maxretry    = 3
+bantime     = 2h
+findtime    = 10m
+
+<span class="cm"># Vérifier qu'un jail est actif :</span>
+<span class="cm"># fail2ban-client status sshd</span>
+<span class="cm"># Vérifier la whitelist LAN :</span>
+<span class="cm"># fail2ban-client get sshd ignoreip</span></div>
+    </div>
+  </div>
+
+  <!-- SECTION 5 : CROWDSEC -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// CrowdSec — analyse comportementale + WAF</div>
+    <h2 class="sec-title">$ cat crowdsec-stack.txt</h2>
+    <div class="sec-sep"></div>
+    <p class="sec-desc">
+      CrowdSec analyse les logs en temps réel et bannit les IPs dont le comportement correspond
+      à des patterns d'attaque connus. Le bouncer firewall bloque au niveau réseau. L'AppSec WAF
+      (port 7422) intercepte les attaques applicatives avant qu'elles atteignent le backend.
+    </p>
+
+    <div class="dual-box-row">
+      <div class="dual-box orange">
+        <div class="dual-box-title orange">Firewall Bouncer</div>
+        <div class="dual-box-desc">
+          Lit les décisions CrowdSec → bannit via nftables au niveau réseau.
+          Actif sur les 3 serveurs.
+        </div>
+      </div>
+      <div class="dual-box cyan">
+        <div class="dual-box-title cyan">AppSec WAF</div>
+        <div class="dual-box-desc">
+          auth_request nginx → analyse chaque requête sur port 7422 →
+          bloque SQLi/XSS/traversal. Actif sur les vhosts publics.
+        </div>
+      </div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-title">// /ETC/NGINX/SNIPPETS/CROWDSEC-APPSEC.CONF</div>
+      <div class="code-pre"><span class="cm"># /etc/nginx/snippets/crowdsec-appsec.conf</span>
+<span class="cm"># À inclure dans les locations exposées publiquement</span>
+auth_request /crowdsec-appsec;
+
+location = /crowdsec-appsec {
+    internal;
+    proxy_pass http://127.0.0.1:7422;
+    proxy_pass_request_body on;
+    proxy_set_header Content-Length       $content_length;
+    proxy_set_header X-Crowdsec-Appsec-Ip    $remote_addr;
+    proxy_set_header X-Crowdsec-Appsec-Uri   $request_uri;
+    proxy_set_header X-Crowdsec-Appsec-Host  $host;
+    proxy_set_header X-Crowdsec-Appsec-Verb  $request_method;
+    proxy_set_header X-Crowdsec-Appsec-Api-Key "[BOUNCER_API_KEY]";
+    proxy_read_timeout 5s;
+}</div>
+    </div>
+  </div>
+
+  <!-- SECTION 6 : SSH HARDENING -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// SSH — durcissement &amp; rotation des clés</div>
+    <h2 class="sec-title">$ cat ssh-hardening.txt</h2>
+    <div class="sec-sep"></div>
+    <p class="sec-desc">
+      Une clé ed25519 dédiée par serveur. Pas de réutilisation de clé entre destinations.
+      Rotation périodique. Le LAN est systématiquement whitelisté dans fail2ban avant toute
+      rotation pour éviter le lockout.
+    </p>
+
+    <div class="pipeline" style="margin-bottom:1.5rem;">
+      <div class="pipe-step">
+        <div class="pipe-num">01</div>
+        <div class="pipe-name">Génération clé</div>
+        <div class="pipe-tech">ssh-keygen -t ed25519<br>-C "[usage]"<br>une clé par lien</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">02</div>
+        <div class="pipe-name">Déploiement</div>
+        <div class="pipe-tech">ssh-copy-id<br>ou authorized_keys<br>test avant durcissement</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">03</div>
+        <div class="pipe-name">Hardening sshd</div>
+        <div class="pipe-tech">Port [non-standard]<br>PermitRootLogin<br>prohibit-password<br>PasswordAuth no</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">04</div>
+        <div class="pipe-name">Rotation</div>
+        <div class="pipe-tech">nouvelle clé → déploiement<br>→ test → retrait ancienne<br>LAN whitelisté f2b</div>
+      </div>
+      <div class="pipe-step" style="border-right:1px solid rgba(0,255,240,0.15);">
+        <div class="pipe-num">05</div>
+        <div class="pipe-name">Audit</div>
+        <div class="pipe-tech">grep authorized_keys<br>entrées obsolètes<br>rotation-ssh.log</div>
+      </div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-title">// /ETC/SSH/SSHD_CONFIG.D/99-HARDENED.CONF</div>
+      <div class="code-pre"><span class="cm"># /etc/ssh/sshd_config.d/99-hardened.conf</span>
+Port [SSH_PORT]
+PermitRootLogin prohibit-password
+PasswordAuthentication no
+PubkeyAuthentication yes
+MaxAuthTries 4
+MaxSessions 5
+X11Forwarding no
+AllowAgentForwarding no
+
+<span class="cm"># Tester avant reload :</span>
+<span class="cm"># sshd -t && systemctl reload ssh</span>
+
+<span class="cm"># Connexion type depuis le client :</span>
+<span class="cm"># ssh -i ~/.ssh/[key_name] -p [SSH_PORT] \</span>
+<span class="cm">#     -o IdentitiesOnly=yes user@[HOST]</span></div>
+    </div>
+  </div>
+
+  <!-- SECTION 7 : AUDIT -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// audit &amp; vérification posture sécurité</div>
+    <h2 class="sec-title">$ cat audit-posture.txt</h2>
+    <div class="sec-sep"></div>
+    <p class="sec-desc">
+      Commandes de vérification périodique. À exécuter après chaque changement de configuration
+      ou lors d'un audit de sécurité.
+    </p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Vérification</th>
+          <th>Commande</th>
+          <th>Attendu</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="data-hl">fail2ban jails actifs</td>
+          <td>fail2ban-client status</td>
+          <td>sshd et nginx actifs</td>
+        </tr>
+        <tr>
+          <td class="data-hl">IPs bannies actives</td>
+          <td>fail2ban-client status sshd</td>
+          <td>liste bans en cours</td>
+        </tr>
+        <tr>
+          <td class="data-hl">LAN whitelisté f2b</td>
+          <td>fail2ban-client get sshd ignoreip</td>
+          <td>[LAN_SUBNET] présent</td>
+        </tr>
+        <tr>
+          <td class="data-hl">Règles UFW</td>
+          <td>ufw status numbered</td>
+          <td>politique deny · ports explicites</td>
+        </tr>
+        <tr>
+          <td class="data-hl">CrowdSec décisions</td>
+          <td>cscli decisions list</td>
+          <td>bans actifs par IP</td>
+        </tr>
+        <tr>
+          <td class="data-hl">CrowdSec collections</td>
+          <td>cscli collections list</td>
+          <td>nginx + linux installés</td>
+        </tr>
+        <tr>
+          <td class="data-hl">Headers SSL</td>
+          <td>curl -I https://[domaine]</td>
+          <td>HSTS + headers sécurité</td>
+        </tr>
+        <tr>
+          <td class="data-hl">Score TLS</td>
+          <td>testssl.sh [domaine]</td>
+          <td>TLSv1.2/1.3 uniquement · Grade A</td>
+        </tr>
+        <tr>
+          <td class="data-hl">Config nginx valide</td>
+          <td>nginx -t</td>
+          <td>syntax is ok</td>
+        </tr>
+        <tr>
+          <td class="data-hl">Processus actifs</td>
+          <td>systemctl status nginx fail2ban crowdsec</td>
+          <td>active (running)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <span>0xCyberLiTech · Briques de Sécurité · Stack Défense · 2026</span>
+    <div class="doc-footer-links">
+      <a href="nginx.html">← nginx Reverse Proxy</a>
+      <a href="portfolio.html">← Portfolio</a>
+    </div>
+  </div>
+
+  <script>
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.06 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
+
+</body>
+</html>

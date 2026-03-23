@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>nginx Reverse Proxy — Sécurisation | 0xCyberLiTech</title>
+  <meta name="description" content="Documentation technique nginx — reverse proxy, WAF CrowdSec AppSec, SSL/TLS, GeoIP2, rate limiting, en-têtes sécurité.">
+  <link rel="icon" type="image/png" href="assets/logo/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap">
+  <style>
+    :root {
+      --cyan:   #00fff0;
+      --orange: #ff8800;
+      --blue:   #00aaff;
+      --green:  #00ff88;
+      --red:    #ff4455;
+      --bg:     #080c10;
+      --bg2:    #0d1117;
+      --muted:  rgba(0,255,240,0.35);
+      --mono:   'Share Tech Mono', monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--cyan); font-family: var(--mono); overflow-x: hidden; }
+
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,240,0.012) 2px, rgba(0,255,240,0.012) 4px);
+      pointer-events: none; z-index: 9999;
+    }
+
+    /* NAV */
+    .nav-main {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.9rem 2rem;
+      background: rgba(8,12,16,0.92);
+      border-bottom: 1px solid rgba(0,255,240,0.08);
+      backdrop-filter: blur(12px);
+    }
+    .nav-brand { font-size: 1rem; letter-spacing: 0.08em; text-decoration: none; color: var(--cyan); }
+    .nav-brand-prefix { color: var(--orange); }
+    .nav-back { font-size: 0.7rem; color: rgba(0,255,240,0.5); text-decoration: none; letter-spacing: 0.1em; transition: color 0.2s; }
+    .nav-back:hover { color: var(--cyan); }
+
+    /* HERO */
+    .doc-hero {
+      padding: 8rem 2rem 4rem;
+      max-width: 960px; margin: 0 auto; text-align: center;
+    }
+    .doc-label { font-size: 0.62rem; color: var(--orange); letter-spacing: 0.4em; margin-bottom: 0.8rem; }
+    .doc-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--cyan);
+      text-shadow: 0 0 30px rgba(0,255,240,0.5), 0 0 60px rgba(0,255,240,0.2);
+      letter-spacing: 0.08em; margin-bottom: 0.8rem;
+    }
+    .doc-sub { font-size: 0.85rem; color: rgba(0,255,240,0.55); letter-spacing: 0.12em; margin-bottom: 1.5rem; }
+    .doc-badges { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; }
+    .badge { font-size: 0.6rem; padding: 0.25rem 0.7rem; border: 1px solid; letter-spacing: 0.1em; }
+    .badge.orange { border-color: rgba(255,136,0,0.4); color: var(--orange); }
+    .badge.green  { border-color: rgba(0,255,136,0.4); color: var(--green); }
+    .badge.blue   { border-color: rgba(0,170,255,0.4); color: var(--blue); }
+    .badge.cyan   { border-color: rgba(0,255,240,0.4); color: var(--cyan); }
+    .badge.red    { border-color: rgba(255,68,85,0.4); color: var(--red); }
+
+    /* SECTIONS */
+    .doc-section { max-width: 960px; margin: 0 auto; padding: 3rem 2rem; }
+    .doc-section + .doc-section { border-top: 1px solid rgba(0,255,240,0.06); }
+    .sec-label { font-size: 0.6rem; color: var(--orange); letter-spacing: 0.35em; margin-bottom: 0.4rem; }
+    .sec-title { font-size: clamp(1rem, 2.5vw, 1.4rem); color: var(--cyan); text-shadow: 0 0 12px rgba(0,255,240,0.3); margin-bottom: 0.4rem; }
+    .sec-sep { width: 40px; height: 2px; background: linear-gradient(90deg, var(--cyan), transparent); margin-bottom: 2rem; }
+    .sec-desc { font-size: 0.78rem; color: rgba(0,255,240,0.55); line-height: 1.9; margin-bottom: 1.8rem; }
+
+    /* ARCH DIAGRAM */
+    .arch-diagram {
+      background: rgba(0,255,240,0.02);
+      border: 1px solid rgba(0,255,240,0.1);
+      padding: 2rem; margin-bottom: 2rem; overflow-x: auto;
+    }
+    .arch-flow { display: flex; flex-direction: column; gap: 0; align-items: center; }
+    .arch-row { display: flex; align-items: center; justify-content: center; gap: 0.5rem; width: 100%; flex-wrap: wrap; }
+    .arch-box {
+      padding: 0.6rem 1rem; border: 1px solid;
+      font-size: 0.65rem; letter-spacing: 0.07em;
+      text-align: center; min-width: 110px; white-space: nowrap;
+    }
+    .arch-box.cyan   { border-color: rgba(0,255,240,0.4); color: var(--cyan); background: rgba(0,255,240,0.04); }
+    .arch-box.orange { border-color: rgba(255,136,0,0.4); color: var(--orange); background: rgba(255,136,0,0.04); }
+    .arch-box.green  { border-color: rgba(0,255,136,0.4); color: var(--green); background: rgba(0,255,136,0.04); }
+    .arch-box.blue   { border-color: rgba(0,170,255,0.4); color: var(--blue); background: rgba(0,170,255,0.04); }
+    .arch-box.red    { border-color: rgba(255,68,85,0.4); color: var(--red); background: rgba(255,68,85,0.04); }
+    .arch-arrow-h { font-size: 0.7rem; color: rgba(0,255,240,0.3); }
+    .arch-arrow-v-wrap { display:flex;justify-content:center;margin:0.3rem 0; }
+    .arch-arrow-v {
+      width:1px;height:22px;background:rgba(0,255,240,0.3);position:relative;
+    }
+    .arch-arrow-v::after {
+      content:'▼';position:absolute;bottom:-9px;left:50%;transform:translateX(-50%);
+      font-size:0.5rem;color:rgba(0,255,240,0.4);
+    }
+    .arch-arrow-v.dashed {
+      background: repeating-linear-gradient(to bottom, rgba(0,255,240,0.3) 0px, rgba(0,255,240,0.3) 4px, transparent 4px, transparent 8px);
+    }
+
+    /* CODE BLOCK inside arch-diagram */
+    .code-block {
+      background: rgba(0,255,240,0.02);
+      border: 1px solid rgba(0,255,240,0.1);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      overflow-x: auto;
+    }
+    .code-block-title {
+      font-size: 0.6rem; color: var(--orange); letter-spacing: 0.2em;
+      margin-bottom: 1rem;
+    }
+    .code-pre {
+      white-space: pre;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: rgba(0,255,240,0.7);
+      line-height: 1.7;
+    }
+    .code-pre .cm { color: rgba(0,255,240,0.35); }
+
+    /* PIPELINE */
+    .pipeline {
+      display: flex; align-items: stretch; gap: 0;
+      overflow-x: auto; padding-bottom: 0.5rem;
+    }
+    .pipe-step {
+      display: flex; flex-direction: column;
+      border: 1px solid rgba(0,255,240,0.15);
+      background: rgba(0,255,240,0.02);
+      padding: 0.8rem 1rem; min-width: 140px;
+      position: relative;
+    }
+    .pipe-step + .pipe-step { border-left: none; }
+    .pipe-step::after {
+      content: '▶';
+      position: absolute; right: -0.6rem; top: 50%; transform: translateY(-50%);
+      font-size: 0.5rem; color: rgba(0,255,240,0.3);
+      z-index: 1;
+    }
+    .pipe-step:last-child::after { display: none; }
+    .pipe-num { font-size: 0.55rem; color: var(--orange); margin-bottom: 0.3rem; }
+    .pipe-name { font-size: 0.68rem; color: var(--cyan); margin-bottom: 0.3rem; }
+    .pipe-tech { font-size: 0.58rem; color: rgba(0,255,240,0.4); line-height: 1.5; }
+
+    /* SOURCES TABLE */
+    .data-table { width: 100%; border-collapse: collapse; font-size: 0.68rem; }
+    .data-table th {
+      text-align: left; padding: 0.5rem 0.8rem;
+      border-bottom: 1px solid rgba(0,255,240,0.15);
+      color: var(--orange); letter-spacing: 0.1em; font-weight: normal;
+    }
+    .data-table td {
+      padding: 0.5rem 0.8rem;
+      border-bottom: 1px solid rgba(0,255,240,0.05);
+      color: rgba(0,255,240,0.6); vertical-align: top;
+    }
+    .data-table tr:hover td { color: rgba(0,255,240,0.85); background: rgba(0,255,240,0.02); }
+    .data-hl { color: var(--cyan); }
+
+    /* STATS ROW */
+    .stats-row {
+      display: flex; gap: 1.5rem; flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .stat-box {
+      border: 1px solid rgba(0,255,240,0.12);
+      padding: 1rem 1.5rem; text-align: center; flex: 1; min-width: 120px;
+    }
+    .stat-val { font-size: 1.8rem; color: var(--cyan); text-shadow: 0 0 15px rgba(0,255,240,0.4); }
+    .stat-lbl { font-size: 0.55rem; color: var(--muted); letter-spacing: 0.12em; margin-top: 0.3rem; }
+
+    /* FOOTER */
+    .doc-footer {
+      border-top: 1px solid rgba(0,255,240,0.08);
+      padding: 1.5rem 2rem;
+      max-width: 960px; margin: 2rem auto 0;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.62rem; color: rgba(0,255,240,0.3); letter-spacing: 0.08em;
+      flex-wrap: wrap; gap: 0.6rem;
+    }
+    .doc-footer a { color: rgba(0,255,240,0.4); text-decoration: none; }
+    .doc-footer a:hover { color: var(--cyan); }
+    .doc-footer-links { display: flex; gap: 1.5rem; }
+
+    @keyframes fadeUp { from { opacity:0;transform:translateY(16px); } to { opacity:1;transform:none; } }
+    .doc-hero { animation: fadeUp 0.8s ease both; }
+    .reveal { opacity:0;transform:translateY(20px);transition:opacity 0.5s ease,transform 0.5s ease; }
+    .reveal.visible { opacity:1;transform:none; }
+
+    @keyframes glowCyan {
+      0%, 100% { box-shadow: 0 0 4px rgba(0,255,240,0.15); }
+      50%       { box-shadow: 0 0 18px rgba(0,255,240,0.45), 0 0 35px rgba(0,255,240,0.15); }
+    }
+    @keyframes glowOrange {
+      0%, 100% { box-shadow: 0 0 6px rgba(255,136,0,0.2); }
+      50%       { box-shadow: 0 0 20px rgba(255,136,0,0.5), 0 0 38px rgba(255,136,0,0.2); }
+    }
+    @keyframes glowGreen {
+      0%, 100% { box-shadow: 0 0 4px rgba(0,255,136,0.15); }
+      50%       { box-shadow: 0 0 16px rgba(0,255,136,0.4), 0 0 30px rgba(0,255,136,0.15); }
+    }
+    @keyframes flowArrow {
+      0%, 100% { opacity: 0.2; }
+      50%       { opacity: 0.9; }
+    }
+    .arch-box.orange { animation: glowOrange 3s ease-in-out infinite; }
+    .arch-box.cyan   { animation: glowCyan 3.5s ease-in-out infinite; }
+    .arch-box.green  { animation: glowGreen 4s ease-in-out infinite; }
+    .arch-arrow-h    { animation: flowArrow 2s ease-in-out infinite; display: inline-block; }
+    .arch-arrow-v    { animation: flowArrow 2.2s ease-in-out infinite; }
+    .pipe-step:hover { background: rgba(0,255,240,0.04); border-color: rgba(0,255,240,0.3); }
+    .pipe-step:hover .pipe-name { color: var(--orange); }
+
+    @media (max-width: 600px) {
+      .doc-section { padding: 2rem 1.2rem; }
+      .pipeline { flex-direction: column; }
+      .pipe-step::after { display:none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav-main">
+    <a class="nav-brand" href="portfolio.html">
+      <span class="nav-brand-prefix">0x</span>CyberLiTech
+    </a>
+    <a class="nav-back" href="portfolio.html">← Retour au portfolio</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="doc-hero">
+    <div class="doc-label">// infrastructure — reverse proxy sécurisé</div>
+    <h1 class="doc-title">nginx Reverse Proxy</h1>
+    <p class="doc-sub">REVERSE PROXY &nbsp;·&nbsp; WAF &nbsp;·&nbsp; SSL/TLS &nbsp;·&nbsp; GEOIP2</p>
+    <div class="doc-badges">
+      <span class="badge cyan">nginx 1.26</span>
+      <span class="badge blue">TLSv1.2 · TLSv1.3</span>
+      <span class="badge orange">CrowdSec AppSec WAF</span>
+      <span class="badge green">GeoIP2 · Restriction FR</span>
+      <span class="badge cyan">Rate Limiting · Headers</span>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="doc-section reveal">
+    <div class="stats-row">
+      <div class="stat-box"><div class="stat-val">4</div><div class="stat-lbl">VHOSTS CONFIGURÉS</div></div>
+      <div class="stat-box"><div class="stat-val">A+</div><div class="stat-lbl">SCORE SSL</div></div>
+      <div class="stat-box"><div class="stat-val">6</div><div class="stat-lbl">COUCHES SÉCURITÉ</div></div>
+      <div class="stat-box"><div class="stat-val">0</div><div class="stat-lbl">EXPOSITION DIRECTE</div></div>
+    </div>
+  </div>
+
+  <!-- SECTION 1 : ARCHITECTURE -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// reverse proxy pattern</div>
+    <h2 class="sec-title">$ cat architecture.json</h2>
+    <div class="sec-sep"></div>
+    <p class="sec-desc">
+      nginx agit comme point d'entrée unique. Les backends Apache ne sont jamais exposés directement
+      sur internet. Toutes les requêtes transitent par le reverse proxy qui applique les couches de
+      sécurité successives avant de transférer vers le backend.
+    </p>
+
+    <div class="arch-diagram">
+      <div class="arch-flow">
+
+        <div class="arch-row">
+          <div class="arch-box red">Internet<br><span style="font-size:0.55rem;opacity:0.6">trafic entrant</span></div>
+          <div class="arch-arrow-h">──▶</div>
+          <div class="arch-box orange">WAF CrowdSec AppSec<br><span style="font-size:0.55rem;opacity:0.6">port 7422 · auth_request</span></div>
+          <div class="arch-arrow-h">──▶</div>
+          <div class="arch-box blue">GeoIP2 Restriction<br><span style="font-size:0.55rem;opacity:0.6">whitelist IP · restriction FR</span></div>
+        </div>
+
+        <div class="arch-arrow-v-wrap"><div class="arch-arrow-v"></div></div>
+
+        <div class="arch-row">
+          <div class="arch-box cyan" style="min-width:340px;padding:1rem 1.5rem;">
+            nginx Reverse Proxy<br>
+            <span style="font-size:0.55rem;opacity:0.6">Rate Limiting · En-têtes Sécurité · SSL/TLS · server_tokens off</span>
+          </div>
+        </div>
+
+        <div class="arch-arrow-v-wrap"><div class="arch-arrow-v"></div></div>
+
+        <div class="arch-row">
+          <div class="arch-box green">Apache Backend<br><span style="font-size:0.55rem;opacity:0.6">[domaine A]</span></div>
+          <div class="arch-arrow-h" style="color:rgba(0,255,136,0.3);">|</div>
+          <div class="arch-box green">Apache Backend<br><span style="font-size:0.55rem;opacity:0.6">[domaine B]</span></div>
+        </div>
+
+        <div class="arch-arrow-v-wrap"><div class="arch-arrow-v dashed"></div></div>
+
+        <div class="arch-row">
+          <div class="arch-box blue" style="min-width:280px;">
+            Backends isolés — réseau interne uniquement<br>
+            <span style="font-size:0.55rem;opacity:0.6">aucun accès direct internet</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 : CHRONOLOGIE -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// démarche — mise en place chronologique</div>
+    <h2 class="sec-title">$ cat chronologie.txt</h2>
+    <div class="sec-sep"></div>
+    <p class="sec-desc">
+      Implémentation en 8 phases successives. Chaque couche est validée avant d'ajouter la suivante.
+      Approche défense en profondeur.
+    </p>
+
+    <div class="pipeline">
+      <div class="pipe-step">
+        <div class="pipe-num">01</div>
+        <div class="pipe-name">Base nginx</div>
+        <div class="pipe-tech">worker_processes<br>events, gzip<br>SSL global<br>server_tokens off</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">02</div>
+        <div class="pipe-name">SSL/TLS</div>
+        <div class="pipe-tech">certbot<br>TLSv1.2+1.3<br>HSTS · dhparam</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">03</div>
+        <div class="pipe-name">Vhosts &amp; Proxy</div>
+        <div class="pipe-tech">server blocks<br>proxy_pass<br>proxy_set_header<br>http2</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">04</div>
+        <div class="pipe-name">En-têtes Sécurité</div>
+        <div class="pipe-tech">snippet réutilisable<br>HSTS · CSP<br>X-Frame · X-Content<br>Permissions-Policy</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">05</div>
+        <div class="pipe-name">Rate Limiting</div>
+        <div class="pipe-tech">limit_req_zone<br>zones par usage<br>burst nodelay</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">06</div>
+        <div class="pipe-name">GeoIP2</div>
+        <div class="pipe-tech">restriction géo<br>whitelist admin+LAN<br>map $geo_blocked</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">07</div>
+        <div class="pipe-name">CrowdSec AppSec</div>
+        <div class="pipe-tech">auth_request<br>WAF port 7422<br>snippet appsec.conf</div>
+      </div>
+      <div class="pipe-step" style="border-right:1px solid rgba(0,255,240,0.15);">
+        <div class="pipe-num">08</div>
+        <div class="pipe-name">Hardening final</div>
+        <div class="pipe-tech">Slowloris timeouts<br>proxy cache API<br>filtrage méthodes HTTP</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 : CONFIG SNIPPETS -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// extraits de configuration — générique</div>
+    <h2 class="sec-title">$ cat config-snippets.conf</h2>
+    <div class="sec-sep"></div>
+    <p class="sec-desc">
+      Patterns de configuration réutilisables. Les valeurs entre [CROCHETS] sont à adapter à votre infrastructure.
+    </p>
+
+    <div class="code-block">
+      <div class="code-block-title">// SNIPPET 1 — WORKERS &amp; PERFORMANCE</div>
+      <div class="code-pre"><span class="cm"># nginx.conf — bloc principal</span>
+worker_processes auto;
+worker_rlimit_nofile 65535;
+events {
+    worker_connections 1024;
+    multi_accept on;
+}
+<span class="cm"># Gzip</span>
+gzip on; gzip_vary on; gzip_comp_level 6;
+gzip_types text/plain text/css application/javascript
+           application/json image/svg+xml font/woff2;</div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-title">// SNIPPET 2 — EN-TÊTES SÉCURITÉ (SNIPPET RÉUTILISABLE)</div>
+      <div class="code-pre"><span class="cm"># /etc/nginx/snippets/security-headers.conf</span>
+add_header Strict-Transport-Security
+  "max-age=63072000; includeSubDomains; preload" always;
+add_header X-Frame-Options "DENY" always;
+add_header X-Content-Type-Options "nosniff" always;
+add_header Referrer-Policy
+  "strict-origin-when-cross-origin" always;
+add_header Permissions-Policy
+  "geolocation=(), camera=(), microphone=()" always;
+add_header Content-Security-Policy
+  "default-src 'self'; script-src 'self';
+   img-src 'self' data:; frame-ancestors 'none';" always;</div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-title">// SNIPPET 3 — RATE LIMITING</div>
+      <div class="code-pre"><span class="cm"># Dans http {} de nginx.conf</span>
+<span class="cm"># Whitelist LAN — bypass rate limiting</span>
+geo $geo_whitelist {
+    default         0;
+    [LAN_SUBNET]  1;   <span class="cm"># réseau local</span>
+    [ADMIN_IP]/32   1;   <span class="cm"># IP fixe admin</span>
+}
+map $geo_whitelist $limit_key {
+    default  $binary_remote_addr;
+    1        "";  <span class="cm"># clé vide = pas de limite</span>
+}
+limit_req_zone $limit_key zone=global:10m   rate=120r/m;
+limit_req_zone $limit_key zone=contact:10m  rate=5r/m;
+limit_req_zone $limit_key zone=api:10m      rate=10r/m;
+<span class="cm"># Dans location {} :</span>
+<span class="cm"># limit_req zone=global burst=100 nodelay;</span></div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-title">// SNIPPET 4 — GEOIP2 RESTRICTION GÉOGRAPHIQUE</div>
+      <div class="code-pre"><span class="cm"># Dans http {} — après chargement module ngx_http_geoip2_module</span>
+geoip2 /usr/share/GeoIP/GeoLite2-Country.mmdb {
+    auto_reload 1d;
+    $geoip2_country_code country iso_code;
+}
+map $geoip2_country_code $geo_country_blocked {
+    default  1;   <span class="cm"># tout bloqué par défaut</span>
+    FR       0;   <span class="cm"># France autorisée</span>
+}
+<span class="cm"># Résultat : whitelisté OU France = autorisé</span>
+map "$geo_whitelist:$geo_country_blocked" $geo_blocked {
+    default  1;
+    "~^1:"   0;   <span class="cm"># whitelisté</span>
+    "0:0"    0;   <span class="cm"># France</span>
+}
+<span class="cm"># Dans location {} :</span>
+<span class="cm"># if ($geo_blocked) { return 403; }</span></div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 : VHOST PATTERN -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// pattern vhost — structure type</div>
+    <h2 class="sec-title">$ cat vhost-pattern.conf</h2>
+    <div class="sec-sep"></div>
+    <p class="sec-desc">
+      Structure type d'un vhost sécurisé. Le même pattern est appliqué à chaque domaine avec
+      adaptation du backend et de la CSP.
+    </p>
+
+    <div class="code-block">
+      <div class="code-block-title">// VHOST — STRUCTURE COMPLÈTE AVEC TOUTES LES COUCHES</div>
+      <div class="code-pre">server {
+    server_name [YOUR_DOMAIN] www.[YOUR_DOMAIN];
+
+    <span class="cm"># En-têtes sécurité globaux</span>
+    include /etc/nginx/snippets/security-headers.conf;
+
+    <span class="cm"># SSL — géré par Certbot</span>
+    listen 443 ssl; http2 on;
+    ssl_certificate     /etc/letsencrypt/live/[YOUR_DOMAIN]/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/[YOUR_DOMAIN]/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+
+    <span class="cm"># Certbot ACME challenge</span>
+    location /.well-known/acme-challenge/ {
+        root /var/www/html;
+        try_files $uri =404;
+    }
+
+    <span class="cm"># Fichiers cachés — toujours bloquer</span>
+    location ~ /\. { deny all; return 404; }
+
+    <span class="cm"># Proxy principal vers backend</span>
+    location / {
+        limit_req zone=global burst=100 nodelay;
+        if ($geo_blocked) { return 403; }
+        include /etc/nginx/snippets/security-headers.conf;
+        include /etc/nginx/snippets/crowdsec-appsec.conf;
+
+        proxy_pass          http://[BACKEND_IP];
+        proxy_http_version  1.1;
+        proxy_set_header    Host              $host;
+        proxy_set_header    X-Real-IP         $remote_addr;
+        proxy_set_header    X-Forwarded-For   $remote_addr;
+        proxy_set_header    X-Forwarded-Proto $scheme;
+        proxy_connect_timeout 10s;
+        proxy_read_timeout    20s;
+    }
+}
+server {
+    listen 80;
+    server_name [YOUR_DOMAIN] www.[YOUR_DOMAIN];
+    return 301 https://$host$request_uri;  <span class="cm"># redirect HTTP → HTTPS</span>
+}</div>
+    </div>
+  </div>
+
+  <!-- SECTION 5 : RÉSULTATS -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// résultats &amp; validation</div>
+    <h2 class="sec-title">$ cat resultats.txt</h2>
+    <div class="sec-sep"></div>
+    <p class="sec-desc">
+      Validation à chaque étape via nginx -t + systemctl reload nginx.
+      Tests avec curl -I et outils SSL Labs.
+    </p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Test</th>
+          <th>Outil</th>
+          <th>Résultat attendu</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="data-hl">Syntaxe config</td>
+          <td>nginx -t</td>
+          <td>configuration file ... syntax is ok</td>
+        </tr>
+        <tr>
+          <td class="data-hl">Reload sans coupure</td>
+          <td>systemctl reload nginx</td>
+          <td>0 downtime, graceful</td>
+        </tr>
+        <tr>
+          <td class="data-hl">Score SSL/TLS</td>
+          <td>SSL Labs / testssl.sh</td>
+          <td>A+ / Grade A</td>
+        </tr>
+        <tr>
+          <td class="data-hl">Headers sécurité</td>
+          <td>curl -I https://[domaine]</td>
+          <td>HSTS, X-Frame, CSP présents</td>
+        </tr>
+        <tr>
+          <td class="data-hl">Rate limiting</td>
+          <td>ab / wrk</td>
+          <td>429 Too Many Requests au seuil</td>
+        </tr>
+        <tr>
+          <td class="data-hl">Restriction GeoIP</td>
+          <td>curl depuis VPN étranger</td>
+          <td>403 Forbidden</td>
+        </tr>
+        <tr>
+          <td class="data-hl">CrowdSec WAF</td>
+          <td>test injection SQLi/XSS</td>
+          <td>Bloqué avant le backend</td>
+        </tr>
+        <tr>
+          <td class="data-hl">Backends isolés</td>
+          <td>curl direct [BACKEND_IP]:80</td>
+          <td>Non accessible depuis internet</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <span>0xCyberLiTech · nginx Reverse Proxy · Sécurisation · 2026</span>
+    <div class="doc-footer-links">
+      <a href="securite.html">→ Briques de sécurité (annexe)</a>
+      <a href="portfolio.html">← Portfolio</a>
+    </div>
+  </div>
+
+  <script>
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.06 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
+
+</body>
+</html>
