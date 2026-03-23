@@ -142,6 +142,19 @@
     .pipe-name { font-size: 0.68rem; color: var(--cyan); margin-bottom: 0.3rem; }
     .pipe-tech { font-size: 0.58rem; color: rgba(0,255,240,0.4); line-height: 1.5; }
 
+    /* COPY BUTTON */
+    .code-block { position: relative; }
+    .copy-btn {
+      position: absolute; top: 0.6rem; right: 0.6rem;
+      background: rgba(0,255,240,0.05);
+      border: 1px solid rgba(0,255,240,0.2);
+      color: rgba(0,255,240,0.45);
+      font-family: var(--mono); font-size: 0.52rem; letter-spacing: 0.1em;
+      padding: 0.2rem 0.55rem; cursor: pointer; transition: all 0.2s;
+    }
+    .copy-btn:hover { background: rgba(0,255,240,0.1); color: var(--cyan); border-color: var(--cyan); }
+    .copy-btn.copied { color: var(--green); border-color: var(--green); background: rgba(0,255,0,0.05); }
+
     /* SCROLLBAR THÉMÉ */
     ::-webkit-scrollbar { height: 4px; width: 4px; background: transparent; }
     ::-webkit-scrollbar-track { background: rgba(0,255,240,0.03); }
@@ -598,6 +611,23 @@ server {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
     }, { threshold: 0.06 });
     document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // COPY BUTTONS
+    document.querySelectorAll('.code-block').forEach(block => {
+      const btn = document.createElement('button');
+      btn.className = 'copy-btn';
+      btn.textContent = '⎘ copier';
+      block.appendChild(btn);
+      btn.addEventListener('click', () => {
+        const target = block.querySelector('pre') || block.querySelector('.code-pre');
+        const text = target ? target.innerText : '';
+        navigator.clipboard.writeText(text).then(() => {
+          btn.textContent = '✓ copié';
+          btn.classList.add('copied');
+          setTimeout(() => { btn.textContent = '⎘ copier'; btn.classList.remove('copied'); }, 2000);
+        });
+      });
+    });
   </script>
 
 </body>
