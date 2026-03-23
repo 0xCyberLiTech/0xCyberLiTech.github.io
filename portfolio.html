@@ -703,6 +703,42 @@
     @media (max-width: 380px) {
       .projects-grid { grid-template-columns: 1fr; }
     }
+    .tw-cursor { display:inline-block; color:var(--cyan); animation:tw-blink 0.75s step-end infinite; }
+    @keyframes tw-blink { 50% { opacity:0; } }
+    .stat-val.counting { color:#fff; text-shadow: 0 0 12px var(--cyan); }
+    .terminal-toggle {
+      position:fixed; left:1.4rem; bottom:2rem; z-index:300;
+      width:38px; height:38px; border-radius:50%;
+      background:rgba(0,10,20,0.85); border:1px solid rgba(0,255,240,0.25);
+      color:rgba(0,255,240,0.6); font-size:0.85rem; font-family:var(--mono);
+      cursor:pointer; display:flex; align-items:center; justify-content:center;
+      box-shadow:0 0 12px rgba(0,255,240,0.08); opacity:0.5; transition: all 0.2s;
+    }
+    .terminal-toggle:hover, .terminal-toggle.active { opacity:1; border-color:rgba(0,255,240,0.6); box-shadow:0 0 18px rgba(0,255,240,0.2); color:var(--cyan); }
+    .terminal-panel {
+      position:fixed; left:1.4rem; bottom:5.2rem; width:min(540px, calc(100vw - 2.8rem));
+      background:rgba(2,8,16,0.97); border:1px solid rgba(0,255,240,0.18); border-radius:6px;
+      z-index:299; display:none; flex-direction:column;
+      box-shadow:0 0 40px rgba(0,255,240,0.07); font-family:var(--mono); font-size:0.8rem; overflow:hidden;
+    }
+    .terminal-panel.open { display:flex; animation:term-in 0.18s ease; }
+    @keyframes term-in { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+    .terminal-titlebar { padding:0.45rem 0.8rem; border-bottom:1px solid rgba(0,255,240,0.1); display:flex; justify-content:space-between; align-items:center; background:rgba(0,255,240,0.03); }
+    .terminal-titlebar span { color:rgba(0,255,240,0.4); font-size:0.72rem; letter-spacing:0.05em; }
+    .terminal-close { background:none; border:none; cursor:pointer; color:rgba(0,255,240,0.4); font-size:0.85rem; padding:0 0.2rem; line-height:1; transition:color 0.15s; }
+    .terminal-close:hover { color:var(--cyan); }
+    .terminal-output { padding:0.6rem 0.9rem; height:220px; overflow-y:auto; color:rgba(0,255,240,0.82); line-height:1.65; }
+    .terminal-output::-webkit-scrollbar { width:3px; }
+    .terminal-output::-webkit-scrollbar-thumb { background:rgba(0,255,240,0.15); }
+    .t-line { margin:0; white-space:pre-wrap; word-break:break-word; }
+    .t-cmd  { color:rgba(0,255,240,0.45); }
+    .t-ok   { color:#00ff88; }
+    .t-warn { color:#ff8800; }
+    .t-dim  { color:rgba(0,255,240,0.3); }
+    .t-hi   { color:var(--cyan); font-weight:bold; }
+    .terminal-input-row { display:flex; align-items:center; padding:0.45rem 0.9rem; border-top:1px solid rgba(0,255,240,0.08); background:rgba(0,255,240,0.02); }
+    .terminal-prompt { color:var(--cyan); margin-right:0.5rem; white-space:nowrap; user-select:none; }
+    .terminal-input { background:transparent; border:none; outline:none; color:var(--cyan); font-family:var(--mono); font-size:0.8rem; flex:1; caret-color:var(--cyan); }
     .scroll-nav { position:fixed; right:1.4rem; bottom:2rem; display:flex; flex-direction:column; gap:0.5rem; z-index:200; }
     .scroll-nav-btn {
       width: 38px; height: 38px; border-radius: 50%;
@@ -729,7 +765,7 @@
     <section id="hero">
       <div class="hero-bracket">[ INITIALISATION COMPLÈTE — ACCÈS AUTORISÉ ]</div>
       <h1 class="hero-title">0x<span>Cyber</span>LiTech</h1>
-      <p class="hero-sub">ASSISTANT CYBERSÉCURITÉ &nbsp;·&nbsp; LINUX &nbsp;·&nbsp; IA</p>
+      <p class="hero-sub" id="hero-sub"></p>
       <div class="hero-divider"></div>
       <p class="hero-bio">
         Passionné par la <strong>cybersécurité défensive</strong>, l'<strong>infrastructure Linux</strong>
@@ -773,10 +809,10 @@
             Les décisions de sécurité sont prises en temps réel par le LLM local.
           </p>
           <div class="card-stats">
-            <div class="stat"><span class="stat-val">4+</span><span class="stat-lbl">MOTEURS LLM</span></div>
-            <div class="stat"><span class="stat-val">5</span><span class="stat-lbl">MOTEURS TTS</span></div>
-            <div class="stat"><span class="stat-val">~3000</span><span class="stat-lbl">LIGNES PY</span></div>
-            <div class="stat"><span class="stat-val">~17K</span><span class="stat-lbl">LIGNES UI</span></div>
+            <div class="stat"><span class="stat-val" data-count="4" data-suffix="+">4+</span><span class="stat-lbl">MOTEURS LLM</span></div>
+            <div class="stat"><span class="stat-val" data-count="5">5</span><span class="stat-lbl">MOTEURS TTS</span></div>
+            <div class="stat"><span class="stat-val" data-count="3000" data-prefix="~">~3000</span><span class="stat-lbl">LIGNES PY</span></div>
+            <div class="stat"><span class="stat-val" data-count="17" data-prefix="~" data-suffix="K">~17K</span><span class="stat-lbl">LIGNES UI</span></div>
           </div>
           <div class="card-tags">
             <span class="tag ai">Ollama</span>
@@ -805,8 +841,8 @@
             et les actions proactives automatisées.
           </p>
           <div class="card-stats">
-            <div class="stat"><span class="stat-val">28</span><span class="stat-lbl">TUILES</span></div>
-            <div class="stat"><span class="stat-val">60s</span><span class="stat-lbl">REFRESH</span></div>
+            <div class="stat"><span class="stat-val" data-count="28">28</span><span class="stat-lbl">TUILES</span></div>
+            <div class="stat"><span class="stat-val" data-count="60" data-suffix="s">60s</span><span class="stat-lbl">REFRESH</span></div>
             <div class="stat"><span class="stat-val">v3.40</span><span class="stat-lbl">VERSION</span></div>
           </div>
           <div class="card-tags">
@@ -833,9 +869,9 @@
             Threat intelligence, kill chain, OpenVAS, Proxmox — 150+ articles.
           </p>
           <div class="card-stats">
-            <div class="stat"><span class="stat-val">21</span><span class="stat-lbl">MOIS CVE</span></div>
-            <div class="stat"><span class="stat-val">150+</span><span class="stat-lbl">ARTICLES</span></div>
-            <div class="stat"><span class="stat-val">24h</span><span class="stat-lbl">DÉLAI NVD</span></div>
+            <div class="stat"><span class="stat-val" data-count="21">21</span><span class="stat-lbl">MOIS CVE</span></div>
+            <div class="stat"><span class="stat-val" data-count="150" data-suffix="+">150+</span><span class="stat-lbl">ARTICLES</span></div>
+            <div class="stat"><span class="stat-val" data-count="24" data-suffix="h">24h</span><span class="stat-lbl">DÉLAI NVD</span></div>
           </div>
           <div class="card-tags">
             <span class="tag">NVD/NIST API</span>
@@ -861,9 +897,9 @@
             en-têtes CSP/HSTS, SSL/TLS A+. Backends isolés — aucune exposition directe internet.
           </p>
           <div class="card-stats">
-            <div class="stat"><span class="stat-val">6</span><span class="stat-lbl">COUCHES</span></div>
+            <div class="stat"><span class="stat-val" data-count="6">6</span><span class="stat-lbl">COUCHES</span></div>
             <div class="stat"><span class="stat-val">A+</span><span class="stat-lbl">SCORE SSL</span></div>
-            <div class="stat"><span class="stat-val">4</span><span class="stat-lbl">VHOSTS</span></div>
+            <div class="stat"><span class="stat-val" data-count="4">4</span><span class="stat-lbl">VHOSTS</span></div>
           </div>
           <div class="card-tags">
             <span class="tag">nginx</span>
@@ -888,9 +924,9 @@
             rotation des clés. Démarche chronologique — LAN toujours whitelisté.
           </p>
           <div class="card-stats">
-            <div class="stat"><span class="stat-val">6</span><span class="stat-lbl">COUCHES</span></div>
-            <div class="stat"><span class="stat-val">3</span><span class="stat-lbl">SERVEURS</span></div>
-            <div class="stat"><span class="stat-val">0</span><span class="stat-lbl">EXPO SSH</span></div>
+            <div class="stat"><span class="stat-val" data-count="6">6</span><span class="stat-lbl">COUCHES</span></div>
+            <div class="stat"><span class="stat-val" data-count="3">3</span><span class="stat-lbl">SERVEURS</span></div>
+            <div class="stat"><span class="stat-val" data-count="0">0</span><span class="stat-lbl">EXPO SSH</span></div>
           </div>
           <div class="card-tags">
             <span class="tag">fail2ban</span>
@@ -1014,6 +1050,87 @@
       });
     }, { threshold: 0.08 });
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  </script>
+
+  <!-- TERMINAL HTML -->
+  <button class="terminal-toggle" id="terminal-toggle" title="Terminal">&#62;_</button>
+  <div class="terminal-panel" id="terminal-panel">
+    <div class="terminal-titlebar">
+      <span>0xCyberLiTech — bash v5.2.15</span>
+      <button class="terminal-close" id="terminal-close">✕</button>
+    </div>
+    <div class="terminal-output" id="terminal-output"></div>
+    <div class="terminal-input-row">
+      <span class="terminal-prompt">user@0xCyberLiTech:~$</span>
+      <input class="terminal-input" id="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="help">
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    const target = document.getElementById('hero-sub');
+    if (!target) return;
+    const text = 'ASSISTANT CYBERSÉCURITÉ · LINUX · IA';
+    let i = 0;
+    function type() {
+      if (i <= text.length) {
+        target.innerHTML = text.slice(0, i) + '<span class="tw-cursor">|</span>';
+        i++;
+        setTimeout(type, i === 1 ? 400 : 42);
+      }
+    }
+    function startTypewriter() { target.innerHTML = '<span class="tw-cursor">|</span>'; i = 0; setTimeout(type, 600); }
+    window.addEventListener('preloader:done', startTypewriter, { once: true });
+    setTimeout(function(){ if(!target.textContent.trim()) startTypewriter(); }, 2500);
+  })();
+  (function(){
+    function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+    function animateCounter(el) {
+      const target = parseInt(el.dataset.count, 10);
+      const prefix = el.dataset.prefix || '', suffix = el.dataset.suffix || '';
+      const duration = Math.min(1200, 400 + target * 0.8);
+      const start = performance.now();
+      el.classList.add('counting');
+      function step(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        el.textContent = prefix + Math.round(easeOut(progress) * target) + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+        else { el.textContent = prefix + target + suffix; el.classList.remove('counting'); }
+      }
+      requestAnimationFrame(step);
+    }
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (!e.isIntersecting) return;
+        e.target.querySelectorAll('.stat-val[data-count]').forEach(animateCounter);
+        observer.unobserve(e.target);
+      });
+    }, { threshold: 0.3 });
+    document.querySelectorAll('.card-stats').forEach(function(el) { observer.observe(el); });
+  })();
+  (function(){
+    const toggle=document.getElementById('terminal-toggle'), panel=document.getElementById('terminal-panel'),
+          closeBtn=document.getElementById('terminal-close'), output=document.getElementById('terminal-output'),
+          input=document.getElementById('terminal-input');
+    if(!toggle) return;
+    const CMDS = {
+      help:()=>['<span class="t-ok">Commandes :</span>','  <span class="t-hi">whoami</span>  <span class="t-hi">ls projects</span>  <span class="t-hi">cat jarvis</span>  <span class="t-hi">cat soc</span>','  <span class="t-hi">./skills</span>  <span class="t-hi">uname -a</span>  <span class="t-hi">clear</span>'],
+      whoami:()=>['<span class="t-ok">0xCyberLiTech</span>','  Cybersécurité · Linux · IA locale','  <span class="t-hi">github.com/0xCyberLiTech</span>  ·  <span class="t-hi">0xcyberlitech.com</span>'],
+      'ls projects':()=>['<span class="t-ok">drwxr-xr-x</span>  JARVIS  SOC-Dashboard  nginx-WAF  0xCyberLiTech  Securite'],
+      'cat jarvis':()=>['<span class="t-hi">JARVIS</span> — phi4:14b · edge-tts · faster-whisper · RTX 5080','  ~3000 py · ~17K html · <span class="t-ok">● ACTIF</span> localhost:5000'],
+      'cat soc':()=>['<span class="t-hi">SOC Dashboard v3.40</span> — 28 tuiles · 60s · CrowdSec · <span class="t-ok">● LIVE</span>'],
+      './skills':()=>['<span class="t-warn">SecOps</span>  CrowdSec · fail2ban · UFW · GeoIP2','<span class="t-warn">IA</span>      Ollama · phi4 · Groq · RAG · TTS','<span class="t-warn">Infra</span>   Proxmox · nginx · Docker · Debian','<span class="t-warn">Dev</span>     Python · Flask · JS · PHP · Bash'],
+      'uname -a':()=>['Linux srv-ngix 6.1.0 x86_64 GNU/Linux','<span class="t-dim">Proxmox VE 9 · RTX 5080 Blackwell · CUDA 12</span>'],
+      clear:()=>{output.innerHTML='';return null;}
+    };
+    const history=[];let histIdx=-1;
+    function print(lines){if(lines===null)return;lines.forEach(l=>{const p=document.createElement('p');p.className='t-line';p.innerHTML=l;output.appendChild(p);});output.scrollTop=output.scrollHeight;}
+    function exec(raw){const cmd=raw.trim().toLowerCase();const p=document.createElement('p');p.className='t-line t-cmd';p.textContent='user@0xCyberLiTech:~$ '+raw;output.appendChild(p);if(!cmd){output.scrollTop=output.scrollHeight;return;}print(CMDS[cmd]?CMDS[cmd]():['<span class="t-warn">bash: '+raw+': introuvable — essayez help</span>']);}
+    print(['<span class="t-ok">0xCyberLiTech Terminal</span> <span class="t-dim">— type <b>help</b></span>']);
+    toggle.addEventListener('click',()=>{const o=panel.classList.toggle('open');toggle.classList.toggle('active',o);if(o)input.focus();});
+    closeBtn.addEventListener('click',()=>{panel.classList.remove('open');toggle.classList.remove('active');});
+    input.addEventListener('keydown',function(e){if(e.key==='Enter'){const v=input.value;history.unshift(v);histIdx=-1;exec(v);input.value='';}else if(e.key==='ArrowUp'){e.preventDefault();if(histIdx<history.length-1)input.value=history[++histIdx];}else if(e.key==='ArrowDown'){e.preventDefault();histIdx>0?input.value=history[--histIdx]:(histIdx=-1,input.value='');}});
+  })();
   </script>
 
   <script>
