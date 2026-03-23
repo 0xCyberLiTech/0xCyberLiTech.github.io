@@ -791,16 +791,16 @@ POST /api/soc/restart-service <span class="cm">→ redémarrer un service</span>
         btnUp.disabled   = i === 0;
         btnDown.disabled = i === sections.length - 1;
       }
-      btnUp.addEventListener('click',   () => { const i=currentIdx(); if(i>0) sections[i-1].scrollIntoView({behavior:'smooth'}); });
-      btnDown.addEventListener('click', () => { const i=currentIdx(); if(i<sections.length-1) sections[i+1].scrollIntoView({behavior:'smooth'}); });
+      btnUp.addEventListener('click',   () => { const i=currentIdx(); if(i>0) window.scrollTo({top: sections[i-1].offsetTop - 20, behavior:'smooth'}); });
+      btnDown.addEventListener('click', () => { const i=currentIdx(); if(i<sections.length-1) window.scrollTo({top: sections[i+1].offsetTop - 20, behavior:'smooth'}); });
       window.addEventListener('scroll', updateBtns, {passive:true});
       updateBtns();
     })();
   </script>
 
   <div class="scroll-nav">
-    <button class="scroll-nav-btn" id="scroll-up"   title="Section précédente">&#8963;</button>
-    <button class="scroll-nav-btn" id="scroll-down" title="Section suivante">&#8964;</button>
+    <button class="scroll-nav-btn" id="scroll-up"   title="Section précédente">▲</button>
+    <button class="scroll-nav-btn" id="scroll-down" title="Section suivante">▼</button>
   </div>
 
 </body>
