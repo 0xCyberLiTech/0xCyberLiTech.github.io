@@ -703,6 +703,94 @@
     @media (max-width: 380px) {
       .projects-grid { grid-template-columns: 1fr; }
     }
+    /* ── SCROLL PROGRESS ───────────────────────── */
+    #scroll-progress {
+      position: fixed; top: 0; left: 0; height: 2px; width: 0;
+      background: linear-gradient(90deg, var(--cyan), var(--orange));
+      z-index: 10000; transition: width 0.08s linear;
+      box-shadow: 0 0 8px rgba(0,255,240,0.5);
+    }
+
+    /* ── Z-INDEX ROOT ──────────────────────────── */
+    #portfolio-root { position: relative; z-index: 1; }
+
+    /* ── GLITCH HERO ───────────────────────────── */
+    @keyframes hglitch {
+      0%,90%,100% { text-shadow:0 0 30px rgba(0,255,240,0.6),0 0 60px rgba(0,255,240,0.2); transform:none; }
+      91%  { text-shadow:-3px 0 var(--orange),3px 0 var(--blue),0 0 30px rgba(0,255,240,0.5); transform:skewX(-1.5deg) translateX(-2px); }
+      92%  { text-shadow:3px 0 var(--orange),-3px 0 var(--blue),0 0 30px rgba(0,255,240,0.5); transform:skewX(1deg) translateX(2px); }
+      93%  { text-shadow:0 0 30px rgba(0,255,240,0.6); transform:none; }
+      96%  { text-shadow:-2px 0 rgba(0,170,255,0.8),2px 0 rgba(255,136,0,0.8),0 0 30px rgba(0,255,240,0.4); transform:scaleX(1.005); }
+      97%  { text-shadow:0 0 30px rgba(0,255,240,0.6); transform:none; }
+    }
+    .hero-title { animation: hglitch 7s ease infinite, fadeUp 0.9s ease both !important; }
+
+    /* ── HERO STATUS STRIP ─────────────────────── */
+    .hero-status {
+      display: flex; gap: 1.4rem; justify-content: center;
+      margin-top: 1.5rem;
+      font-size: 0.62rem; letter-spacing: 0.18em;
+      color: rgba(0,255,240,0.45);
+      animation: fadeUp 1.4s ease both;
+      flex-wrap: wrap;
+    }
+    .hs-item { display: flex; align-items: center; gap: 0.4rem; }
+    .hs-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .hs-dot.green  { background: var(--green); box-shadow: 0 0 6px var(--green); animation: pulse 2.2s ease infinite; }
+    .hs-dot.orange { background: var(--orange); box-shadow: 0 0 6px var(--orange); animation: pulse 2.8s ease infinite; }
+    .hs-dot.cyan   { background: var(--cyan); box-shadow: 0 0 6px var(--cyan); animation: pulse 3s ease infinite; }
+
+    /* ── CARDS CHAMFERED CORNERS ────────────────── */
+    .project-card {
+      clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+    }
+    .project-card::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--cyan), transparent);
+      opacity: 0.25;
+      transition: opacity 0.3s;
+    }
+    .project-card.featured::after { background: linear-gradient(90deg, var(--orange), transparent); opacity: 0.6; }
+    .project-card:hover::after { opacity: 0.7; }
+
+    /* ── SKILL GROUP IMPROVED ───────────────────── */
+    .skill-group {
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+    }
+
+    /* ── SECTION SEP DIAMOND ────────────────────── */
+    .section-sep { position: relative; overflow: visible; }
+    .section-sep::after {
+      content: '◆';
+      position: absolute; right: 0; top: -5px;
+      font-size: 0.45rem; color: var(--orange);
+      animation: pulse 2.5s ease infinite;
+    }
+
+    /* ── NAV ACTIVE LINE ────────────────────────── */
+    .nav-main::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,255,240,0.2), var(--orange), rgba(0,255,240,0.2), transparent);
+      animation: nav-scan 4s ease infinite;
+    }
+    @keyframes nav-scan {
+      0%,100% { opacity: 0.4; }
+      50%      { opacity: 1; }
+    }
+
+    /* ── HERO BRACKET IMPROVED ──────────────────── */
+    .hero-bracket {
+      border: 1px solid rgba(0,255,240,0.12);
+      padding: 0.3rem 1rem;
+      background: rgba(0,255,240,0.03);
+      display: inline-block;
+    }
+
     .tw-cursor { display:inline-block; color:var(--cyan); animation:tw-blink 0.75s step-end infinite; }
     @keyframes tw-blink { 50% { opacity:0; } }
     .stat-val.counting { color:#fff; text-shadow: 0 0 12px var(--cyan); }
@@ -758,6 +846,8 @@
 </head>
 <body>
 
+  <div id="scroll-progress"></div>
+
   <div id="portfolio-root">
     <div id="header"></div>
 
@@ -774,6 +864,12 @@
         en intégrant des <strong>LLMs locaux</strong> pour automatiser l'analyse de menaces.<br>
         Le croisement <strong>SecOps × IA</strong> est au cœur de mes projets.
       </p>
+      <div class="hero-status">
+        <span class="hs-item"><span class="hs-dot green"></span>JARVIS ONLINE</span>
+        <span class="hs-item"><span class="hs-dot green"></span>SOC ACTIF</span>
+        <span class="hs-item"><span class="hs-dot cyan"></span>INFRA LAN</span>
+        <span class="hs-item"><span class="hs-dot orange"></span>RTX 5080</span>
+      </div>
       <div class="hero-cta">
         <a class="btn-cyber" href="https://github.com/0xcyberlitech/" target="_blank" rel="noopener">
           ◈ GitHub
@@ -816,8 +912,8 @@
           </div>
           <div class="card-tags">
             <span class="tag ai">Ollama</span>
+            <span class="tag ai">deepseek-r1:14b</span>
             <span class="tag ai">phi4:14b</span>
-            <span class="tag ai">Groq</span>
             <span class="tag ai">edge-tts</span>
             <span class="tag ai">faster-whisper</span>
             <span class="tag">Python</span>
@@ -843,7 +939,7 @@
           <div class="card-stats">
             <div class="stat"><span class="stat-val" data-count="28">28</span><span class="stat-lbl">TUILES</span></div>
             <div class="stat"><span class="stat-val" data-count="60" data-suffix="s">60s</span><span class="stat-lbl">REFRESH</span></div>
-            <div class="stat"><span class="stat-val">v3.40</span><span class="stat-lbl">VERSION</span></div>
+            <div class="stat"><span class="stat-val">v3.55</span><span class="stat-lbl">VERSION</span></div>
           </div>
           <div class="card-tags">
             <span class="tag">CrowdSec</span>
@@ -971,10 +1067,10 @@
           <div class="skill-group-title">⬡ IA & LLM</div>
           <div class="skill-list">
             <span class="skill-pill hot">Ollama</span>
-            <span class="skill-pill hot">phi4 · qwen2.5</span>
-            <span class="skill-pill hot">Groq API</span>
-            <span class="skill-pill hot">OpenRouter</span>
+            <span class="skill-pill hot">deepseek-r1 · phi4</span>
+            <span class="skill-pill hot">qwen2.5 · gemma3</span>
             <span class="skill-pill hot">LLM Streaming</span>
+            <span class="skill-pill hot">Tool Calling</span>
             <span class="skill-pill hot">Tool Calling</span>
             <span class="skill-pill hot">RAG</span>
             <span class="skill-pill hot">edge-tts</span>
@@ -1040,6 +1136,16 @@
   <script type="module" src="assets/portfolio/script.js"></script>
   <script src="assets/partials/inject-partials.js"></script>
   <script>
+    // Scroll progress bar
+    (function(){
+      var bar = document.getElementById('scroll-progress');
+      if(!bar) return;
+      window.addEventListener('scroll', function(){
+        var p = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+        bar.style.width = Math.min(100, p * 100) + '%';
+      }, {passive:true});
+    })();
+
     // Scroll reveal
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(e => {
