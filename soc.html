@@ -288,6 +288,113 @@
     .reveal { opacity:0;transform:translateY(20px);transition:opacity 0.5s ease,transform 0.5s ease; }
     .reveal.visible { opacity:1;transform:none; }
 
+    /* GALLERY */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.9rem;
+      margin-top: 1.5rem;
+    }
+    .gallery-card {
+      position: relative;
+      border: 1px solid rgba(0,255,240,0.12);
+      border-radius: 3px;
+      background: #060a0e;
+      cursor: pointer;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    }
+    .gallery-card.wide { grid-column: 1 / -1; }
+    .gallery-card:hover {
+      border-color: rgba(0,255,240,0.55);
+      box-shadow: 0 0 28px rgba(0,255,240,0.14), inset 0 0 0 1px rgba(0,255,240,0.08);
+      transform: translateY(-2px);
+    }
+    .gallery-card img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 2px 2px 0 0;
+      opacity: 0.85;
+      transition: opacity 0.3s, filter 0.3s;
+    }
+    .gallery-card:hover img { opacity: 1; filter: brightness(1.08) contrast(1.04); }
+    .gallery-card::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,255,240,0.018) 3px, rgba(0,255,240,0.018) 4px);
+      pointer-events: none;
+    }
+    .gallery-card-overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,255,240,0.0);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s, background 0.3s;
+      pointer-events: none;
+    }
+    .gallery-card:hover .gallery-card-overlay {
+      opacity: 1;
+      background: rgba(0,20,30,0.42);
+    }
+    .gallery-card-overlay span {
+      font-size: 0.58rem;
+      letter-spacing: 0.3em;
+      color: var(--cyan);
+      border: 1px solid rgba(0,255,240,0.5);
+      padding: 0.35rem 0.85rem;
+      text-shadow: 0 0 12px rgba(0,255,240,0.8);
+    }
+    .gallery-caption {
+      padding: 0.6rem 0.8rem;
+      border-top: 1px solid rgba(0,255,240,0.07);
+      background: rgba(0,8,14,0.9);
+    }
+    .gallery-caption-title {
+      font-size: 0.58rem;
+      color: var(--cyan);
+      letter-spacing: 0.18em;
+      margin-bottom: 0.18rem;
+    }
+    .gallery-caption-desc {
+      font-size: 0.5rem;
+      color: rgba(0,255,240,0.38);
+      letter-spacing: 0.06em;
+    }
+    /* LIGHTBOX */
+    .lb-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 9000;
+      background: rgba(4,8,12,0.96);
+      align-items: center; justify-content: center;
+      cursor: pointer;
+    }
+    .lb-overlay.active { display: flex; }
+    .lb-overlay img {
+      max-width: 92vw;
+      max-height: 88vh;
+      border: 1px solid rgba(0,255,240,0.25);
+      box-shadow: 0 0 60px rgba(0,255,240,0.1);
+    }
+    .lb-close {
+      position: fixed; top: 1.2rem; right: 1.5rem;
+      font-size: 1.4rem; color: rgba(0,255,240,0.6);
+      cursor: pointer; letter-spacing: 0.1em;
+      transition: color 0.2s;
+    }
+    .lb-close:hover { color: var(--cyan); }
+    .lb-caption {
+      position: fixed; bottom: 1.5rem; left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.58rem; letter-spacing: 0.2em;
+      color: rgba(0,255,240,0.5);
+      white-space: nowrap;
+    }
+    @media (max-width: 620px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-card.wide { grid-column: 1; }
+    }
+
     /* SCROLL NAV */
     .scroll-nav { position:fixed; right:1.4rem; bottom:2rem; display:flex; flex-direction:column; gap:0.5rem; z-index:200; }
     .scroll-nav-btn {
@@ -381,6 +488,78 @@
       <div class="stat-box"><div class="stat-val">182</div><div class="stat-lbl">RÈGLES APPSEC WAF</div></div>
       <div class="stat-box"><div class="stat-val">4</div><div class="stat-lbl">SOURCES JSON</div></div>
     </div>
+  </div>
+
+  <!-- GALERIE SCREENSHOTS -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// dashboard en production</div>
+    <h2 class="sec-title">$ ls -1 screenshots/</h2>
+    <div class="sec-sep"></div>
+
+    <div class="gallery-grid">
+
+      <div class="gallery-card wide" onclick="lbOpen('images/Kill_chen.jpg','CYBER KILL CHAIN — Phases d\'attaque • Hexagones animés canvas')">
+        <img src="images/Kill_chen.jpg" alt="Cyber Kill Chain" loading="lazy">
+        <div class="gallery-card-overlay"><span>AGRANDIR</span></div>
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">⬡ CYBER KILL CHAIN</div>
+          <div class="gallery-caption-desc">Phases d'attaque en cours • Hexagones animés • Score normalisé 0-100</div>
+        </div>
+      </div>
+
+      <div class="gallery-card" onclick="lbOpen('images/Map.jpg','CARTOGRAPHIE GEOIP — Arcs d\'attaque géolocalisés 24h')">
+        <img src="images/Map.jpg" alt="Cartographie GeoIP" loading="lazy">
+        <div class="gallery-card-overlay"><span>AGRANDIR</span></div>
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">⬡ CARTOGRAPHIE GEOIP</div>
+          <div class="gallery-caption-desc">Menaces géolocalisées 24h • Arcs canvas animés</div>
+        </div>
+      </div>
+
+      <div class="gallery-card" onclick="lbOpen('images/Crowdsec.jpg','CROWDSEC — Analyse comportementale • Décisions actives')">
+        <img src="images/Crowdsec.jpg" alt="CrowdSec" loading="lazy">
+        <div class="gallery-card-overlay"><span>AGRANDIR</span></div>
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">⬡ CROWDSEC — ANALYSE COMPORTEMENTALE</div>
+          <div class="gallery-caption-desc">Décisions actives • Scénarios en cours • IPs bannies</div>
+        </div>
+      </div>
+
+      <div class="gallery-card wide" onclick="lbOpen('images/Activitees_attaques_24h.jpg','ACTIVITÉ & ATTAQUES 24H — Heatmap canvas temporelle')">
+        <img src="images/Activitees_attaques_24h.jpg" alt="Activité et attaques 24h" loading="lazy">
+        <div class="gallery-card-overlay"><span>AGRANDIR</span></div>
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">⬡ ACTIVITÉ & ATTAQUES 24H</div>
+          <div class="gallery-caption-desc">Heatmap canvas temporelle • Densité des requêtes par heure et par type</div>
+        </div>
+      </div>
+
+      <div class="gallery-card" onclick="lbOpen('images/PROTOCOLES_ACTIFS_LIVE.jpg','PROTOCOLES ACTIFS LIVE — Distribution trafic temps réel')">
+        <img src="images/PROTOCOLES_ACTIFS_LIVE.jpg" alt="Protocoles actifs live" loading="lazy">
+        <div class="gallery-card-overlay"><span>AGRANDIR</span></div>
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">⬡ PROTOCOLES ACTIFS LIVE</div>
+          <div class="gallery-caption-desc">Distribution trafic temps réel • HTTP / HTTPS / SSH / DNS</div>
+        </div>
+      </div>
+
+      <div class="gallery-card" onclick="lbOpen('images/TRAFFIC_ANALYSIS.jpg','ANALYSE TRAFIC — Vue globale requêtes et menaces')">
+        <img src="images/TRAFFIC_ANALYSIS.jpg" alt="Analyse trafic" loading="lazy">
+        <div class="gallery-card-overlay"><span>AGRANDIR</span></div>
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">⬡ ANALYSE TRAFIC</div>
+          <div class="gallery-caption-desc">Vue globale requêtes et menaces • 2xx / 4xx / 5xx • volume bytes</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lb-overlay" id="lb-overlay" onclick="lbClose()">
+    <span class="lb-close" onclick="lbClose()">✕ FERMER</span>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-caption" id="lb-caption"></div>
   </div>
 
   <!-- TIMELINE CONSTRUCTION -->
@@ -1318,6 +1497,21 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
   </div>
 
   <script>
+    // LIGHTBOX
+    function lbOpen(src, caption){
+      document.getElementById('lb-img').src = src;
+      document.getElementById('lb-caption').textContent = caption;
+      document.getElementById('lb-overlay').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function lbClose(){
+      document.getElementById('lb-overlay').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') lbClose(); });
+    // empêche fermeture si clic sur l'image elle-même
+    document.getElementById('lb-img').addEventListener('click', function(e){ e.stopPropagation(); });
+
     // SCROLL REVEAL
     const obs = new IntersectionObserver(entries => {
       entries.forEach(e => {
