@@ -8,7 +8,6 @@
   <link rel="icon" type="image/png" href="assets/logo/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap">
-  <link rel="stylesheet" href="assets/preloader/preloader-ultramodern.css">
   <style>
     :root {
       --cyan:   #00fff0;
@@ -442,34 +441,6 @@
   </style>
 </head>
 <body>
-
-  <!-- PRELOADER SOC BOOT -->
-  <div id="preloader-soc" class="preloader-ultramodern">
-    <canvas id="preloader-canvas"></canvas>
-    <div class="preloader-content">
-      <div class="preloader-logo-container">
-        <img src="assets/logo/logo.png" alt="Logo 0xCyberLiTech" class="preloader-logo">
-      </div>
-      <div class="preloader-header">
-        <div class="preloader-title">SOC Dashboard</div>
-        <div class="preloader-subtitle">MONITORING SÉCURITÉ · BOOT SEQUENCE</div>
-      </div>
-      <div class="preloader-status">
-        <div class="preloader-status-text" id="preloader-status-text">INITIALISATION...</div>
-        <div class="preloader-progress-bar-container">
-          <div class="preloader-progress-bar-bg">
-            <div class="preloader-progress-bar" id="preloader-progress-bar"></div>
-          </div>
-          <div class="preloader-progress-bar-marks">
-            <span>0%</span><span>50%</span><span>100%</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- PAGE CONTENT -->
-  <div id="soc-root" style="opacity:0;pointer-events:none;transition:opacity 0.8s cubic-bezier(0.4,0,0.2,1);">
 
   <!-- NAV -->
   <nav class="nav-main">
@@ -1517,8 +1488,6 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
     <a href="/portfolio.html">← Portfolio</a>
   </div>
 
-  </div><!-- /#soc-root -->
-
   <script>
     // LIGHTBOX
     function lbOpen(src, caption){
@@ -1590,44 +1559,6 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
   <script src="assets/portfolio/cyberParticlesBg.js"></script>
   <script>if (window.startCyberParticlesBG) window.startCyberParticlesBG({ color:'#00fff0', count:55, opacity:0.18 });</script>
 
-  <script>
-  // ── SOC PRELOADER BOOT SEQUENCE ──────────────────────────────────────
-  (function(){
-    var bar  = document.getElementById('preloader-progress-bar');
-    var txt  = document.getElementById('preloader-status-text');
-    var prel = document.getElementById('preloader-soc');
-    var root = document.getElementById('soc-root');
-    if (!bar) return;
-
-    var steps = [
-      { pct: 12,  msg: 'AUTHENTIFICATION SSH...' },
-      { pct: 30,  msg: 'LECTURE LOGS NGINX 24H...' },
-      { pct: 50,  msg: 'ANALYSE CROWDSEC · FAIL2BAN...' },
-      { pct: 68,  msg: 'CHARGEMENT KILL CHAIN...' },
-      { pct: 85,  msg: 'CONNEXION JARVIS LLM...' },
-      { pct: 100, msg: 'SOC DASHBOARD ACTIF ✓' }
-    ];
-    var step = 0;
-
-    function next() {
-      if (step >= steps.length) return;
-      bar.style.width = steps[step].pct + '%';
-      if (txt) txt.textContent = steps[step].msg;
-      step++;
-      if (step < steps.length) {
-        setTimeout(next, 900 + Math.random() * 400);
-      } else {
-        // boot terminé — reveal page
-        setTimeout(function() {
-          if (prel) { prel.style.opacity = '0'; prel.style.pointerEvents = 'none'; }
-          if (root) { root.style.opacity = '1'; root.style.pointerEvents = 'auto'; }
-          setTimeout(function() { if (prel && prel.parentNode) prel.parentNode.removeChild(prel); }, 800);
-        }, 700);
-      }
-    }
-    next();
-  })();
-  </script>
 
 </body>
 </html>

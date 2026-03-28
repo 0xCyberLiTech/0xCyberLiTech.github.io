@@ -1227,21 +1227,41 @@
 
   <!-- Scripts -->
   <link rel="stylesheet" href="assets/preloader/preloader-ultramodern.css">
-  <script src="assets/preloader/preloaderUltramodern.js"></script>
   <script>
-    window.addEventListener('preloader:done', function() {
-      document.getElementById('preloader-status-text').textContent = 'Bienvenue.';
-      setTimeout(function() {
-        var p = document.getElementById('preloader-ultramodern');
-        p.style.opacity = '0';
-        p.style.pointerEvents = 'none';
-        var r = document.getElementById('portfolio-root');
-        r.style.display = '';
-        r.style.opacity = '1';
-        r.style.pointerEvents = 'auto';
-        setTimeout(function() { if (p && p.parentNode) p.parentNode.removeChild(p); }, 700);
-      }, 900);
-    });
+  (function(){
+    var bar  = document.getElementById('preloader-progress-bar');
+    var txt  = document.getElementById('preloader-status-text');
+    var prel = document.getElementById('preloader-ultramodern');
+    var root = document.getElementById('portfolio-root');
+    if (!bar) return;
+
+    var steps = [
+      { pct: 10,  msg: 'INITIALISATION SYSTÈME...' },
+      { pct: 28,  msg: 'CHARGEMENT MODULES JARVIS...' },
+      { pct: 46,  msg: 'CONNEXION SOC DASHBOARD...' },
+      { pct: 63,  msg: 'ANALYSE MENACES EN COURS...' },
+      { pct: 80,  msg: 'INFRASTRUCTURE OPÉRATIONNELLE...' },
+      { pct: 100, msg: 'ACCÈS AUTORISÉ ✓' }
+    ];
+    var step = 0;
+
+    function next() {
+      if (step >= steps.length) return;
+      bar.style.width = steps[step].pct + '%';
+      if (txt) txt.textContent = steps[step].msg;
+      step++;
+      if (step < steps.length) {
+        setTimeout(next, 880 + Math.random() * 420);
+      } else {
+        setTimeout(function() {
+          if (prel) { prel.style.opacity = '0'; prel.style.pointerEvents = 'none'; }
+          if (root) { root.style.display = ''; root.style.opacity = '1'; root.style.pointerEvents = 'auto'; }
+          setTimeout(function() { if (prel && prel.parentNode) prel.parentNode.removeChild(prel); }, 800);
+        }, 700);
+      }
+    }
+    next();
+  })();
   </script>
   <script src="assets/portfolio/cyberParticlesBg.js"></script>
   <script>if (window.startCyberParticlesBG) window.startCyberParticlesBG({ color:'#00fff0', count:62, opacity:0.22 });</script>
