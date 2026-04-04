@@ -2,16 +2,35 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>0xCyberLiTech — Cybersécurité & IA</title>
+  <title>0xCyberLiTech — Cybersécurité Défensive & IA Locale | Homelab SecOps</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Portfolio de 0xCyberLiTech — Cybersécurité, homelab, IA locale. Projets : JARVIS AI, SOC Dashboard, nginx WAF, infrastructure SecOps Proxmox.">
-  <meta property="og:title" content="0xCyberLiTech — Portfolio Cybersécurité & IA">
-  <meta property="og:description" content="JARVIS AI local · SOC Dashboard · nginx WAF CrowdSec · Infrastructure SecOps Proxmox. Homelab cybersécurité open-source.">
+  <meta name="description" content="Portfolio de 0xCyberLiTech — Cybersécurité défensive, homelab Proxmox, IA locale. SOC Dashboard 27 tuiles (CrowdSec WAF, Suricata IDS, fail2ban), assistant JARVIS (Ollama LLM, RTX 5080). Projets open-source SecOps.">
+  <meta name="keywords" content="cybersécurité, SOC dashboard, homelab, CrowdSec, Suricata IDS, fail2ban, nginx WAF, JARVIS IA, Ollama, LLM local, Proxmox, Debian, Python, sécurité informatique">
+  <meta name="author" content="0xCyberLiTech">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://0xcyberlitech.github.io/">
+  <meta property="og:title" content="0xCyberLiTech — Cybersécurité Défensive & IA Locale">
+  <meta property="og:description" content="SOC Dashboard 27 tuiles (CrowdSec WAF · Suricata IDS · fail2ban) + JARVIS assistant IA local (Ollama · RTX 5080). Homelab SecOps en production 24/7.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://0xcyberlitech.github.io/">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="0xCyberLiTech — Cybersécurité & IA locale">
-  <meta name="twitter:description" content="JARVIS AI · SOC Dashboard 28 tuiles · nginx WAF · CrowdSec · fail2ban · GeoIP2 · Proxmox SecOps">
+  <meta property="og:image" content="https://0xcyberlitech.github.io/assets/logo/logo.png">
+  <meta property="og:locale" content="fr_FR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="0xCyberLiTech — Cybersécurité & IA Locale | SOC + JARVIS">
+  <meta name="twitter:description" content="SOC Dashboard 27 tuiles · JARVIS IA local (Ollama · RTX 5080) · CrowdSec WAF · Suricata IDS · fail2ban · Proxmox SecOps">
+  <meta name="twitter:image" content="https://0xcyberlitech.github.io/assets/logo/logo.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "0xCyberLiTech",
+    "url": "https://0xcyberlitech.github.io/",
+    "sameAs": ["https://github.com/0xCyberLiTech", "https://0xcyberlitech.com/"],
+    "jobTitle": "Cybersecurity Engineer",
+    "description": "Passionné de cybersécurité défensive et d'intelligence artificielle locale. Créateur du SOC Dashboard (CrowdSec, Suricata IDS, fail2ban) et de JARVIS, assistant IA local sur RTX 5080.",
+    "knowsAbout": ["Cybersecurity", "SOC", "CrowdSec", "Suricata IDS", "fail2ban", "Nginx WAF", "Ollama LLM", "Proxmox", "Python", "Linux Debian"]
+  }
+  </script>
   <link rel="icon" type="image/png" href="assets/logo/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap">
@@ -878,6 +897,31 @@
     .project-card.featured::after { background: linear-gradient(90deg, var(--orange), transparent); opacity: 0.6; }
     .project-card:hover::after { opacity: 0.7; }
 
+    /* ── CARD PREVIEW SCREENSHOT ───────────────── */
+    .card-preview {
+      width: 100%; margin: 0.8rem 0 1rem;
+      border: 1px solid rgba(0,255,240,0.12);
+      overflow: hidden;
+      position: relative;
+    }
+    .card-preview img {
+      width: 100%; height: 160px; object-fit: cover; object-position: top;
+      display: block; opacity: 0.82;
+      transition: opacity 0.3s, transform 0.4s;
+    }
+    .card-preview:hover img { opacity: 1; transform: scale(1.02); }
+    .card-preview::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 40px;
+      background: linear-gradient(transparent, rgba(8,12,16,0.9));
+      pointer-events: none;
+    }
+    .project-card.live-site::before { background: var(--green); opacity: 1; }
+    .project-card.live-site { border-color: rgba(0,255,136,0.2); }
+    .project-card.live-site:hover { border-color: rgba(0,255,136,0.45); box-shadow: 0 0 30px rgba(0,255,136,0.07); }
+    .project-card.live-site::after { background: linear-gradient(90deg, var(--green), transparent); }
+    .project-card.live-site .card-title { color: var(--green); }
+
     /* ── SKILL GROUP IMPROVED ───────────────────── */
     .skill-group {
       clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
@@ -999,22 +1043,22 @@
             Les décisions de sécurité sont prises en temps réel par le LLM local.
           </p>
           <div class="card-stats">
-            <div class="stat"><span class="stat-val" data-count="4" data-suffix="+">4+</span><span class="stat-lbl">MOTEURS LLM</span></div>
+            <div class="stat"><span class="stat-val" data-count="55">55</span><span class="stat-lbl">ROUTES API</span></div>
             <div class="stat"><span class="stat-val" data-count="5">5</span><span class="stat-lbl">MOTEURS TTS</span></div>
-            <div class="stat"><span class="stat-val" data-count="3000" data-prefix="~">~3000</span><span class="stat-lbl">LIGNES PY</span></div>
+            <div class="stat"><span class="stat-val" data-count="3594" data-prefix="~">~3594</span><span class="stat-lbl">LIGNES PY</span></div>
             <div class="stat"><span class="stat-val" data-count="17" data-prefix="~" data-suffix="K">~17K</span><span class="stat-lbl">LIGNES UI</span></div>
           </div>
           <div class="card-tags">
             <span class="tag ai">Ollama</span>
-            <span class="tag ai">phi4:14b</span>
-            <span class="tag ai">Groq</span>
+            <span class="tag ai">phi4-reasoning:plus</span>
             <span class="tag ai">edge-tts</span>
             <span class="tag ai">faster-whisper</span>
+            <span class="tag ai">DeepFilterNet</span>
             <span class="tag">Python</span>
             <span class="tag">Flask</span>
             <span class="tag">JavaScript</span>
             <span class="tag">DSP Audio</span>
-            <span class="tag">RTX 5080</span>
+            <span class="tag">RTX 5080 · CUDA 12</span>
           </div>
           <a class="card-link orange" href="jarvis.html">→ Documentation technique</a>
         </div>
@@ -1031,48 +1075,84 @@
             et les actions proactives automatisées.
           </p>
           <div class="card-stats">
-            <div class="stat"><span class="stat-val" data-count="28">28</span><span class="stat-lbl">TUILES</span></div>
+            <div class="stat"><span class="stat-val" data-count="27">27</span><span class="stat-lbl">TUILES</span></div>
             <div class="stat"><span class="stat-val" data-count="60" data-suffix="s">60s</span><span class="stat-lbl">REFRESH</span></div>
-            <div class="stat"><span class="stat-val">v3.40</span><span class="stat-lbl">VERSION</span></div>
+            <div class="stat"><span class="stat-val">v3.80</span><span class="stat-lbl">VERSION</span></div>
           </div>
           <div class="card-tags">
-            <span class="tag">CrowdSec</span>
+            <span class="tag">CrowdSec AppSec WAF</span>
+            <span class="tag">Suricata IDS</span>
             <span class="tag">fail2ban</span>
             <span class="tag">nginx</span>
-            <span class="tag">Python</span>
             <span class="tag">GeoIP2</span>
-            <span class="tag">Kill Chain</span>
-            <span class="tag ai">LLM Analysis</span>
-            <span class="tag">JavaScript</span>
+            <span class="tag">MITRE ATT&CK</span>
+            <span class="tag ai">JARVIS IA</span>
+            <span class="tag">Proxmox</span>
           </div>
           <a class="card-link" href="soc.html">→ Documentation technique</a>
         </div>
 
-        <!-- SITE CLT / CVE -->
-        <div class="project-card">
-          <span class="card-badge live">● LIVE</span>
+        <!-- CVE TRACKER -->
+        <div class="project-card live-site">
+          <span class="card-badge live">● LIVE — Production</span>
           <span class="card-icon">⚡</span>
-          <h3 class="card-title">0xCyberLiTech.com — CVE Auto-Feed</h3>
+          <h3 class="card-title">0xCyberLiTech.com — CVE Tracker</h3>
+          <div class="card-preview">
+            <img src="images/cve-dashboard.jpg" alt="CVE Dashboard — 0xCyberLiTech" loading="lazy" />
+          </div>
           <p class="card-desc">
-            Site de veille cybersécurité avec flux CVE automatisé depuis NVD/NIST.
-            21 mois de données, tri par sévérité CVSS, export CSV, filtres temporels.
-            Threat intelligence, kill chain, OpenVAS, Proxmox — 150+ articles.
+            Dashboard CVE en production — flux automatisé NVD/NIST, 773 CVE affichées,
+            pic à 254 CVE/mois. Filtres CVSS, CISA KEV, export CSV, historique 21 mois.
+            Répartition critique/élevée/moyenne/faible · indice de risque · évolution graphique.
           </p>
           <div class="card-stats">
-            <div class="stat"><span class="stat-val" data-count="21">21</span><span class="stat-lbl">MOIS CVE</span></div>
-            <div class="stat"><span class="stat-val" data-count="150" data-suffix="+">150+</span><span class="stat-lbl">ARTICLES</span></div>
-            <div class="stat"><span class="stat-val" data-count="24" data-suffix="h">24h</span><span class="stat-lbl">DÉLAI NVD</span></div>
+            <div class="stat"><span class="stat-val" data-count="773">773</span><span class="stat-lbl">CVE ACTIVES</span></div>
+            <div class="stat"><span class="stat-val" data-count="15">15</span><span class="stat-lbl">EXPLOIT REFS</span></div>
+            <div class="stat"><span class="stat-val">6.8</span><span class="stat-lbl">CVSS MOYEN</span></div>
+            <div class="stat"><span class="stat-val" data-count="21">21</span><span class="stat-lbl">MOIS DATA</span></div>
           </div>
           <div class="card-tags">
             <span class="tag">NVD/NIST API</span>
-            <span class="tag">CVSS</span>
-            <span class="tag">Python</span>
-            <span class="tag">Cron</span>
+            <span class="tag">CVSS v3</span>
+            <span class="tag">CISA KEV</span>
+            <span class="tag">Python · Cron</span>
             <span class="tag">JavaScript</span>
             <span class="tag">nginx</span>
           </div>
           <a class="card-link" href="https://0xcyberlitech.com/cve.html" target="_blank" rel="noopener">
-            → Voir les CVE en direct
+            → Voir le CVE Tracker en direct ↗
+          </a>
+        </div>
+
+        <!-- THREAT INTEL -->
+        <div class="project-card live-site">
+          <span class="card-badge live">● LIVE — Production</span>
+          <span class="card-icon">◉</span>
+          <h3 class="card-title">0xCyberLiTech.com — Threat Intel</h3>
+          <div class="card-preview">
+            <img src="images/threat-intel.jpg" alt="Threat Intel — 0xCyberLiTech" loading="lazy" />
+          </div>
+          <p class="card-desc">
+            Menaces en temps réel — URLhaus, MalwareBazaar, ThreatFox, Feodo Tracker.
+            4 flux abuse.ch mis à jour quotidiennement par cron serveur.
+            IOCs, C2 actifs, hashes malwares, IPs malveillantes — zéro appel API navigateur.
+          </p>
+          <div class="card-stats">
+            <div class="stat"><span class="stat-val" data-count="214">214</span><span class="stat-lbl">URLS ACTIVES</span></div>
+            <div class="stat"><span class="stat-val" data-count="100">100</span><span class="stat-lbl">MALWARES/JOUR</span></div>
+            <div class="stat"><span class="stat-val" data-count="350">350</span><span class="stat-lbl">IOCs/24H</span></div>
+            <div class="stat"><span class="stat-val" data-count="5">5</span><span class="stat-lbl">C2 ACTIFS</span></div>
+          </div>
+          <div class="card-tags">
+            <span class="tag">URLhaus</span>
+            <span class="tag">MalwareBazaar</span>
+            <span class="tag">ThreatFox</span>
+            <span class="tag">Feodo Tracker</span>
+            <span class="tag">abuse.ch</span>
+            <span class="tag">IOCs · TTPs</span>
+          </div>
+          <a class="card-link" href="https://0xcyberlitech.com/threat-intel.html" target="_blank" rel="noopener">
+            → Voir les menaces en temps réel ↗
           </a>
         </div>
 
