@@ -11,6 +11,179 @@
   <link rel="stylesheet" href="assets/portfolio/doc.css">
   <style>
     :root { --doc-accent: var(--cyan); }
+
+    /* ── STAT-LBL alias ───────────────────────── */
+    .stat-lbl { font-family: var(--font-head); font-size: 0.58rem; color: var(--text-mute); letter-spacing: 0.12em; margin-top: 0.3rem; display: block; }
+
+    /* ── LEVEL BADGES ─────────────────────────── */
+    .level-critique { color: var(--red); font-weight: 600; }
+    .level-eleve    { color: var(--orange); font-weight: 600; }
+    .level-blue     { color: var(--blue); font-weight: 600; }
+
+    /* ── PÉRIMÈTRE NOTICE ─────────────────────── */
+    .perimeter-notice {
+      border-left: 3px solid rgba(245,158,11,0.5);
+      padding: 0.9rem 1.4rem;
+      background: rgba(245,158,11,0.04);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: 0.85rem; color: var(--text-sec); line-height: 1.8;
+    }
+
+    /* ── GALLERY ──────────────────────────────── */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+    .gallery-card {
+      position: relative; overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      background: var(--card-bg);
+      backdrop-filter: blur(6px);
+      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+    .gallery-card.wide { grid-column: span 2; }
+    .gallery-card:hover { border-color: var(--border-h); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,217,255,0.1); }
+    .gallery-card img { width: 100%; height: 180px; object-fit: cover; display: block; filter: brightness(0.85); transition: filter var(--transition), transform var(--transition); }
+    .gallery-card:hover img { filter: brightness(1); transform: scale(1.02); }
+    .gallery-card-overlay {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,217,255,0.08);
+      opacity: 0; transition: opacity var(--transition);
+    }
+    .gallery-card-overlay span {
+      font-family: var(--font-head); font-size: 0.65rem; font-weight: 700;
+      color: var(--cyan); letter-spacing: 0.2em;
+      padding: 0.4rem 1rem;
+      border: 1px solid rgba(0,217,255,0.5);
+      border-radius: var(--radius-sm);
+      background: rgba(12,18,25,0.8);
+    }
+    .gallery-card:hover .gallery-card-overlay { opacity: 1; }
+    .gallery-caption { padding: 0.8rem 1rem; }
+    .gallery-caption-title { font-family: var(--font-head); font-size: 0.65rem; color: var(--cyan); letter-spacing: 0.06em; margin-bottom: 0.3rem; }
+    .gallery-caption-desc  { font-family: var(--font-body); font-size: 0.75rem; color: var(--text-sec); line-height: 1.5; }
+
+    /* ── LIGHTBOX ─────────────────────────────── */
+    .lb-overlay {
+      position: fixed; inset: 0; z-index: 9000;
+      background: rgba(8,14,22,0.95);
+      backdrop-filter: blur(12px);
+      display: none; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 1rem; padding: 2rem;
+      cursor: pointer;
+    }
+    .lb-overlay.active { display: flex; }
+    .lb-close {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      font-family: var(--font-head); font-size: 0.65rem;
+      color: var(--text-mute); cursor: pointer; letter-spacing: 0.15em;
+      padding: 0.3rem 0.8rem; border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      transition: all 0.2s;
+    }
+    .lb-close:hover { color: var(--red); border-color: rgba(239,68,68,0.4); }
+    #lb-img { max-width: 90vw; max-height: 80vh; object-fit: contain; border-radius: var(--radius-md); border: 1px solid var(--border); cursor: default; }
+    .lb-caption { font-family: var(--font-head); font-size: 0.62rem; color: var(--text-mute); letter-spacing: 0.12em; text-align: center; }
+
+    /* ── TIMELINE ─────────────────────────────── */
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .timeline-item {
+      display: flex; gap: 1.5rem; align-items: flex-start;
+      position: relative; padding-bottom: 2rem;
+    }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-item::before {
+      content: ''; position: absolute;
+      left: 19px; top: 38px; bottom: 0;
+      width: 1px; background: linear-gradient(180deg, var(--border-h), transparent);
+    }
+    .timeline-item:last-child::before { display: none; }
+    .timeline-num {
+      flex-shrink: 0;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--card-bg);
+      border: 2px solid var(--cyan);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-head); font-size: 0.72rem; font-weight: 700;
+      color: var(--cyan);
+      box-shadow: 0 0 14px rgba(0,217,255,0.2);
+      position: relative; z-index: 1;
+    }
+    .timeline-body { flex: 1; padding-top: 0.5rem; }
+    .timeline-title { font-family: var(--font-head); font-size: 0.75rem; font-weight: 700; color: var(--text); letter-spacing: 0.04em; margin-bottom: 0.5rem; }
+    .timeline-desc  { font-family: var(--font-body); font-size: 0.82rem; color: var(--text-sec); line-height: 1.75; }
+
+    /* ── KILL CHAIN STAGES ────────────────────── */
+    .kc-stages {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 0.75rem; margin-bottom: 2rem;
+    }
+    .kc-stage {
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      border-radius: var(--radius-md);
+      padding: 1.2rem 1rem;
+      backdrop-filter: blur(6px);
+      display: flex; flex-direction: column; gap: 0.5rem;
+      position: relative;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .kc-stage:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+    .kc-stage-arrow {
+      font-family: var(--font-head); font-size: 0.55rem;
+      color: var(--text-mute); margin-bottom: 0.2rem;
+    }
+    .kc-stage-num  { font-family: var(--font-head); font-size: 0.55rem; color: var(--text-mute); letter-spacing: 0.15em; }
+    .kc-stage-name { font-family: var(--font-head); font-size: 0.85rem; font-weight: 900; letter-spacing: 0.08em; }
+    .kc-stage-signals { font-family: var(--font-body); font-size: 0.72rem; color: var(--text-sec); line-height: 1.7; }
+    .kc-stage-score {
+      font-family: var(--font-head); font-size: 0.6rem; color: var(--text-mute);
+      margin-top: auto; padding-top: 0.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── SUB-TITLE ────────────────────────────── */
+    .sub-title {
+      font-family: var(--font-head); font-size: 0.62rem;
+      color: var(--doc-accent); letter-spacing: 0.3em;
+      opacity: 0.75; margin-bottom: 1rem;
+    }
+
+    /* ── CHECKLIST ────────────────────────────── */
+    .checklist { display: flex; flex-direction: column; gap: 0.6rem; }
+    .checklist-item { display: flex; gap: 0.8rem; align-items: flex-start; }
+    .checklist-icon { color: var(--cyan); flex-shrink: 0; font-size: 0.8rem; margin-top: 0.1rem; }
+    .checklist-text { font-family: var(--font-body); font-size: 0.85rem; color: var(--text-sec); line-height: 1.7; }
+    .checklist-text strong { color: var(--text); font-weight: 600; }
+
+    /* ── KBD ──────────────────────────────────── */
+    .kbd {
+      font-family: var(--font-mono); font-size: 0.75rem;
+      padding: 0.15rem 0.45rem;
+      background: var(--bg3); border: 1px solid var(--border-h);
+      border-radius: var(--radius-sm); color: var(--cyan);
+    }
+
+    /* ── FOOTER LINKS ─────────────────────────── */
+    .doc-footer-links { display: flex; gap: 1.5rem; align-items: center; }
+    .doc-footer-links a { color: var(--text-mute); text-decoration: none; font-size: 0.78rem; transition: color var(--transition); }
+    .doc-footer-links a:hover { color: var(--cyan); }
+
+    /* ── RESPONSIVE GALLERY ───────────────────── */
+    @media (max-width: 640px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-card.wide { grid-column: span 1; }
+      .kc-stages { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 400px) {
+      .kc-stages { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -49,8 +222,8 @@
 
   <!-- PÉRIMÈTRE -->
   <div class="doc-section reveal">
-    <div style="border-left: 3px solid rgba(255,136,0,0.5); padding: 0.8rem 1.2rem; background: rgba(255,136,0,0.03); font-size: 0.72rem; color: rgba(0,255,240,0.6); line-height: 1.8;">
-      <span style="color:var(--orange); letter-spacing:0.1em;">◉ PÉRIMÈTRE —</span>
+    <div class="perimeter-notice">
+      <span style="color:var(--orange); font-family:var(--font-head); font-size:0.65rem; letter-spacing:0.1em;">◉ PÉRIMÈTRE —</span>
       Solution homelab déployée sur réseau local (LAN). Le dashboard SOC, le reverse proxy et l'assistant IA
       fonctionnent exclusivement dans un environnement privé et maîtrisé.
       Cette documentation présente la <strong style="color:var(--cyan)">méthodologie</strong> et les
@@ -288,7 +461,7 @@
         <div class="pipe-name">Windows</div>
         <div class="pipe-tech">windows-disk-report.ps1<br>Disques · GPU · CPU<br>Sauvegardes VMs</div>
       </div>
-      <div class="pipe-step" style="border-right:1px solid rgba(0,255,240,0.15);">
+      <div class="pipe-step" style="border-right:1px solid var(--border);">
         <div class="pipe-num">06</div>
         <div class="pipe-name">SSL</div>
         <div class="pipe-tech">Certificats TLS<br>Jours restants<br>Statut par domaine</div>
@@ -447,7 +620,7 @@
         <div class="pipe-name">SSH check</div>
         <div class="pipe-tech">socket connect<br>Hôtes UP/DOWN<br>Uptime via ssh</div>
       </div>
-      <div class="pipe-step" style="border-right:1px solid rgba(0,255,240,0.15);">
+      <div class="pipe-step" style="border-right:1px solid var(--border);">
         <div class="pipe-num">SRC 07</div>
         <div class="pipe-name">Honeypot</div>
         <div class="pipe-tech">URLs pièges vhosts<br>Détection accès<br>Tag EXPLOIT auto</div>
@@ -920,23 +1093,23 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
       <tbody>
         <tr>
           <td><kbd class="kbd">[F]</kbd></td>
-          <td style="color:rgba(0,255,240,0.6);">Ouvre le modal Firewall Matrix — règles nftables actives</td>
+          <td style="color:var(--text-sec);">Ouvre le modal Firewall Matrix — règles nftables actives</td>
         </tr>
         <tr>
           <td><kbd class="kbd">[T]</kbd></td>
-          <td style="color:rgba(0,255,240,0.6);">Ouvre le modal Analyse Trafic — vue détaillée par heure</td>
+          <td style="color:var(--text-sec);">Ouvre le modal Analyse Trafic — vue détaillée par heure</td>
         </tr>
         <tr>
           <td><kbd class="kbd">[E]</kbd></td>
-          <td style="color:rgba(0,255,240,0.6);">Envoie le rapport SOC par email (cooldown 60s)</td>
+          <td style="color:var(--text-sec);">Envoie le rapport SOC par email (cooldown 60s)</td>
         </tr>
         <tr>
           <td><kbd class="kbd">[R]</kbd></td>
-          <td style="color:rgba(0,255,240,0.6);">Force un refresh JSON immédiat (contourne les 60s)</td>
+          <td style="color:var(--text-sec);">Force un refresh JSON immédiat (contourne les 60s)</td>
         </tr>
         <tr>
           <td><kbd class="kbd">[Z]</kbd></td>
-          <td style="color:rgba(0,255,240,0.6);">Active le mode projection plein écran (salle de guerre)</td>
+          <td style="color:var(--text-sec);">Active le mode projection plein écran (salle de guerre)</td>
         </tr>
       </tbody>
     </table>
@@ -1031,7 +1204,7 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
       <div style="display:flex;gap:2rem;flex-wrap:wrap;align-items:flex-start;">
         <div style="flex:1;min-width:200px;">
           <div class="code-block-title" style="margin-bottom:0.6rem;">// paths pièges (exemples génériques)</div>
-          <div style="font-size:0.65rem;color:rgba(0,255,240,0.55);line-height:2;">
+          <div style="font-family:var(--font-mono);font-size:0.78rem;color:var(--text-sec);line-height:2.1;">
             /wp-admin<br>
             /wp-login.php<br>
             /.env<br>
