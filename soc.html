@@ -211,11 +211,11 @@
     <h1 class="doc-title">SOC Dashboard</h1>
     <p class="doc-sub">MONITORING SÉCURITÉ TEMPS RÉEL &nbsp;·&nbsp; KILL CHAIN &nbsp;·&nbsp; IA INTÉGRÉE</p>
     <div class="doc-badges">
-      <span class="badge cyan">28 tuiles en production</span>
+      <span class="badge cyan">30 tuiles en production</span>
       <span class="badge green">Refresh 60s</span>
-      <span class="badge orange">CrowdSec · fail2ban</span>
+      <span class="badge orange">CrowdSec · fail2ban · Suricata IDS</span>
       <span class="badge blue">nginx · GeoIP2 · CVE NVD</span>
-      <span class="badge cyan">v3.40 · Python · JavaScript</span>
+      <span class="badge cyan">v3.80.4 · Python · JavaScript</span>
       <span class="badge red">LAN uniquement — solution locale</span>
     </div>
   </div>
@@ -235,7 +235,7 @@
   <!-- STATS -->
   <div class="doc-section reveal">
     <div class="stats-row">
-      <div class="stat-box"><div class="stat-val">28</div><div class="stat-lbl">TUILES EN PROD</div></div>
+      <div class="stat-box"><div class="stat-val">30</div><div class="stat-lbl">TUILES EN PROD</div></div>
       <div class="stat-box"><div class="stat-val">60s</div><div class="stat-lbl">CYCLE REFRESH</div></div>
       <div class="stat-box"><div class="stat-val">21</div><div class="stat-lbl">MOIS CVE INDEXÉS</div></div>
       <div class="stat-box"><div class="stat-val">3×</div><div class="stat-lbl">SYNC CVE / JOUR</div></div>
@@ -373,6 +373,20 @@
         <div class="timeline-item">
           <div class="timeline-num">8</div>
           <div class="timeline-body">
+            <div class="timeline-title">SURICATA IDS 7 — DÉTECTION RÉSEAU PASSIVE</div>
+            <div class="timeline-desc">Déploiement Suricata 7 en mode IDS passif (AF_PACKET, interface ens18). 49 343 règles Emerging Threats actives, mise à jour quotidienne automatique. Pipeline IDS→IPS : Suricata détecte → CrowdSec acquis lit eve.json → firewall-bouncer bloque. Tuile SOC : sévérités 1/2/3, top signatures, corrélation Kill Chain, MITRE ATT&CK T1059/T1071.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-num">9</div>
+          <div class="timeline-body">
+            <div class="timeline-title">ROUTEUR GT-BE98 — MONITORING RÉSEAU COMPLET</div>
+            <div class="timeline-desc">Intégration SNMP + SSH du routeur via script Python (paramiko). Données collectées toutes les 5 minutes : débits WAN/LAN, WiFi 5/6GHz, Skynet blacklist, nf_conntrack (matrice flux LAN→WAN). Score réseau isolé du score SOC. Modal 7 onglets : Réseau, WiFi, Système, Historique 24h, Flux WAN, Sécurité, Ports SVG.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-num">10</div>
+          <div class="timeline-body">
             <div class="timeline-title">RAPPORT SOC QUOTIDIEN + ALERTES EMAIL + SNAPSHOTS UFW</div>
             <div class="timeline-desc">soc-daily-report.py génère un rapport complet chaque matin à 08h00 UTC : trafic 24h, CrowdSec, Kill Chain, top attaquants, état services, SSL, système. Snapshots UFW horodatés pour historique posture sécurité. Déclenchement manuel depuis le dashboard via raccourci [E].</div>
           </div>
@@ -401,6 +415,8 @@
           <div class="arch-box orange">CrowdSec<br><span style="font-size:0.55rem;opacity:0.6">décisions · bans actifs</span></div>
           <div class="arch-box green">fail2ban<br><span style="font-size:0.55rem;opacity:0.6">jails · IPs bannies</span></div>
           <div class="arch-box blue">Système<br><span style="font-size:0.55rem;opacity:0.6">CPU · RAM · disque · réseau</span></div>
+          <div class="arch-box red">Suricata IDS 7<br><span style="font-size:0.55rem;opacity:0.6">eve.json · 49k règles ET</span></div>
+          <div class="arch-box violet">ROUTEUR GT-BE98<br><span style="font-size:0.55rem;opacity:0.6">SNMP · SSH · Skynet · Flux WAN</span></div>
         </div>
 
         <div class="arch-arrow-v-wrap"><div class="arch-arrow-v"></div></div>
@@ -420,7 +436,7 @@
         <div class="arch-arrow-v-wrap"><div class="arch-arrow-v"></div></div>
 
         <div class="arch-row">
-          <div class="arch-box cyan" style="min-width:220px;">◈ SOC DASHBOARD<br><span style="font-size:0.55rem;opacity:0.6">monitoring-index.html · fetch JSON 60s<br>28 tuiles · Kill Chain · GeoIP</span></div>
+          <div class="arch-box cyan" style="min-width:220px;">◈ SOC DASHBOARD<br><span style="font-size:0.55rem;opacity:0.6">monitoring-index.html · fetch JSON 60s<br>30 tuiles · Kill Chain · GeoIP · Suricata</span></div>
         </div>
 
         <div class="arch-arrow-v-wrap"><div class="arch-arrow-v" style="background:rgba(255,136,0,0.4);"></div></div>
@@ -583,7 +599,7 @@
     <h2 class="sec-title">$ python3 monitoring_gen.py --explain</h2>
     <div class="sec-sep"></div>
     <p class="sec-desc">
-      monitoring_gen.py est le coeur du pipeline. Ce script Python (~73 000 lignes commentées) collecte,
+      monitoring_gen.py est le cœur du pipeline. Ce script Python collecte,
       normalise et agrège les données de toutes les sources en un seul fichier monitoring.json.
       Il est déclenché toutes les 5 minutes par cron via monitoring.sh (wrapper de lancement).
     </p>
@@ -620,8 +636,18 @@
         <div class="pipe-name">SSH check</div>
         <div class="pipe-tech">socket connect<br>Hôtes UP/DOWN<br>Uptime via ssh</div>
       </div>
-      <div class="pipe-step" style="border-right:1px solid var(--border);">
+      <div class="pipe-step">
         <div class="pipe-num">SRC 07</div>
+        <div class="pipe-name">Suricata IDS</div>
+        <div class="pipe-tech">eve.json 24h<br>49k règles ET<br>Sévérité 1/2/3</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">SRC 08</div>
+        <div class="pipe-name">ROUTEUR</div>
+        <div class="pipe-tech">SNMP + SSH<br>Débits · Skynet<br>nf_conntrack</div>
+      </div>
+      <div class="pipe-step" style="border-right:1px solid var(--border);">
+        <div class="pipe-num">SRC 09</div>
         <div class="pipe-name">Honeypot</div>
         <div class="pipe-tech">URLs pièges vhosts<br>Détection accès<br>Tag EXPLOIT auto</div>
       </div>
@@ -693,6 +719,12 @@
 
 <span class="cm"># Proto-live — analyse protocoles réseau temps réel</span>
 <span class="hl">*/1 * * * *</span> /opt/scripts/proto-live.py &gt;&gt; /var/log/proto-live.log 2&gt;&amp;1
+
+<span class="cm"># Mise à jour règles Suricata Emerging Threats — quotidien 03h00</span>
+<span class="hl">0 3 * * *</span> /usr/bin/suricata-update &gt;&gt; /var/log/suricata-update.log 2&gt;&amp;1
+
+<span class="cm"># Collecte SNMP+SSH routeur — toutes les 5 minutes</span>
+<span class="hl">*/5 * * * *</span> /usr/bin/python3 /opt/scripts/router-report.py &gt;&gt; /var/log/router-report.log 2&gt;&amp;1
 
 <span class="cm"># Nettoyage logs rotatifs — hebdomadaire</span>
 <span class="hl">0 2 * * 0</span> /opt/scripts/log-rotate-clean.sh &gt;&gt; /var/log/log-clean.log 2&gt;&amp;1</pre>
@@ -775,7 +807,7 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
 
   <!-- TUILES -->
   <div class="doc-section reveal">
-    <div class="sec-label">// inventaire des 28 tuiles</div>
+    <div class="sec-label">// inventaire des 30 tuiles</div>
     <h2 class="sec-title">$ cat tiles-inventory.json</h2>
     <div class="sec-sep"></div>
 
@@ -806,6 +838,12 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
       <div class="tile-item"><div class="tile-name">BANDE PASSANTE nginx</div><div class="tile-desc">Sparklines RX/TX sur 24h — pic/moyen/actuel en Mo/s</div></div>
       <div class="tile-item"><div class="tile-name">SYSTÈME — SERVEUR</div><div class="tile-desc">CPU ring animé, RAM barre, disque /var/www — seuils colorés</div></div>
       <div class="tile-item"><div class="tile-name">RÉSEAU — SERVEUR</div><div class="tile-desc">Interfaces réseau RX/TX — graphique sparkline par interface</div></div>
+    </div>
+
+    <div class="tiles-section-label">▶ IDS RÉSEAU</div>
+    <div class="tiles-grid">
+      <div class="tile-item"><span class="tile-badge live">LIVE</span><div class="tile-name">SURICATA IDS</div><div class="tile-desc">Alertes temps réel · Sévérité 1/2/3 · Top signatures · Corrélation CrowdSec · MITRE ATT&CK T1059/T1071</div></div>
+      <div class="tile-item"><span class="tile-badge live">LIVE</span><div class="tile-name">ROUTEUR GT-BE98</div><div class="tile-desc">Débits WAN/LAN · WiFi 5/6GHz · Skynet blacklist · Score réseau · Flux nf_conntrack · Top destinations</div></div>
     </div>
 
     <div class="tiles-section-label">▶ INFRASTRUCTURE</div>
