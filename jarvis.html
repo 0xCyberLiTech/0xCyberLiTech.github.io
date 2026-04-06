@@ -43,7 +43,7 @@
       <span class="badge green">Ollama · phi4-reasoning:plus</span>
       <span class="badge blue">edge-tts · Whisper</span>
       <span class="badge cyan">RTX 5080 · CUDA 12</span>
-      <span class="badge orange">~3594 lignes PY · ~17K lignes UI</span>
+      <span class="badge orange">~3650 lignes PY · ~17K lignes UI</span>
     </div>
   </div>
 
@@ -54,7 +54,7 @@
     <div class="sec-sep"></div>
     <p class="sec-desc">
       JARVIS est un serveur Flask local exposant une interface web holographique.
-      Il orchestre plusieurs moteurs IA en local et en cloud, avec un pipeline audio complet
+      Il orchestre plusieurs moteurs IA en local uniquement, avec un pipeline audio complet
       (STT → LLM → DSP → TTS) et une intégration bidirectionnelle avec le dashboard SOC.
     </p>
 
@@ -234,6 +234,10 @@
         <div class="tab-name">⏱ Tâches</div>
         <div class="tab-desc">Tâches automatisées avec scheduling et exécution planifiée</div>
       </div>
+      <div class="tab-item">
+        <div class="tab-name">◈ SOC</div>
+        <div class="tab-desc">Journal actions proactives (ban-ip, restart), compteurs session, analyse LLM narrative, alertes TTS niveau ÉLEVÉ/CRITIQUE</div>
+      </div>
     </div>
   </div>
 
@@ -330,7 +334,7 @@
     <div class="code-block">
       <div class="code-block-title">// structure du projet</div>
       <pre><span class="hl">scripts/</span>
-<span class="cm">├──</span> <span class="kw">jarvis.py</span>              <span class="cm"># Serveur Flask principal (~3 000 lignes)</span>
+<span class="cm">├──</span> <span class="kw">jarvis.py</span>              <span class="cm"># Serveur Flask principal (~3 650 lignes)</span>
 <span class="cm">├──</span> templates/
 <span class="cm">│   └──</span> <span class="kw">jarvis.html</span>        <span class="cm"># Interface UI holographique (~17 000 lignes)</span>
 <span class="cm">├──</span> <span class="st">jarvis_providers.json</span>  <span class="cm"># Providers LLM + clés API (non versionné)</span>
@@ -366,17 +370,11 @@ pip install pynvml
     <span class="st">"ollama"</span>: {
       <span class="st">"base_url"</span>: <span class="kw">"http://localhost:11434"</span>,
       <span class="st">"model"</span>: <span class="kw">"[MODEL_NAME]"</span>       <span class="cm">// ex: phi4-reasoning:plus</span>
-    },
-    <span class="st">"groq"</span>: {
-      <span class="st">"api_key"</span>: <span class="kw">"[GROQ_API_KEY]"</span>,
-      <span class="st">"model"</span>: <span class="kw">"[GROQ_MODEL]"</span>        <span class="cm">// ex: llama-3.3-70b-versatile</span>
-    },
-    <span class="st">"openrouter"</span>: {
-      <span class="st">"api_key"</span>: <span class="kw">"[OPENROUTER_API_KEY]"</span>,
-      <span class="st">"model"</span>: <span class="kw">"[OPENROUTER_MODEL]"</span>  <span class="cm">// ex: anthropic/claude-3.5-sonnet</span>
     }
   }
-}</pre>
+}
+<span class="cm">// JARVIS fonctionne exclusivement en local via Ollama.</span>
+<span class="cm">// Aucun envoi de données vers un service cloud.</span></pre>
     </div>
 
     <!-- CONFIG LLM PARAMS -->
