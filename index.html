@@ -1077,7 +1077,7 @@
           <div class="card-stats">
             <div class="stat"><span class="stat-val" data-count="27">27</span><span class="stat-lbl">TUILES</span></div>
             <div class="stat"><span class="stat-val" data-count="60" data-suffix="s">60s</span><span class="stat-lbl">REFRESH</span></div>
-            <div class="stat"><span class="stat-val">v3.80</span><span class="stat-lbl">VERSION</span></div>
+            <div class="stat"><span class="stat-val">v3.80.4</span><span class="stat-lbl">VERSION</span></div>
           </div>
           <div class="card-tags">
             <span class="tag">CrowdSec AppSec WAF</span>
@@ -1242,8 +1242,6 @@
           <div class="skill-list">
             <span class="skill-pill hot">Ollama</span>
             <span class="skill-pill hot">phi4 · qwen2.5</span>
-            <span class="skill-pill hot">Groq API</span>
-            <span class="skill-pill hot">OpenRouter</span>
             <span class="skill-pill hot">LLM Streaming</span>
             <span class="skill-pill hot">Tool Calling</span>
             <span class="skill-pill hot">RAG</span>
@@ -1489,17 +1487,17 @@
         return [
           '<span class="t-hi">JARVIS — Assistant IA Local</span>',
           '<span class="t-dim">──────────────────────────────</span>',
-          '  LLM     : phi4:14b · qwen2.5 · deepseek-r1:14b',
+          '  LLM     : phi4-reasoning:plus · qwen2.5 · deepseek-r1:14b',
           '  TTS     : edge-tts (Antoine) · Piper · SAPI5',
           '  STT     : faster-whisper "small" FR',
           '  GPU     : RTX 5080 Blackwell 16 GB GDDR7',
-          '  Lignes  : ~3000 Python · ~17K HTML/JS',
+          '  Lignes  : ~3594 Python · ~17K HTML/JS',
           '  Status  : <span class="t-ok">● ACTIF</span> — localhost:5000',
         ];
       },
       'cat soc': function() {
         return [
-          '<span class="t-hi">SOC Dashboard v3.40</span>',
+          '<span class="t-hi">SOC Dashboard v3.80.4</span>',
           '<span class="t-dim">──────────────────────────────</span>',
           '  Tuiles  : 28 (kill chain, GeoIP, CVE, fail2ban…)',
           '  Refresh : 60s auto',
@@ -1513,7 +1511,7 @@
         return [
           '<span class="t-hi">Stack technique :</span>',
           '  <span class="t-warn">SecOps</span>   CrowdSec · fail2ban · UFW · GeoIP2 · OpenVAS',
-          '  <span class="t-warn">IA</span>       Ollama · phi4 · Groq · RAG · TTS · STT · DSP',
+          '  <span class="t-warn">IA</span>       Ollama · phi4-reasoning · RAG · TTS · STT · DSP',
           '  <span class="t-warn">Infra</span>    Proxmox VE · nginx · Apache · Certbot · Docker',
           '  <span class="t-warn">Dev</span>      Python 3.11 · Flask · JS ES6 · PHP · Bash · PS1',
         ];

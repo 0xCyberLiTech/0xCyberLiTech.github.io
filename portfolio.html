@@ -907,13 +907,13 @@
           <div class="card-stats">
             <div class="stat"><span class="stat-val" data-count="4" data-suffix="+">4+</span><span class="stat-lbl">MOTEURS LLM</span></div>
             <div class="stat"><span class="stat-val" data-count="5">5</span><span class="stat-lbl">MOTEURS TTS</span></div>
-            <div class="stat"><span class="stat-val" data-count="3000" data-prefix="~">~3000</span><span class="stat-lbl">LIGNES PY</span></div>
+            <div class="stat"><span class="stat-val" data-count="3594" data-prefix="~">~3594</span><span class="stat-lbl">LIGNES PY</span></div>
             <div class="stat"><span class="stat-val" data-count="17" data-prefix="~" data-suffix="K">~17K</span><span class="stat-lbl">LIGNES UI</span></div>
           </div>
           <div class="card-tags">
             <span class="tag ai">Ollama</span>
             <span class="tag ai">deepseek-r1:14b</span>
-            <span class="tag ai">phi4:14b</span>
+            <span class="tag ai">phi4-reasoning:plus</span>
             <span class="tag ai">edge-tts</span>
             <span class="tag ai">faster-whisper</span>
             <span class="tag">Python</span>
@@ -1223,9 +1223,9 @@
       help:()=>['<span class="t-ok">Commandes :</span>','  <span class="t-hi">whoami</span>  <span class="t-hi">ls projects</span>  <span class="t-hi">cat jarvis</span>  <span class="t-hi">cat soc</span>','  <span class="t-hi">./skills</span>  <span class="t-hi">uname -a</span>  <span class="t-hi">clear</span>'],
       whoami:()=>['<span class="t-ok">0xCyberLiTech</span>','  Cybersécurité · Linux · IA locale','  <span class="t-hi">github.com/0xCyberLiTech</span>  ·  <span class="t-hi">0xcyberlitech.com</span>'],
       'ls projects':()=>['<span class="t-ok">drwxr-xr-x</span>  JARVIS  SOC-Dashboard  nginx-WAF  0xCyberLiTech  Securite'],
-      'cat jarvis':()=>['<span class="t-hi">JARVIS</span> — phi4:14b · edge-tts · faster-whisper · RTX 5080','  ~3000 py · ~17K html · <span class="t-ok">● ACTIF</span> localhost:5000'],
-      'cat soc':()=>['<span class="t-hi">SOC Dashboard v3.40</span> — 28 tuiles · 60s · CrowdSec · <span class="t-ok">● LIVE</span>'],
-      './skills':()=>['<span class="t-warn">SecOps</span>  CrowdSec · fail2ban · UFW · GeoIP2','<span class="t-warn">IA</span>      Ollama · phi4 · Groq · RAG · TTS','<span class="t-warn">Infra</span>   Proxmox · nginx · Docker · Debian','<span class="t-warn">Dev</span>     Python · Flask · JS · PHP · Bash'],
+      'cat jarvis':()=>['<span class="t-hi">JARVIS</span> — phi4-reasoning:plus · edge-tts · faster-whisper · RTX 5080','  ~3594 py · ~17K html · <span class="t-ok">● ACTIF</span> localhost:5000'],
+      'cat soc':()=>['<span class="t-hi">SOC Dashboard v3.80.4</span> — 27 tuiles · 60s · CrowdSec · <span class="t-ok">● LIVE</span>'],
+      './skills':()=>['<span class="t-warn">SecOps</span>  CrowdSec · fail2ban · UFW · GeoIP2','<span class="t-warn">IA</span>      Ollama · phi4-reasoning · RAG · TTS','<span class="t-warn">Infra</span>   Proxmox · nginx · Docker · Debian','<span class="t-warn">Dev</span>     Python · Flask · JS · PHP · Bash'],
       'uname -a':()=>['Linux srv-ngix 6.1.0 x86_64 GNU/Linux','<span class="t-dim">Proxmox VE 9 · RTX 5080 Blackwell · CUDA 12</span>'],
       clear:()=>{output.innerHTML='';return null;}
     };

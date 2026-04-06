@@ -338,10 +338,10 @@
 
   <!-- NAV -->
   <nav class="nav-main">
-    <a class="nav-brand" href="/portfolio.html">
+    <a class="nav-brand" href="/index.html">
       <span class="nav-brand-prefix">0x</span>CyberLiTech
     </a>
-    <a class="nav-back" href="/portfolio.html">← Retour au portfolio</a>
+    <a class="nav-back" href="/index.html">← Retour au portfolio</a>
   </nav>
 
   <!-- HERO -->
@@ -351,10 +351,10 @@
     <p class="doc-sub">ASSISTANT IA LOCAL &nbsp;·&nbsp; ARCHITECTURE IRON MAN &nbsp;·&nbsp; INTÉGRATION SOC</p>
     <div class="doc-badges">
       <span class="badge orange">Python 3.11 · Flask</span>
-      <span class="badge green">Ollama · phi4:14b</span>
+      <span class="badge green">Ollama · phi4-reasoning:plus</span>
       <span class="badge blue">edge-tts · Whisper</span>
       <span class="badge cyan">RTX 5080 · CUDA 12</span>
-      <span class="badge orange">~3000 lignes PY · ~17K lignes UI</span>
+      <span class="badge orange">~3594 lignes PY · ~17K lignes UI</span>
     </div>
   </div>
 
@@ -389,11 +389,9 @@
         </div>
 
         <div class="arch-row" style="gap:0.4rem;">
-          <div class="arch-box green" style="min-width:130px;">Ollama local<br><span style="font-size:0.55rem;opacity:0.6">phi4:14b · qwen2.5<br>mistral · gemma3</span></div>
+          <div class="arch-box green" style="min-width:130px;">Ollama local<br><span style="font-size:0.55rem;opacity:0.6">phi4-reasoning:plus · qwen2.5<br>mistral · gemma3</span></div>
           <div class="arch-arrow-h" style="color:rgba(255,136,0,0.4);">◀──▶</div>
           <div class="arch-box orange" style="min-width:100px;">LLM<br>ROUTER</div>
-          <div class="arch-arrow-h" style="color:rgba(255,136,0,0.4);">◀──▶</div>
-          <div class="arch-box blue" style="min-width:130px;">Cloud LLM<br><span style="font-size:0.55rem;opacity:0.6">Groq · OpenRouter<br>fallback auto</span></div>
         </div>
 
         <div style="display:flex;justify-content:center;margin:0.3rem 0;">
@@ -439,9 +437,7 @@
       <div class="stack-card orange">
         <div class="stack-title">⬡ MOTEUR LLM</div>
         <div class="stack-items">
-          <div class="stack-item"><strong>Ollama local</strong> — phi4:14b (défaut), qwen2.5, mistral, gemma3</div>
-          <div class="stack-item"><strong>Groq Cloud</strong> — fallback API OpenAI-compatible</div>
-          <div class="stack-item"><strong>OpenRouter</strong> — accès multi-modèles cloud</div>
+          <div class="stack-item"><strong>Ollama local</strong> — phi4-reasoning:plus (défaut), qwen2.5, mistral, gemma3</div>
           <div class="stack-item"><strong>Streaming SSE</strong> — réponses token par token</div>
           <div class="stack-item"><strong>Paramètres persistés</strong> — temperature, top_p, num_ctx, num_predict</div>
           <div class="stack-item"><strong>Préréglages</strong> — RAPIDE / ÉQUILIBRÉ / QUALITÉ</div>
@@ -680,7 +676,7 @@ pip install pynvml
   <span class="st">"providers"</span>: {
     <span class="st">"ollama"</span>: {
       <span class="st">"base_url"</span>: <span class="kw">"http://localhost:11434"</span>,
-      <span class="st">"model"</span>: <span class="kw">"[MODEL_NAME]"</span>       <span class="cm">// ex: phi4:14b</span>
+      <span class="st">"model"</span>: <span class="kw">"[MODEL_NAME]"</span>       <span class="cm">// ex: phi4-reasoning:plus</span>
     },
     <span class="st">"groq"</span>: {
       <span class="st">"api_key"</span>: <span class="kw">"[GROQ_API_KEY]"</span>,
@@ -750,7 +746,7 @@ POST /api/soc/restart-service <span class="cm">→ redémarrer un service</span>
   <!-- FOOTER -->
   <div class="doc-footer">
     <span>0xCyberLiTech · JARVIS · Documentation technique · 2026</span>
-    <a href="/portfolio.html">← Portfolio</a>
+    <a href="/index.html">← Portfolio</a>
   </div>
 
   <script>
