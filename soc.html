@@ -211,12 +211,27 @@
     <h1 class="doc-title">SOC Dashboard</h1>
     <p class="doc-sub">MONITORING SÉCURITÉ TEMPS RÉEL &nbsp;·&nbsp; KILL CHAIN &nbsp;·&nbsp; IA INTÉGRÉE</p>
     <div class="doc-badges">
-      <span class="badge cyan">29 tuiles en production</span>
+      <span class="badge cyan">35 tuiles en production</span>
       <span class="badge green">Refresh 60s</span>
       <span class="badge orange">CrowdSec · fail2ban · Suricata IDS</span>
       <span class="badge blue">nginx · GeoIP2 · CVE NVD</span>
-      <span class="badge cyan">v3.81.1 · Python · JavaScript</span>
+      <span class="badge cyan">v3.97.155 · Python · JavaScript</span>
       <span class="badge red">LAN uniquement — solution locale</span>
+    </div>
+    <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:1.8rem;">
+      <a href="https://github.com/0xCyberLiTech/SOC" target="_blank" rel="noopener"
+         style="display:inline-flex;align-items:center;gap:0.6rem;font-family:var(--font-head);font-size:0.68rem;font-weight:700;letter-spacing:0.1em;color:var(--cyan);border:1px solid rgba(0,217,255,0.4);border-radius:var(--radius-sm);padding:0.6rem 1.4rem;background:rgba(0,217,255,0.05);text-decoration:none;transition:background .2s,border-color .2s;backdrop-filter:blur(4px);"
+         onmouseover="this.style.background='rgba(0,217,255,0.12)';this.style.borderColor='rgba(0,217,255,0.7)'"
+         onmouseout="this.style.background='rgba(0,217,255,0.05)';this.style.borderColor='rgba(0,217,255,0.4)'">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        ⊳ Dépôt GitHub — 0xCyberLiTech/SOC
+      </a>
+      <a href="https://github.com/0xCyberLiTech/SOC/blob/main/DEPLOY/deploy-soc.sh" target="_blank" rel="noopener"
+         style="display:inline-flex;align-items:center;gap:0.6rem;font-family:var(--font-head);font-size:0.68rem;font-weight:700;letter-spacing:0.1em;color:var(--green);border:1px solid rgba(0,255,136,0.35);border-radius:var(--radius-sm);padding:0.6rem 1.4rem;background:rgba(0,255,136,0.04);text-decoration:none;transition:background .2s,border-color .2s;backdrop-filter:blur(4px);"
+         onmouseover="this.style.background='rgba(0,255,136,0.1)';this.style.borderColor='rgba(0,255,136,0.6)'"
+         onmouseout="this.style.background='rgba(0,255,136,0.04)';this.style.borderColor='rgba(0,255,136,0.35)'">
+        ⚡ deploy-soc.sh — Déploiement Debian 13
+      </a>
     </div>
   </div>
 
@@ -235,13 +250,13 @@
   <!-- STATS -->
   <div class="doc-section reveal">
     <div class="stats-row">
-      <div class="stat-box"><div class="stat-val">30</div><div class="stat-lbl">TUILES EN PROD</div></div>
+      <div class="stat-box"><div class="stat-val">35</div><div class="stat-lbl">TUILES EN PROD</div></div>
       <div class="stat-box"><div class="stat-val">60s</div><div class="stat-lbl">CYCLE REFRESH</div></div>
       <div class="stat-box"><div class="stat-val">21</div><div class="stat-lbl">MOIS CVE INDEXÉS</div></div>
       <div class="stat-box"><div class="stat-val">3×</div><div class="stat-lbl">SYNC CVE / JOUR</div></div>
-      <div class="stat-box"><div class="stat-val">8</div><div class="stat-lbl">CRONS ACTIFS</div></div>
-      <div class="stat-box"><div class="stat-val">182</div><div class="stat-lbl">RÈGLES APPSEC WAF</div></div>
-      <div class="stat-box"><div class="stat-val">4</div><div class="stat-lbl">SOURCES JSON</div></div>
+      <div class="stat-box"><div class="stat-val">10</div><div class="stat-lbl">CRONS ACTIFS</div></div>
+      <div class="stat-box"><div class="stat-val">150+</div><div class="stat-lbl">RÈGLES APPSEC WAF</div></div>
+      <div class="stat-box"><div class="stat-val">5</div><div class="stat-lbl">HÔTES RSYSLOG</div></div>
     </div>
   </div>
 
@@ -253,49 +268,137 @@
 
     <div class="gallery-grid">
 
-
-      <div class="gallery-card" onclick="lbOpen('images/Map.jpg','CARTOGRAPHIE GEOIP — Arcs d\'attaque géolocalisés 24h')">
-        <img src="images/Map.jpg" alt="Cartographie GeoIP" loading="lazy">
+      <div class="gallery-card wide" onclick="lbOpen('https://raw.githubusercontent.com/0xCyberLiTech/SOC/main/assets/geoip-world.jpg','CARTOGRAPHIE GEOIP MONDE — Origines d\'attaque géolocalisées 24h · Arcs canvas animés')">
+        <img src="https://raw.githubusercontent.com/0xCyberLiTech/SOC/main/assets/geoip-world.jpg" alt="Cartographie GeoIP Monde" loading="lazy">
         <div class="gallery-card-overlay"><span>AGRANDIR</span></div>
         <div class="gallery-caption">
-          <div class="gallery-caption-title">⬡ CARTOGRAPHIE GEOIP</div>
-          <div class="gallery-caption-desc">Menaces géolocalisées 24h • Arcs canvas animés</div>
+          <div class="gallery-caption-title">⬡ CARTOGRAPHIE GEOIP MONDE</div>
+          <div class="gallery-caption-desc">Origines d'attaque géolocalisées 24h • Arcs canvas animés • MaxMind GeoIP2</div>
         </div>
       </div>
 
-      <div class="gallery-card" onclick="lbOpen('images/Crowdsec.jpg','CROWDSEC — Analyse comportementale • Décisions actives')">
-        <img src="images/Crowdsec.jpg" alt="CrowdSec" loading="lazy">
+      <div class="gallery-card" onclick="lbOpen('https://raw.githubusercontent.com/0xCyberLiTech/SOC/main/assets/geoip-stats.png','GEOIP STATS — Classement pays attaquants · Volumes · Corrélation Kill Chain')">
+        <img src="https://raw.githubusercontent.com/0xCyberLiTech/SOC/main/assets/geoip-stats.png" alt="GeoIP Stats pays" loading="lazy">
         <div class="gallery-card-overlay"><span>AGRANDIR</span></div>
         <div class="gallery-caption">
-          <div class="gallery-caption-title">⬡ CROWDSEC — ANALYSE COMPORTEMENTALE</div>
-          <div class="gallery-caption-desc">Décisions actives • Scénarios en cours • IPs bannies</div>
+          <div class="gallery-caption-title">⬡ GEOIP STATS — ORIGINES PAR PAYS</div>
+          <div class="gallery-caption-desc">Classement pays attaquants • Volumes • Corrélation Kill Chain</div>
         </div>
       </div>
 
-      <div class="gallery-card wide" onclick="lbOpen('images/Activitees_attaques_24h.jpg','ACTIVITÉ & ATTAQUES 24H — Heatmap canvas temporelle')">
-        <img src="images/Activitees_attaques_24h.jpg" alt="Activité et attaques 24h" loading="lazy">
+      <div class="gallery-card" onclick="lbOpen('https://raw.githubusercontent.com/0xCyberLiTech/SOC/main/assets/socmap-europe.png','FOCUS EUROPE — Densité d\'attaques · Top pays sources')">
+        <img src="https://raw.githubusercontent.com/0xCyberLiTech/SOC/main/assets/socmap-europe.png" alt="Focus Europe attaques" loading="lazy">
         <div class="gallery-card-overlay"><span>AGRANDIR</span></div>
         <div class="gallery-caption">
-          <div class="gallery-caption-title">⬡ ACTIVITÉ & ATTAQUES 24H</div>
-          <div class="gallery-caption-desc">Heatmap canvas temporelle • Densité des requêtes par heure et par type</div>
+          <div class="gallery-caption-title">⬡ FOCUS EUROPE — TOP ORIGINES</div>
+          <div class="gallery-caption-desc">Densité d'attaques par pays • Zoom Europe • Scénarios CrowdSec actifs</div>
         </div>
       </div>
 
-      <div class="gallery-card" onclick="lbOpen('images/PROTOCOLES_ACTIFS_LIVE.jpg','PROTOCOLES ACTIFS LIVE — Distribution trafic temps réel')">
-        <img src="images/PROTOCOLES_ACTIFS_LIVE.jpg" alt="Protocoles actifs live" loading="lazy">
+      <div class="gallery-card wide" onclick="lbOpen('https://raw.githubusercontent.com/0xCyberLiTech/SOC/main/assets/kill-chain.png','CYBER KILL CHAIN — Classification temps réel · RECON → SCAN → EXPLOIT → BRUTE · Score normalisé 0-100')">
+        <img src="https://raw.githubusercontent.com/0xCyberLiTech/SOC/main/assets/kill-chain.png" alt="Cyber Kill Chain" loading="lazy">
         <div class="gallery-card-overlay"><span>AGRANDIR</span></div>
         <div class="gallery-caption">
-          <div class="gallery-caption-title">⬡ PROTOCOLES ACTIFS LIVE</div>
-          <div class="gallery-caption-desc">Distribution trafic temps réel • HTTP / HTTPS / SSH / DNS</div>
+          <div class="gallery-caption-title">⬡ CYBER KILL CHAIN</div>
+          <div class="gallery-caption-desc">Canvas animé • RECON → SCAN → EXPLOIT → BRUTE • Score normalisé 0–100 • IPs actives + investigation inline</div>
         </div>
       </div>
 
-      <div class="gallery-card" onclick="lbOpen('images/TRAFFIC_ANALYSIS.jpg','ANALYSE TRAFIC — Vue globale requêtes et menaces')">
-        <img src="images/TRAFFIC_ANALYSIS.jpg" alt="Analyse trafic" loading="lazy">
+      <div class="gallery-card wide" onclick="lbOpen('https://raw.githubusercontent.com/0xCyberLiTech/SOC/main/assets/heatmap.png','HEATMAP ATTAQUES 24H — Densité canvas temporelle · Requêtes par heure et par type')">
+        <img src="https://raw.githubusercontent.com/0xCyberLiTech/SOC/main/assets/heatmap.png" alt="Heatmap attaques 24h" loading="lazy">
         <div class="gallery-card-overlay"><span>AGRANDIR</span></div>
         <div class="gallery-caption">
-          <div class="gallery-caption-title">⬡ ANALYSE TRAFIC</div>
-          <div class="gallery-caption-desc">Vue globale requêtes et menaces • 2xx / 4xx / 5xx • volume bytes</div>
+          <div class="gallery-caption-title">⬡ HEATMAP ATTAQUES 24H</div>
+          <div class="gallery-caption-desc">Densité canvas temporelle • Requêtes par heure et par type • Pics d'activité visualisés</div>
+        </div>
+      </div>
+
+      <div class="gallery-card" onclick="lbOpen('https://raw.githubusercontent.com/0xCyberLiTech/SOC/main/assets/xdr-engine.png','XDR ENGINE — Corrélation cross-host · nginx · CrowdSec · Suricata · Apache VMs · Routeur · Rsyslog')">
+        <img src="https://raw.githubusercontent.com/0xCyberLiTech/SOC/main/assets/xdr-engine.png" alt="XDR Engine corrélation" loading="lazy">
+        <div class="gallery-card-overlay"><span>AGRANDIR</span></div>
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">⬡ XDR ENGINE — CORRÉLATION CROSS-HOST</div>
+          <div class="gallery-caption-desc">nginx · CrowdSec · fail2ban · Suricata · Apache VMs · Routeur · 5 hôtes rsyslog</div>
+        </div>
+      </div>
+
+      <div class="gallery-card" onclick="lbOpen('https://raw.githubusercontent.com/0xCyberLiTech/SOC/main/assets/defense-chain.png','CHAÎNE DE DÉFENSE — UFW → CrowdSec → fail2ban → AppSec WAF → Suricata IDS')">
+        <img src="https://raw.githubusercontent.com/0xCyberLiTech/SOC/main/assets/defense-chain.png" alt="Chaîne de défense" loading="lazy">
+        <div class="gallery-card-overlay"><span>AGRANDIR</span></div>
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">⬡ CHAÎNE DE DÉFENSE</div>
+          <div class="gallery-caption-desc">UFW → CrowdSec WAF → fail2ban → AppSec 150+ règles → Suricata IDS • Défense en profondeur</div>
+        </div>
+      </div>
+
+      <div class="gallery-card" onclick="lbOpen('https://raw.githubusercontent.com/0xCyberLiTech/SOC/main/assets/ip-investigation.png','INVESTIGATION IP APPROFONDIE — GeoIP · WHOIS/ASN · CrowdSec · Fail2ban 30j · Verdict local · Ban inline')">
+        <img src="https://raw.githubusercontent.com/0xCyberLiTech/SOC/main/assets/ip-investigation.png" alt="Investigation IP approfondie" loading="lazy">
+        <div class="gallery-card-overlay"><span>AGRANDIR</span></div>
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">⬡ INVESTIGATION IP APPROFONDIE</div>
+          <div class="gallery-caption-desc">GeoIP · WHOIS/ASN · CrowdSec · Fail2ban 30j · Verdict local · Ban/unban inline</div>
+        </div>
+      </div>
+
+      <div class="gallery-card" onclick="lbOpen('https://raw.githubusercontent.com/0xCyberLiTech/SOC/main/assets/jarvis-ai.png','JARVIS IA — Auto-engine · Analyse LLM · Alertes TTS · ban-ip · restart-service')">
+        <img src="https://raw.githubusercontent.com/0xCyberLiTech/SOC/main/assets/jarvis-ai.png" alt="JARVIS IA intégration SOC" loading="lazy">
+        <div class="gallery-card-overlay"><span>AGRANDIR</span></div>
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">⬡ JARVIS IA — INTÉGRATION SOC</div>
+          <div class="gallery-caption-desc">Auto-engine • Analyse LLM • Alertes TTS vocales • ban-ip · restart-service proactifs</div>
+        </div>
+      </div>
+
+      <div class="gallery-card" onclick="lbOpen('https://raw.githubusercontent.com/0xCyberLiTech/SOC/main/assets/windows-metrics.png','WINDOWS MÉTRIQUES — CPU · GPU RTX 5080 · Disques · Sauvegardes VMs Proxmox')">
+        <img src="https://raw.githubusercontent.com/0xCyberLiTech/SOC/main/assets/windows-metrics.png" alt="Windows métriques locales" loading="lazy">
+        <div class="gallery-card-overlay"><span>AGRANDIR</span></div>
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">⬡ WINDOWS — MÉTRIQUES LOCALES</div>
+          <div class="gallery-caption-desc">CPU · GPU RTX 5080 VRAM · Disques · Sauvegardes VMs Proxmox · Quota backup</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SCHÉMAS ARCHITECTURE -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// schémas d'architecture</div>
+    <h2 class="sec-title">$ cat architecture-schemas/</h2>
+    <div class="sec-sep"></div>
+    <p class="sec-desc">
+      Les deux schémas ci-dessous illustrent la <strong style="color:var(--cyan)">chaîne de défense</strong> et le
+      <strong style="color:var(--cyan)">moteur XDR</strong> cross-host — les deux pivots architecturaux du SOC.
+    </p>
+    <div style="display:flex;flex-direction:column;gap:1.5rem;">
+
+      <div style="border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;background:var(--card-bg);backdrop-filter:blur(6px);">
+        <div style="padding:.7rem 1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.6rem;">
+          <span style="font-family:var(--font-head);font-size:.62rem;color:var(--cyan);letter-spacing:.1em;">⬡ CHAÎNE DE DÉFENSE — BRIQUES EN PROFONDEUR</span>
+        </div>
+        <img src="https://raw.githubusercontent.com/0xCyberLiTech/SOC/main/assets/defense-chain.png"
+             alt="Schéma chaîne de défense" loading="lazy"
+             style="width:100%;display:block;cursor:pointer;"
+             onclick="lbOpen('https://raw.githubusercontent.com/0xCyberLiTech/SOC/main/assets/defense-chain.png','CHAÎNE DE DÉFENSE — UFW → CrowdSec → fail2ban → AppSec WAF → Suricata IDS')">
+        <div style="padding:.7rem 1.2rem;">
+          <div style="font-family:var(--font-body);font-size:.75rem;color:var(--text-sec);line-height:1.7;">
+            UFW (nftables kernel) → CrowdSec bouncer → fail2ban jails → AppSec WAF 150+ règles → Suricata IDS 7 (49k règles ET) · Chaque couche filtre indépendamment — un attaquant contournant l'une tombe sur la suivante.
+          </div>
+        </div>
+      </div>
+
+      <div style="border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;background:var(--card-bg);backdrop-filter:blur(6px);">
+        <div style="padding:.7rem 1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.6rem;">
+          <span style="font-family:var(--font-head);font-size:.62rem;color:var(--orange);letter-spacing:.1em;">⬡ XDR ENGINE — CORRÉLATION CROSS-HOST 5 HÔTES</span>
+        </div>
+        <img src="https://raw.githubusercontent.com/0xCyberLiTech/SOC/main/assets/xdr-engine.png"
+             alt="Schéma XDR Engine" loading="lazy"
+             style="width:100%;display:block;cursor:pointer;"
+             onclick="lbOpen('https://raw.githubusercontent.com/0xCyberLiTech/SOC/main/assets/xdr-engine.png','XDR ENGINE — Corrélation cross-host · nginx · CrowdSec · Suricata · Apache VMs · Routeur · Rsyslog 5 hôtes')">
+        <div style="padding:.7rem 1.2rem;">
+          <div style="font-family:var(--font-body);font-size:.75rem;color:var(--text-sec);line-height:1.7;">
+            srv-ngix (nginx + CrowdSec + Suricata) · clt (Apache site-01) · pa85 (Apache site-02) · GT-BE98 (routeur) · Windows (GPU + sauvegardes) — tous centralisés via rsyslog UDP/TCP → corrélation Kill Chain unifiée.
+          </div>
         </div>
       </div>
 
@@ -807,7 +910,7 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
 
   <!-- TUILES -->
   <div class="doc-section reveal">
-    <div class="sec-label">// inventaire des 29 tuiles</div>
+    <div class="sec-label">// inventaire des 35 tuiles en production</div>
     <h2 class="sec-title">$ cat tiles-inventory.json</h2>
     <div class="sec-sep"></div>
 
@@ -840,10 +943,19 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
       <div class="tile-item"><div class="tile-name">RÉSEAU — SERVEUR</div><div class="tile-desc">Interfaces réseau RX/TX — graphique sparkline par interface</div></div>
     </div>
 
-    <div class="tiles-section-label">▶ IDS RÉSEAU</div>
+    <div class="tiles-section-label">▶ IDS RÉSEAU &amp; INVESTIGATION</div>
     <div class="tiles-grid">
       <div class="tile-item"><span class="tile-badge live">LIVE</span><div class="tile-name">SURICATA IDS</div><div class="tile-desc">Alertes temps réel · Sévérité 1/2/3 · Top signatures · Corrélation CrowdSec · MITRE ATT&CK T1059/T1071</div></div>
       <div class="tile-item"><span class="tile-badge live">LIVE</span><div class="tile-name">ROUTEUR GT-BE98</div><div class="tile-desc">Débits WAN/LAN · WiFi 5/6GHz · Skynet blacklist · Score réseau · Flux nf_conntrack · Top destinations</div></div>
+      <div class="tile-item"><div class="tile-name">XDR — CORRÉLATION CROSS-HOST</div><div class="tile-desc">Logigramme défense · 8 sources corrélées · nginx · CrowdSec · Suricata · Apache VMs · Routeur · Rsyslog</div></div>
+      <div class="tile-item"><div class="tile-name">INVESTIGATION IP</div><div class="tile-desc">GeoIP · WHOIS/ASN · CrowdSec · Fail2ban 30j · Verdict local · Ban/unban inline depuis la Kill Chain</div></div>
+    </div>
+
+    <div class="tiles-section-label">▶ CENTRALISATION LOGS &amp; SÉCURITÉ SYSTÈME</div>
+    <div class="tiles-grid">
+      <div class="tile-item"><div class="tile-name">LOGS CENTRAUX RSYSLOG</div><div class="tile-desc">5 hôtes centralisés · Taille/hôte · L/min · Espace libre · Dernière rotation · Cross-host correlations</div></div>
+      <div class="tile-item"><div class="tile-name">CHAÎNE DE DÉFENSE</div><div class="tile-desc">Visualisation des 7 briques défensives · Statut temps réel · Blocages cumulés · Score protection</div></div>
+      <div class="tile-item"><div class="tile-name">AIDE — INTÉGRITÉ SYSTÈME</div><div class="tile-desc">Scan intégrité fichiers · Base 49k entrées · Exclusions CrowdSec/hub · Dernière exécution + statut</div></div>
     </div>
 
     <div class="tiles-section-label">▶ INFRASTRUCTURE</div>
@@ -858,7 +970,7 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
       <div class="tile-item"><span class="tile-badge ai">IA</span><div class="tile-name">BLOCKLIST LLM GARDE-FOU</div><div class="tile-desc">Journal tentatives tool calling bloquées — sécurité actions JARVIS</div></div>
       <div class="tile-item"><span class="tile-badge ai">IA</span><div class="tile-name">OPÉRATIONS PROACTIVES</div><div class="tile-desc">Journal actions JARVIS : ban-ip, restart-service — timestamp + résultat</div></div>
       <div class="tile-item"><div class="tile-name">SSL</div><div class="tile-desc">Certificats TLS, jours restants par domaine — alerte si &lt; 7 jours</div></div>
-      <div class="tile-item"><div class="tile-name">CONNECTIVITÉ SSH</div><div class="tile-desc">Statut UP/DOWN + uptime des 4 hôtes surveillés</div></div>
+      <div class="tile-item"><div class="tile-name">CONNECTIVITÉ SSH</div><div class="tile-desc">Statut UP/DOWN + uptime des 5 hôtes surveillés</div></div>
     </div>
   </div>
 
@@ -1275,10 +1387,77 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
     </div>
   </div>
 
+  <!-- DÉPLOYER CE SOC -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// déployer ce SOC</div>
+    <h2 class="sec-title">$ git clone &amp;&amp; ./DEPLOY/deploy-soc.sh</h2>
+    <div class="sec-sep"></div>
+    <p class="sec-desc">
+      Le dépôt contient tout le nécessaire pour reconstruire ce SOC de zéro sur une VM Debian 13 :
+      scripts de déploiement, configs nginx, fail2ban, CrowdSec, crons, dashboard et documentation complète.
+    </p>
+
+    <div class="arch-diagram" style="padding:1.5rem 2rem;margin-bottom:1.5rem;">
+      <div class="code-block">
+        <div class="code-block-title">Déploiement en 3 commandes</div>
+        <pre><span class="cm"># 1. Cloner le dépôt sur la VM cible</span>
+<span class="kw">git clone</span> https://github.com/0xCyberLiTech/SOC /root/soc-deploy
+
+<span class="cm"># 2. Remplir le bloc CONFIG (IPs, domaines, ports SSH)</span>
+<span class="kw">nano</span> /root/soc-deploy/DEPLOY/deploy-soc.sh
+
+<span class="cm"># 3. Déployer</span>
+<span class="kw">bash</span> /root/soc-deploy/DEPLOY/deploy-soc.sh</pre>
+      </div>
+    </div>
+
+    <div class="checklist" style="margin-bottom:2rem;">
+      <div class="checklist-item">
+        <span class="checklist-icon">▶</span>
+        <span class="checklist-text"><strong>Aucune dépendance externe</strong> — le script déploie nginx, CrowdSec, fail2ban, Suricata, GeoIP, certbot, AIDE et tous les crons depuis le dépôt</span>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-icon">▶</span>
+        <span class="checklist-text"><strong>Idempotent et modulaire</strong> — chaque étape est isolée (<code>--step nginx</code>, <code>--step crowdsec</code>…) — relancer sans risque</span>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-icon">▶</span>
+        <span class="checklist-text"><strong>Configs nginx incluses</strong> — vhosts <code>monitoring</code>, <code>site-01</code>, <code>site-02</code>, snippets sécurité, NVD proxy local</span>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-icon">▶</span>
+        <span class="checklist-text"><strong>Dashboard déployé automatiquement</strong> — 35 tuiles, 22 modules JS, placeholders substitués par sed à l'installation</span>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-icon">▶</span>
+        <span class="checklist-text"><strong>Documentation complète</strong> — RUNBOOK Debian 13, GUIDE déploiement rapide, CHECKLIST opérationnelle, procédure de restauration</span>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;">
+      <a href="https://github.com/0xCyberLiTech/SOC" target="_blank" rel="noopener"
+         style="display:inline-flex;align-items:center;gap:0.6rem;font-family:var(--font-head);font-size:0.72rem;font-weight:700;letter-spacing:0.1em;color:var(--cyan);border:1px solid rgba(0,217,255,0.5);border-radius:var(--radius-sm);padding:0.7rem 1.8rem;background:rgba(0,217,255,0.06);text-decoration:none;transition:background .2s,border-color .2s;backdrop-filter:blur(4px);"
+         onmouseover="this.style.background='rgba(0,217,255,0.14)';this.style.borderColor='rgba(0,217,255,0.8)'"
+         onmouseout="this.style.background='rgba(0,217,255,0.06)';this.style.borderColor='rgba(0,217,255,0.5)'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        ⊳ 0xCyberLiTech/SOC — GitHub
+      </a>
+      <a href="https://github.com/0xCyberLiTech/SOC/blob/main/README.md" target="_blank" rel="noopener"
+         style="display:inline-flex;align-items:center;gap:0.6rem;font-family:var(--font-head);font-size:0.72rem;font-weight:700;letter-spacing:0.1em;color:var(--text-mute);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.7rem 1.8rem;background:transparent;text-decoration:none;transition:background .2s,border-color .2s;backdrop-filter:blur(4px);"
+         onmouseover="this.style.background='rgba(255,255,255,0.04)';this.style.borderColor='var(--border-h)'"
+         onmouseout="this.style.background='transparent';this.style.borderColor='var(--border)'">
+        ≡ Documentation README
+      </a>
+    </div>
+  </div>
+
   <!-- FOOTER -->
   <div class="doc-footer">
-    <span>0xCyberLiTech · SOC Dashboard · Documentation technique · 2026</span>
-    <a href="/index.html">← Portfolio</a>
+    <span>0xCyberLiTech · SOC Dashboard v3.97.155 · Documentation technique · 2026</span>
+    <div style="display:flex;gap:1.5rem;align-items:center;">
+      <a href="https://github.com/0xCyberLiTech/SOC" target="_blank" rel="noopener" style="color:var(--text-mute);text-decoration:none;font-size:.78rem;transition:color .2s;" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--text-mute)'">GitHub SOC</a>
+      <a href="/index.html" style="color:var(--text-mute);text-decoration:none;font-size:.78rem;transition:color .2s;" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--text-mute)'">← Portfolio</a>
+    </div>
   </div>
 
   <script>
