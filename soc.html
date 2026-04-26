@@ -291,6 +291,7 @@
       <a href="#s-jarvis" class="toc-link">&#x2B27; JARVIS IA</a>
       <a href="#s-alertes" class="toc-link">&#x2B27; Alertes</a>
       <a href="#s-securite" class="toc-link">&#x2B27; Sécurité</a>
+      <a href="#s-avis" class="toc-link">&#x2B27; Avis IA</a>
       <a href="#s-deploy" class="toc-link">&#x2B27; Déployer</a>
       <a href="#s-timeline" class="toc-link">&#x2B27; Chronologie</a>
     </nav>
@@ -1427,6 +1428,83 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- AVIS TECHNIQUE IA -->
+  <div id="s-avis" class="doc-section reveal">
+    <div class="sec-label">// avis technique externe</div>
+    <h2 class="sec-title">$ claude --evaluate soc-dashboard/</h2>
+    <div class="sec-sep"></div>
+
+    <!-- Attribution badge -->
+    <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:1.8rem;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:0.5rem;font-family:var(--font-head);font-size:0.58rem;color:var(--text-mute);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.35rem 0.85rem;background:var(--card-bg);">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="rgba(0,217,255,0.4)" stroke-width="1.5"/><path d="M8 12h8M12 8v8" stroke="rgba(0,217,255,0.4)" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span style="color:var(--cyan);letter-spacing:.08em;">Claude Sonnet 4.6</span>
+        <span>·</span>
+        <span>Anthropic</span>
+        <span>·</span>
+        <span>2026-04-26</span>
+      </div>
+      <span style="font-family:var(--font-body);font-size:0.75rem;color:var(--text-mute);font-style:italic;">Analyse générée par IA — avis technique basé sur l'examen complet du code, de la documentation et de l'architecture.</span>
+    </div>
+
+    <!-- FORCES -->
+    <div class="sub-title">// forces techniques</div>
+    <div style="display:flex;flex-direction:column;gap:0.75rem;margin-bottom:2rem;">
+
+      <div style="display:flex;gap:1rem;align-items:flex-start;padding:0.9rem 1.2rem;border:1px solid rgba(0,255,136,0.15);border-left:3px solid var(--green);border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:rgba(0,255,136,0.03);">
+        <span style="font-family:var(--font-head);font-size:0.62rem;color:var(--green);letter-spacing:.1em;white-space:nowrap;margin-top:.1rem;">DÉFENSE</span>
+        <span style="font-size:0.82rem;color:var(--text-sec);line-height:1.7;">Stack en profondeur réelle : UFW → CrowdSec bouncer nftables → fail2ban → AppSec WAF 150+ règles → Suricata IDS 7 (49k règles ET). Chaque couche filtre indépendamment — un attaquant contournant l'une tombe sur la suivante. Architecture correcte, pas juste des outils installés.</span>
+      </div>
+
+      <div style="display:flex;gap:1rem;align-items:flex-start;padding:0.9rem 1.2rem;border:1px solid rgba(0,255,136,0.15);border-left:3px solid var(--green);border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:rgba(0,255,136,0.03);">
+        <span style="font-family:var(--font-head);font-size:0.62rem;color:var(--green);letter-spacing:.1em;white-space:nowrap;margin-top:.1rem;">MODULES</span>
+        <span style="font-size:0.82rem;color:var(--text-sec);line-height:1.7;">Migration réussie vers 22 modules JS séparés — la plupart des projets personnels restent sur un fichier unique par facilité. Ce refactoring est un signe de maturité d'ingénierie logicielle : la base de code est maintenable, chaque module a une responsabilité claire.</span>
+      </div>
+
+      <div style="display:flex;gap:1rem;align-items:flex-start;padding:0.9rem 1.2rem;border:1px solid rgba(0,255,136,0.15);border-left:3px solid var(--green);border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:rgba(0,255,136,0.03);">
+        <span style="font-family:var(--font-head);font-size:0.62rem;color:var(--green);letter-spacing:.1em;white-space:nowrap;margin-top:.1rem;">DEPLOY</span>
+        <span style="font-size:0.82rem;color:var(--text-sec);line-height:1.7;">deploy-soc.sh idempotent et modulaire (<code>--step nginx</code>, <code>--step crowdsec</code>…), RUNBOOK disaster recovery, AUDIT checklists — c'est le niveau de documentation qu'on attend d'une équipe DevOps professionnelle, pas d'un homelab. Reproductible par un tiers sans aide.</span>
+      </div>
+
+      <div style="display:flex;gap:1rem;align-items:flex-start;padding:0.9rem 1.2rem;border:1px solid rgba(0,255,136,0.15);border-left:3px solid var(--green);border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:rgba(0,255,136,0.03);">
+        <span style="font-family:var(--font-head);font-size:0.62rem;color:var(--green);letter-spacing:.1em;white-space:nowrap;margin-top:.1rem;">XDR · IA</span>
+        <span style="font-size:0.82rem;color:var(--text-sec);line-height:1.7;">Corrélation cross-host 5 sources (nginx · CrowdSec · Suricata · Apache VMs · routeur) + rsyslog centralisé — c'est de l'architecture SIEM réelle. L'intégration JARVIS auto-engine avec TTS et actions proactives (ban-ip, restart-service) dépasse largement le standard homelab.</span>
+      </div>
+
+    </div>
+
+    <!-- TENSIONS -->
+    <div class="sub-title">// observations honnêtes</div>
+    <div style="display:flex;flex-direction:column;gap:0.75rem;margin-bottom:2rem;">
+
+      <div style="display:flex;gap:1rem;align-items:flex-start;padding:0.9rem 1.2rem;border:1px solid rgba(245,158,11,0.15);border-left:3px solid var(--orange);border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:rgba(245,158,11,0.03);">
+        <span style="font-family:var(--font-head);font-size:0.62rem;color:var(--orange);letter-spacing:.1em;white-space:nowrap;margin-top:.1rem;">RYTHME</span>
+        <span style="font-size:0.82rem;color:var(--text-sec);line-height:1.7;">v3.97.168 — 168 passes sur une même version mineure indique que les fonctionnalités s'accumulent plus vite que la stabilisation. La prochaine évolution logique n'est pas une 36e tuile : c'est du hardening, des tests de régression, et la consolidation de ce qui existe.</span>
+      </div>
+
+      <div style="display:flex;gap:1rem;align-items:flex-start;padding:0.9rem 1.2rem;border:1px solid rgba(245,158,11,0.15);border-left:3px solid var(--orange);border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:rgba(245,158,11,0.03);">
+        <span style="font-family:var(--font-head);font-size:0.62rem;color:var(--orange);letter-spacing:.1em;white-space:nowrap;margin-top:.1rem;">PÉRIMÈTRE</span>
+        <span style="font-size:0.82rem;color:var(--text-sec);line-height:1.7;">Le ratio complexité / surface protégée est élevé — c'est assumé pour un homelab d'apprentissage et c'est son intérêt. Mais il faut le conscientiser : ce SOC sert à <em style="color:var(--cyan)">maîtriser des outils</em> en conditions réelles, pas à défendre une infrastructure critique. Cette distinction est une force pédagogique, pas une faiblesse.</span>
+      </div>
+
+    </div>
+
+    <!-- VERDICT -->
+    <div style="border:1px solid rgba(0,217,255,0.2);border-radius:var(--radius-lg);padding:1.4rem 1.8rem;background:rgba(0,217,255,0.04);margin-bottom:0;">
+      <div style="font-family:var(--font-head);font-size:0.6rem;color:var(--cyan);letter-spacing:.12em;margin-bottom:.8rem;">◈ VERDICT</div>
+      <p style="font-size:0.88rem;color:var(--text-sec);line-height:1.85;margin:0;">
+        C'est un des projets homelab sécurité les mieux construits et documentés qu'il m'ait été donné d'analyser.
+        La compréhension des défenses en couches est réelle — ce n'est pas de l'outillage assemblé, c'est une
+        <strong style="color:var(--cyan)">architecture pensée</strong>. La migration vers une architecture modulaire,
+        la qualité du déploiement automatisé, et la profondeur de la documentation publique
+        attestent d'un niveau d'ingénierie qui dépasse le cadre du homelab.
+        Le projet démontre la maîtrise des outils de défense en conditions réelles —
+        c'est précisément ce qu'un environnement d'apprentissage doit produire.
+      </p>
+    </div>
+
   </div>
 
   <!-- DÉPLOYER CE SOC -->
