@@ -184,6 +184,25 @@
     @media (max-width: 400px) {
       .kc-stages { grid-template-columns: 1fr; }
     }
+
+    /* ── TOC LINKS ───────────────────────── */
+    .toc-link {
+      font-family: var(--font-head);
+      font-size: 0.56rem;
+      color: rgba(0,217,255,0.45);
+      text-decoration: none;
+      border: 1px solid rgba(0,217,255,0.14);
+      border-radius: 2px;
+      padding: 0.18rem 0.5rem;
+      letter-spacing: 0.06em;
+      transition: color .15s, border-color .15s, background .15s;
+      white-space: nowrap;
+    }
+    .toc-link:hover {
+      color: var(--cyan);
+      border-color: rgba(0,217,255,0.45);
+      background: rgba(0,217,255,0.06);
+    }
   </style>
 </head>
 <body>
@@ -259,8 +278,117 @@
     </div>
   </div>
 
+  <!-- TOC NAV -->
+  <div class="doc-section reveal" style="padding:0.7rem 1.5rem 0.4rem;margin-bottom:0;">
+    <nav aria-label="Sections" style="display:flex;flex-wrap:wrap;gap:0.45rem;justify-content:center;align-items:center;">
+      <span style="font-family:var(--font-head);font-size:0.5rem;color:var(--text-mute);letter-spacing:0.18em;margin-right:0.3rem;">SECTIONS</span>
+      <a href="#s-pipeline" class="toc-link">&#x2B27; Pipeline</a>
+      <a href="#s-gallery" class="toc-link">&#x2B27; Screenshots</a>
+      <a href="#s-schemas" class="toc-link">&#x2B27; Schémas</a>
+      <a href="#s-killchain" class="toc-link">&#x2B27; Kill Chain</a>
+      <a href="#s-tuiles" class="toc-link">&#x2B27; 35 Tuiles</a>
+      <a href="#s-collecte" class="toc-link">&#x2B27; Collecte</a>
+      <a href="#s-jarvis" class="toc-link">&#x2B27; JARVIS IA</a>
+      <a href="#s-alertes" class="toc-link">&#x2B27; Alertes</a>
+      <a href="#s-securite" class="toc-link">&#x2B27; Sécurité</a>
+      <a href="#s-deploy" class="toc-link">&#x2B27; Déployer</a>
+      <a href="#s-timeline" class="toc-link">&#x2B27; Chronologie</a>
+    </nav>
+  </div>
+
+  <!-- ARCHITECTURE -->
+  <div id="s-pipeline" class="doc-section reveal">
+    <div class="sec-label">// pipeline de données</div>
+    <h2 class="sec-title">$ cat pipeline.json</h2>
+    <div class="sec-sep"></div>
+    <p class="sec-desc">
+      Le dashboard SOC est un fichier HTML unique (~35 000 lignes) qui consomme des fichiers JSON
+      générés côté serveur. Le pipeline collecte les données de plusieurs sources
+      (logs nginx, CrowdSec, fail2ban, système, CVE, Windows, Proxmox) et les centralise
+      dans un JSON de monitoring actualisé toutes les 60 secondes.
+    </p>
+
+    <div class="arch-diagram">
+      <div class="arch-flow">
+
+        <div class="arch-row">
+          <div class="arch-box cyan">nginx access.log<br><span style="font-size:0.55rem;opacity:0.6">requêtes · erreurs · volumes</span></div>
+          <div class="arch-box orange">CrowdSec<br><span style="font-size:0.55rem;opacity:0.6">décisions · bans actifs</span></div>
+          <div class="arch-box green">fail2ban<br><span style="font-size:0.55rem;opacity:0.6">jails · IPs bannies</span></div>
+          <div class="arch-box blue">Système<br><span style="font-size:0.55rem;opacity:0.6">CPU · RAM · disque · réseau</span></div>
+          <div class="arch-box red">Suricata IDS 7<br><span style="font-size:0.55rem;opacity:0.6">eve.json · 49k règles ET</span></div>
+          <div class="arch-box violet">ROUTEUR GT-BE98<br><span style="font-size:0.55rem;opacity:0.6">SNMP · SSH · Skynet · Flux WAN</span></div>
+          <div class="arch-box" style="border-color:rgba(236,72,153,0.5);color:#ec4899;background:rgba(236,72,153,0.04);">Rsyslog centralisé<br><span style="font-size:0.55rem;opacity:0.6">5 hôtes · clt · pa85 · pve · routeur</span></div>
+        </div>
+
+        <div class="arch-arrow-v-wrap"><div class="arch-arrow-v"></div></div>
+
+        <div class="arch-row">
+          <div class="arch-box orange" style="min-width:200px;">monitoring_gen.py<br><span style="font-size:0.55rem;opacity:0.6">agrégation · normalisation · cron 60s</span></div>
+        </div>
+
+        <div class="arch-arrow-v-wrap"><div class="arch-arrow-v"></div></div>
+
+        <div class="arch-row">
+          <div class="arch-box cyan">monitoring.json</div>
+          <div class="arch-box blue">windows-disk.json<br><span style="font-size:0.55rem;opacity:0.6">machine locale → VM</span></div>
+          <div class="arch-box green">proto-live.json<br><span style="font-size:0.55rem;opacity:0.6">protocoles 15s</span></div>
+        </div>
+
+        <div class="arch-arrow-v-wrap"><div class="arch-arrow-v"></div></div>
+
+        <div class="arch-row">
+          <div class="arch-box cyan" style="min-width:220px;">◈ SOC DASHBOARD<br><span style="font-size:0.55rem;opacity:0.6">index.html · fetch JSON 60s<br>35 tuiles · Kill Chain · GeoIP · Suricata · XDR · IP</span></div>
+        </div>
+
+        <div class="arch-arrow-v-wrap"><div class="arch-arrow-v" style="background:rgba(255,136,0,0.4);"></div></div>
+
+        <div class="arch-row">
+          <div class="arch-box orange">JARVIS IA<br><span style="font-size:0.55rem;opacity:0.6">analyse LLM · TTS alertes<br>ban-ip · restart-service</span></div>
+          <div class="arch-arrow-h">──▶</div>
+          <div class="arch-box red">CrowdSec<br><span style="font-size:0.55rem;opacity:0.6">actions proactives</span></div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="sec-label" style="margin-bottom:1rem;">// sources complémentaires</div>
+    <div class="pipeline">
+      <div class="pipe-step">
+        <div class="pipe-num">01</div>
+        <div class="pipe-name">CVE NVD</div>
+        <div class="pipe-tech">API NVD/NIST<br>3x/jour via cron<br>21 mois indexés</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">02</div>
+        <div class="pipe-name">GeoIP2</div>
+        <div class="pipe-tech">Géolocalisation IPs<br>Cartographie monde<br>Arcs d'attaque</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">03</div>
+        <div class="pipe-name">Threat Intel</div>
+        <div class="pipe-tech">Flux menaces externes<br>threat-fetch.sh<br>Synchronisation auto</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">04</div>
+        <div class="pipe-name">Proxmox</div>
+        <div class="pipe-tech">CPU/RAM nœud<br>VMs actives<br>État stockage</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">05</div>
+        <div class="pipe-name">Windows</div>
+        <div class="pipe-tech">windows-disk-report.ps1<br>Disques · GPU · CPU<br>Sauvegardes VMs</div>
+      </div>
+      <div class="pipe-step" style="border-right:1px solid var(--border);">
+        <div class="pipe-num">06</div>
+        <div class="pipe-name">SSL</div>
+        <div class="pipe-tech">Certificats TLS<br>Jours restants<br>Statut par domaine</div>
+      </div>
+    </div>
+  </div>
+
   <!-- GALERIE SCREENSHOTS -->
-  <div class="doc-section reveal">
+  <div id="s-gallery" class="doc-section reveal">
     <div class="sec-label">// dashboard en production</div>
     <h2 class="sec-title">$ ls -1 screenshots/</h2>
     <div class="sec-sep"></div>
@@ -361,7 +489,7 @@
   </div>
 
   <!-- SCHÉMAS ARCHITECTURE -->
-  <div class="doc-section reveal">
+  <div id="s-schemas" class="doc-section reveal">
     <div class="sec-label">// schémas d'architecture</div>
     <h2 class="sec-title">$ cat architecture-schemas/</h2>
     <div class="sec-sep"></div>
@@ -411,184 +539,8 @@
     <div class="lb-caption" id="lb-caption"></div>
   </div>
 
-  <!-- TIMELINE CONSTRUCTION -->
-  <div class="doc-section reveal">
-    <div class="sec-label">// chronologie de construction</div>
-    <h2 class="sec-title">$ git log --oneline --reverse</h2>
-    <div class="sec-sep"></div>
-    <p class="sec-desc">
-      Le SOC Dashboard est le résultat d'une construction itérative sur plusieurs mois.
-      Chaque étape apporte une couche supplémentaire de visibilité, de détection ou d'automatisation.
-    </p>
-
-    <div class="arch-diagram">
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-num">1</div>
-          <div class="timeline-body">
-            <div class="timeline-title">REVERSE PROXY nginx + SSL</div>
-            <div class="timeline-desc">Mise en place du reverse proxy nginx avec terminaison TLS (certbot Let's Encrypt). Vhosts séparés par domaine. Headers de sécurité : X-Frame-Options, X-Content-Type-Options, HSTS, Referrer-Policy. Configuration access_log JSON pour parsing structuré.</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-num">2</div>
-          <div class="timeline-body">
-            <div class="timeline-title">CROWDSEC WAF + BOUNCER NFTABLES</div>
-            <div class="timeline-desc">Installation CrowdSec avec bouncer nftables pour blocage kernel-space. Scénarios communautaires activés. AppSec collection nginx (182 règles WAF niveau applicatif). Exposition API locale pour requêtes programmatiques depuis monitoring_gen.py.</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-num">3</div>
-          <div class="timeline-body">
-            <div class="timeline-title">monitoring_gen.py — COLLECTE LOGS nginx</div>
-            <div class="timeline-desc">Script Python de collecte et agrégation. Parse les access.log + access.log.1 pour couverture cross-midnight. Interroge CrowdSec API, fail2ban socket, stats système. Génère monitoring.json toutes les 60 secondes via cron.</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-num">4</div>
-          <div class="timeline-body">
-            <div class="timeline-title">DASHBOARD HTML v1 — PREMIÈRES TUILES SYSTÈME</div>
-            <div class="timeline-desc">Premier dashboard HTML consommant monitoring.json. Tuiles CPU, RAM, disque, réseau. Fetch polling toutes les 60s. Architecture fichier unique sans dépendance externe — déployable par simple scp.</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-num">5</div>
-          <div class="timeline-body">
-            <div class="timeline-title">CYBER KILL CHAIN + GEOIP CARTOGRAPHIE CANVAS</div>
-            <div class="timeline-desc">Classification des menaces en 5 stages (Recon, Scan, Exploit, Brute, Delivery) avec scoring normalisé 0-100. Cartographie monde canvas avec arcs d'attaque géolocalisés via MaxMind GeoIP2. Heatmap 24h canvas.</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-num">6</div>
-          <div class="timeline-body">
-            <div class="timeline-title">CVE NVD — 21 MOIS D'HISTORIQUE INDEXÉS</div>
-            <div class="timeline-desc">Intégration de l'API NVD/NIST. Synchronisation 3 fois par jour via cron-cve-fetch.sh. Index local ~21 mois de CVE. Moteur de corrélation entre CVE récentes et signatures CrowdSec détectées en production.</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-num">7</div>
-          <div class="timeline-body">
-            <div class="timeline-title">INTÉGRATION JARVIS IA — AUTO-ENGINE, TTS, ACTIONS PROACTIVES</div>
-            <div class="timeline-desc">Connexion au moteur IA JARVIS (Flask localhost). Auto-engine surveille les deltas de trafic et déclenche des analyses LLM. Alertes vocales TTS si niveau ÉLEVÉ ou CRITIQUE. Routes SOC : ban-ip, unban-ip, restart-service via CrowdSec cscli.</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-num">8</div>
-          <div class="timeline-body">
-            <div class="timeline-title">SURICATA IDS 7 — DÉTECTION RÉSEAU PASSIVE</div>
-            <div class="timeline-desc">Déploiement Suricata 7 en mode IDS passif (AF_PACKET, interface ens18). 49 343 règles Emerging Threats actives, mise à jour quotidienne automatique. Pipeline IDS→IPS : Suricata détecte → CrowdSec acquis lit eve.json → firewall-bouncer bloque. Tuile SOC : sévérités 1/2/3, top signatures, corrélation Kill Chain, MITRE ATT&CK T1059/T1071.</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-num">9</div>
-          <div class="timeline-body">
-            <div class="timeline-title">ROUTEUR GT-BE98 — MONITORING RÉSEAU COMPLET</div>
-            <div class="timeline-desc">Intégration SNMP + SSH du routeur via script Python (paramiko). Données collectées toutes les 5 minutes : débits WAN/LAN, WiFi 5/6GHz, Skynet blacklist, nf_conntrack (matrice flux LAN→WAN). Score réseau isolé du score SOC. Modal 7 onglets : Réseau, WiFi, Système, Historique 24h, Flux WAN, Sécurité, Ports SVG.</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-num">10</div>
-          <div class="timeline-body">
-            <div class="timeline-title">RAPPORT SOC QUOTIDIEN + ALERTES EMAIL + SNAPSHOTS UFW</div>
-            <div class="timeline-desc">soc-daily-report.py génère un rapport complet chaque matin à 08h00 UTC : trafic 24h, CrowdSec, Kill Chain, top attaquants, état services, SSL, système. Snapshots UFW horodatés pour historique posture sécurité. Déclenchement manuel depuis le dashboard via raccourci [E].</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ARCHITECTURE -->
-  <div class="doc-section reveal">
-    <div class="sec-label">// pipeline de données</div>
-    <h2 class="sec-title">$ cat pipeline.json</h2>
-    <div class="sec-sep"></div>
-    <p class="sec-desc">
-      Le dashboard SOC est un fichier HTML unique (~35 000 lignes) qui consomme des fichiers JSON
-      générés côté serveur. Le pipeline collecte les données de plusieurs sources
-      (logs nginx, CrowdSec, fail2ban, système, CVE, Windows, Proxmox) et les centralise
-      dans un JSON de monitoring actualisé toutes les 60 secondes.
-    </p>
-
-    <div class="arch-diagram">
-      <div class="arch-flow">
-
-        <div class="arch-row">
-          <div class="arch-box cyan">nginx access.log<br><span style="font-size:0.55rem;opacity:0.6">requêtes · erreurs · volumes</span></div>
-          <div class="arch-box orange">CrowdSec<br><span style="font-size:0.55rem;opacity:0.6">décisions · bans actifs</span></div>
-          <div class="arch-box green">fail2ban<br><span style="font-size:0.55rem;opacity:0.6">jails · IPs bannies</span></div>
-          <div class="arch-box blue">Système<br><span style="font-size:0.55rem;opacity:0.6">CPU · RAM · disque · réseau</span></div>
-          <div class="arch-box red">Suricata IDS 7<br><span style="font-size:0.55rem;opacity:0.6">eve.json · 49k règles ET</span></div>
-          <div class="arch-box violet">ROUTEUR GT-BE98<br><span style="font-size:0.55rem;opacity:0.6">SNMP · SSH · Skynet · Flux WAN</span></div>
-        </div>
-
-        <div class="arch-arrow-v-wrap"><div class="arch-arrow-v"></div></div>
-
-        <div class="arch-row">
-          <div class="arch-box orange" style="min-width:200px;">monitoring_gen.py<br><span style="font-size:0.55rem;opacity:0.6">agrégation · normalisation · cron 60s</span></div>
-        </div>
-
-        <div class="arch-arrow-v-wrap"><div class="arch-arrow-v"></div></div>
-
-        <div class="arch-row">
-          <div class="arch-box cyan">monitoring.json</div>
-          <div class="arch-box blue">windows-disk.json<br><span style="font-size:0.55rem;opacity:0.6">machine locale → VM</span></div>
-          <div class="arch-box green">proto-live.json<br><span style="font-size:0.55rem;opacity:0.6">protocoles 15s</span></div>
-        </div>
-
-        <div class="arch-arrow-v-wrap"><div class="arch-arrow-v"></div></div>
-
-        <div class="arch-row">
-          <div class="arch-box cyan" style="min-width:220px;">◈ SOC DASHBOARD<br><span style="font-size:0.55rem;opacity:0.6">monitoring-index.html · fetch JSON 60s<br>29 tuiles · Kill Chain · GeoIP · Suricata</span></div>
-        </div>
-
-        <div class="arch-arrow-v-wrap"><div class="arch-arrow-v" style="background:rgba(255,136,0,0.4);"></div></div>
-
-        <div class="arch-row">
-          <div class="arch-box orange">JARVIS IA<br><span style="font-size:0.55rem;opacity:0.6">analyse LLM · TTS alertes<br>ban-ip · restart-service</span></div>
-          <div class="arch-arrow-h">──▶</div>
-          <div class="arch-box red">CrowdSec<br><span style="font-size:0.55rem;opacity:0.6">actions proactives</span></div>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="sec-label" style="margin-bottom:1rem;">// sources complémentaires</div>
-    <div class="pipeline">
-      <div class="pipe-step">
-        <div class="pipe-num">01</div>
-        <div class="pipe-name">CVE NVD</div>
-        <div class="pipe-tech">API NVD/NIST<br>3x/jour via cron<br>21 mois indexés</div>
-      </div>
-      <div class="pipe-step">
-        <div class="pipe-num">02</div>
-        <div class="pipe-name">GeoIP2</div>
-        <div class="pipe-tech">Géolocalisation IPs<br>Cartographie monde<br>Arcs d'attaque</div>
-      </div>
-      <div class="pipe-step">
-        <div class="pipe-num">03</div>
-        <div class="pipe-name">Threat Intel</div>
-        <div class="pipe-tech">Flux menaces externes<br>threat-fetch.sh<br>Synchronisation auto</div>
-      </div>
-      <div class="pipe-step">
-        <div class="pipe-num">04</div>
-        <div class="pipe-name">Proxmox</div>
-        <div class="pipe-tech">CPU/RAM nœud<br>VMs actives<br>État stockage</div>
-      </div>
-      <div class="pipe-step">
-        <div class="pipe-num">05</div>
-        <div class="pipe-name">Windows</div>
-        <div class="pipe-tech">windows-disk-report.ps1<br>Disques · GPU · CPU<br>Sauvegardes VMs</div>
-      </div>
-      <div class="pipe-step" style="border-right:1px solid var(--border);">
-        <div class="pipe-num">06</div>
-        <div class="pipe-name">SSL</div>
-        <div class="pipe-tech">Certificats TLS<br>Jours restants<br>Statut par domaine</div>
-      </div>
-    </div>
-  </div>
-
   <!-- CYBER KILL CHAIN -->
-  <div class="doc-section reveal">
+  <div id="s-killchain" class="doc-section reveal">
     <div class="sec-label">// classification des menaces</div>
     <h2 class="sec-title">$ cat kill-chain.json</h2>
     <div class="sec-sep"></div>
@@ -695,8 +647,74 @@
     </table>
   </div>
 
+  <!-- TUILES -->
+  <div id="s-tuiles" class="doc-section reveal">
+    <div class="sec-label">// inventaire des 35 tuiles en production</div>
+    <h2 class="sec-title">$ cat tiles-inventory.json</h2>
+    <div class="sec-sep"></div>
+
+    <div class="tiles-section-label">▶ HERO — MENACES EN COURS</div>
+    <div class="tiles-grid">
+      <div class="tile-item"><span class="tile-badge wide">WIDE</span><span class="tile-badge live">LIVE</span><div class="tile-name">CYBER KILL CHAIN</div><div class="tile-desc">Canvas animé, liste IPs actives, phases d'attaque en cours, score global normalisé</div></div>
+      <div class="tile-item"><span class="tile-badge wide">WIDE</span><div class="tile-name">GEOIP — CARTOGRAPHIE 24H</div><div class="tile-desc">Carte monde canvas, arcs d'attaque géolocalisés par pays source</div></div>
+    </div>
+
+    <div class="tiles-section-label">▶ MENACES & PROTECTION</div>
+    <div class="tiles-grid">
+      <div class="tile-item"><div class="tile-name">NIVEAU DE MENACE GLOBAL</div><div class="tile-desc">Score 0-100 coloré selon sévérité : NOMINAL / MODÉRÉ / ÉLEVÉ / CRITIQUE</div></div>
+      <div class="tile-item"><div class="tile-name">SERVICES</div><div class="tile-desc">Services UP/DOWN sur le reverse proxy — nginx, crowdsec, fail2ban, ssh</div></div>
+      <div class="tile-item"><div class="tile-name">THREAT INTEL SYNC</div><div class="tile-desc">Flux menaces externes synchronisés — dernière mise à jour, nb entrées</div></div>
+      <div class="tile-item"><div class="tile-name">FAIL2BAN — JAILS</div><div class="tile-desc">Jails actives, IPs bannies — modal détail avec liste par jail</div></div>
+      <div class="tile-item"><div class="tile-name">CROWDSEC</div><div class="tile-desc">Analyse comportementale, décisions actives, scénarios en cours</div></div>
+      <div class="tile-item"><div class="tile-name">CVE SYNC</div><div class="tile-desc">Dernière MAJ NVD, 21 mois indexés, CVE critiques récentes</div></div>
+    </div>
+
+    <div class="tiles-section-label">▶ TRAFIC & ACTIVITÉ</div>
+    <div class="tiles-grid">
+      <div class="tile-item"><span class="tile-badge wide">WIDE</span><div class="tile-name">ACTIVITÉ TEMPS RÉEL</div><div class="tile-desc">Graphique barres requêtes/heure — 24 barres glissantes, légende 2xx/4xx/5xx</div></div>
+      <div class="tile-item"><div class="tile-name">ACTIVITÉ & ATTAQUES 24H</div><div class="tile-desc">Heatmap canvas 24h — densité des requêtes par heure et par type</div></div>
+      <div class="tile-item"><div class="tile-name">PROTOCOLES ACTIFS</div><div class="tile-desc">Donut canvas + légende — répartition HTTP/HTTPS/SSH/DNS/autres</div></div>
+      <div class="tile-item"><div class="tile-name">TOP PAGES 24H</div><div class="tile-desc">Tableau des pages les plus requêtées avec compteur et statut</div></div>
+      <div class="tile-item"><div class="tile-name">TRAFIC 24H</div><div class="tile-desc">Stats globales : total, 2xx, 4xx, 5xx, volume bytes, taux d'erreur</div></div>
+      <div class="tile-item"><span class="tile-badge live">LIVE</span><div class="tile-name">FLUX LIVE</div><div class="tile-desc">Barres protocoles fenêtre 5 minutes — source proto-live.json 15s</div></div>
+      <div class="tile-item"><div class="tile-name">BANDE PASSANTE nginx</div><div class="tile-desc">Sparklines RX/TX sur 24h — pic/moyen/actuel en Mo/s</div></div>
+      <div class="tile-item"><div class="tile-name">SYSTÈME — SERVEUR</div><div class="tile-desc">CPU ring animé, RAM barre, disque /var/www — seuils colorés</div></div>
+      <div class="tile-item"><div class="tile-name">RÉSEAU — SERVEUR</div><div class="tile-desc">Interfaces réseau RX/TX — graphique sparkline par interface</div></div>
+    </div>
+
+    <div class="tiles-section-label">▶ IDS RÉSEAU &amp; INVESTIGATION</div>
+    <div class="tiles-grid">
+      <div class="tile-item"><span class="tile-badge live">LIVE</span><div class="tile-name">SURICATA IDS</div><div class="tile-desc">Alertes temps réel · Sévérité 1/2/3 · Top signatures · Corrélation CrowdSec · MITRE ATT&CK T1059/T1071</div></div>
+      <div class="tile-item"><span class="tile-badge live">LIVE</span><div class="tile-name">ROUTEUR GT-BE98</div><div class="tile-desc">Débits WAN/LAN · WiFi 5/6GHz · Skynet blacklist · Score réseau · Flux nf_conntrack · Top destinations</div></div>
+      <div class="tile-item"><div class="tile-name">XDR — CORRÉLATION CROSS-HOST</div><div class="tile-desc">Logigramme défense · 8 sources corrélées · nginx · CrowdSec · Suricata · Apache VMs · Routeur · Rsyslog</div></div>
+      <div class="tile-item"><div class="tile-name">INVESTIGATION IP</div><div class="tile-desc">GeoIP · WHOIS/ASN · CrowdSec · Fail2ban 30j · Verdict local · Ban/unban inline depuis la Kill Chain</div></div>
+    </div>
+
+    <div class="tiles-section-label">▶ CENTRALISATION LOGS &amp; SÉCURITÉ SYSTÈME</div>
+    <div class="tiles-grid">
+      <div class="tile-item"><div class="tile-name">LOGS CENTRAUX RSYSLOG</div><div class="tile-desc">5 hôtes centralisés · Taille/hôte · L/min · Espace libre · Dernière rotation · Cross-host correlations</div></div>
+      <div class="tile-item"><div class="tile-name">CHAÎNE DE DÉFENSE</div><div class="tile-desc">Visualisation des 7 briques défensives · Statut temps réel · Blocages cumulés · Score protection</div></div>
+      <div class="tile-item"><div class="tile-name">AIDE — INTÉGRITÉ SYSTÈME</div><div class="tile-desc">Scan intégrité fichiers · Base 49k entrées · Exclusions CrowdSec/hub · Dernière exécution + statut</div></div>
+    </div>
+
+    <div class="tiles-section-label">▶ INFRASTRUCTURE</div>
+    <div class="tiles-grid">
+      <div class="tile-item"><div class="tile-name">PROXMOX — NŒUD</div><div class="tile-desc">CPU/RAM/stockage hyperviseur — températures, uptime, version PVE</div></div>
+      <div class="tile-item"><div class="tile-name">PROXMOX — VMs</div><div class="tile-desc">Machines virtuelles actives/total — mémoire allouée, CPU vcores</div></div>
+      <div class="tile-item"><div class="tile-name">WINDOWS — RESSOURCES</div><div class="tile-desc">CPU/RAM/disques machine locale — modal détail avec historique</div></div>
+      <div class="tile-item"><div class="tile-name">WINDOWS — SAUVEGARDES</div><div class="tile-desc">Quota D:, dernières backups par VM — date, taille, statut rotation</div></div>
+      <div class="tile-item"><span class="tile-badge ai">IA</span><div class="tile-name">GPU RTX 5080</div><div class="tile-desc">Stats GPU injectées dynamiquement par JARVIS : VRAM, temp, charge</div></div>
+      <div class="tile-item"><div class="tile-name">CRONS — INFRASTRUCTURE</div><div class="tile-desc">Tâches planifiées Windows et Linux — statut dernière exécution</div></div>
+      <div class="tile-item"><span class="tile-badge ai">IA</span><div class="tile-name">JARVIS — INTELLIGENCE</div><div class="tile-desc">Statut ONLINE/OFFLINE, modèle LLM actif, compteurs session, uptime</div></div>
+      <div class="tile-item"><span class="tile-badge ai">IA</span><div class="tile-name">BLOCKLIST LLM GARDE-FOU</div><div class="tile-desc">Journal tentatives tool calling bloquées — sécurité actions JARVIS</div></div>
+      <div class="tile-item"><span class="tile-badge ai">IA</span><div class="tile-name">OPÉRATIONS PROACTIVES</div><div class="tile-desc">Journal actions JARVIS : ban-ip, restart-service — timestamp + résultat</div></div>
+      <div class="tile-item"><div class="tile-name">SSL</div><div class="tile-desc">Certificats TLS, jours restants par domaine — alerte si &lt; 7 jours</div></div>
+      <div class="tile-item"><div class="tile-name">CONNECTIVITÉ SSH</div><div class="tile-desc">Statut UP/DOWN + uptime des 5 hôtes surveillés</div></div>
+    </div>
+  </div>
+
   <!-- MOTEUR DE COLLECTE -->
-  <div class="doc-section reveal">
+  <div id="s-collecte" class="doc-section reveal">
     <div class="sec-label">// moteur de collecte — monitoring_gen.py</div>
     <h2 class="sec-title">$ python3 monitoring_gen.py --explain</h2>
     <div class="sec-sep"></div>
@@ -748,10 +766,15 @@
         <div class="pipe-name">ROUTEUR</div>
         <div class="pipe-tech">SNMP + SSH<br>Débits · Skynet<br>nf_conntrack</div>
       </div>
-      <div class="pipe-step" style="border-right:1px solid var(--border);">
+      <div class="pipe-step">
         <div class="pipe-num">SRC 09</div>
         <div class="pipe-name">Honeypot</div>
         <div class="pipe-tech">URLs pièges vhosts<br>Détection accès<br>Tag EXPLOIT auto</div>
+      </div>
+      <div class="pipe-step" style="border-right:1px solid var(--border);">
+        <div class="pipe-num">SRC 10</div>
+        <div class="pipe-name">Rsyslog</div>
+        <div class="pipe-tech">5 hôtes distants<br>clt · pa85 · pve · routeur<br>Corrélation XDR cross-host</div>
       </div>
     </div>
 
@@ -833,148 +856,8 @@
     </div>
   </div>
 
-  <!-- ANTI-FREEZE -->
-  <div class="doc-section reveal">
-    <div class="sec-label">// performance — anti-freeze 60s</div>
-    <h2 class="sec-title">$ cat performance.md</h2>
-    <div class="sec-sep"></div>
-    <p class="sec-desc">
-      Le dashboard rafraichit ses données toutes les 60 secondes. Sur des sessions longues (plusieurs heures),
-      un rendu DOM naif provoquerait des freezes perceptibles. Deux mécanismes sont combinés pour garantir
-      une expérience fluide en permanence, même sur machine peu puissante.
-    </p>
-
-    <table class="data-table" style="margin-bottom:2rem;">
-      <thead>
-        <tr>
-          <th>Mécanisme</th>
-          <th>Implémentation</th>
-          <th>Effet</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="data-hl">If-Modified-Since</td>
-          <td>Header HTTP + _lastModified stocké en mémoire</td>
-          <td>304 si fichier inchangé → 0 parsing, 0 DOM update</td>
-        </tr>
-        <tr>
-          <td class="data-hl">requestIdleCallback</td>
-          <td>render(data) différé dans callback idle</td>
-          <td>Exécution pendant créneau idle navigateur — 0 clipping</td>
-        </tr>
-        <tr>
-          <td class="data-hl">_lastGenAt</td>
-          <td>Comparaison timestamp JSON côté client</td>
-          <td>Double vérification applicative — ignorer si identique</td>
-        </tr>
-        <tr>
-          <td class="data-hl">Polling proto-live</td>
-          <td>Aussi idle-schedulé (cycle 15s)</td>
-          <td>Même protection pour le flux protocoles réseau</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="code-block">
-      <div class="code-block-title">fetch JSON avec If-Modified-Since — dashboard SOC (extrait)</div>
-      <pre><span class="cm">// fetch JSON avec If-Modified-Since — dashboard SOC</span>
-<span class="kw">let</span> <span class="hl">_lastModified</span> = <span class="kw">null</span>;
-
-<span class="kw">async function</span> <span class="hl">fetchMonitoring</span>() {
-  <span class="kw">const</span> headers = {};
-  <span class="kw">if</span> (_lastModified) headers[<span class="st">'If-Modified-Since'</span>] = _lastModified;
-
-  <span class="kw">const</span> res = <span class="kw">await</span> fetch(<span class="st">'/monitoring.json'</span>, { headers });
-
-  <span class="cm">// 304 = fichier inchangé — rien à re-parser ni à re-rendre</span>
-  <span class="kw">if</span> (res.status === <span class="hl">304</span>) <span class="kw">return</span>;
-
-  _lastModified = res.headers.get(<span class="st">'Last-Modified'</span>);
-  <span class="kw">const</span> data = <span class="kw">await</span> res.json();
-
-  <span class="cm">// Différer le rendu pendant un créneau idle du navigateur</span>
-  <span class="kw">if</span> (<span class="st">'requestIdleCallback'</span> <span class="kw">in</span> window) {
-    requestIdleCallback(() =&gt; render(data), { timeout: <span class="hl">2000</span> });
-  } <span class="kw">else</span> {
-    setTimeout(() =&gt; render(data), <span class="hl">0</span>);   <span class="cm">// fallback navigateurs anciens</span>
-  }
-}
-
-<span class="cm">// Refresh toutes les 60s</span>
-setInterval(fetchMonitoring, <span class="hl">60_000</span>);
-fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
-    </div>
-  </div>
-
-  <!-- TUILES -->
-  <div class="doc-section reveal">
-    <div class="sec-label">// inventaire des 35 tuiles en production</div>
-    <h2 class="sec-title">$ cat tiles-inventory.json</h2>
-    <div class="sec-sep"></div>
-
-    <div class="tiles-section-label">▶ HERO — MENACES EN COURS</div>
-    <div class="tiles-grid">
-      <div class="tile-item"><span class="tile-badge wide">WIDE</span><span class="tile-badge live">LIVE</span><div class="tile-name">CYBER KILL CHAIN</div><div class="tile-desc">Canvas animé, liste IPs actives, phases d'attaque en cours, score global normalisé</div></div>
-      <div class="tile-item"><span class="tile-badge wide">WIDE</span><div class="tile-name">GEOIP — CARTOGRAPHIE 24H</div><div class="tile-desc">Carte monde canvas, arcs d'attaque géolocalisés par pays source</div></div>
-    </div>
-
-    <div class="tiles-section-label">▶ MENACES & PROTECTION</div>
-    <div class="tiles-grid">
-      <div class="tile-item"><div class="tile-name">NIVEAU DE MENACE GLOBAL</div><div class="tile-desc">Score 0-100 coloré selon sévérité : NOMINAL / MODÉRÉ / ÉLEVÉ / CRITIQUE</div></div>
-      <div class="tile-item"><div class="tile-name">SERVICES</div><div class="tile-desc">Services UP/DOWN sur le reverse proxy — nginx, crowdsec, fail2ban, ssh</div></div>
-      <div class="tile-item"><div class="tile-name">THREAT INTEL SYNC</div><div class="tile-desc">Flux menaces externes synchronisés — dernière mise à jour, nb entrées</div></div>
-      <div class="tile-item"><div class="tile-name">FAIL2BAN — JAILS</div><div class="tile-desc">Jails actives, IPs bannies — modal détail avec liste par jail</div></div>
-      <div class="tile-item"><div class="tile-name">CROWDSEC</div><div class="tile-desc">Analyse comportementale, décisions actives, scénarios en cours</div></div>
-      <div class="tile-item"><div class="tile-name">CVE SYNC</div><div class="tile-desc">Dernière MAJ NVD, 21 mois indexés, CVE critiques récentes</div></div>
-    </div>
-
-    <div class="tiles-section-label">▶ TRAFIC & ACTIVITÉ</div>
-    <div class="tiles-grid">
-      <div class="tile-item"><span class="tile-badge wide">WIDE</span><div class="tile-name">ACTIVITÉ TEMPS RÉEL</div><div class="tile-desc">Graphique barres requêtes/heure — 24 barres glissantes, légende 2xx/4xx/5xx</div></div>
-      <div class="tile-item"><div class="tile-name">ACTIVITÉ & ATTAQUES 24H</div><div class="tile-desc">Heatmap canvas 24h — densité des requêtes par heure et par type</div></div>
-      <div class="tile-item"><div class="tile-name">PROTOCOLES ACTIFS</div><div class="tile-desc">Donut canvas + légende — répartition HTTP/HTTPS/SSH/DNS/autres</div></div>
-      <div class="tile-item"><div class="tile-name">TOP PAGES 24H</div><div class="tile-desc">Tableau des pages les plus requêtées avec compteur et statut</div></div>
-      <div class="tile-item"><div class="tile-name">TRAFIC 24H</div><div class="tile-desc">Stats globales : total, 2xx, 4xx, 5xx, volume bytes, taux d'erreur</div></div>
-      <div class="tile-item"><span class="tile-badge live">LIVE</span><div class="tile-name">FLUX LIVE</div><div class="tile-desc">Barres protocoles fenêtre 5 minutes — source proto-live.json 15s</div></div>
-      <div class="tile-item"><div class="tile-name">BANDE PASSANTE nginx</div><div class="tile-desc">Sparklines RX/TX sur 24h — pic/moyen/actuel en Mo/s</div></div>
-      <div class="tile-item"><div class="tile-name">SYSTÈME — SERVEUR</div><div class="tile-desc">CPU ring animé, RAM barre, disque /var/www — seuils colorés</div></div>
-      <div class="tile-item"><div class="tile-name">RÉSEAU — SERVEUR</div><div class="tile-desc">Interfaces réseau RX/TX — graphique sparkline par interface</div></div>
-    </div>
-
-    <div class="tiles-section-label">▶ IDS RÉSEAU &amp; INVESTIGATION</div>
-    <div class="tiles-grid">
-      <div class="tile-item"><span class="tile-badge live">LIVE</span><div class="tile-name">SURICATA IDS</div><div class="tile-desc">Alertes temps réel · Sévérité 1/2/3 · Top signatures · Corrélation CrowdSec · MITRE ATT&CK T1059/T1071</div></div>
-      <div class="tile-item"><span class="tile-badge live">LIVE</span><div class="tile-name">ROUTEUR GT-BE98</div><div class="tile-desc">Débits WAN/LAN · WiFi 5/6GHz · Skynet blacklist · Score réseau · Flux nf_conntrack · Top destinations</div></div>
-      <div class="tile-item"><div class="tile-name">XDR — CORRÉLATION CROSS-HOST</div><div class="tile-desc">Logigramme défense · 8 sources corrélées · nginx · CrowdSec · Suricata · Apache VMs · Routeur · Rsyslog</div></div>
-      <div class="tile-item"><div class="tile-name">INVESTIGATION IP</div><div class="tile-desc">GeoIP · WHOIS/ASN · CrowdSec · Fail2ban 30j · Verdict local · Ban/unban inline depuis la Kill Chain</div></div>
-    </div>
-
-    <div class="tiles-section-label">▶ CENTRALISATION LOGS &amp; SÉCURITÉ SYSTÈME</div>
-    <div class="tiles-grid">
-      <div class="tile-item"><div class="tile-name">LOGS CENTRAUX RSYSLOG</div><div class="tile-desc">5 hôtes centralisés · Taille/hôte · L/min · Espace libre · Dernière rotation · Cross-host correlations</div></div>
-      <div class="tile-item"><div class="tile-name">CHAÎNE DE DÉFENSE</div><div class="tile-desc">Visualisation des 7 briques défensives · Statut temps réel · Blocages cumulés · Score protection</div></div>
-      <div class="tile-item"><div class="tile-name">AIDE — INTÉGRITÉ SYSTÈME</div><div class="tile-desc">Scan intégrité fichiers · Base 49k entrées · Exclusions CrowdSec/hub · Dernière exécution + statut</div></div>
-    </div>
-
-    <div class="tiles-section-label">▶ INFRASTRUCTURE</div>
-    <div class="tiles-grid">
-      <div class="tile-item"><div class="tile-name">PROXMOX — NŒUD</div><div class="tile-desc">CPU/RAM/stockage hyperviseur — températures, uptime, version PVE</div></div>
-      <div class="tile-item"><div class="tile-name">PROXMOX — VMs</div><div class="tile-desc">Machines virtuelles actives/total — mémoire allouée, CPU vcores</div></div>
-      <div class="tile-item"><div class="tile-name">WINDOWS — RESSOURCES</div><div class="tile-desc">CPU/RAM/disques machine locale — modal détail avec historique</div></div>
-      <div class="tile-item"><div class="tile-name">WINDOWS — SAUVEGARDES</div><div class="tile-desc">Quota D:, dernières backups par VM — date, taille, statut rotation</div></div>
-      <div class="tile-item"><span class="tile-badge ai">IA</span><div class="tile-name">GPU RTX 5080</div><div class="tile-desc">Stats GPU injectées dynamiquement par JARVIS : VRAM, temp, charge</div></div>
-      <div class="tile-item"><div class="tile-name">CRONS — INFRASTRUCTURE</div><div class="tile-desc">Tâches planifiées Windows et Linux — statut dernière exécution</div></div>
-      <div class="tile-item"><span class="tile-badge ai">IA</span><div class="tile-name">JARVIS — INTELLIGENCE</div><div class="tile-desc">Statut ONLINE/OFFLINE, modèle LLM actif, compteurs session, uptime</div></div>
-      <div class="tile-item"><span class="tile-badge ai">IA</span><div class="tile-name">BLOCKLIST LLM GARDE-FOU</div><div class="tile-desc">Journal tentatives tool calling bloquées — sécurité actions JARVIS</div></div>
-      <div class="tile-item"><span class="tile-badge ai">IA</span><div class="tile-name">OPÉRATIONS PROACTIVES</div><div class="tile-desc">Journal actions JARVIS : ban-ip, restart-service — timestamp + résultat</div></div>
-      <div class="tile-item"><div class="tile-name">SSL</div><div class="tile-desc">Certificats TLS, jours restants par domaine — alerte si &lt; 7 jours</div></div>
-      <div class="tile-item"><div class="tile-name">CONNECTIVITÉ SSH</div><div class="tile-desc">Statut UP/DOWN + uptime des 5 hôtes surveillés</div></div>
-    </div>
-  </div>
-
   <!-- SOURCES DONNÉES -->
-  <div class="doc-section reveal">
+  <div id="s-sources" class="doc-section reveal">
     <div class="sec-label">// sources de données</div>
     <h2 class="sec-title">$ cat data-sources.json</h2>
     <div class="sec-sep"></div>
@@ -992,7 +875,7 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
         <tr>
           <td class="data-hl">monitoring.json</td>
           <td>monitoring_gen.py</td>
-          <td>60s (cron)</td>
+          <td>5 min (cron)</td>
           <td>nginx logs, CrowdSec, fail2ban, système, réseau, Proxmox, SSL, CVE, GeoIP, Kill Chain</td>
         </tr>
         <tr>
@@ -1018,7 +901,7 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
   </div>
 
   <!-- JARVIS AUTO-ENGINE -->
-  <div class="doc-section reveal">
+  <div id="s-jarvis" class="doc-section reveal">
     <div class="sec-label">// intégration IA — auto-engine</div>
     <h2 class="sec-title">$ cat jarvis-integration.json</h2>
     <div class="sec-sep"></div>
@@ -1144,7 +1027,7 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
   </div>
 
   <!-- ALERTES -->
-  <div class="doc-section reveal">
+  <div id="s-alertes" class="doc-section reveal">
     <div class="sec-label">// système d'alertes</div>
     <h2 class="sec-title">$ cat alert-thresholds.json</h2>
     <div class="sec-sep"></div>
@@ -1264,8 +1147,82 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
     </table>
   </div>
 
+  <!-- ANTI-FREEZE -->
+  <div id="s-perf" class="doc-section reveal">
+    <div class="sec-label">// performance — anti-freeze 60s</div>
+    <h2 class="sec-title">$ cat performance.md</h2>
+    <div class="sec-sep"></div>
+    <p class="sec-desc">
+      Le dashboard rafraichit ses données toutes les 60 secondes. Sur des sessions longues (plusieurs heures),
+      un rendu DOM naif provoquerait des freezes perceptibles. Deux mécanismes sont combinés pour garantir
+      une expérience fluide en permanence, même sur machine peu puissante.
+    </p>
+
+    <table class="data-table" style="margin-bottom:2rem;">
+      <thead>
+        <tr>
+          <th>Mécanisme</th>
+          <th>Implémentation</th>
+          <th>Effet</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="data-hl">If-Modified-Since</td>
+          <td>Header HTTP + _lastModified stocké en mémoire</td>
+          <td>304 si fichier inchangé → 0 parsing, 0 DOM update</td>
+        </tr>
+        <tr>
+          <td class="data-hl">requestIdleCallback</td>
+          <td>render(data) différé dans callback idle</td>
+          <td>Exécution pendant créneau idle navigateur — 0 clipping</td>
+        </tr>
+        <tr>
+          <td class="data-hl">_lastGenAt</td>
+          <td>Comparaison timestamp JSON côté client</td>
+          <td>Double vérification applicative — ignorer si identique</td>
+        </tr>
+        <tr>
+          <td class="data-hl">Polling proto-live</td>
+          <td>Aussi idle-schedulé (cycle 15s)</td>
+          <td>Même protection pour le flux protocoles réseau</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="code-block">
+      <div class="code-block-title">fetch JSON avec If-Modified-Since — dashboard SOC (extrait)</div>
+      <pre><span class="cm">// fetch JSON avec If-Modified-Since — dashboard SOC</span>
+<span class="kw">let</span> <span class="hl">_lastModified</span> = <span class="kw">null</span>;
+
+<span class="kw">async function</span> <span class="hl">fetchMonitoring</span>() {
+  <span class="kw">const</span> headers = {};
+  <span class="kw">if</span> (_lastModified) headers[<span class="st">'If-Modified-Since'</span>] = _lastModified;
+
+  <span class="kw">const</span> res = <span class="kw">await</span> fetch(<span class="st">'/monitoring.json'</span>, { headers });
+
+  <span class="cm">// 304 = fichier inchangé — rien à re-parser ni à re-rendre</span>
+  <span class="kw">if</span> (res.status === <span class="hl">304</span>) <span class="kw">return</span>;
+
+  _lastModified = res.headers.get(<span class="st">'Last-Modified'</span>);
+  <span class="kw">const</span> data = <span class="kw">await</span> res.json();
+
+  <span class="cm">// Différer le rendu pendant un créneau idle du navigateur</span>
+  <span class="kw">if</span> (<span class="st">'requestIdleCallback'</span> <span class="kw">in</span> window) {
+    requestIdleCallback(() =&gt; render(data), { timeout: <span class="hl">2000</span> });
+  } <span class="kw">else</span> {
+    setTimeout(() =&gt; render(data), <span class="hl">0</span>);   <span class="cm">// fallback navigateurs anciens</span>
+  }
+}
+
+<span class="cm">// Refresh toutes les 60s</span>
+setInterval(fetchMonitoring, <span class="hl">60_000</span>);
+fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
+    </div>
+  </div>
+
   <!-- SÉCURITÉ -->
-  <div class="doc-section reveal">
+  <div id="s-securite" class="doc-section reveal">
     <div class="sec-label">// périmètre & défense en profondeur</div>
     <h2 class="sec-title">$ cat defense-layers.txt</h2>
     <div class="sec-sep"></div>
@@ -1386,8 +1343,94 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
     </div>
   </div>
 
+  <!-- TIMELINE CONSTRUCTION -->
+  <div id="s-timeline" class="doc-section reveal">
+    <div class="sec-label">// chronologie de construction</div>
+    <h2 class="sec-title">$ git log --oneline --reverse</h2>
+    <div class="sec-sep"></div>
+    <p class="sec-desc">
+      Le SOC Dashboard est le résultat d'une construction itérative sur plusieurs mois.
+      Chaque étape apporte une couche supplémentaire de visibilité, de détection ou d'automatisation.
+    </p>
+
+    <div class="arch-diagram">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-num">1</div>
+          <div class="timeline-body">
+            <div class="timeline-title">REVERSE PROXY nginx + SSL</div>
+            <div class="timeline-desc">Mise en place du reverse proxy nginx avec terminaison TLS (certbot Let's Encrypt). Vhosts séparés par domaine. Headers de sécurité : X-Frame-Options, X-Content-Type-Options, HSTS, Referrer-Policy. Configuration access_log JSON pour parsing structuré.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-num">2</div>
+          <div class="timeline-body">
+            <div class="timeline-title">CROWDSEC WAF + BOUNCER NFTABLES</div>
+            <div class="timeline-desc">Installation CrowdSec avec bouncer nftables pour blocage kernel-space. Scénarios communautaires activés. AppSec collection nginx (182 règles WAF niveau applicatif). Exposition API locale pour requêtes programmatiques depuis monitoring_gen.py.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-num">3</div>
+          <div class="timeline-body">
+            <div class="timeline-title">monitoring_gen.py — COLLECTE LOGS nginx</div>
+            <div class="timeline-desc">Script Python de collecte et agrégation. Parse les access.log + access.log.1 pour couverture cross-midnight. Interroge CrowdSec API, fail2ban socket, stats système. Génère monitoring.json toutes les 60 secondes via cron.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-num">4</div>
+          <div class="timeline-body">
+            <div class="timeline-title">DASHBOARD HTML v1 — PREMIÈRES TUILES SYSTÈME</div>
+            <div class="timeline-desc">Premier dashboard HTML consommant monitoring.json. Tuiles CPU, RAM, disque, réseau. Fetch polling toutes les 60s. Architecture fichier unique sans dépendance externe — déployable par simple scp.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-num">5</div>
+          <div class="timeline-body">
+            <div class="timeline-title">CYBER KILL CHAIN + GEOIP CARTOGRAPHIE CANVAS</div>
+            <div class="timeline-desc">Classification des menaces en 5 stages (Recon, Scan, Exploit, Brute, Delivery) avec scoring normalisé 0-100. Cartographie monde canvas avec arcs d'attaque géolocalisés via MaxMind GeoIP2. Heatmap 24h canvas.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-num">6</div>
+          <div class="timeline-body">
+            <div class="timeline-title">CVE NVD — 21 MOIS D'HISTORIQUE INDEXÉS</div>
+            <div class="timeline-desc">Intégration de l'API NVD/NIST. Synchronisation 3 fois par jour via cron-cve-fetch.sh. Index local ~21 mois de CVE. Moteur de corrélation entre CVE récentes et signatures CrowdSec détectées en production.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-num">7</div>
+          <div class="timeline-body">
+            <div class="timeline-title">INTÉGRATION JARVIS IA — AUTO-ENGINE, TTS, ACTIONS PROACTIVES</div>
+            <div class="timeline-desc">Connexion au moteur IA JARVIS (Flask localhost). Auto-engine surveille les deltas de trafic et déclenche des analyses LLM. Alertes vocales TTS si niveau ÉLEVÉ ou CRITIQUE. Routes SOC : ban-ip, unban-ip, restart-service via CrowdSec cscli.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-num">8</div>
+          <div class="timeline-body">
+            <div class="timeline-title">SURICATA IDS 7 — DÉTECTION RÉSEAU PASSIVE</div>
+            <div class="timeline-desc">Déploiement Suricata 7 en mode IDS passif (AF_PACKET, interface ens18). 49 343 règles Emerging Threats actives, mise à jour quotidienne automatique. Pipeline IDS→IPS : Suricata détecte → CrowdSec acquis lit eve.json → firewall-bouncer bloque. Tuile SOC : sévérités 1/2/3, top signatures, corrélation Kill Chain, MITRE ATT&CK T1059/T1071.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-num">9</div>
+          <div class="timeline-body">
+            <div class="timeline-title">ROUTEUR GT-BE98 — MONITORING RÉSEAU COMPLET</div>
+            <div class="timeline-desc">Intégration SNMP + SSH du routeur via script Python (paramiko). Données collectées toutes les 5 minutes : débits WAN/LAN, WiFi 5/6GHz, Skynet blacklist, nf_conntrack (matrice flux LAN→WAN). Score réseau isolé du score SOC. Modal 7 onglets : Réseau, WiFi, Système, Historique 24h, Flux WAN, Sécurité, Ports SVG.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-num">10</div>
+          <div class="timeline-body">
+            <div class="timeline-title">RAPPORT SOC QUOTIDIEN + ALERTES EMAIL + SNAPSHOTS UFW</div>
+            <div class="timeline-desc">soc-daily-report.py génère un rapport complet chaque matin à 08h00 UTC : trafic 24h, CrowdSec, Kill Chain, top attaquants, état services, SSL, système. Snapshots UFW horodatés pour historique posture sécurité. Déclenchement manuel depuis le dashboard via raccourci [E].</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- DÉPLOYER CE SOC -->
-  <div class="doc-section reveal">
+  <div id="s-deploy" class="doc-section reveal">
     <div class="sec-label">// déployer ce SOC</div>
     <h2 class="sec-title">$ git clone &amp;&amp; ./DEPLOY/deploy-soc.sh</h2>
     <div class="sec-sep"></div>
