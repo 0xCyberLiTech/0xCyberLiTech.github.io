@@ -303,10 +303,13 @@
     <h2 class="sec-title">$ cat pipeline.json</h2>
     <div class="sec-sep"></div>
     <p class="sec-desc">
-      Le dashboard SOC est un fichier HTML unique (~35 000 lignes) qui consomme des fichiers JSON
-      générés côté serveur. Le pipeline collecte les données de plusieurs sources
-      (logs nginx, CrowdSec, fail2ban, système, CVE, Windows, Proxmox) et les centralise
-      dans un JSON de monitoring actualisé toutes les 60 secondes.
+      Le dashboard SOC repose sur une <strong style="color:var(--cyan)">architecture modulaire</strong> —
+      un <code style="color:var(--cyan)">index.html</code> orchestre
+      <strong style="color:var(--cyan)">24 modules JavaScript</strong> spécialisés
+      (rendu, Kill Chain, GeoIP, XDR, AIDE, JARVIS, défense…).
+      Il consomme des fichiers JSON générés côté serveur. Le pipeline collecte les données
+      de plusieurs sources (logs nginx, CrowdSec, fail2ban, système, CVE, Windows, Proxmox)
+      et les centralise dans un JSON de monitoring actualisé toutes les 60 secondes.
     </p>
 
     <div class="arch-diagram">
@@ -339,7 +342,7 @@
         <div class="arch-arrow-v-wrap"><div class="arch-arrow-v"></div></div>
 
         <div class="arch-row">
-          <div class="arch-box cyan" style="min-width:220px;">◈ SOC DASHBOARD<br><span style="font-size:0.55rem;opacity:0.6">index.html · 22 modules JS · fetch JSON 60s<br>35 tuiles · Kill Chain · GeoIP · Suricata · XDR · IP</span></div>
+          <div class="arch-box cyan" style="min-width:220px;">◈ SOC DASHBOARD<br><span style="font-size:0.55rem;opacity:0.6">index.html · 24 modules JS · fetch JSON 60s<br>35 tuiles · Kill Chain · GeoIP · Suricata · XDR · IP</span></div>
         </div>
 
         <div class="arch-arrow-v-wrap"><div class="arch-arrow-v" style="background:rgba(255,136,0,0.4);"></div></div>
