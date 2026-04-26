@@ -339,7 +339,7 @@
         <div class="arch-arrow-v-wrap"><div class="arch-arrow-v"></div></div>
 
         <div class="arch-row">
-          <div class="arch-box cyan" style="min-width:220px;">◈ SOC DASHBOARD<br><span style="font-size:0.55rem;opacity:0.6">index.html · fetch JSON 60s<br>35 tuiles · Kill Chain · GeoIP · Suricata · XDR · IP</span></div>
+          <div class="arch-box cyan" style="min-width:220px;">◈ SOC DASHBOARD<br><span style="font-size:0.55rem;opacity:0.6">index.html · 22 modules JS · fetch JSON 60s<br>35 tuiles · Kill Chain · GeoIP · Suricata · XDR · IP</span></div>
         </div>
 
         <div class="arch-arrow-v-wrap"><div class="arch-arrow-v" style="background:rgba(255,136,0,0.4);"></div></div>
@@ -1460,7 +1460,7 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
 
       <div style="display:flex;gap:1rem;align-items:flex-start;padding:0.9rem 1.2rem;border:1px solid rgba(0,255,136,0.15);border-left:3px solid var(--green);border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:rgba(0,255,136,0.03);">
         <span style="font-family:var(--font-head);font-size:0.62rem;color:var(--green);letter-spacing:.1em;white-space:nowrap;margin-top:.1rem;">MODULES</span>
-        <span style="font-size:0.82rem;color:var(--text-sec);line-height:1.7;">Migration réussie vers 22 modules JS séparés — la plupart des projets personnels restent sur un fichier unique par facilité. Ce refactoring est un signe de maturité d'ingénierie logicielle : la base de code est maintenable, chaque module a une responsabilité claire.</span>
+        <span style="font-size:0.82rem;color:var(--text-sec);line-height:1.7;">Architecture modulaire refactorisée — 22 modules JS à responsabilité unique : rendu, binding, canvas Kill Chain, GeoIP, investigation IP, XDR engine, rsyslog… Séparation des concerns stricte, base de code lisible, maintenable et extensible indépendamment. Là où la quasi-totalité des projets personnels s'arrêtent à un fichier unique de 30 000 lignes, ce dashboard applique les principes du génie logiciel professionnel. <strong style="color:var(--green);">Gage de qualité d'ingénierie — pas juste du code qui fonctionne.</strong></span>
       </div>
 
       <div style="display:flex;gap:1rem;align-items:flex-start;padding:0.9rem 1.2rem;border:1px solid rgba(0,255,136,0.15);border-left:3px solid var(--green);border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:rgba(0,255,136,0.03);">
