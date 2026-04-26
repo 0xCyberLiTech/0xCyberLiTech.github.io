@@ -318,8 +318,8 @@
           <div class="arch-box green">fail2ban<br><span style="font-size:0.55rem;opacity:0.6">jails · IPs bannies</span></div>
           <div class="arch-box blue">Système<br><span style="font-size:0.55rem;opacity:0.6">CPU · RAM · disque · réseau</span></div>
           <div class="arch-box red">Suricata IDS 7<br><span style="font-size:0.55rem;opacity:0.6">eve.json · 49k règles ET</span></div>
-          <div class="arch-box violet">ROUTEUR GT-BE98<br><span style="font-size:0.55rem;opacity:0.6">SNMP · SSH · Skynet · Flux WAN</span></div>
-          <div class="arch-box" style="border-color:rgba(236,72,153,0.5);color:#ec4899;background:rgba(236,72,153,0.04);">Rsyslog centralisé<br><span style="font-size:0.55rem;opacity:0.6">5 hôtes · clt · pa85 · pve · routeur</span></div>
+          <div class="arch-box violet">ROUTEUR<br><span style="font-size:0.55rem;opacity:0.6">SNMP · SSH · Skynet · Flux WAN</span></div>
+          <div class="arch-box" style="border-color:rgba(236,72,153,0.5);color:#ec4899;background:rgba(236,72,153,0.04);">Rsyslog centralisé<br><span style="font-size:0.55rem;opacity:0.6">5 hôtes · site-01 · site-02 · pve · routeur</span></div>
         </div>
 
         <div class="arch-arrow-v-wrap"><div class="arch-arrow-v"></div></div>
@@ -525,7 +525,7 @@
              onclick="lbOpen('assets/soc/xdr-engine.png','XDR ENGINE — Corrélation cross-host · nginx · CrowdSec · Suricata · Apache VMs · Routeur · Rsyslog 5 hôtes')">
         <div style="padding:.7rem 1.2rem;">
           <div style="font-family:var(--font-body);font-size:.75rem;color:var(--text-sec);line-height:1.7;">
-            srv-ngix (nginx + CrowdSec + Suricata) · clt (Apache site-01) · pa85 (Apache site-02) · GT-BE98 (routeur) · Windows (GPU + sauvegardes) — tous centralisés via rsyslog UDP/TCP → corrélation Kill Chain unifiée.
+            srv-ngix (nginx + CrowdSec + Suricata) · site-01 (Apache) · site-02 (Apache) · routeur · Windows (GPU + sauvegardes) — tous centralisés via rsyslog UDP/TCP → corrélation Kill Chain unifiée.
           </div>
         </div>
       </div>
@@ -686,7 +686,7 @@
     <div class="tiles-section-label">▶ IDS RÉSEAU &amp; INVESTIGATION</div>
     <div class="tiles-grid">
       <div class="tile-item"><span class="tile-badge live">LIVE</span><div class="tile-name">SURICATA IDS</div><div class="tile-desc">Alertes temps réel · Sévérité 1/2/3 · Top signatures · Corrélation CrowdSec · MITRE ATT&CK T1059/T1071</div></div>
-      <div class="tile-item"><span class="tile-badge live">LIVE</span><div class="tile-name">ROUTEUR GT-BE98</div><div class="tile-desc">Débits WAN/LAN · WiFi 5/6GHz · Skynet blacklist · Score réseau · Flux nf_conntrack · Top destinations</div></div>
+      <div class="tile-item"><span class="tile-badge live">LIVE</span><div class="tile-name">ROUTEUR</div><div class="tile-desc">Débits WAN/LAN · WiFi 5/6GHz · Skynet blacklist · Score réseau · Flux nf_conntrack · Top destinations</div></div>
       <div class="tile-item"><div class="tile-name">XDR — CORRÉLATION CROSS-HOST</div><div class="tile-desc">Logigramme défense · 8 sources corrélées · nginx · CrowdSec · Suricata · Apache VMs · Routeur · Rsyslog</div></div>
       <div class="tile-item"><div class="tile-name">INVESTIGATION IP</div><div class="tile-desc">GeoIP · WHOIS/ASN · CrowdSec · Fail2ban 30j · Verdict local · Ban/unban inline depuis la Kill Chain</div></div>
     </div>
@@ -775,7 +775,7 @@
       <div class="pipe-step" style="border-right:1px solid var(--border);">
         <div class="pipe-num">SRC 10</div>
         <div class="pipe-name">Rsyslog</div>
-        <div class="pipe-tech">5 hôtes distants<br>clt · pa85 · pve · routeur<br>Corrélation XDR cross-host</div>
+        <div class="pipe-tech">5 hôtes distants<br>site-01 · site-02 · pve · routeur<br>Corrélation XDR cross-host</div>
       </div>
     </div>
 
@@ -1415,7 +1415,7 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
         <div class="timeline-item">
           <div class="timeline-num">9</div>
           <div class="timeline-body">
-            <div class="timeline-title">ROUTEUR GT-BE98 — MONITORING RÉSEAU COMPLET</div>
+            <div class="timeline-title">ROUTEUR — MONITORING RÉSEAU COMPLET</div>
             <div class="timeline-desc">Intégration SNMP + SSH du routeur via script Python (paramiko). Données collectées toutes les 5 minutes : débits WAN/LAN, WiFi 5/6GHz, Skynet blacklist, nf_conntrack (matrice flux LAN→WAN). Score réseau isolé du score SOC. Modal 7 onglets : Réseau, WiFi, Système, Historique 24h, Flux WAN, Sécurité, Ports SVG.</div>
           </div>
         </div>
