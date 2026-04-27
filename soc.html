@@ -234,7 +234,7 @@
       <span class="badge green">Refresh 60s</span>
       <span class="badge orange">CrowdSec · fail2ban · Suricata IDS</span>
       <span class="badge blue">nginx · GeoIP2 · CVE NVD</span>
-      <span class="badge cyan">v3.97.155 · Python · JavaScript</span>
+      <span class="badge cyan">v3.97.168 · Python · JavaScript</span>
       <span class="badge red">LAN uniquement — solution locale</span>
     </div>
     <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:1.8rem;">
@@ -245,11 +245,11 @@
         <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
         ⊳ Dépôt GitHub — 0xCyberLiTech/SOC
       </a>
-      <a href="https://github.com/0xCyberLiTech/SOC/blob/main/DEPLOY/deploy-soc.sh" target="_blank" rel="noopener"
+      <a href="https://github.com/0xCyberLiTech/SOC/tree/main/DEPLOY" target="_blank" rel="noopener"
          style="display:inline-flex;align-items:center;gap:0.6rem;font-family:var(--font-head);font-size:0.68rem;font-weight:700;letter-spacing:0.1em;color:var(--green);border:1px solid rgba(0,255,136,0.35);border-radius:var(--radius-sm);padding:0.6rem 1.4rem;background:rgba(0,255,136,0.04);text-decoration:none;transition:background .2s,border-color .2s;backdrop-filter:blur(4px);"
          onmouseover="this.style.background='rgba(0,255,136,0.1)';this.style.borderColor='rgba(0,255,136,0.6)'"
          onmouseout="this.style.background='rgba(0,255,136,0.04)';this.style.borderColor='rgba(0,255,136,0.35)'">
-        ⚡ deploy-soc.sh — Déploiement Debian 13
+        ≡ Framework de déploiement — Documentation
       </a>
     </div>
   </div>
@@ -292,7 +292,7 @@
       <a href="#s-alertes" class="toc-link">&#x2B27; Alertes</a>
       <a href="#s-securite" class="toc-link">&#x2B27; Sécurité</a>
       <a href="#s-avis" class="toc-link">&#x2B27; Avis IA</a>
-      <a href="#s-deploy" class="toc-link">&#x2B27; Déployer</a>
+      <a href="#s-deploy" class="toc-link">&#x2B27; Framework</a>
       <a href="#s-timeline" class="toc-link">&#x2B27; Chronologie</a>
     </nav>
   </div>
@@ -1463,7 +1463,7 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
 
       <div style="display:flex;gap:1rem;align-items:flex-start;padding:0.9rem 1.2rem;border:1px solid rgba(0,255,136,0.15);border-left:3px solid var(--green);border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:rgba(0,255,136,0.03);">
         <span style="font-family:var(--font-head);font-size:0.62rem;color:var(--green);letter-spacing:.1em;white-space:nowrap;margin-top:.1rem;">MODULES</span>
-        <span style="font-size:0.82rem;color:var(--text-sec);line-height:1.7;">Architecture modulaire refactorisée — 22 modules JS à responsabilité unique : rendu, binding, canvas Kill Chain, GeoIP, investigation IP, XDR engine, rsyslog… Séparation des concerns stricte, base de code lisible, maintenable et extensible indépendamment. Là où la quasi-totalité des projets personnels s'arrêtent à un fichier unique de 30 000 lignes, ce dashboard applique les principes du génie logiciel professionnel. <strong style="color:var(--green);">Gage de qualité d'ingénierie — pas juste du code qui fonctionne.</strong></span>
+        <span style="font-size:0.82rem;color:var(--text-sec);line-height:1.7;">Architecture modulaire refactorisée — 24 modules JS à responsabilité unique : rendu, binding, canvas Kill Chain, GeoIP, investigation IP, XDR engine, rsyslog… Séparation des concerns stricte, base de code lisible, maintenable et extensible indépendamment. Là où la quasi-totalité des projets personnels s'arrêtent à un fichier unique de 30 000 lignes, ce dashboard applique les principes du génie logiciel professionnel. <strong style="color:var(--green);">Gage de qualité d'ingénierie — pas juste du code qui fonctionne.</strong></span>
       </div>
 
       <div style="display:flex;gap:1rem;align-items:flex-start;padding:0.9rem 1.2rem;border:1px solid rgba(0,255,136,0.15);border-left:3px solid var(--green);border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:rgba(0,255,136,0.03);">
@@ -1473,7 +1473,7 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
 
       <div style="display:flex;gap:1rem;align-items:flex-start;padding:0.9rem 1.2rem;border:1px solid rgba(0,255,136,0.15);border-left:3px solid var(--green);border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:rgba(0,255,136,0.03);">
         <span style="font-family:var(--font-head);font-size:0.62rem;color:var(--green);letter-spacing:.1em;white-space:nowrap;margin-top:.1rem;">DEPLOY</span>
-        <span style="font-size:0.82rem;color:var(--text-sec);line-height:1.7;">deploy-soc.sh idempotent et modulaire (<code>--step nginx</code>, <code>--step crowdsec</code>…), RUNBOOK disaster recovery, AUDIT checklists — c'est le niveau de documentation qu'on attend d'une équipe DevOps professionnelle, pas d'un homelab. Reproductible par un tiers sans aide.</span>
+        <span style="font-size:0.82rem;color:var(--text-sec);line-height:1.7;">deploy-soc.sh idempotent et modulaire (<code>--step nginx</code>, <code>--step crowdsec</code>…), RUNBOOK disaster recovery 8 étapes, CHECKLIST 61 points — c'est le niveau de documentation qu'on attend d'une équipe DevOps professionnelle, pas d'un homelab. Disaster recovery personnel : reconstruction complète sur VM vierge Debian 13 en moins de 30 minutes.</span>
       </div>
 
       <div style="display:flex;gap:1rem;align-items:flex-start;padding:0.9rem 1.2rem;border:1px solid rgba(0,255,136,0.15);border-left:3px solid var(--green);border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:rgba(0,255,136,0.03);">
@@ -1554,50 +1554,48 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
 
   </div>
 
-  <!-- DÉPLOYER CE SOC -->
+  <!-- FRAMEWORK DE DÉPLOIEMENT -->
   <div id="s-deploy" class="doc-section reveal">
-    <div class="sec-label">// déployer ce SOC</div>
-    <h2 class="sec-title">$ git clone &amp;&amp; ./DEPLOY/deploy-soc.sh</h2>
+    <div class="sec-label">// framework de déploiement</div>
+    <h2 class="sec-title">Disaster recovery personnel — infrastructure documentée</h2>
     <div class="sec-sep"></div>
     <p class="sec-desc">
-      Le dépôt contient tout le nécessaire pour reconstruire ce SOC de zéro sur une VM Debian 13 :
-      scripts de déploiement, configs nginx, fail2ban, CrowdSec, crons, dashboard et documentation complète.
+      Le dépôt publie le framework de déploiement et la documentation technique complète.
+      Les sources du dashboard JS (24 modules) et les scripts opérationnels restent privés — ce SOC est un
+      système en production, pas un kit à distribuer.
     </p>
 
     <div class="arch-diagram" style="padding:1.5rem 2rem;margin-bottom:1.5rem;">
       <div class="code-block">
-        <div class="code-block-title">Déploiement en 3 commandes</div>
-        <pre><span class="cm"># 1. Cloner le dépôt sur la VM cible</span>
-<span class="kw">git clone</span> https://github.com/0xCyberLiTech/SOC /root/soc-deploy
+        <div class="code-block-title">Ce que contient le dépôt public</div>
+        <pre><span class="cm"># Framework d'installation des paquets</span>
+<span class="kw">DEPLOY/deploy-soc.sh</span>        <span class="cm"># nginx · crowdsec · suricata · fail2ban · AIDE</span>
 
-<span class="cm"># 2. Remplir le bloc CONFIG (IPs, domaines, ports SSH)</span>
-<span class="kw">nano</span> /root/soc-deploy/DEPLOY/deploy-soc.sh
+<span class="cm"># Procédure de restauration depuis archive personnelle</span>
+<span class="kw">DEPLOY/restore-soc.sh</span>       <span class="cm"># 13 blocs · réseau · SSL · crons · systemd</span>
 
-<span class="cm"># 3. Déployer</span>
-<span class="kw">bash</span> /root/soc-deploy/DEPLOY/deploy-soc.sh</pre>
+<span class="cm"># Documentation disaster recovery</span>
+<span class="kw">DEPLOY/RUNBOOK-DEBIAN13.md</span>  <span class="cm"># reconstruction VM vierge — 8 étapes</span>
+<span class="kw">DEPLOY/CHECKLIST-DEPLOY.md</span>  <span class="cm"># 61 points de validation post-déploiement</span></pre>
       </div>
     </div>
 
     <div class="checklist" style="margin-bottom:2rem;">
       <div class="checklist-item">
         <span class="checklist-icon">▶</span>
-        <span class="checklist-text"><strong>Aucune dépendance externe</strong> — le script déploie nginx, CrowdSec, fail2ban, Suricata, GeoIP, certbot, AIDE et tous les crons depuis le dépôt</span>
+        <span class="checklist-text"><strong>Framework idempotent et modulaire</strong> — chaque bloc est isolé (<code>--step nginx</code>, <code>--step crowdsec</code>…) — relancer sans risque</span>
       </div>
       <div class="checklist-item">
         <span class="checklist-icon">▶</span>
-        <span class="checklist-text"><strong>Idempotent et modulaire</strong> — chaque étape est isolée (<code>--step nginx</code>, <code>--step crowdsec</code>…) — relancer sans risque</span>
+        <span class="checklist-text"><strong>Configs nginx publiques</strong> — vhosts <code>monitoring</code>, <code>site-01</code>, <code>site-02</code>, snippets sécurité, NVD proxy local</span>
       </div>
       <div class="checklist-item">
         <span class="checklist-icon">▶</span>
-        <span class="checklist-text"><strong>Configs nginx incluses</strong> — vhosts <code>monitoring</code>, <code>site-01</code>, <code>site-02</code>, snippets sécurité, NVD proxy local</span>
+        <span class="checklist-text"><strong>Sources privées requises</strong> — dashboard JS (24 modules) et scripts Python déployés depuis l'archive de configuration personnelle — non distribuée</span>
       </div>
       <div class="checklist-item">
         <span class="checklist-icon">▶</span>
-        <span class="checklist-text"><strong>Dashboard déployé automatiquement</strong> — 35 tuiles, 22 modules JS, placeholders substitués par sed à l'installation</span>
-      </div>
-      <div class="checklist-item">
-        <span class="checklist-icon">▶</span>
-        <span class="checklist-text"><strong>Documentation complète</strong> — RUNBOOK Debian 13, GUIDE déploiement rapide, CHECKLIST opérationnelle, procédure de restauration</span>
+        <span class="checklist-text"><strong>Documentation complète</strong> — RUNBOOK Debian 13, GUIDE déploiement rapide, CHECKLIST 61 points, procédure de restauration</span>
       </div>
     </div>
 
@@ -1620,7 +1618,7 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
 
   <!-- FOOTER -->
   <div class="doc-footer">
-    <span>0xCyberLiTech · SOC Dashboard v3.97.155 · Documentation technique · 2026</span>
+    <span>0xCyberLiTech · SOC Dashboard v3.97.168 · Documentation technique · 2026</span>
     <div style="display:flex;gap:1.5rem;align-items:center;">
       <a href="https://github.com/0xCyberLiTech/SOC" target="_blank" rel="noopener" style="color:var(--text-mute);text-decoration:none;font-size:.78rem;transition:color .2s;" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--text-mute)'">GitHub SOC</a>
       <a href="/index.html" style="color:var(--text-mute);text-decoration:none;font-size:.78rem;transition:color .2s;" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--text-mute)'">← Portfolio</a>
