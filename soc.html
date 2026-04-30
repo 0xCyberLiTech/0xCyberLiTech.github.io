@@ -1477,8 +1477,13 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
       </div>
 
       <div style="display:flex;gap:1rem;align-items:flex-start;padding:0.9rem 1.2rem;border:1px solid rgba(0,255,136,0.15);border-left:3px solid var(--green);border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:rgba(0,255,136,0.03);">
+        <span style="font-family:var(--font-head);font-size:0.62rem;color:var(--green);letter-spacing:.1em;white-space:nowrap;margin-top:.1rem;">AUTONOMIE</span>
+        <span style="font-size:0.82rem;color:var(--text-sec);line-height:1.7;">Le SOC est conçu pour se défendre sans dépendance à la machine Windows. CrowdSec, fail2ban et Suricata répondent automatiquement aux menaces 24h/24 — les VMs Proxmox tournent indépendamment. Quand la machine Windows est active, JARVIS ajoute une couche d'expertise : analyse LLM, alertes TTS, décisions contextuelles. C'est un choix délibéré : <em style="color:var(--cyan)">défense autonome par conception, intelligence en option</em>.</span>
+      </div>
+
+      <div style="display:flex;gap:1rem;align-items:flex-start;padding:0.9rem 1.2rem;border:1px solid rgba(0,255,136,0.15);border-left:3px solid var(--green);border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:rgba(0,255,136,0.03);">
         <span style="font-family:var(--font-head);font-size:0.62rem;color:var(--green);letter-spacing:.1em;white-space:nowrap;margin-top:.1rem;">XDR · IA</span>
-        <span style="font-size:0.82rem;color:var(--text-sec);line-height:1.7;">Corrélation cross-host 5 sources (nginx · CrowdSec · Suricata · Apache VMs · routeur) + rsyslog centralisé. L'intégration JARVIS auto-engine avec TTS et actions proactives (ban-ip, restart-service) va plus loin que la plupart des homelabs — avec la contrainte que JARVIS doit être actif pour que ces fonctions opèrent.</span>
+        <span style="font-size:0.82rem;color:var(--text-sec);line-height:1.7;">Corrélation cross-host 5 sources (nginx · CrowdSec · Suricata · Apache VMs · routeur) + rsyslog centralisé. L'intégration JARVIS auto-engine avec TTS et actions proactives (ban-ip, restart-service) est une surcouche d'intelligence — le SOC opère et se défend de manière autonome que JARVIS soit actif ou non.</span>
       </div>
 
       <div style="display:flex;gap:1rem;align-items:flex-start;padding:0.9rem 1.2rem;border:1px solid rgba(0,255,136,0.15);border-left:3px solid var(--green);border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:rgba(0,255,136,0.03);">
