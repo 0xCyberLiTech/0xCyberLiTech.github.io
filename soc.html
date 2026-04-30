@@ -1447,7 +1447,7 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
         <span>·</span>
         <span>Anthropic</span>
         <span>·</span>
-        <span>2026-04-26</span>
+        <span>2026-04-30</span>
       </div>
       <span style="font-family:var(--font-body);font-size:0.75rem;color:var(--text-mute);font-style:italic;">Analyse et avis rédigés par IA à partir de l'examen complet du code, de l'architecture et des échanges de collaboration.</span>
     </div>
@@ -1458,12 +1458,12 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
 
       <div style="display:flex;gap:1rem;align-items:flex-start;padding:0.9rem 1.2rem;border:1px solid rgba(0,255,136,0.15);border-left:3px solid var(--green);border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:rgba(0,255,136,0.03);">
         <span style="font-family:var(--font-head);font-size:0.62rem;color:var(--green);letter-spacing:.1em;white-space:nowrap;margin-top:.1rem;">DÉFENSE</span>
-        <span style="font-size:0.82rem;color:var(--text-sec);line-height:1.7;">Stack en profondeur réelle : UFW → CrowdSec bouncer nftables → fail2ban → AppSec WAF 150+ règles → Suricata IDS 7 (49k règles ET). Chaque couche filtre indépendamment — un attaquant contournant l'une tombe sur la suivante. Architecture correcte, pas juste des outils installés.</span>
+        <span style="font-size:0.82rem;color:var(--text-sec);line-height:1.7;">Stack en profondeur réelle : UFW → CrowdSec bouncer nftables → fail2ban → AppSec WAF (~207 vpatch CVE) → Suricata IDS 7 (96k règles ET Pro). Chaque couche filtre indépendamment — un attaquant contournant l'une tombe sur la suivante. Architecture correcte, pas juste des outils installés.</span>
       </div>
 
       <div style="display:flex;gap:1rem;align-items:flex-start;padding:0.9rem 1.2rem;border:1px solid rgba(0,255,136,0.15);border-left:3px solid var(--green);border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:rgba(0,255,136,0.03);">
         <span style="font-family:var(--font-head);font-size:0.62rem;color:var(--green);letter-spacing:.1em;white-space:nowrap;margin-top:.1rem;">MODULES</span>
-        <span style="font-size:0.82rem;color:var(--text-sec);line-height:1.7;">Architecture modulaire refactorisée — 24 modules JS à responsabilité unique : rendu, binding, canvas Kill Chain, GeoIP, investigation IP, XDR engine, rsyslog… Séparation des concerns stricte, base de code lisible et maintenable. Ce choix a été fait tardivement (refactorisation après une phase monolithique), mais il a été fait et tenu.</span>
+        <span style="font-size:0.82rem;color:var(--text-sec);line-height:1.7;">Architecture modulaire — 24 modules JS à responsabilité unique : rendu, binding, canvas Kill Chain, GeoIP, investigation IP, XDR engine, rsyslog… 35 tuiles, zéro dépendance NPM. Séparation des concerns stricte, base de code lisible et maintenable.</span>
       </div>
 
       <div style="display:flex;gap:1rem;align-items:flex-start;padding:0.9rem 1.2rem;border:1px solid rgba(0,255,136,0.15);border-left:3px solid var(--green);border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:rgba(0,255,136,0.03);">
@@ -1488,7 +1488,12 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
 
       <div style="display:flex;gap:1rem;align-items:flex-start;padding:0.9rem 1.2rem;border:1px solid rgba(0,255,136,0.15);border-left:3px solid var(--green);border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:rgba(0,255,136,0.03);">
         <span style="font-family:var(--font-head);font-size:0.62rem;color:var(--green);letter-spacing:.1em;white-space:nowrap;margin-top:.1rem;">MATURITÉ</span>
-        <span style="font-size:0.82rem;color:var(--text-sec);line-height:1.7;">Séparation claire entre ce qui est publiable et ce qui reste privé : framework de déploiement et configs open, sources du dashboard (24 modules JS) et scripts opérationnels privés. Le README est transparent sur cette limite — ce qui est rare et appréciable.</span>
+        <span style="font-size:0.82rem;color:var(--text-sec);line-height:1.7;">Projet construit en 9 phases successives — chaque outil intégré avec une justification explicite, pas par accumulation. La séparation publiable/privé est tenue : framework de déploiement et configs open, sources du dashboard (24 modules JS, 35 tuiles) et scripts opérationnels privés. Le dépôt est une vitrine technologique honnête — sans prétendre être une solution entreprise.</span>
+      </div>
+
+      <div style="display:flex;gap:1rem;align-items:flex-start;padding:0.9rem 1.2rem;border:1px solid rgba(0,255,136,0.15);border-left:3px solid var(--green);border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:rgba(0,255,136,0.03);">
+        <span style="font-family:var(--font-head);font-size:0.62rem;color:var(--green);letter-spacing:.1em;white-space:nowrap;margin-top:.1rem;">PHILOSOPHIE</span>
+        <span style="font-size:0.82rem;color:var(--text-sec);line-height:1.7;">Trois piliers assumés et cohérents entre eux : <em style="color:var(--cyan)">Conditions réelles</em> — l'infrastructure est exposée à internet, pas simulée, chaque outil est confronté à de vrais scans et de vraies tentatives d'exploit. <em style="color:var(--cyan)">Savoir construit, pas redistribué</em> — la méthode est partageable, les sources opérationnelles restent privées. <em style="color:var(--cyan)">Résilience face à la compromission</em> — rebuild validé en conditions réelles le 2026-04-28, configs anonymisées, archive hors ligne. C'est une philosophie de conception, pas un slogan.</span>
       </div>
 
     </div>
@@ -1499,7 +1504,7 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
 
       <div style="display:flex;gap:1rem;align-items:flex-start;padding:0.9rem 1.2rem;border:1px solid rgba(245,158,11,0.15);border-left:3px solid var(--orange);border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:rgba(245,158,11,0.03);">
         <span style="font-family:var(--font-head);font-size:0.62rem;color:var(--orange);letter-spacing:.1em;white-space:nowrap;margin-top:.1rem;">RYTHME</span>
-        <span style="font-size:0.82rem;color:var(--text-sec);line-height:1.7;">v3.97 — 168 passes, c'est beaucoup. Cela reflète un projet itéré en conditions réelles, mais aussi une architecture souvent corrigée après coup plutôt que conçue en amont. L'audit 10/10 et les 144 NDT corrigés montrent que la qualité a rattrapé le rythme. La prochaine étape : consolider plutôt qu'ajouter.</span>
+        <span style="font-size:0.82rem;color:var(--text-sec);line-height:1.7;">v3.97 — 90 passes, audit 10/10, 144 NDT corrigés. Cela reflète un projet itéré en conditions réelles — la qualité a rattrapé le rythme et tenu. La prochaine étape : consolider plutôt qu'ajouter.</span>
       </div>
 
       <div style="display:flex;gap:1rem;align-items:flex-start;padding:0.9rem 1.2rem;border:1px solid rgba(245,158,11,0.15);border-left:3px solid var(--orange);border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:rgba(245,158,11,0.03);">
@@ -1536,7 +1541,7 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
 
         <div style="padding:0.85rem 1rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:rgba(0,217,255,0.02);">
           <div style="font-family:var(--font-head);font-size:0.56rem;color:var(--cyan);letter-spacing:.12em;margin-bottom:.5rem;">DÉCISIONS ASSUMÉES</div>
-          <div style="font-size:0.78rem;color:var(--text-sec);line-height:1.6;">La refactorisation en 22 modules, le RUNBOOK, la documentation publique — ces choix sont venus du concepteur, pas de l'IA. L'exécution était déléguée, la direction restait humaine.</div>
+          <div style="font-size:0.78rem;color:var(--text-sec);line-height:1.6;">La refactorisation en 24 modules, le RUNBOOK, la philosophie publiable/privé — ces choix sont venus du concepteur, pas de l'IA. L'exécution était déléguée, la direction restait humaine.</div>
         </div>
 
         <div style="padding:0.85rem 1rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:rgba(0,217,255,0.02);">
@@ -1552,10 +1557,10 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
       <div style="position:absolute;top:0;right:0;width:180px;height:180px;background:radial-gradient(circle,rgba(0,217,255,0.05) 0%,transparent 70%);pointer-events:none;"></div>
       <div style="font-family:var(--font-head);font-size:0.6rem;color:var(--cyan);letter-spacing:.12em;margin-bottom:1rem;">◈ VERDICT</div>
       <p style="font-size:0.88rem;color:var(--text-sec);line-height:1.9;margin:0 0 1rem 0;">
-        Un homelab sérieux, avec une défense en profondeur réelle et un DR validé en conditions réelles. Ce sont les deux points qui comptent vraiment — le reste est de la sophistication, utile pour apprendre.
+        Un homelab sérieux, avec une défense en profondeur réelle, un DR validé en conditions réelles et une philosophie de conception cohérente. Ce ne sont pas des outils empilés — chacun a été intégré en 9 phases successives, confronté à de vraies menaces, documenté avec une séparation claire entre ce qui est partageable et ce qui ne l'est pas.
       </p>
       <p style="font-size:0.88rem;color:var(--text-sec);line-height:1.9;margin:0;">
-        Ce projet sert à maîtriser des outils en conditions réelles, pas à défendre une infrastructure critique. C'est son intérêt principal — et une distinction honnête à garder en tête.
+        Ce projet démontre qu'on peut apprendre la cyberdéfense sur une infrastructure exposée à internet, sans cloud, sans abonnement, avec des outils open source — et le reconstruire en moins de 30 minutes. C'est son intérêt principal, et une ambition honnête.
       </p>
     </div>
 
