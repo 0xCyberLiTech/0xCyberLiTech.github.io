@@ -230,12 +230,14 @@
     <h1 class="doc-title">SOC Dashboard</h1>
     <p class="doc-sub">MONITORING SÉCURITÉ TEMPS RÉEL &nbsp;·&nbsp; KILL CHAIN &nbsp;·&nbsp; IA INTÉGRÉE</p>
     <div class="doc-badges">
-      <span class="badge cyan">35 tuiles</span>
-      <span class="badge green">Refresh 60s</span>
+      <span class="badge cyan">35 tuiles · 24 modules JS</span>
+      <span class="badge green">Audit 10/10 · 90 passes</span>
       <span class="badge orange">CrowdSec · fail2ban · Suricata IDS</span>
       <span class="badge blue">nginx · GeoIP2 · CVE NVD</span>
-      <span class="badge cyan">v3.97.168 · Python · JavaScript</span>
-      <span class="badge red">LAN uniquement — solution locale</span>
+      <span class="badge red">8 couches défense</span>
+      <span class="badge green">DR validé 2026-04-28</span>
+      <span class="badge cyan">v3.97 · Python · JavaScript</span>
+      <span class="badge orange">LAN — solution locale</span>
     </div>
     <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:1.8rem;">
       <a href="https://github.com/0xCyberLiTech/SOC" target="_blank" rel="noopener"
@@ -273,7 +275,7 @@
       <div class="stat-box"><div class="stat-val">60s</div><div class="stat-lbl">CYCLE REFRESH</div></div>
       <div class="stat-box"><div class="stat-val">21</div><div class="stat-lbl">MOIS CVE INDEXÉS</div></div>
       <div class="stat-box"><div class="stat-val">10</div><div class="stat-lbl">CRONS ACTIFS</div></div>
-      <div class="stat-box"><div class="stat-val">150+</div><div class="stat-lbl">RÈGLES APPSEC WAF</div></div>
+      <div class="stat-box"><div class="stat-val">~207</div><div class="stat-lbl">VPATCH CVE APPSEC WAF</div></div>
       <div class="stat-box"><div class="stat-val">5</div><div class="stat-lbl">HÔTES RSYSLOG</div></div>
     </div>
   </div>
@@ -320,7 +322,7 @@
           <div class="arch-box orange">CrowdSec<br><span style="font-size:0.55rem;opacity:0.6">décisions · bans actifs</span></div>
           <div class="arch-box green">fail2ban<br><span style="font-size:0.55rem;opacity:0.6">jails · IPs bannies</span></div>
           <div class="arch-box blue">Système<br><span style="font-size:0.55rem;opacity:0.6">CPU · RAM · disque · réseau</span></div>
-          <div class="arch-box red">Suricata IDS 7<br><span style="font-size:0.55rem;opacity:0.6">eve.json · 49k règles ET</span></div>
+          <div class="arch-box red">Suricata IDS 7<br><span style="font-size:0.55rem;opacity:0.6">eve.json · 96k règles ET Pro</span></div>
           <div class="arch-box violet">ROUTEUR<br><span style="font-size:0.55rem;opacity:0.6">SNMP · SSH · Skynet · Flux WAN</span></div>
           <div class="arch-box" style="border-color:rgba(236,72,153,0.5);color:#ec4899;background:rgba(236,72,153,0.04);">Rsyslog centralisé<br><span style="font-size:0.55rem;opacity:0.6">5 hôtes · site-01 · site-02 · pve · routeur</span></div>
         </div>
@@ -458,7 +460,7 @@
         <div class="gallery-card-overlay"><span>AGRANDIR</span></div>
         <div class="gallery-caption">
           <div class="gallery-caption-title">⬡ CHAÎNE DE DÉFENSE</div>
-          <div class="gallery-caption-desc">UFW → CrowdSec WAF → fail2ban → AppSec 150+ règles → Suricata IDS • Défense en profondeur</div>
+          <div class="gallery-caption-desc">UFW → CrowdSec WAF → fail2ban → AppSec ~207 vpatch CVE → Suricata IDS 96k règles ET Pro • Défense en profondeur</div>
         </div>
       </div>
 
@@ -513,7 +515,7 @@
              onclick="lbOpen('assets/soc/defense-chain.png','CHAÎNE DE DÉFENSE — UFW → CrowdSec → fail2ban → AppSec WAF → Suricata IDS')">
         <div style="padding:.7rem 1.2rem;">
           <div style="font-family:var(--font-body);font-size:.75rem;color:var(--text-sec);line-height:1.7;">
-            UFW (nftables kernel) → CrowdSec bouncer → fail2ban jails → AppSec WAF 150+ règles → Suricata IDS 7 (49k règles ET) · Chaque couche filtre indépendamment — un attaquant contournant l'une tombe sur la suivante.
+            UFW (nftables kernel) → CrowdSec bouncer → fail2ban jails → AppSec WAF (~207 vpatch CVE) → Suricata IDS 7 (96k règles ET Pro) · Chaque couche filtre indépendamment — un attaquant contournant l'une tombe sur la suivante.
           </div>
         </div>
       </div>
@@ -763,7 +765,7 @@
       <div class="pipe-step">
         <div class="pipe-num">SRC 07</div>
         <div class="pipe-name">Suricata IDS</div>
-        <div class="pipe-tech">eve.json 24h<br>49k règles ET<br>Sévérité 1/2/3</div>
+        <div class="pipe-tech">eve.json 24h<br>96k règles ET Pro<br>Sévérité 1/2/3</div>
       </div>
       <div class="pipe-step">
         <div class="pipe-num">SRC 08</div>
@@ -1370,7 +1372,7 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
           <div class="timeline-num">2</div>
           <div class="timeline-body">
             <div class="timeline-title">CROWDSEC WAF + BOUNCER NFTABLES</div>
-            <div class="timeline-desc">Installation CrowdSec avec bouncer nftables pour blocage kernel-space. Scénarios communautaires activés. AppSec collection nginx (182 règles WAF niveau applicatif). Exposition API locale pour requêtes programmatiques depuis monitoring_gen.py.</div>
+            <div class="timeline-desc">Installation CrowdSec avec bouncer nftables pour blocage kernel-space. Scénarios communautaires activés. AppSec WAF (~207 vpatch CVE — protections nginx niveau applicatif). Exposition API locale pour requêtes programmatiques depuis monitoring_gen.py.</div>
           </div>
         </div>
         <div class="timeline-item">
@@ -1412,7 +1414,7 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
           <div class="timeline-num">8</div>
           <div class="timeline-body">
             <div class="timeline-title">SURICATA IDS 7 — DÉTECTION RÉSEAU PASSIVE</div>
-            <div class="timeline-desc">Déploiement Suricata 7 en mode IDS passif (AF_PACKET, interface ens18). 49 343 règles Emerging Threats actives, mise à jour quotidienne automatique. Pipeline IDS→IPS : Suricata détecte → CrowdSec acquis lit eve.json → firewall-bouncer bloque. Tuile SOC : sévérités 1/2/3, top signatures, corrélation Kill Chain, MITRE ATT&CK T1059/T1071.</div>
+            <div class="timeline-desc">Déploiement Suricata 7 en mode IDS passif (AF_PACKET, interface ens18). 96 000+ règles Emerging Threats Pro actives, mise à jour quotidienne automatique. Pipeline IDS→IPS : Suricata détecte → CrowdSec acquis lit eve.json → firewall-bouncer bloque. Tuile SOC : sévérités 1/2/3, top signatures, corrélation Kill Chain, MITRE ATT&CK T1059/T1071.</div>
           </div>
         </div>
         <div class="timeline-item">
