@@ -1,0 +1,24 @@
+name: Lighthouse CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Lighthouse audit
+        uses: treosh/lighthouse-ci-action@v11
+        with:
+          urls: |
+            https://0xcyberlitech.github.io/
+            https://0xcyberlitech.github.io/soc.html
+            https://0xcyberlitech.github.io/jarvis.html
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          budgetPath: .github/lighthouse-budget.json
