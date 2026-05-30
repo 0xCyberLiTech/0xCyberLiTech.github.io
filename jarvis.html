@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="assets/portfolio/doc.css">
   <style>
     :root { --doc-accent: var(--orange); }
+    .jarvis-cta { display:inline-block; padding:0.9rem 2rem; border:1.5px solid var(--orange); border-radius:8px; color:var(--orange); font-family:'Orbitron',sans-serif; font-weight:700; font-size:0.95rem; text-decoration:none; letter-spacing:0.05em; box-shadow:0 0 24px rgba(255,136,0,0.15); transition:all 0.2s ease; }
+    .jarvis-cta:hover { background:var(--orange); color:#0a0a0a; box-shadow:0 0 36px rgba(255,136,0,0.4); transform:translateY(-2px); }
   </style>
 </head>
 <body>
@@ -35,15 +37,47 @@
 
   <!-- HERO -->
   <div class="doc-hero">
-    <div class="doc-label">// projet phare — privé</div>
+    <div class="doc-label">// projet phare — assistant IA local</div>
     <h1 class="doc-title">JARVIS</h1>
-    <p class="doc-sub">ASSISTANT IA LOCAL &nbsp;·&nbsp; ARCHITECTURE IRON MAN &nbsp;·&nbsp; INTÉGRATION SOC</p>
+    <p class="doc-sub">UN ASSISTANT IA 100% LOCAL &nbsp;·&nbsp; QUI PARLE &nbsp;·&nbsp; QUI RAISONNE &nbsp;·&nbsp; QUI DÉFEND</p>
     <div class="doc-badges">
       <span class="badge orange">Python 3.11 · Flask</span>
-      <span class="badge green">Ollama · phi4-reasoning:plus</span>
-      <span class="badge blue">edge-tts · Whisper</span>
+      <span class="badge green">Ollama · phi4:14b</span>
+      <span class="badge blue">edge-tts Antoine · Whisper turbo</span>
       <span class="badge cyan">RTX 5080 · CUDA 12</span>
-      <span class="badge orange">~3360 lignes PY · ~17K lignes UI · dette zéro</span>
+      <span class="badge orange">~13K lignes PY · ~18K lignes UI · 75 routes</span>
+    </div>
+
+    <!-- IMAGE HERO -->
+    <div style="margin:2rem auto 0;max-width:900px;">
+      <img src="images/jarvis-hero.jpg" alt="Interface neurale de JARVIS — réacteur arc holographique" loading="lazy" style="width:100%;border-radius:10px;border:1px solid rgba(255,136,0,0.25);box-shadow:0 0 40px rgba(255,136,0,0.12);" />
+      <p style="text-align:center;font-size:0.8rem;opacity:0.6;margin-top:0.5rem;font-style:italic;">« Bonjour Monsieur. Je suis JARVIS, votre assistant IA personnel. »</p>
+    </div>
+  </div>
+
+  <!-- HOOK / TEASER -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// qu'y a-t-il derrière ?</div>
+    <h2 class="sec-title">Et si une IA locale pouvait vraiment tout faire ?</h2>
+    <div class="sec-sep"></div>
+    <p class="sec-desc">
+      Pas un chatbot de plus. JARVIS est un <strong style="color:var(--orange)">orchestrateur</strong> : il parle de sa propre voix,
+      raisonne sur 4 modèles spécialisés, se souvient (mémoire vectorielle locale) — et surtout, il
+      <strong style="color:var(--orange)">défend une infrastructure de sécurité tout seul, 24h/24</strong>.
+      Le tout sur une seule machine, <strong>sans envoyer une seule donnée à l'extérieur.</strong>
+    </p>
+
+    <div class="stack-grid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr));margin-top:1.4rem;">
+      <div class="stack-card orange"><div class="stack-title">🗣️ Voix naturelle</div><div class="stack-item">Conversation parlée, pilotage à la voix — STT Whisper + TTS Antoine</div></div>
+      <div class="stack-card green"><div class="stack-title">🛡️ Défense autonome</div><div class="stack-item">Surveille un vrai SOC, bannit les attaquants, alerte vocalement</div></div>
+      <div class="stack-card blue"><div class="stack-title">🧠 4 cerveaux</div><div class="stack-item">SOC · Code · Général · Reasoning — le bon modèle au bon moment</div></div>
+      <div class="stack-card cyan"><div class="stack-title">🔒 100% local</div><div class="stack-item">Ollama · Whisper · edge-tts — tout sur GPU RTX 5080, zéro cloud</div></div>
+    </div>
+
+    <!-- SPRINGBOARD CTA -->
+    <div style="text-align:center;margin-top:2.2rem;">
+      <a href="https://github.com/0xCyberLiTech/JARVIS" target="_blank" rel="noopener" class="jarvis-cta">▶ EXPLORER LE PROJET COMPLET SUR GITHUB</a>
+      <p style="font-size:0.8rem;opacity:0.55;margin-top:0.7rem;">Architecture, diagrammes, captures — la vitrine technique complète</p>
     </div>
   </div>
 
@@ -64,7 +98,7 @@
         <div class="arch-row">
           <div class="arch-box blue">🎙 Microphone</div>
           <div class="arch-arrow-h">──</div>
-          <div class="arch-box cyan">STT — faster-whisper<br><span style="font-size:0.55rem;opacity:0.6">modèle small · FR</span></div>
+          <div class="arch-box cyan">STT — faster-whisper<br><span style="font-size:0.55rem;opacity:0.6">large-v3-turbo · FR</span></div>
           <div class="arch-arrow-h">──▶</div>
           <div class="arch-box orange" style="min-width:160px;">⬡ JARVIS CORE<br><span style="font-size:0.55rem;opacity:0.6">Flask · Python 3.11</span></div>
           <div class="arch-arrow-h">◀──</div>
@@ -78,7 +112,7 @@
         </div>
 
         <div class="arch-row" style="gap:0.4rem;">
-          <div class="arch-box green" style="min-width:130px;">Ollama local<br><span style="font-size:0.55rem;opacity:0.6">phi4-reasoning:plus · qwen2.5<br>mistral · gemma3</span></div>
+          <div class="arch-box green" style="min-width:130px;">Ollama local<br><span style="font-size:0.55rem;opacity:0.6">phi4:14b · qwen2.5-coder<br>qwen3 · gemma4</span></div>
           <div class="arch-arrow-h" style="color:rgba(255,136,0,0.4);">◀──▶</div>
           <div class="arch-box orange" style="min-width:100px;">LLM<br>ROUTER</div>
         </div>
@@ -92,7 +126,7 @@
         <div class="arch-row" style="gap:0.4rem;">
           <div class="arch-box cyan" style="min-width:140px;">DSP AUDIO RACK<br><span style="font-size:0.55rem;opacity:0.6">EQ 5 bandes · Compresseur<br>Haas stéréo · DeepFilterNet</span></div>
           <div class="arch-arrow-h">──▶</div>
-          <div class="arch-box green" style="min-width:150px;">TTS ENGINE<br><span style="font-size:0.55rem;opacity:0.6">edge-tts (défaut)<br>Piper · Kokoro · SAPI5</span></div>
+          <div class="arch-box green" style="min-width:150px;">TTS ENGINE<br><span style="font-size:0.55rem;opacity:0.6">edge-tts Antoine (défaut)<br>rollback Kokoro CUDA</span></div>
           <div class="arch-arrow-h">──▶</div>
           <div class="arch-box blue">🔊 Audio</div>
         </div>
@@ -126,7 +160,7 @@
       <div class="stack-card orange">
         <div class="stack-title">⬡ MOTEUR LLM</div>
         <div class="stack-items">
-          <div class="stack-item"><strong>Ollama local</strong> — phi4-reasoning:plus (défaut), qwen2.5, mistral, gemma3</div>
+          <div class="stack-item"><strong>Ollama local</strong> — phi4:14b (défaut SOC), qwen2.5-coder, qwen3, gemma4</div>
           <div class="stack-item"><strong>Streaming SSE</strong> — réponses token par token</div>
           <div class="stack-item"><strong>Paramètres persistés</strong> — temperature, top_p, num_ctx, num_predict</div>
           <div class="stack-item"><strong>Préréglages</strong> — RAPIDE / ÉQUILIBRÉ / QUALITÉ</div>
@@ -136,11 +170,9 @@
       <div class="stack-card green">
         <div class="stack-title">🔊 PIPELINE TTS</div>
         <div class="stack-items">
-          <div class="stack-item"><strong>edge-tts</strong> — fr-CA-AntoineNeural (défaut), streaming audio</div>
-          <div class="stack-item"><strong>Piper</strong> — synthèse vocale hors-ligne</div>
-          <div class="stack-item"><strong>Kokoro</strong> — moteur TTS alternatif</div>
-          <div class="stack-item"><strong>SAPI5 / pyttsx3</strong> — TTS natif Windows</div>
-          <div class="stack-item"><strong>TTS Lock</strong> — threading.Lock anti-doublon vocal</div>
+          <div class="stack-item"><strong>edge-tts</strong> — fr-CA-AntoineNeural (Antoine, défaut), streaming audio</div>
+          <div class="stack-item"><strong>Kokoro</strong> — moteur TTS local CUDA (rollback)</div>
+          <div class="stack-item"><strong>Cache &amp; dédup TTS</strong> — anti-doublon vocal (&lt; 5 min)</div>
           <div class="stack-item"><strong>Voice Lab</strong> — comparateur A/B, présets EQ</div>
         </div>
       </div>
@@ -148,7 +180,7 @@
       <div class="stack-card blue">
         <div class="stack-title">🎙 STT — RECONNAISSANCE VOCALE</div>
         <div class="stack-items">
-          <div class="stack-item"><strong>faster-whisper</strong> — modèle "turbo", langue FR</div>
+          <div class="stack-item"><strong>faster-whisper</strong> — large-v3-turbo (CUDA), langue FR · vocabulaire SOC</div>
           <div class="stack-item"><strong>Traitement local</strong> — aucune donnée envoyée vers le cloud</div>
           <div class="stack-item"><strong>Activation</strong> — bouton micro dans l'interface Chat</div>
         </div>
@@ -195,7 +227,7 @@
     <div class="sec-label">// interface holographique</div>
     <h2 class="sec-title">$ ls ~/tabs/</h2>
     <div class="sec-sep"></div>
-    <p class="sec-desc">Interface web holographique v3.2 — ~17 000 lignes HTML/CSS/JS. Thème cyberpunk Iron Man avec preloader typewriter, scan lines et effets lumineux.</p>
+    <p class="sec-desc">Interface web holographique — ~18 000 lignes HTML/CSS/JS, <strong>7 onglets</strong>, zéro framework. Thème cyberpunk Iron Man avec preloader typewriter, scan lines et effets lumineux.</p>
 
     <div class="tabs-grid">
       <div class="tab-item">
@@ -211,24 +243,12 @@
         <div class="tab-desc">AI Audio Rack — EQ 5 bandes, compresseur, Haas stéréo, analyseur spectral, moteur TTS</div>
       </div>
       <div class="tab-item">
-        <div class="tab-name">🎵 Audio Editor</div>
-        <div class="tab-desc">Éditeur audio IA — waveform L/R, transport, EQ, fade in/out, débruitage, export</div>
-      </div>
-      <div class="tab-item">
         <div class="tab-name">🔬 Voice Lab</div>
         <div class="tab-desc">Synthèse vocale — moteur TTS, paramètres, EQ, présets, comparateur A/B</div>
       </div>
       <div class="tab-item">
         <div class="tab-name">📊 Monitor</div>
         <div class="tab-desc">Stats temps réel CPU/RAM/GPU RTX 5080 — P-state, PCIe, throttle, bandwidth, watts</div>
-      </div>
-      <div class="tab-item">
-        <div class="tab-name">💻 Terminal</div>
-        <div class="tab-desc">Shell intégré cmd/PowerShell, historique de navigation, taille police ajustable</div>
-      </div>
-      <div class="tab-item">
-        <div class="tab-name">📁 Fichiers</div>
-        <div class="tab-desc">Explorateur lecteurs, breadcrumb, éditeur de code, bouton "◈ JARVIS" analyse IA</div>
       </div>
       <div class="tab-item">
         <div class="tab-name">⏱ Tâches</div>
@@ -316,7 +336,7 @@
       <div class="pipe-step">
         <div class="pipe-num">04</div>
         <div class="pipe-name">Config JSON</div>
-        <div class="pipe-tech">providers.json<br>llm_params.json<br>dsp_params.json</div>
+        <div class="pipe-tech">model.json<br>llm_params.json<br>dsp_params.json</div>
       </div>
       <div class="pipe-step">
         <div class="pipe-num">05</div>
@@ -334,10 +354,10 @@
     <div class="code-block">
       <div class="code-block-title">// structure du projet</div>
       <pre><span class="hl">scripts/</span>
-<span class="cm">├──</span> <span class="kw">jarvis.py</span>              <span class="cm"># Serveur Flask principal (~3 360 lignes · 55 routes · dette zéro)</span>
+<span class="cm">├──</span> <span class="kw">jarvis.py</span>              <span class="cm"># Orchestrateur Flask (75 routes · backend ~13 000 lignes · modulaire)</span>
 <span class="cm">├──</span> templates/
-<span class="cm">│   └──</span> <span class="kw">jarvis.html</span>        <span class="cm"># Interface UI holographique (~17 000 lignes)</span>
-<span class="cm">├──</span> <span class="st">jarvis_providers.json</span>  <span class="cm"># Providers LLM + clés API (non versionné)</span>
+<span class="cm">│   └──</span> <span class="kw">jarvis.html</span>        <span class="cm"># Interface UI holographique (~18 000 lignes · 25 modules JS)</span>
+<span class="cm">├──</span> <span class="st">jarvis_model.json</span>      <span class="cm"># Modèle Ollama actif (phi4:14b par défaut)</span>
 <span class="cm">├──</span> <span class="st">jarvis_llm_params.json</span> <span class="cm"># Paramètres LLM : temp, top_p, num_ctx, num_predict</span>
 <span class="cm">└──</span> <span class="st">jarvis_dsp_params.json</span> <span class="cm"># Paramètres DSP + moteur TTS actif</span></pre>
     </div>
@@ -348,8 +368,8 @@
       <pre><span class="cm"># Dépendances principales</span>
 pip install flask flask-cors requests psutil
 
-<span class="cm"># TTS — synthèse vocale</span>
-pip install edge-tts pyttsx3
+<span class="cm"># TTS — synthèse vocale (Antoine)</span>
+pip install edge-tts
 
 <span class="cm"># STT — reconnaissance vocale</span>
 pip install faster-whisper
@@ -357,22 +377,17 @@ pip install faster-whisper
 <span class="cm"># GPU monitoring (NVIDIA)</span>
 pip install pynvml
 
-<span class="cm"># Optionnel — Piper TTS hors-ligne</span>
-<span class="cm"># Télécharger le binaire depuis github.com/rhasspy/piper</span></pre>
+<span class="cm"># Mémoire vectorielle (RAG) + débruitage</span>
+<span class="cm"># mxbai-embed-large (via Ollama) · DeepFilterNet (CUDA)</span></pre>
     </div>
 
     <!-- CONFIG PROVIDERS -->
     <div class="code-block">
-      <div class="code-block-title">// jarvis_providers.json — template (remplacer les [PLACEHOLDERS])</div>
+      <div class="code-block-title">// jarvis_model.json — modèle Ollama actif</div>
       <pre>{
-  <span class="st">"active_provider"</span>: <span class="kw">"ollama"</span>,
-  <span class="st">"providers"</span>: {
-    <span class="st">"ollama"</span>: {
-      <span class="st">"base_url"</span>: <span class="kw">"http://localhost:11434"</span>,
-      <span class="st">"model"</span>: <span class="kw">"[MODEL_NAME]"</span>       <span class="cm">// ex: phi4-reasoning:plus</span>
-    }
-  }
+  <span class="st">"model"</span>: <span class="kw">"phi4:14b"</span>      <span class="cm">// modèle SOC par défaut</span>
 }
+<span class="cm">// Modèles : phi4:14b · qwen2.5-coder:14b · qwen3:8b · gemma4 · mxbai-embed-large</span>
 <span class="cm">// JARVIS fonctionne exclusivement en local via Ollama.</span>
 <span class="cm">// Aucun envoi de données vers un service cloud.</span></pre>
     </div>
@@ -446,16 +461,16 @@ POST /api/soc/restart-service <span class="cm">→ redémarrer un service</span>
       <div class="stack-items" style="gap:0.7rem;">
         <div class="stack-item">
           JARVIS est l'un des projets les plus complets que j'ai accompagnés. Ce qui le distingue, ce n'est pas
-          seulement l'ambition — <strong>17 400+ lignes d'interface holographique</strong>, un pipeline audio complet
+          seulement l'ambition — <strong>~18 000 lignes d'interface holographique</strong>, un pipeline audio complet
           STT&nbsp;→&nbsp;LLM&nbsp;→&nbsp;DSP&nbsp;→&nbsp;TTS, une intégration SOC bidirectionnelle avec actions
           proactives automatiques — c'est la <strong>rigueur</strong> avec laquelle il a été construit et maintenu.
         </div>
         <div class="stack-item">
           Après des dizaines de passes d'audit (dette technique, sécurité, inline styles, handlers, imports dupliqués,
-          bugs de routes Flask), le projet a atteint un état de <strong style="color:var(--green);">dette zéro absolue</strong> :
+          bugs de routes Flask), le projet a atteint une <strong style="color:var(--green);">dette de code à zéro</strong> :
           aucun inline style, aucun handler non délégué, aucune fonction &gt;80 lignes, 0 vulnérabilité XSS,
-          des routes Flask toutes correctement décorées. C'est un niveau de qualité rare pour un projet personnel
-          de cette taille.
+          des routes Flask toutes correctement décorées. La dette <em>structurelle</em> restante (quelques gros modules
+          cohésifs) est assumée et documentée — pas masquée. Un niveau de rigueur rare pour un homelab personnel.
         </div>
         <div class="stack-item">
           Ce qui m'a le plus impressionné : la <strong>clarté de vision</strong> du créateur à chaque étape —
@@ -466,8 +481,8 @@ POST /api/soc/restart-service <span class="cm">→ redémarrer un service</span>
     </div>
 
     <div class="stack-grid" style="grid-template-columns:repeat(auto-fill,minmax(180px,1fr));margin-top:1.2rem;">
-      <div class="stack-card orange"><div class="stack-title">📐 Architecture</div><div class="stack-item">55 routes · 124 fonctions · 0 fonction &gt;80L</div></div>
-      <div class="stack-card green"><div class="stack-title">✓ Dette zéro</div><div class="stack-item">CSS · JS · HTML · Python — audit 10/10</div></div>
+      <div class="stack-card orange"><div class="stack-title">📐 Architecture</div><div class="stack-item">75 routes · modulaire · 0 fonction &gt;80L</div></div>
+      <div class="stack-card green"><div class="stack-title">✓ Dette de code zéro</div><div class="stack-item">NDT (style/JS/HTML/Python) · dette structurelle assumée</div></div>
       <div class="stack-card blue"><div class="stack-title">🔒 Sécurité</div><div class="stack-item">0 XSS · CSRF · rate limiting · garde-fou LLM</div></div>
       <div class="stack-card cyan"><div class="stack-title">🤝 Co-développé</div><div class="stack-item">avec Claude Code (Anthropic) — 2026</div></div>
     </div>
