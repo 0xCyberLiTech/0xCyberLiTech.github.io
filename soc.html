@@ -230,13 +230,13 @@
     <h1 class="doc-title">SOC Dashboard</h1>
     <p class="doc-sub">MONITORING SÉCURITÉ TEMPS RÉEL &nbsp;·&nbsp; KILL CHAIN &nbsp;·&nbsp; IA INTÉGRÉE</p>
     <div class="doc-badges">
-      <span class="badge cyan">35 tuiles · 24 modules JS</span>
-      <span class="badge green">Audit 10/10 · 90 passes</span>
+      <span class="badge cyan">35 tuiles · 28 modules JS</span>
+      <span class="badge green">Dette de code zéro · 1000+ tests</span>
       <span class="badge orange">CrowdSec · fail2ban · Suricata IDS</span>
       <span class="badge blue">nginx · GeoIP2 · CVE NVD</span>
       <span class="badge red">8 couches défense</span>
       <span class="badge green">DR validé 2026-04-28</span>
-      <span class="badge cyan">v3.97 · Python · JavaScript</span>
+      <span class="badge cyan">v3.108 · Python · JavaScript</span>
       <span class="badge orange">LAN — solution locale</span>
     </div>
     <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:1.8rem;">
@@ -253,6 +253,11 @@
          onmouseout="this.style.background='rgba(0,255,136,0.04)';this.style.borderColor='rgba(0,255,136,0.35)'">
         ≡ Framework de déploiement — Documentation
       </a>
+    </div>
+
+    <div style="margin:2.2rem auto 0;max-width:920px;">
+      <img src="assets/soc/soc-hero.jpg" alt="SOC — cartographie mondiale des menaces en temps réel" loading="lazy" style="width:100%;border-radius:10px;border:1px solid rgba(0,217,255,0.22);box-shadow:0 0 40px rgba(0,217,255,0.12);" />
+      <p style="text-align:center;font-size:0.8rem;opacity:0.6;margin-top:0.6rem;font-style:italic;">Carte mondiale des menaces, arcs d'attaque animés — en direct sur une infrastructure exposée 24h/24.</p>
     </div>
   </div>
 
@@ -307,7 +312,7 @@
     <p class="sec-desc">
       Le dashboard SOC repose sur une <strong style="color:var(--cyan)">architecture modulaire</strong> —
       un <code style="color:var(--cyan)">index.html</code> orchestre
-      <strong style="color:var(--cyan)">24 modules JavaScript</strong> spécialisés
+      <strong style="color:var(--cyan)">28 modules JavaScript</strong> spécialisés
       (rendu, Kill Chain, GeoIP, XDR, AIDE, JARVIS, défense…).
       Il consomme des fichiers JSON générés côté serveur. Le pipeline collecte les données
       de plusieurs sources (logs nginx, CrowdSec, fail2ban, système, CVE, Windows, Proxmox)
@@ -344,7 +349,7 @@
         <div class="arch-arrow-v-wrap"><div class="arch-arrow-v"></div></div>
 
         <div class="arch-row">
-          <div class="arch-box cyan" style="min-width:220px;">◈ SOC DASHBOARD<br><span style="font-size:0.55rem;opacity:0.6">index.html · 24 modules JS · fetch JSON 60s<br>35 tuiles · Kill Chain · GeoIP · Suricata · XDR · IP</span></div>
+          <div class="arch-box cyan" style="min-width:220px;">◈ SOC DASHBOARD<br><span style="font-size:0.55rem;opacity:0.6">index.html · 28 modules JS · fetch JSON 60s<br>35 tuiles · Kill Chain · GeoIP · Suricata · XDR · IP</span></div>
         </div>
 
         <div class="arch-arrow-v-wrap"><div class="arch-arrow-v" style="background:rgba(255,136,0,0.4);"></div></div>
@@ -1465,7 +1470,7 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
 
       <div style="display:flex;gap:1rem;align-items:flex-start;padding:0.9rem 1.2rem;border:1px solid rgba(0,255,136,0.15);border-left:3px solid var(--green);border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:rgba(0,255,136,0.03);">
         <span style="font-family:var(--font-head);font-size:0.62rem;color:var(--green);letter-spacing:.1em;white-space:nowrap;margin-top:.1rem;">MODULES</span>
-        <span style="font-size:0.82rem;color:var(--text-sec);line-height:1.7;">Architecture modulaire — 24 modules JS à responsabilité unique : rendu, binding, canvas Kill Chain, GeoIP, investigation IP, XDR engine, rsyslog… 35 tuiles, zéro dépendance NPM. Séparation des concerns stricte, base de code lisible et maintenable.</span>
+        <span style="font-size:0.82rem;color:var(--text-sec);line-height:1.7;">Architecture modulaire — 28 modules JS à responsabilité unique : rendu, binding, canvas Kill Chain, GeoIP, investigation IP, XDR engine, rsyslog… 35 tuiles, zéro dépendance NPM. Séparation des concerns stricte, base de code lisible et maintenable.</span>
       </div>
 
       <div style="display:flex;gap:1rem;align-items:flex-start;padding:0.9rem 1.2rem;border:1px solid rgba(0,255,136,0.15);border-left:3px solid var(--green);border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:rgba(0,255,136,0.03);">
@@ -1490,7 +1495,7 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
 
       <div style="display:flex;gap:1rem;align-items:flex-start;padding:0.9rem 1.2rem;border:1px solid rgba(0,255,136,0.15);border-left:3px solid var(--green);border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:rgba(0,255,136,0.03);">
         <span style="font-family:var(--font-head);font-size:0.62rem;color:var(--green);letter-spacing:.1em;white-space:nowrap;margin-top:.1rem;">MATURITÉ</span>
-        <span style="font-size:0.82rem;color:var(--text-sec);line-height:1.7;">Projet construit en 9 phases successives — chaque outil intégré avec une justification explicite, pas par accumulation. La séparation publiable/privé est tenue : framework de déploiement et configs open, sources du dashboard (24 modules JS, 35 tuiles) et scripts opérationnels privés. Le dépôt est une vitrine technologique honnête — sans prétendre être une solution entreprise.</span>
+        <span style="font-size:0.82rem;color:var(--text-sec);line-height:1.7;">Projet construit en 9 phases successives — chaque outil intégré avec une justification explicite, pas par accumulation. La séparation publiable/privé est tenue : framework de déploiement et configs open, sources du dashboard (28 modules JS, 35 tuiles) et scripts opérationnels privés. Le dépôt est une vitrine technologique honnête — sans prétendre être une solution entreprise.</span>
       </div>
 
       <div style="display:flex;gap:1rem;align-items:flex-start;padding:0.9rem 1.2rem;border:1px solid rgba(0,255,136,0.15);border-left:3px solid var(--green);border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:rgba(0,255,136,0.03);">
@@ -1506,7 +1511,7 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
 
       <div style="display:flex;gap:1rem;align-items:flex-start;padding:0.9rem 1.2rem;border:1px solid rgba(245,158,11,0.15);border-left:3px solid var(--orange);border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:rgba(245,158,11,0.03);">
         <span style="font-family:var(--font-head);font-size:0.62rem;color:var(--orange);letter-spacing:.1em;white-space:nowrap;margin-top:.1rem;">RYTHME</span>
-        <span style="font-size:0.82rem;color:var(--text-sec);line-height:1.7;">v3.97 — 90 passes, audit 10/10, 144 NDT corrigés. Cela reflète un projet itéré en conditions réelles — la qualité a rattrapé le rythme et tenu. La prochaine étape : consolider plutôt qu'ajouter.</span>
+        <span style="font-size:0.82rem;color:var(--text-sec);line-height:1.7;">v3.108 — itéré sur de nombreuses passes, dette de code à zéro, dette structurelle assumée et documentée. Cela reflète un projet maintenu en conditions réelles — la qualité a tenu le rythme. La prochaine étape : consolider plutôt qu'ajouter.</span>
       </div>
 
       <div style="display:flex;gap:1rem;align-items:flex-start;padding:0.9rem 1.2rem;border:1px solid rgba(245,158,11,0.15);border-left:3px solid var(--orange);border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:rgba(245,158,11,0.03);">
@@ -1543,7 +1548,7 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
 
         <div style="padding:0.85rem 1rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:rgba(0,217,255,0.02);">
           <div style="font-family:var(--font-head);font-size:0.56rem;color:var(--cyan);letter-spacing:.12em;margin-bottom:.5rem;">DÉCISIONS ASSUMÉES</div>
-          <div style="font-size:0.78rem;color:var(--text-sec);line-height:1.6;">La refactorisation en 24 modules, le RUNBOOK, la philosophie publiable/privé — ces choix sont venus du concepteur, pas de l'IA. L'exécution était déléguée, la direction restait humaine.</div>
+          <div style="font-size:0.78rem;color:var(--text-sec);line-height:1.6;">La refactorisation en 28 modules, le RUNBOOK, la philosophie publiable/privé — ces choix sont venus du concepteur, pas de l'IA. L'exécution était déléguée, la direction restait humaine.</div>
         </div>
 
         <div style="padding:0.85rem 1rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:rgba(0,217,255,0.02);">
@@ -1575,7 +1580,7 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
     <div class="sec-sep"></div>
     <p class="sec-desc">
       Le dépôt publie le framework de déploiement et la documentation technique complète.
-      Les sources du dashboard JS (24 modules) et les scripts opérationnels restent privés — ce SOC est un
+      Les sources du dashboard JS (28 modules) et les scripts opérationnels restent privés — ce SOC est un
       système en production, pas un kit à distribuer.
     </p>
 
@@ -1605,7 +1610,7 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
       </div>
       <div class="checklist-item">
         <span class="checklist-icon">▶</span>
-        <span class="checklist-text"><strong>Sources privées requises</strong> — dashboard JS (24 modules) et scripts Python déployés depuis l'archive de configuration personnelle — non distribuée</span>
+        <span class="checklist-text"><strong>Sources privées requises</strong> — dashboard JS (28 modules) et scripts Python déployés depuis l'archive de configuration personnelle — non distribuée</span>
       </div>
       <div class="checklist-item">
         <span class="checklist-icon">▶</span>
@@ -1632,7 +1637,7 @@ fetchMonitoring(); <span class="cm">// premier appel immédiat</span></pre>
 
   <!-- FOOTER -->
   <div class="doc-footer">
-    <span>0xCyberLiTech · SOC Dashboard v3.97.168 · Documentation technique · 2026</span>
+    <span>0xCyberLiTech · SOC Dashboard v3.108.168 · Documentation technique · 2026</span>
     <div style="display:flex;gap:1.5rem;align-items:center;">
       <a href="https://github.com/0xCyberLiTech/SOC" target="_blank" rel="noopener" style="color:var(--text-mute);text-decoration:none;font-size:.78rem;transition:color .2s;" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--text-mute)'">GitHub SOC</a>
       <a href="/index.html" style="color:var(--text-mute);text-decoration:none;font-size:.78rem;transition:color .2s;" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--text-mute)'">← Portfolio</a>
