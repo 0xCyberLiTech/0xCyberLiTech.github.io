@@ -530,7 +530,7 @@
              onclick="lbOpen('assets/soc/xdr-engine.png','XDR ENGINE — Corrélation cross-host · nginx · CrowdSec · Suricata · Apache VMs · Routeur · Rsyslog 5 hôtes')">
         <div style="padding:.7rem 1.2rem;">
           <div style="font-family:var(--font-body);font-size:.75rem;color:var(--text-sec);line-height:1.7;">
-            srv-nginx (nginx + CrowdSec + Suricata) · site-01 (Apache) · site-02 (Apache) · routeur · Windows (GPU + sauvegardes) — tous centralisés via rsyslog UDP/TCP → corrélation Kill Chain unifiée.
+            reverse-proxy (nginx + CrowdSec + Suricata) · site-01 (Apache) · site-02 (Apache) · routeur · Windows (GPU + sauvegardes) — tous centralisés via rsyslog UDP/TCP → corrélation Kill Chain unifiée.
           </div>
         </div>
       </div>
@@ -827,7 +827,7 @@
     ...</pre>
     </div>
 
-    <div class="sub-title">// crons actifs — srv-nginx</div>
+    <div class="sub-title">// crons actifs — reverse-proxy</div>
     <div class="code-block">
       <div class="code-block-title">crontab -l (root@[MONITORING_SERVER])</div>
       <pre><span class="cm"># Monitoring JSON — toutes les 5 minutes</span>
