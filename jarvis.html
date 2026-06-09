@@ -124,6 +124,86 @@
     </div>
   </div>
 
+  <!-- HERMÈS — Agent persistant -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// évolution — agent persistant hermès</div>
+    <h2 class="sec-title">◈ HERMÈS — JARVIS devient un agent qui apprend</h2>
+    <div class="sec-sep"></div>
+    <p class="sec-desc">
+      Hermès est la couche d'<strong style="color:var(--orange);">agentification persistante</strong> de JARVIS.
+      Là où un assistant répond à des questions, un agent observe, mémorise, apprend et agit de façon autonome.
+      Hermès est bâti en <strong>5 briques</strong> directement au-dessus du moteur JARVIS, sans rupture d'architecture.
+    </p>
+
+    <!-- Image Hermès -->
+    <div style="margin:1.6rem auto 0;max-width:880px;">
+      <img src="images/hermes.png"
+           alt="Hermès — synoptique 6 couches actives : LLM, RAG, STT, TTS, SOC, MÉMOIRE"
+           loading="lazy"
+           style="width:100%;border-radius:10px;border:1px solid rgba(139,92,246,0.3);box-shadow:0 0 40px rgba(139,92,246,0.12);" />
+      <p style="text-align:center;font-size:0.8rem;opacity:0.6;margin-top:0.5rem;font-style:italic;">
+        Synoptique Hermès temps réel — 6 couches visibles : LLM actif, base RAG, reconnaissance vocale, synthèse, SOC, mémoire
+      </p>
+    </div>
+
+    <!-- 5 briques -->
+    <div class="stack-grid" style="grid-template-columns:repeat(auto-fill,minmax(210px,1fr));margin-top:1.6rem;">
+      <div class="stack-card" style="border-color:rgba(139,92,246,0.4);">
+        <div class="stack-title" style="color:#a78bfa;">◈ Brique 1 — Synoptique</div>
+        <div class="stack-item">
+          6 couches moteur visibles en temps réel : LLM actif, chunks RAG, état STT/TTS, auto-engine SOC, historique mémoire.
+          Un tableau de bord vivant de ce que pense JARVIS.
+        </div>
+      </div>
+      <div class="stack-card" style="border-color:rgba(139,92,246,0.4);">
+        <div class="stack-title" style="color:#a78bfa;">◈ Brique 2 — Mémoire</div>
+        <div class="stack-item">
+          Tuile dédiée à l'état de la mémoire vectorielle : échanges, taille, résumés, leçons apprises.
+          Rechargement RAG et purge accessibles depuis l'interface.
+        </div>
+      </div>
+      <div class="stack-card" style="border-color:rgba(139,92,246,0.4);">
+        <div class="stack-title" style="color:#a78bfa;">◈ Brique 3 — Commandes vocales</div>
+        <div class="stack-item">
+          Bypass LLM pour les commandes système : "recharge le RAG", "vide la mémoire", "rafraîchis l'index".
+          Exécution instantanée, sans passer par le modèle de langage.
+        </div>
+      </div>
+      <div class="stack-card" style="border-color:rgba(139,92,246,0.4);">
+        <div class="stack-title" style="color:#a78bfa;">◈ Brique 4 — Apprentissage</div>
+        <div class="stack-item">
+          Boucle d'apprentissage explicite : "souviens-toi que X", "retiens que Y".
+          La leçon est persistée, indexée dans le RAG et remonte dans les réponses futures.
+        </div>
+      </div>
+      <div class="stack-card" style="border-color:rgba(139,92,246,0.4);">
+        <div class="stack-title" style="color:#a78bfa;">◈ Brique 5 — Briefing matinal</div>
+        <div class="stack-item">
+          "Bonjour JARVIS" déclenche un briefing vocal complet : niveau de menace SOC, état des machines,
+          alertes 24h. Automatisable à heure fixe — JARVIS parle seul le matin.
+        </div>
+      </div>
+    </div>
+
+    <div class="stack-card" style="border-color:rgba(139,92,246,0.3);background:rgba(139,92,246,0.04);margin-top:1.4rem;max-width:100%;">
+      <div class="stack-title" style="color:#a78bfa;">◈ Ce que ça change concrètement</div>
+      <div class="stack-items" style="gap:0.7rem;">
+        <div class="stack-item">
+          <strong style="color:#a78bfa;">Avant Hermès</strong> — JARVIS répondait aux questions et exécutait des commandes.
+          Chaque session commençait à zéro. Le contexte était perdu au redémarrage.
+        </div>
+        <div class="stack-item">
+          <strong style="color:#a78bfa;">Après Hermès</strong> — JARVIS accumule les leçons explicites, les indexe dans sa base vectorielle
+          et les réinjecte automatiquement dans ses réponses futures. Il connaît les règles d'infra, les conventions de code,
+          les préférences d'accessibilité — sans avoir besoin d'être re-briefé à chaque session.
+        </div>
+        <div class="stack-item">
+          Pas un chatbot. Pas un copilote. <strong style="color:var(--orange);">Un agent qui vit sur la machine et devient plus intelligent chaque jour.</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- CTA FINAL -->
   <div class="doc-section reveal" style="text-align:center;">
     <div class="sec-label" style="justify-content:center;">// la suite</div>
