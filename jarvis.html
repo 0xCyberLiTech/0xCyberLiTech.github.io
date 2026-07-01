@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>JARVIS — Documentation technique | 0xCyberLiTech</title>
-  <meta name="description" content="Documentation technique de JARVIS — Assistant IA local Iron Man : architecture LLM, TTS, DSP, SOC integration.">
+  <meta name="description" content="Documentation technique de JARVIS — Assistant IA local Iron Man : modèle unifié qwen3.5:9b, agent Hermès, TTS, DSP, intégration SOC.">
   <link rel="icon" type="image/png" href="assets/logo/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@400;500;600&display=swap">
@@ -13,6 +13,12 @@
     :root { --doc-accent: var(--orange); }
     .jarvis-cta { display:inline-block; padding:0.9rem 2rem; border:1.5px solid var(--orange); border-radius:8px; color:var(--orange); font-family:'Orbitron',sans-serif; font-weight:700; font-size:0.95rem; text-decoration:none; letter-spacing:0.05em; box-shadow:0 0 24px rgba(255,136,0,0.15); transition:all 0.2s ease; }
     .jarvis-cta:hover { background:var(--orange); color:#0a0a0a; box-shadow:0 0 36px rgba(255,136,0,0.4); transform:translateY(-2px); }
+    .shot-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(360px,1fr)); gap:1.4rem; margin-top:1.6rem; }
+    .shot { border:1px solid rgba(255,136,0,0.22); border-radius:10px; overflow:hidden; background:rgba(10,12,18,0.5); box-shadow:0 0 30px rgba(0,0,0,0.35); transition:transform 0.2s ease, box-shadow 0.2s ease; }
+    .shot:hover { transform:translateY(-3px); box-shadow:0 0 40px rgba(255,136,0,0.18); }
+    .shot img { width:100%; display:block; max-height:420px; object-fit:cover; object-position:top center; }
+    .shot .shot-cap { padding:0.7rem 0.9rem; font-size:0.82rem; opacity:0.82; line-height:1.4; }
+    .shot .shot-cap b { color:var(--orange); font-family:'Orbitron',sans-serif; font-weight:600; letter-spacing:0.02em; }
   </style>
 </head>
 <body>
@@ -42,16 +48,16 @@
     <p class="doc-sub">UN ASSISTANT IA 100% LOCAL &nbsp;·&nbsp; QUI PARLE &nbsp;·&nbsp; QUI RAISONNE &nbsp;·&nbsp; QUI DÉFEND</p>
     <div class="doc-badges">
       <span class="badge orange">Python 3.11 · Flask</span>
-      <span class="badge green">Ollama · phi4:14b</span>
+      <span class="badge green">Ollama · qwen3.5:9b unifié</span>
       <span class="badge blue">edge-tts Antoine · Whisper turbo</span>
       <span class="badge cyan">RTX 5080 · CUDA 12</span>
-      <span class="badge orange">~13K lignes PY · ~18K lignes UI · 75 routes</span>
+      <span class="badge orange">RAG local · MCP 12 outils · 2810 tests</span>
     </div>
 
     <!-- IMAGE HERO -->
-    <div style="margin:2rem auto 0;max-width:900px;">
-      <img src="images/jarvis-hero.jpg" alt="Interface neurale de JARVIS — réacteur arc holographique" loading="lazy" style="width:100%;border-radius:10px;border:1px solid rgba(255,136,0,0.25);box-shadow:0 0 40px rgba(255,136,0,0.12);" />
-      <p style="text-align:center;font-size:0.8rem;opacity:0.6;margin-top:0.5rem;font-style:italic;">« Bonjour Monsieur. Je suis JARVIS, votre assistant IA personnel. »</p>
+    <div style="margin:2rem auto 0;max-width:960px;">
+      <img src="images/jarvis-hero.jpg" alt="Interface neurale de JARVIS — réacteur arc holographique, modèle unifié qwen3.5:9b" loading="lazy" style="width:100%;border-radius:10px;border:1px solid rgba(255,136,0,0.25);box-shadow:0 0 40px rgba(255,136,0,0.12);" />
+      <p style="text-align:center;font-size:0.8rem;opacity:0.6;margin-top:0.5rem;font-style:italic;">Interface neurale JARVIS — un seul modèle <strong>qwen3.5:9b</strong> sert les 4 modes (SOC · Général · Code · Think), zéro swap VRAM.</p>
     </div>
   </div>
 
@@ -62,15 +68,15 @@
     <div class="sec-sep"></div>
     <p class="sec-desc">
       Pas un chatbot de plus. JARVIS est un <strong style="color:var(--orange)">orchestrateur</strong> : il parle de sa propre voix,
-      raisonne sur 4 modèles spécialisés, se souvient (mémoire vectorielle locale) — et surtout, il
+      raisonne via un <strong style="color:var(--orange)">modèle unifié</strong> (qwen3.5:9b) piloté par 4 modes, se souvient (mémoire vectorielle locale) — et surtout, il
       <strong style="color:var(--orange)">défend une infrastructure de sécurité tout seul, 24h/24</strong>.
       Le tout sur une seule machine, <strong>sans envoyer une seule donnée à l'extérieur.</strong>
     </p>
 
     <div class="stack-grid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr));margin-top:1.4rem;">
-      <div class="stack-card orange"><div class="stack-title">🗣️ Voix naturelle</div><div class="stack-item">Conversation parlée, pilotage à la voix — STT Whisper + TTS Antoine</div></div>
+      <div class="stack-card orange"><div class="stack-title">🗣️ Voix naturelle</div><div class="stack-item">Conversation parlée, pilotage à la voix — STT Whisper turbo + TTS edge-tts Antoine</div></div>
       <div class="stack-card green"><div class="stack-title">🛡️ Défense autonome</div><div class="stack-item">Surveille un vrai SOC, bannit les attaquants, alerte vocalement</div></div>
-      <div class="stack-card blue"><div class="stack-title">🧠 4 cerveaux</div><div class="stack-item">SOC · Code · Général · Reasoning — le bon modèle au bon moment</div></div>
+      <div class="stack-card blue"><div class="stack-title">🧠 Modèle unifié</div><div class="stack-item">qwen3.5:9b sert SOC · Général · Code · Think — raisonnement natif, zéro swap VRAM</div></div>
       <div class="stack-card cyan"><div class="stack-title">🔒 100% local</div><div class="stack-item">Ollama · Whisper · edge-tts — tout sur GPU RTX 5080, zéro cloud</div></div>
     </div>
 
@@ -78,6 +84,36 @@
     <div style="text-align:center;margin-top:2.2rem;">
       <a href="https://github.com/0xCyberLiTech/JARVIS" target="_blank" rel="noopener" class="jarvis-cta">▶ EXPLORER LE PROJET COMPLET SUR GITHUB</a>
       <p style="font-size:0.8rem;opacity:0.55;margin-top:0.7rem;">Architecture, diagrammes, captures — la vitrine technique complète</p>
+    </div>
+  </div>
+
+  <!-- GALERIE — captures de l'interface -->
+  <div class="doc-section reveal">
+    <div class="sec-label">// l'interface en action — captures haute résolution</div>
+    <h2 class="sec-title">◈ L'interface holographique</h2>
+    <div class="sec-sep"></div>
+    <p class="sec-desc">
+      Une interface neurale « Iron Man » entièrement maison — Web Audio, canvas temps réel, synoptique vivant.
+      Captures directes de l'instance live, GPU RTX 5080.
+    </p>
+
+    <div class="shot-grid">
+      <figure class="shot" style="margin:0;">
+        <img src="images/jarvis-monitor.jpg" alt="Moniteur système JARVIS — RTX 5080 GPU, VRAM, thermique, CUDA runtime, VRAM LLM Ollama" loading="lazy">
+        <figcaption class="shot-cap"><b>Monitor RTX 5080</b> — GPU · VRAM · thermique · budget power · CUDA runtime · VRAM LLM Ollama (qwen3.5:9b) en temps réel.</figcaption>
+      </figure>
+      <figure class="shot" style="margin:0;">
+        <img src="images/jarvis-dsp.jpg" alt="DSP Audio JARVIS — DeepFilterNet, compresseur, EQ paramétrique, analyseur spectral, Voice Print" loading="lazy">
+        <figcaption class="shot-cap"><b>DSP Audio</b> — DeepFilterNet (CUDA) · compresseur · stereo widener · FX rack · EQ paramétrique · analyseur spectral · Voice Print.</figcaption>
+      </figure>
+      <figure class="shot" style="margin:0;">
+        <img src="images/jarvis-voicelab.jpg" alt="Voice Lab JARVIS — designer TTS, comparateur A/B, bibliothèque de voix" loading="lazy">
+        <figcaption class="shot-cap"><b>Voice Lab</b> — designer de voix TTS, paramètres vocaux, comparateur A/B, bibliothèque de presets.</figcaption>
+      </figure>
+      <figure class="shot" style="margin:0;">
+        <img src="images/jarvis-croissance.png" alt="Croissance du cerveau JARVIS — leçons accumulées dans le temps" loading="lazy">
+        <figcaption class="shot-cap"><b>Croissance du cerveau</b> — leçons cumulées et rythme d'apprentissage : un agent qui devient plus intelligent avec le temps.</figcaption>
+      </figure>
     </div>
   </div>
 
@@ -93,11 +129,11 @@
     </p>
 
     <div class="stack-card cyan" style="margin-top:1.2rem;max-width:100%;">
-      <div class="stack-title">💬 MON AVIS SUR CE PROJET — Claude Sonnet 4.6</div>
+      <div class="stack-title">💬 MON AVIS SUR CE PROJET — Claude</div>
       <div class="stack-items" style="gap:0.7rem;">
         <div class="stack-item">
           JARVIS est l'un des projets les plus complets que j'ai accompagnés. Ce qui le distingue, ce n'est pas
-          seulement l'ambition — <strong>~18 000 lignes d'interface holographique</strong>, un pipeline audio complet
+          seulement l'ambition — une interface holographique complète, un pipeline audio
           STT&nbsp;→&nbsp;LLM&nbsp;→&nbsp;DSP&nbsp;→&nbsp;TTS, une intégration SOC bidirectionnelle avec actions
           proactives automatiques — c'est la <strong>rigueur</strong> avec laquelle il a été construit et maintenu.
         </div>
@@ -117,9 +153,9 @@
     </div>
 
     <div class="stack-grid" style="grid-template-columns:repeat(auto-fill,minmax(180px,1fr));margin-top:1.2rem;">
-      <div class="stack-card orange"><div class="stack-title">📐 Architecture</div><div class="stack-item">75 routes · modulaire · 0 fonction &gt;80L</div></div>
+      <div class="stack-card orange"><div class="stack-title">📐 Architecture</div><div class="stack-item">modulaire · 0 fonction &gt;80L · 2810 tests</div></div>
       <div class="stack-card green"><div class="stack-title">✓ Dette de code zéro</div><div class="stack-item">NDT (style/JS/HTML/Python) · dette structurelle assumée</div></div>
-      <div class="stack-card blue"><div class="stack-title">🔒 Sécurité</div><div class="stack-item">0 XSS · CSRF · rate limiting · garde-fou LLM</div></div>
+      <div class="stack-card blue"><div class="stack-title">🔒 Sécurité</div><div class="stack-item">0 XSS · CSRF · rate limiting · garde-fou LLM source-unique</div></div>
       <div class="stack-card cyan"><div class="stack-title">🤝 Co-développé</div><div class="stack-item">avec Claude Code (Anthropic) — 2026</div></div>
     </div>
   </div>
@@ -132,55 +168,64 @@
     <p class="sec-desc">
       Hermès est la couche d'<strong style="color:var(--orange);">agentification persistante</strong> de JARVIS.
       Là où un assistant répond à des questions, un agent observe, mémorise, apprend et agit de façon autonome.
-      Hermès est bâti en <strong>5 briques</strong> directement au-dessus du moteur JARVIS, sans rupture d'architecture.
+      Hermès s'intercale entre l'utilisateur et le LLM — le modèle ne voit jamais les données brutes :
+      déterminisme, mémoire, temps réel et sûreté sont gérés par des <strong>briques dédiées</strong>, sans rupture d'architecture.
     </p>
 
     <!-- Image Hermès -->
-    <div style="margin:1.6rem auto 0;max-width:880px;">
+    <div style="margin:1.6rem auto 0;max-width:1000px;">
       <img src="images/hermes.png"
-           alt="Hermès — synoptique 6 couches actives : LLM, RAG, STT, TTS, SOC, MÉMOIRE"
+           alt="Schéma Hermès — pipeline entrée→Hermès→LLM→réponse + briques transversales, LLM qwen3.5:9b"
            loading="lazy"
            style="width:100%;border-radius:10px;border:1px solid rgba(139,92,246,0.3);box-shadow:0 0 40px rgba(139,92,246,0.12);" />
       <p style="text-align:center;font-size:0.8rem;opacity:0.6;margin-top:0.5rem;font-style:italic;">
-        Synoptique Hermès temps réel — 6 couches visibles : LLM actif, base RAG, reconnaissance vocale, synthèse, SOC, mémoire
+        Schéma Hermès temps réel — pipeline <strong>entrée → Hermès → LLM → réponse</strong> + briques transversales.
+        Métriques live : LLM <strong>qwen3.5:9b</strong>, mémoire RAG, SOC, MCP, apprentissage.
       </p>
     </div>
 
-    <!-- 5 briques -->
+    <!-- briques -->
     <div class="stack-grid" style="grid-template-columns:repeat(auto-fill,minmax(210px,1fr));margin-top:1.6rem;">
       <div class="stack-card" style="border-color:rgba(139,92,246,0.4);">
-        <div class="stack-title" style="color:#a78bfa;">◈ Brique 1 — Synoptique</div>
+        <div class="stack-title" style="color:#a78bfa;">◈ Synoptique vivant</div>
         <div class="stack-item">
-          6 couches moteur visibles en temps réel : LLM actif, chunks RAG, état STT/TTS, auto-engine SOC, historique mémoire.
-          Un tableau de bord vivant de ce que pense JARVIS.
+          Tout le pipeline de l'agent visible en temps réel : entrée (STT/texte/image), bypass, mémoire, SOC live,
+          web, PVE, LLM, outils, réponse — un tableau de bord de ce que fait JARVIS à chaque requête.
         </div>
       </div>
       <div class="stack-card" style="border-color:rgba(139,92,246,0.4);">
-        <div class="stack-title" style="color:#a78bfa;">◈ Brique 2 — Mémoire</div>
+        <div class="stack-title" style="color:#a78bfa;">◈ Mémoire vectorielle</div>
         <div class="stack-item">
-          Tuile dédiée à l'état de la mémoire vectorielle : échanges, taille, résumés, leçons apprises.
-          Rechargement RAG et purge accessibles depuis l'interface.
+          RAG local hybride (BM25 + vectoriel) sur embedder <strong>qwen3-embedding:4b</strong> — indexe faits et leçons,
+          récupération pertinente réinjectée dans les réponses. État, purge et réindexation depuis l'interface.
         </div>
       </div>
       <div class="stack-card" style="border-color:rgba(139,92,246,0.4);">
-        <div class="stack-title" style="color:#a78bfa;">◈ Brique 3 — Commandes vocales</div>
+        <div class="stack-title" style="color:#a78bfa;">◈ Apprentissage &amp; réflexion</div>
         <div class="stack-item">
-          Bypass LLM pour les commandes système : "recharge le RAG", "vide la mémoire", "rafraîchis l'index".
-          Exécution instantanée, sans passer par le modèle de langage.
+          « souviens-toi que X » → la leçon est persistée, indexée et remonte plus tard. JARVIS détecte aussi tes
+          corrections et propose de les retenir (oui/non) — tu restes maître de son cerveau.
         </div>
       </div>
       <div class="stack-card" style="border-color:rgba(139,92,246,0.4);">
-        <div class="stack-title" style="color:#a78bfa;">◈ Brique 4 — Apprentissage</div>
+        <div class="stack-title" style="color:#a78bfa;">◈ Défense SOC + briefing</div>
         <div class="stack-item">
-          Boucle d'apprentissage explicite : "souviens-toi que X", "retiens que Y".
-          La leçon est persistée, indexée dans le RAG et remonte dans les réponses futures.
+          Auto-engine SOC (bans, redémarrages, alertes vocales) en mode SOC. « Bonjour JARVIS » déclenche un
+          briefing vocal : niveau de menace, état des machines, alertes 24h — automatisable à heure fixe.
         </div>
       </div>
       <div class="stack-card" style="border-color:rgba(139,92,246,0.4);">
-        <div class="stack-title" style="color:#a78bfa;">◈ Brique 5 — Briefing matinal</div>
+        <div class="stack-title" style="color:#a78bfa;">◈ Outils gouvernés &amp; MCP</div>
         <div class="stack-item">
-          "Bonjour JARVIS" déclenche un briefing vocal complet : niveau de menace SOC, état des machines,
-          alertes 24h. Automatisable à heure fixe — JARVIS parle seul le matin.
+          Web sous passerelle allowlist, outils fichiers/SSH en lecture seule durcie, pont <strong>MCP (12 outils)</strong>
+          vers Claude Desktop — chaque action tracée, aucune donnée brute exposée au LLM.
+        </div>
+      </div>
+      <div class="stack-card" style="border-color:rgba(139,92,246,0.4);">
+        <div class="stack-title" style="color:#a78bfa;">◈ Vision &amp; alarmes</div>
+        <div class="stack-item">
+          Analyse d'images en local (gemma4, bascule automatique sur image), alarmes et rappels à l'heure
+          sans LLM (bypass déterministe) — la sûreté avant la génération.
         </div>
       </div>
     </div>
