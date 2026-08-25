@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>JARVIS — Documentation technique | 0xCyberLiTech</title>
-  <meta name="description" content="Documentation technique de JARVIS — Assistant IA local Iron Man : modèle unifié qwen3.5:9b, agent Hermès, TTS, DSP, intégration SOC.">
+  <meta name="description" content="Documentation technique de JARVIS — Assistant IA local Iron Man : modèle unifié mistral-nemo:12b, agent Hermès, TTS, DSP, intégration SOC.">
   <link rel="icon" type="image/png" href="assets/logo/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@400;500;600&display=swap">
@@ -48,7 +48,7 @@
     <p class="doc-sub">UN ASSISTANT IA 100% LOCAL &nbsp;·&nbsp; QUI PARLE &nbsp;·&nbsp; QUI RAISONNE &nbsp;·&nbsp; QUI DÉFEND</p>
     <div class="doc-badges">
       <span class="badge orange">Python 3.11 · Flask</span>
-      <span class="badge green">Ollama · qwen3.5:9b unifié</span>
+      <span class="badge green">Ollama · mistral-nemo:12b unifié</span>
       <span class="badge blue">edge-tts Antoine · Whisper turbo</span>
       <span class="badge cyan">RTX 5080 · CUDA 12</span>
       <span class="badge orange">RAG local · MCP 12 outils · 3000 tests</span>
@@ -56,8 +56,8 @@
 
     <!-- IMAGE HERO -->
     <div style="margin:2rem auto 0;max-width:960px;">
-      <img src="images/interface.webp" alt="Interface neurale de JARVIS — réacteur arc holographique, modèle unifié qwen3.5:9b" loading="lazy" style="width:100%;border-radius:10px;border:1px solid rgba(255,136,0,0.25);box-shadow:0 0 40px rgba(255,136,0,0.12);" />
-      <p style="text-align:center;font-size:0.8rem;opacity:0.6;margin-top:0.5rem;font-style:italic;">Interface neurale JARVIS — un seul modèle <strong>qwen3.5:9b</strong> sert les 4 modes (SOC · Général · Code · Think), zéro swap VRAM.</p>
+      <img src="images/interface.webp" alt="Interface neurale de JARVIS — réacteur arc holographique, modèle unifié mistral-nemo:12b" loading="lazy" style="width:100%;border-radius:10px;border:1px solid rgba(255,136,0,0.25);box-shadow:0 0 40px rgba(255,136,0,0.12);" />
+      <p style="text-align:center;font-size:0.8rem;opacity:0.6;margin-top:0.5rem;font-style:italic;">Interface neurale JARVIS — un seul modèle <strong>mistral-nemo:12b</strong> sert les 4 modes (SOC · Général · Code · Think), zéro swap VRAM.</p>
     </div>
   </div>
 
@@ -68,7 +68,7 @@
     <div class="sec-sep"></div>
     <p class="sec-desc">
       Pas un chatbot de plus. JARVIS est un <strong style="color:var(--orange)">orchestrateur</strong> : il parle de sa propre voix,
-      raisonne via un <strong style="color:var(--orange)">modèle unifié</strong> (qwen3.5:9b) piloté par 4 modes, se souvient (mémoire vectorielle locale) — et surtout, il
+      raisonne via un <strong style="color:var(--orange)">modèle unifié</strong> (mistral-nemo:12b) piloté par 4 modes, se souvient (mémoire vectorielle locale) — et surtout, il
       <strong style="color:var(--orange)">défend une infrastructure de sécurité tout seul, 24h/24</strong>.
       Le tout sur une seule machine, <strong>sans envoyer une seule donnée à l'extérieur.</strong>
     </p>
@@ -76,7 +76,7 @@
     <div class="stack-grid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr));margin-top:1.4rem;">
       <div class="stack-card orange"><div class="stack-title">🗣️ Voix naturelle</div><div class="stack-item">Conversation parlée, pilotage à la voix — STT Whisper turbo + TTS edge-tts Antoine</div></div>
       <div class="stack-card green"><div class="stack-title">🛡️ Défense autonome</div><div class="stack-item">Surveille un vrai SOC, bannit les attaquants, alerte vocalement</div></div>
-      <div class="stack-card blue"><div class="stack-title">🧠 Modèle unifié</div><div class="stack-item">qwen3.5:9b sert SOC · Général · Code · Think — raisonnement natif, zéro swap VRAM</div></div>
+      <div class="stack-card blue"><div class="stack-title">🧠 Modèle unifié</div><div class="stack-item">mistral-nemo:12b sert SOC · Général · Code · Think — raisonnement natif, zéro swap VRAM</div></div>
       <div class="stack-card cyan"><div class="stack-title">🔒 100% local</div><div class="stack-item">Ollama · Whisper · edge-tts — tout sur GPU RTX 5080, zéro cloud</div></div>
     </div>
 
@@ -100,7 +100,7 @@
     <div class="shot-grid">
       <figure class="shot" style="margin:0;">
         <img src="images/monitor.webp" alt="Moniteur système JARVIS — RTX 5080 GPU, VRAM, thermique, CUDA runtime, VRAM LLM Ollama" loading="lazy">
-        <figcaption class="shot-cap"><b>Monitor RTX 5080</b> — GPU · VRAM · thermique · budget power · CUDA runtime · VRAM LLM Ollama (qwen3.5:9b) en temps réel.</figcaption>
+        <figcaption class="shot-cap"><b>Monitor RTX 5080</b> — GPU · VRAM · thermique · budget power · CUDA runtime · VRAM LLM Ollama (mistral-nemo:12b) en temps réel.</figcaption>
       </figure>
       <figure class="shot" style="margin:0;">
         <img src="images/studio-dsp.webp" alt="DSP Audio JARVIS — DeepFilterNet, compresseur, EQ paramétrique, analyseur spectral, Voice Print" loading="lazy">
@@ -150,8 +150,8 @@
         <figcaption class="shot-cap"><b>Profils RTX 5080</b> — 6 préréglages en un clic : Rapide · Équilibré · Code · Créatif · Précis · MAX.</figcaption>
       </figure>
       <figure class="shot" style="margin:0;">
-        <img src="images/monitor-llm-vram.webp" alt="Empreinte LLM en VRAM — qwen3.5:9b + qwen3-embedding:4b cohabitent dans 16 Go" loading="lazy">
-        <figcaption class="shot-cap"><b>Empreinte VRAM</b> — <code>qwen3.5:9b</code> (~5,5 Go) + embedding RAG <code>qwen3-embedding:4b</code> (~4,1 Go) tiennent dans les 16 Go, <b>swap = 0</b>.</figcaption>
+        <img src="images/monitor-llm-vram.webp" alt="Empreinte LLM en VRAM — mistral-nemo:12b + qwen3-embedding:4b cohabitent dans 16 Go" loading="lazy">
+        <figcaption class="shot-cap"><b>Empreinte VRAM</b> — <code>mistral-nemo:12b</code> (~5,5 Go) + embedding RAG <code>qwen3-embedding:4b</code> (~4,1 Go) tiennent dans les 16 Go, <b>swap = 0</b>.</figcaption>
       </figure>
     </div>
   </div>
@@ -267,12 +267,12 @@
     <!-- Image Hermès -->
     <div style="margin:1.6rem auto 0;max-width:1000px;">
       <img src="images/hermes.webp"
-           alt="Schéma Hermès — pipeline entrée→Hermès→LLM→réponse + briques transversales, LLM qwen3.5:9b"
+           alt="Schéma Hermès — pipeline entrée→Hermès→LLM→réponse + briques transversales, LLM mistral-nemo:12b"
            loading="lazy"
            style="width:100%;border-radius:10px;border:1px solid rgba(139,92,246,0.3);box-shadow:0 0 40px rgba(139,92,246,0.12);" />
       <p style="text-align:center;font-size:0.8rem;opacity:0.6;margin-top:0.5rem;font-style:italic;">
         Schéma Hermès temps réel — pipeline <strong>entrée → Hermès → LLM → réponse</strong> + briques transversales.
-        Métriques live : LLM <strong>qwen3.5:9b</strong>, mémoire RAG, SOC, MCP, apprentissage.
+        Métriques live : LLM <strong>mistral-nemo:12b</strong>, mémoire RAG, SOC, MCP, apprentissage.
       </p>
     </div>
 
@@ -316,7 +316,7 @@
       <div class="stack-card" style="border-color:rgba(139,92,246,0.4);">
         <div class="stack-title" style="color:#a78bfa;">◈ Vision &amp; alarmes</div>
         <div class="stack-item">
-          Analyse d'images en local (qwen3.5:9b multimodal natif, bascule automatique sur image), alarmes et rappels à l'heure
+          Analyse d'images en local (mistral-nemo:12b multimodal natif, bascule automatique sur image), alarmes et rappels à l'heure
           sans LLM (bypass déterministe) — la sûreté avant la génération.
         </div>
       </div>
